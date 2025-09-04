@@ -1,0 +1,60 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-background text-text; /* ✅ Use only the generated class names */
+    font-family: var(--font-body);
+  }
+
+  h1, h2, h3, h4, h5, h6, p, a, span, div {
+    @apply text-inherit;
+  }
+
+  html.dark body {
+    @apply bg-background-dark text-text-light;
+  }
+}
+
+:root {
+  --font-body: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  --font-heading: system-ui, Avenir, Helvetica, Arial, sans-serif;
+
+  --color-text: theme('colors.text.DEFAULT');
+  --color-bg: theme('colors.background.DEFAULT');
+}
+
+*{
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+
+  font-family: var(--font-body);
+  line-height: 1.5;
+  font-weight: 400;
+
+  color: theme('colors.text.DEFAULT');        /* use Tailwind text color */
+  background-color: theme('colors.background.DEFAULT'); /* Tailwind background */
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+  font-family: var(--font-heading);
+}
+
+a {
+  font-weight: 500;
+  color: theme('colors.primary.DEFAULT');  /* Tailwind primary color */
+  text-decoration: inherit;
+}
+a:hover {
+  color: theme('colors.primary.dark');
+}
