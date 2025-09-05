@@ -1,7 +1,7 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import DashboardLayout from "./components/DashboardLayout";
+import { BrowserRouter as Router, Routes, Route, RouterProvider } from "react-router-dom";
 import { useEffect, useState } from "react";
-import Flashcards from "./pages/Flashcards";
+import { AuthProvider } from "./hooks/useAuth";
+import { router } from "./routes";
 
 export default function App() {
   const [dark, setDark] = useState(false);
@@ -15,14 +15,8 @@ export default function App() {
   }, [dark]);
 
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={
-            <DashboardLayout>
-                <Flashcards />
-            </DashboardLayout>
-        } />
-      </Routes>
-    </Router>
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
   );
 }

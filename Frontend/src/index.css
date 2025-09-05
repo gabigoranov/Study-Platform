@@ -19,6 +19,9 @@
 
 *{
   box-sizing: border-box;
+}
+
+div, a, button, img {
   transition: all 0.3s ease-in-out;
 }
 
