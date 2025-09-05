@@ -1,5 +1,5 @@
 import { FiMenu, FiX } from "react-icons/fi";
-import ProfileIcon from "./ProfileIcon";
+import LoginComponent from "./LoginComponent";
 
 type HeaderProps = {
     toggleSidebar: () => void;
@@ -9,7 +9,7 @@ type HeaderProps = {
 export default function Header({ toggleSidebar, isSidebarOpen }: HeaderProps) {
     return (
         <header className="w-full h-20 p-2 lg:pr-8 flex justify-end gap-2 items-center">
-            <ProfileIcon notifications={3}/>
+            <LoginComponent isAuth={false} iconProps={ {notifications: 3,} }/>
             <button 
                 onClick={toggleSidebar}
                 className="md:hidden p-2 rounded-md transition-all duration-200 z-50"

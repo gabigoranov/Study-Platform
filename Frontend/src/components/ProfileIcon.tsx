@@ -1,4 +1,4 @@
-type ProfileIconProps = {
+export type ProfileIconProps = {
     imgUrl?: string;
     notifications: number;
 }
