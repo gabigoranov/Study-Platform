@@ -17,31 +17,9 @@
   }
 }
 
-:root {
-  --font-body: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  --font-heading: system-ui, Avenir, Helvetica, Arial, sans-serif;
-
-  --color-text: theme('colors.text.DEFAULT');
-  --color-bg: theme('colors.background.DEFAULT');
-}
-
 *{
   box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-
-  font-family: var(--font-body);
-  line-height: 1.5;
-  font-weight: 400;
-
-  color: theme('colors.text.DEFAULT');        /* use Tailwind text color */
-  background-color: theme('colors.background.DEFAULT'); /* Tailwind background */
+  transition: all 0.3s ease-in-out;
 }
 
 h1 {
