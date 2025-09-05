@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { useAuth } from "../hooks/useAuth";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import { supabase } from "../lib/supabaseClient";
 
-export default function SignIn() {
+export default function SignUp() {
   const { signInWithGoogle, user, loading } = useAuth();
   const navigate = useNavigate();
 
@@ -13,7 +13,7 @@ export default function SignIn() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [errors, setErrors] = useState<string[]>([]);
-  const [emailConfirmation, setEmailConfirmation] = useState(false); // NEW
+  const [emailConfirmation, setEmailConfirmation] = useState(false);
 
   if (loading) return <p className="text-center mt-10">Loading...</p>;
   if (user) {
@@ -27,7 +27,7 @@ export default function SignIn() {
     if (!/[a-z]/.test(pwd)) errs.push("Password must contain at least one lowercase letter.");
     if (!/[A-Z]/.test(pwd)) errs.push("Password must contain at least one uppercase letter.");
     if (!/[0-9]/.test(pwd)) errs.push("Password must contain at least one digit.");
-    if (!/[!@#$%^&*(),.?":{}|<>]/.test(pwd)) errs.push("Password must contain at least one special character.");
+    if (!/[!@#$%^&*(),.?\":{}|<>]/.test(pwd)) errs.push("Password must contain at least one special character.");
     return errs;
   };
 
@@ -43,52 +43,32 @@ export default function SignIn() {
     }
 
     try {
-      const { data: signInData, error: signInError } = await supabase.auth.signInWithPassword({
+      const { data, error } = await supabase.auth.signUp({
         email,
         password,
+        options: {
+          data: {
+            first_name: firstName,
+            last_name: lastName,
+            display_name: `${firstName} ${lastName}`,
+          },
+        },
       });
 
-      if (signInError) {
-        // If no account exists, sign up
-        if (signInError.message.includes("Invalid login credentials")) {
-          const { data: signUpData, error: signUpError } = await supabase.auth.signUp({
-            email,
-            password,
-            options: {
-              data: {
-                first_name: firstName,
-                last_name: lastName,
-                display_name: `${firstName} ${lastName}`,
-              },
-            },
-          });
-
-          if (signUpError) {
-            setErrors([signUpError.message]);
-            return;
-          }
-
-          // Show email confirmation box instead of signing in automatically
-          if (signUpData.user?.confirmation_sent_at) {
-            setEmailConfirmation(true);
-            return;
-          }
-        } else {
-          setErrors([signInError.message]);
-        }
-      } else {
-        // Successful sign in
-        navigate("/");
+      if (error) {
+        setErrors([error.message]);
+        return;
       }
+
+      if (data.user?.confirmation_sent_at) {
+        setEmailConfirmation(true);
+        return;
+      }
+
+      navigate("/");
     } catch (err) {
       setErrors([(err as Error).message]);
     }
-  };
-
-  const handleRetrySignIn = () => {
-    setEmailConfirmation(false);
-    setPassword("");
-    setErrors([]);
   };
 
   const handleGoogle = async () => {
@@ -104,9 +84,8 @@ export default function SignIn() {
       <div className="bg-white p-8 rounded-lg shadow-md w-80 sm:w-96 text-center">
         {!emailConfirmation ? (
           <>
-            <h1 className="text-2xl font-bold mb-6">Sign In / Sign Up</h1>
+            <h1 className="text-2xl font-bold mb-6">Sign Up</h1>
 
-            {/* Email / Password Form */}
             <form onSubmit={handleSubmit} className="flex flex-col gap-4 mb-6">
               {errors.length > 0 && (
                 <div className="text-left text-red-500 text-sm">
@@ -151,25 +130,30 @@ export default function SignIn() {
                 type="submit"
                 className="bg-blue-500 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-600 transition-colors"
               >
-                Sign In / Sign Up
+                Sign Up
               </button>
             </form>
 
-            {/* Divider */}
             <div className="flex items-center mb-6">
               <hr className="flex-grow border-gray-300" />
               <span className="mx-2 text-gray-400">OR</span>
               <hr className="flex-grow border-gray-300" />
             </div>
 
-            {/* Google Sign-In */}
             <button
               onClick={handleGoogle}
               className="flex items-center justify-center w-full bg-neutral-200 px-4 py-2 rounded-lg shadow hover:bg-neutral-300 transition-colors"
             >
               <FcGoogle className="w-5 h-5 mr-2" />
-              Sign in with Google
+              Sign up with Google
             </button>
+
+            <p className="mt-6 text-sm text-gray-600">
+              Already have an account?{" "}
+              <Link to="/login" className="text-blue-500 hover:underline">
+                Sign In
+              </Link>
+            </p>
           </>
         ) : (
           <>
@@ -177,12 +161,6 @@ export default function SignIn() {
             <p className="mb-4 text-gray-700">
               We sent a confirmation link to <strong>{email}</strong>. Please check your email and click the link to confirm your account.
             </p>
-            <button
-              onClick={handleRetrySignIn}
-              className="bg-blue-500 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-600 transition-colors"
-            >
-              Try Signing In Again
-            </button>
           </>
         )}
       </div>
