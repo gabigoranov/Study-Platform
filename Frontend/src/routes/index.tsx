@@ -20,9 +20,11 @@ export const router = createBrowserRouter(
     },
     {
       path: "/",
-      element: <DashboardLayout>
-        <ProtectedRoute children={<Flashcards />} />
-      </DashboardLayout>,
+      element: <ProtectedRoute children={
+        <DashboardLayout>
+          <Flashcards />
+        </DashboardLayout>
+      } />,
       errorElement: <ErrorPage />,
     },
   ],

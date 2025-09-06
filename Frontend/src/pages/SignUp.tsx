@@ -3,8 +3,16 @@ import { useAuth } from "../hooks/useAuth";
 import { Link, useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import { supabase } from "../lib/supabaseClient";
+import InputComponent from "../components/Login/InputComponent";
+import { useTranslation } from "react-i18next";
+import { keys } from '../types/keys';
 
 export default function SignUp() {
+  const { t, i18n } = useTranslation();
+  
+  const switchLanguage = (lang: string) => {
+    i18n.changeLanguage(lang);
+  };
   const { signInWithGoogle, user, loading } = useAuth();
   const navigate = useNavigate();
 
@@ -15,7 +23,7 @@ export default function SignUp() {
   const [errors, setErrors] = useState<string[]>([]);
   const [emailConfirmation, setEmailConfirmation] = useState(false);
 
-  if (loading) return <p className="text-center mt-10">Loading...</p>;
+  if (loading) return <p className="text-center mt-10">{t(keys.loading)}</p>;
   if (user) {
     navigate("/");
     return null;
@@ -23,11 +31,11 @@ export default function SignUp() {
 
   const validatePassword = (pwd: string) => {
     const errs: string[] = [];
-    if (pwd.length < 8) errs.push("Password must be at least 8 characters.");
-    if (!/[a-z]/.test(pwd)) errs.push("Password must contain at least one lowercase letter.");
-    if (!/[A-Z]/.test(pwd)) errs.push("Password must contain at least one uppercase letter.");
-    if (!/[0-9]/.test(pwd)) errs.push("Password must contain at least one digit.");
-    if (!/[!@#$%^&*(),.?\":{}|<>]/.test(pwd)) errs.push("Password must contain at least one special character.");
+    if (pwd.length < 8) errs.push(t(keys.passwordLengthError));
+    if (!/[a-z]/.test(pwd)) errs.push(t(keys.passwordLowercaseError));
+    if (!/[A-Z]/.test(pwd)) errs.push(t(keys.passwordUppercaseError));
+    if (!/[0-9]/.test(pwd)) errs.push(t(keys.passwordDigitError));
+    if (!/[!@#$%^&*(),.?\":{}|<>]/.test(pwd)) errs.push(t(keys.passwordSpecialCharError));
     return errs;
   };
 
@@ -84,7 +92,7 @@ export default function SignUp() {
       <div className="bg-white p-8 rounded-lg shadow-md w-80 sm:w-96 text-center">
         {!emailConfirmation ? (
           <>
-            <h1 className="text-2xl font-bold mb-6">Sign Up</h1>
+            <h1 className="text-2xl font-bold mb-6">{t(keys.signUpTitle)}</h1>
 
             <form onSubmit={handleSubmit} className="flex flex-col gap-4 mb-6">
               {errors.length > 0 && (
@@ -94,49 +102,23 @@ export default function SignUp() {
                   ))}
                 </div>
               )}
-              <input
-                type="text"
-                placeholder="First Name"
-                value={firstName}
-                onChange={(e) => setFirstName(e.target.value)}
-                required
-                className="border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
-              />
-              <input
-                type="text"
-                placeholder="Last Name"
-                value={lastName}
-                onChange={(e) => setLastName(e.target.value)}
-                required
-                className="border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
-              />
-              <input
-                type="email"
-                placeholder="Email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-                className="border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
-              />
-              <input
-                type="password"
-                placeholder="Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-                className="border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
-              />
+
+              <InputComponent type="text" placeholder={t(keys.firstNamePlaceholder)} value={firstName} onChange={setFirstName} required />
+              <InputComponent type="text" placeholder={t(keys.lastNamePlaceholder)} value={lastName} onChange={setLastName} required />
+              <InputComponent type="email" placeholder={t(keys.emailPlaceholder)} value={email} onChange={setEmail} required />
+              <InputComponent type="password" placeholder={t(keys.passwordPlaceholder)} value={password} onChange={setPassword} required />
+              
               <button
                 type="submit"
                 className="bg-blue-500 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-600 transition-colors"
               >
-                Sign Up
+                {t(keys.signUpButton)}
               </button>
             </form>
 
             <div className="flex items-center mb-6">
               <hr className="flex-grow border-gray-300" />
-              <span className="mx-2 text-gray-400">OR</span>
+              <span className="mx-2 text-gray-400">{t(keys.orDivider)}</span>
               <hr className="flex-grow border-gray-300" />
             </div>
 
@@ -145,22 +127,24 @@ export default function SignUp() {
               className="flex items-center justify-center w-full bg-neutral-200 px-4 py-2 rounded-lg shadow hover:bg-neutral-300 transition-colors"
             >
               <FcGoogle className="w-5 h-5 mr-2" />
-              Sign up with Google
+              {t(keys.signUpWithGoogle)}
             </button>
 
             <p className="mt-6 text-sm text-gray-600">
-              Already have an account?{" "}
+              {t(keys.haveAccountText)}{" "}
               <Link to="/login" className="text-blue-500 hover:underline">
-                Sign In
+                {t(keys.signInButton)}
               </Link>
             </p>
           </>
         ) : (
           <>
-            <h1 className="text-2xl font-bold mb-6">Confirm Your Email</h1>
+            <h1 className="text-2xl font-bold mb-6">{t(keys.confirmEmailTitle)}</h1>
             <p className="mb-4 text-gray-700">
-              We sent a confirmation link to <strong>{email}</strong>. Please check your email and click the link to confirm your account.
+              {t(keys.confirmEmailMessage, { email })}
             </p>
+
+            <a href="/login" className="bg-blue-500 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-600 hover:text-white transition-colors">Sign In</a>
           </>
         )}
       </div>

@@ -1,6 +1,8 @@
 import { useAuth } from "../hooks/useAuth";
 import type { ProfileIconProps } from "./ProfileIcon";
 import ProfileIcon from "./ProfileIcon";
+import { useTranslation } from "react-i18next";
+import { keys } from "../types/keys";
 
 type LoginComponentProps = {
     iconProps: ProfileIconProps;
@@ -8,13 +10,14 @@ type LoginComponentProps = {
 
 export default function LoginComponent({ iconProps }: LoginComponentProps) {
     const { user } = useAuth();
+    const { t } = useTranslation();
 
     return (
         user ? (
             <ProfileIcon {...iconProps} />
         ) : (
             <div className="flex gap-2 items-center">
-                <a href="/signin"className="text-lg text-text-muted hover:text-text hover:cursor-pointer">Sign In</a>
+                <a href="/signin"className="text-lg text-text-muted hover:text-text hover:cursor-pointer">{t(keys.signInButton)}</a>
             </div>
         )
     );

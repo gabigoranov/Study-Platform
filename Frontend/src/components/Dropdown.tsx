@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import type { IconType } from 'react-icons';
 import { FaChevronDown } from "react-icons/fa";
+import { useTranslation } from "react-i18next";
+import { keys } from "../types/keys";
 
 interface DropdownProps {
     options: { value: string; label: string; icon: IconType }[];
@@ -10,6 +12,7 @@ interface DropdownProps {
 export default function Dropdown({ options, onSelect }: DropdownProps) {
     const [isOpen, setIsOpen] = useState(false);
     const [selectedValue, setSelectedValue] = useState<string | null>(null);
+    const { t } = useTranslation();
 
     const toggleDropdown = () => {
         setIsOpen(!isOpen);
@@ -35,7 +38,7 @@ export default function Dropdown({ options, onSelect }: DropdownProps) {
                     ) : (
                         <span className=""></span>
                     )}
-                    {options.find(x => x.value === selectedValue)?.label || 'Select a subject'}
+                    {options.find(x => x.value === selectedValue)?.label || t(keys.selectSubject)}
                     <FaChevronDown className='h-5 w-5 text-md text-gray-400' />
                 </button>
             </div>
