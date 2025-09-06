@@ -14,7 +14,7 @@ export default function LanguageToggle({ className }: LanguageToggleProps) {
         { code: "bg", label: "Български" }
     ];
 
-    const toggle = (lang: string) => {
+    const changeLanguage = (lang: string) => {
         i18n.changeLanguage(lang, (err, t) => {
             if (err) return console.log('something went wrong loading', err);
         });
@@ -28,7 +28,7 @@ export default function LanguageToggle({ className }: LanguageToggleProps) {
                 onClick={() => setIsOpen(!isOpen)}
                 className="flex items-center gap-1 px-3 py-2 text-sm font-medium rounded-md bg-gray-100 hover:bg-gray-200 transition-colors"
             >
-                {i18n.language === "en" ? "EN" : "BG"}
+                {languages.find((lang) => lang.code === i18n.language)?.label}
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                 </svg>
@@ -40,7 +40,7 @@ export default function LanguageToggle({ className }: LanguageToggleProps) {
                         {languages.map((lang) => (
                             <button
                                 key={lang.code}
-                                onClick={() => toggle(lang.code)}
+                                onClick={() => changeLanguage(lang.code)}
                                 className={`block w-full px-4 py-2 text-sm text-left ${i18n.language === lang.code ? 'bg-gray-100' : ''}`}
                             >
                                 {lang.label}

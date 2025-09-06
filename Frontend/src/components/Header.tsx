@@ -2,7 +2,6 @@ import { FiMenu, FiX } from "react-icons/fi";
 import LoginComponent from "./LoginComponent";
 import { useTranslation } from "react-i18next";
 import { keys } from "../types/keys";
-import LanguageToggle from "./LanguageToggle";
 
 type HeaderProps = {
     toggleSidebar: () => void;
@@ -14,7 +13,6 @@ export default function Header({ toggleSidebar, isSidebarOpen }: HeaderProps) {
     
     return (
         <header className="w-full h-20 p-2 lg:pr-8 flex justify-end gap-4 items-center">
-            <LanguageToggle className="hidden md:block" />
             <LoginComponent iconProps={ {notifications: 3,} }/>
             <button 
                 onClick={toggleSidebar}

@@ -1,32 +1,38 @@
 import Dropdown from "./Dropdown";
-import { FaLaptopCode, FaCalculator, FaFlask } from 'react-icons/fa';
-import { AiFillHome } from "react-icons/ai";    
+import { FaLaptopCode, FaCalculator, FaFlask } from "react-icons/fa";
+import { AiFillHome } from "react-icons/ai";
 import { PiNoteBlankFill } from "react-icons/pi";
 import { MdMap } from "react-icons/md";
 import { useTranslation } from "react-i18next";
 
-import { keys } from '../types/keys';
+import { keys } from "../types/keys";
+import LanguageToggle from "./LanguageToggle";
 
 type SidebarProps = {
-    isOpen: boolean;
+  isOpen: boolean;
 };
 
 export default function Sidebar({ isOpen }: SidebarProps) {
-    const { t } = useTranslation();
-    
-    const options = [
-        { value: 'informatics', label: t(keys.subjectInformatics), icon: FaLaptopCode },
-        { value: 'math', label: t(keys.subjectMath), icon: FaCalculator },
-        { value: 'biology', label: t(keys.subjectBiology), icon: FaFlask },
-    ];
+  const { t } = useTranslation();
 
-    const handleSelect = (value: string) => {
-        console.log(`Selected subject: ${value}`);
-        // You can add additional logic here based on the selected value
-    };
+  const options = [
+    {
+      value: "informatics",
+      label: t(keys.subjectInformatics),
+      icon: FaLaptopCode,
+    },
+    { value: "math", label: t(keys.subjectMath), icon: FaCalculator },
+    { value: "biology", label: t(keys.subjectBiology), icon: FaFlask },
+  ];
 
-    return (
-        <div className={`
+  const handleSelect = (value: string) => {
+    console.log(`Selected subject: ${value}`);
+    // You can add additional logic here based on the selected value
+  };
+
+  return (
+    <div
+      className={`
             p-2 flex flex-col gap-2
             fixed md:static
             h-screen
@@ -34,27 +40,49 @@ export default function Sidebar({ isOpen }: SidebarProps) {
             bg-background-muted
             z-40
             transition-all duration-300 ease-in-out
-            ${isOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'}
+            ${isOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"}
             shadow-lg shadow-black/20
-        `}>
-                <h2 className="text-4xl font-bold">Study<br/>Mate</h2>
-                <Dropdown options={options} onSelect={handleSelect} />
-                <nav className="pl-4 mt-6">
-                    <ul>
-                        <li className="flex g-4 items-center">
-                            <AiFillHome className="text-xl mr-2" />
-                            <a className="block text-xl text-gray-800 hover:text-gray-900" href="#">{t(keys.navHome)}</a>
-                        </li>
-                        <li className="flex g-4 items-center">
-                            <PiNoteBlankFill className="text-xl mr-2"/>
-                            <a className="block text-xl text-gray-800 hover:text-gray-900" href="#">{t(keys.navFlashcards)}</a>
-                        </li>
-                        <li className="flex g-4 items-center">
-                            <MdMap className="text-xl mr-2"/>
-                            <a className="block text-xl text-gray-800 hover:text-gray-900" href="#">{t(keys.navMindmaps)}</a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
-        );
-    }
+        `}
+    >
+      <h2 className="text-4xl font-bold">
+        Study
+        <br />
+        Mate
+      </h2>
+      <Dropdown options={options} onSelect={handleSelect} />
+      <nav className="pl-4 mt-6">
+        <ul>
+          <li className="flex g-4 items-center">
+            <AiFillHome className="text-xl mr-2" />
+            <a
+              className="block text-xl text-gray-800 hover:text-gray-900"
+              href="#"
+            >
+              {t(keys.navHome)}
+            </a>
+          </li>
+          <li className="flex g-4 items-center">
+            <PiNoteBlankFill className="text-xl mr-2" />
+            <a
+              className="block text-xl text-gray-800 hover:text-gray-900"
+              href="#"
+            >
+              {t(keys.navFlashcards)}
+            </a>
+          </li>
+          <li className="flex g-4 items-center">
+            <MdMap className="text-xl mr-2" />
+            <a
+              className="block text-xl text-gray-800 hover:text-gray-900"
+              href="#"
+            >
+              {t(keys.navMindmaps)}
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <LanguageToggle className="hidden md:block mt-auto ml-auto" />
+    </div>
+  );
+}
