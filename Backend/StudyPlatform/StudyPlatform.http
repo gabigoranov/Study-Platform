@@ -1,0 +1,6 @@
+@StudyPlatform_HostAddress = http://localhost:5163
+
+GET {{StudyPlatform_HostAddress}}/
+Accept: application/json
+
+###

@@ -1,0 +1,219 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>StudyPlatform</name>
+    </assembly>
+    <members>
+        <member name="T:StudyPlatform.Controllers.FlashcardsController">
+            <summary>
+            Provides endpoints for managing flashcards.
+            </summary>
+        </member>
+        <member name="M:StudyPlatform.Controllers.FlashcardsController.#ctor(StudyPlatform.Services.Flashcards.IFlashcardsService)">
+            <summary>
+            A constructor for injecting the services.
+            </summary>
+            <param name="flashcardsService">The flashcards service, dependency injected.</param>
+        </member>
+        <member name="M:StudyPlatform.Controllers.FlashcardsController.Create(StudyPlatform.Models.FlashcardViewModel)">
+            <summary>
+            Endpoint for creating a new flashcard.
+            </summary>
+            <param name="model">The model for the flashcard created by the user.</param>
+            <returns>A new flashcard if successful.</returns>
+        </member>
+        <member name="M:StudyPlatform.Controllers.FlashcardsController.Get(System.Int32[])">
+            <summary>
+            Endpoint for getting a list of flashcards by their IDs.
+            </summary>
+            <param name="ids">The list of ids required.</param>
+            <returns>A list of flashcards if successful.</returns>
+        </member>
+        <member name="M:StudyPlatform.Controllers.FlashcardsController.Update(StudyPlatform.Models.FlashcardViewModel,System.Int32)">
+            <summary>
+            Endpoint for updating a specific flashcard that the user owns.
+            </summary>
+            <param name="model">The model for updating the flashcard.</param>
+            <param name="id">The id of the flashcard.</param>
+            <returns>An edited flashcard if successful.</returns>
+        </member>
+        <member name="M:StudyPlatform.Controllers.FlashcardsController.Delete(System.Int32[])">
+            <summary>
+            Endpoint for deleting an array of flashcards by their IDs.
+            </summary>
+            <param name="ids">The array of flashcard ids.</param>
+            <returns>Nothing.</returns>
+        </member>
+        <member name="T:StudyPlatform.Exceptions.ForbiddenAccessException">
+            <summary>
+            A custom excpetion for cases where a request does not have the right roles.
+            </summary>
+        </member>
+        <member name="M:StudyPlatform.Exceptions.ForbiddenAccessException.#ctor(System.String)">
+            <summary>
+            Initializes the exception with a custom message.
+            </summary>
+            <param name="message">The message returned by the exception.</param>
+        </member>
+        <member name="T:StudyPlatform.Extensions.ClaimsPrincipalExtensions">
+            <summary>
+            An extension class for the claims prinicpal.
+            </summary>
+        </member>
+        <member name="M:StudyPlatform.Extensions.ClaimsPrincipalExtensions.GetUserId(System.Security.Claims.ClaimsPrincipal)">
+            <summary>
+            An extension for extracting the userId out of the JWT token.
+            </summary>
+            <param name="user">The claims principal.</param>
+            <returns>The user id if successful.</returns>
+            <exception cref="T:System.UnauthorizedAccessException">Returned if the user id claim is missing or invalid.</exception>
+        </member>
+        <member name="T:StudyPlatform.Middlewares.ExceptionHandlingMiddleware">
+            <summary>
+            Middleware that handles exceptions globally for the application.
+            Catches unhandled exceptions, maps them to appropriate HTTP status codes,
+            and returns a JSON error response.
+            </summary>
+        </member>
+        <member name="M:StudyPlatform.Middlewares.ExceptionHandlingMiddleware.#ctor(Microsoft.AspNetCore.Http.RequestDelegate)">
+            <summary>
+            Initializes a new instance of the <see cref="T:StudyPlatform.Middlewares.ExceptionHandlingMiddleware"/> class.
+            </summary>
+            <param name="next">The next middleware component in the pipeline.</param>
+        </member>
+        <member name="M:StudyPlatform.Middlewares.ExceptionHandlingMiddleware.Invoke(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            Invokes the middleware logic. Wraps the request delegate in a try-catch block
+            to capture and process unhandled exceptions.
+            </summary>
+            <param name="context">The current <see cref="T:Microsoft.AspNetCore.Http.HttpContext"/>.</param>
+        </member>
+        <member name="M:StudyPlatform.Middlewares.ExceptionHandlingMiddleware.HandleExceptionAsync(Microsoft.AspNetCore.Http.HttpContext,System.Exception)">
+            <summary>
+            Maps exceptions to HTTP status codes and writes a JSON error response.
+            </summary>
+            <param name="context">The current <see cref="T:Microsoft.AspNetCore.Http.HttpContext"/>.</param>
+            <param name="ex">The exception that was thrown.</param>
+        </member>
+        <member name="T:StudyPlatform.Migrations.Init">
+            <inheritdoc />
+        </member>
+        <member name="M:StudyPlatform.Migrations.Init.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:StudyPlatform.Migrations.Init.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:StudyPlatform.Migrations.Init.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:StudyPlatform.Migrations.CreateFlashcardsTable">
+            <inheritdoc />
+        </member>
+        <member name="M:StudyPlatform.Migrations.CreateFlashcardsTable.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:StudyPlatform.Migrations.CreateFlashcardsTable.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:StudyPlatform.Migrations.CreateFlashcardsTable.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:StudyPlatform.Models.Common.AutoMapper">
+            <summary>
+            Defines the AutoMapper initialization and maps.
+            </summary>
+        </member>
+        <member name="T:StudyPlatform.Services.Flashcards.FlashcardsService">
+            <summary>
+            Service for managing flashcards: create, edit, retrieve, and delete.
+            </summary>
+        </member>
+        <member name="M:StudyPlatform.Services.Flashcards.FlashcardsService.#ctor(StudyPlatform.Data.AppDbContext,Microsoft.Extensions.Logging.ILogger{StudyPlatform.Services.Flashcards.FlashcardsService},AutoMapper.IMapper)">
+            <summary>
+            Initializes a new instance of the <see cref="T:StudyPlatform.Services.Flashcards.FlashcardsService"/> class.
+            </summary>
+            <param name="context">The database context.</param>
+            <param name="logger">The logger instance.</param>
+            <param name="mapper">The AutoMapper instance.</param>
+        </member>
+        <member name="M:StudyPlatform.Services.Flashcards.FlashcardsService.CreateAsync(StudyPlatform.Models.FlashcardViewModel,System.Guid)">
+            <summary>
+            Creates a new flashcard for a specific user.
+            </summary>
+            <param name="model">The flashcard view model containing data.</param>
+            <param name="userId">The ID of the user who owns the flashcard.</param>
+            <returns>The created <see cref="T:StudyPlatform.Data.Models.Flashcard"/>.</returns>
+        </member>
+        <member name="M:StudyPlatform.Services.Flashcards.FlashcardsService.UpdateAsync(StudyPlatform.Models.FlashcardViewModel,System.Guid,System.Int32)">
+            <summary>
+            Edits an existing flashcard for a specific user.
+            </summary>
+            <param name="model">The flashcard view model containing updated data.</param>
+            <param name="userId">The ID of the user who owns the flashcard.</param>
+            <returns>The updated <see cref="T:StudyPlatform.Data.Models.Flashcard"/>.</returns>
+        </member>
+        <member name="M:StudyPlatform.Services.Flashcards.FlashcardsService.GetAsync(System.Int32[],System.Guid)">
+            <summary>
+            Retrieves multiple flashcards by their IDs for a specific user.
+            </summary>
+            <param name="ids">Array of flashcard IDs to retrieve.</param>
+            <param name="userId">The ID of the user who owns the flashcards.</param>
+            <returns>A collection of <see cref="T:StudyPlatform.Data.Models.Flashcard"/> objects.</returns>
+        </member>
+        <member name="M:StudyPlatform.Services.Flashcards.FlashcardsService.DeleteAsync(System.Int32[],System.Guid)">
+            <summary>
+            Deletes multiple flashcards by their IDs for a specific user.
+            </summary>
+            <param name="ids">Array of flashcard IDs to delete.</param>
+            <param name="userId">The ID of the user who owns the flashcards.</param>
+            <returns>A task representing the asynchronous delete operation.</returns>
+        </member>
+        <member name="T:StudyPlatform.Services.Flashcards.IFlashcardsService">
+            <summary>
+            Provides operations for creating, editing, retrieving, and deleting flashcards.
+            </summary>
+        </member>
+        <member name="M:StudyPlatform.Services.Flashcards.IFlashcardsService.CreateAsync(StudyPlatform.Models.FlashcardViewModel,System.Guid)">
+            <summary>
+            Creates a new flashcard for the specified user.
+            </summary>
+            <param name="model">The flashcard data to create.</param>
+            <param name="userId">The ID of the user who owns the flashcard.</param>
+            <returns>
+            A <see cref="T:System.Threading.Tasks.Task`1"/> representing the asynchronous operation.
+            The task result contains the created <see cref="T:StudyPlatform.Data.Models.Flashcard"/>.
+            </returns>
+        </member>
+        <member name="M:StudyPlatform.Services.Flashcards.IFlashcardsService.UpdateAsync(StudyPlatform.Models.FlashcardViewModel,System.Guid,System.Int32)">
+            <summary>
+            Edits an existing flashcard for the specified user.
+            </summary>
+            <param name="model">The updated flashcard data.</param>
+            <param name="userId">The ID of the user who owns the flashcard.</param>
+            <returns>
+            A <see cref="T:System.Threading.Tasks.Task`1"/> representing the asynchronous operation.
+            The task result contains the updated <see cref="T:StudyPlatform.Data.Models.Flashcard"/>.
+            </returns>
+        </member>
+        <member name="M:StudyPlatform.Services.Flashcards.IFlashcardsService.GetAsync(System.Int32[],System.Guid)">
+            <summary>
+            Retrieves flashcards by their IDs for the specified user.
+            </summary>
+            <param name="ids">An array of flashcard IDs to retrieve.</param>
+            <param name="userId">The ID of the user who owns the flashcards.</param>
+            <returns>
+            A <see cref="T:System.Threading.Tasks.Task`1"/> representing the asynchronous operation.
+            The task result contains a collection of <see cref="T:StudyPlatform.Data.Models.Flashcard"/> objects.
+            </returns>
+        </member>
+        <member name="M:StudyPlatform.Services.Flashcards.IFlashcardsService.DeleteAsync(System.Int32[],System.Guid)">
+            <summary>
+            Deletes flashcards by their IDs for the specified user.
+            </summary>
+            <param name="ids">An array of flashcard IDs to delete.</param>
+            <param name="userId">The ID of the user who owns the flashcards.</param>
+            <returns>A <see cref="T:System.Threading.Tasks.Task"/> representing the asynchronous delete operation.</returns>
+        </member>
+    </members>
+</doc>
