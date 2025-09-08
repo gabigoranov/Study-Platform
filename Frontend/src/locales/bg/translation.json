@@ -32,5 +32,8 @@
     "navMindmaps": "Мисловни карти",
     "selectSubject": "Изберете предмет",
     "errorHeading": "Опа!",
-    "defaultErrorMessage": "Нещо се обърка."
+    "defaultErrorMessage": "Нещо се обърка.",
+    "settingsTitleGeneral": "Общи",
+    "settingsTitleAccount": "Профил",
+    "settingsTitleSecurity": "Тема"
 }

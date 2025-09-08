@@ -1,7 +1,7 @@
 import { FiMenu, FiX } from "react-icons/fi";
-import LoginComponent from "./LoginComponent";
+import LoginComponent from "../LoginComponent";
 import { useTranslation } from "react-i18next";
-import { keys } from "../types/keys";
+import { keys } from "../../types/keys";
 
 type HeaderProps = {
     toggleSidebar: () => void;

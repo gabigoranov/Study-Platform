@@ -46,7 +46,7 @@ module.exports = {
         background: {
           DEFAULT: "#F5F5F5",
           muted: "#E5E5E5",
-          dark: "#1F2937",
+          dark: "#121212",
         },
 
         // Alerts & feedback

@@ -32,5 +32,8 @@
     "navMindmaps": "Mindmaps",
     "selectSubject": "Select a subject",
     "errorHeading": "Oops!",
-    "defaultErrorMessage": "Something went wrong."
+    "defaultErrorMessage": "Something went wrong.",
+    "settingsTitleGeneral": "General",
+    "settingsTitleAccount": "Account",
+    "settingsTitleSecurity": "Theme"
 }

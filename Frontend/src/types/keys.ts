@@ -32,5 +32,9 @@ export const keys = {
   navMindmaps: 'navMindmaps',
   selectSubject: 'selectSubject',
   errorHeading: 'errorHeading',
-  defaultErrorMessage: 'defaultErrorMessage'
+  defaultErrorMessage: 'defaultErrorMessage',
+  settingsTitleGeneral: 'settingsTitleGeneral',
+  settingsTitleAccount: 'settingsTitleAccount',
+  settingsTitleSecurity: 'settingsTitleSecurity'
+  
 };

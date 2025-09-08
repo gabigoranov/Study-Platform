@@ -2,7 +2,7 @@ import { useState } from 'react';
 import type { IconType } from 'react-icons';
 import { FaChevronDown } from "react-icons/fa";
 import { useTranslation } from "react-i18next";
-import { keys } from "../types/keys";
+import { keys } from "../../types/keys";
 
 interface DropdownProps {
     options: { value: string; label: string; icon: IconType }[];
