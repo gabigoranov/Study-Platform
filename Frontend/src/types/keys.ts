@@ -35,6 +35,20 @@ export const keys = {
   defaultErrorMessage: 'defaultErrorMessage',
   settingsTitleGeneral: 'settingsTitleGeneral',
   settingsTitleAccount: 'settingsTitleAccount',
-  settingsTitleSecurity: 'settingsTitleSecurity'
-  
+  settingsTitleSecurity: 'settingsTitleSecurity',
+  flashcardsDashboardTitle: "flashcardsDashboardTitle",
+  createNewFlashcard: "createNewFlashcard",
+  uploadStudyMaterials: "uploadStudyMaterials",
+  backToList: "backToList",
+  frontLabel: "frontLabel",
+  backLabel: "backLabel",
+  userIdLabel: "userIdLabel",
+  createFlashcardButton: "createFlashcardButton",
+  updateFlashcardButton: "updateFlashcardButton",
+  noFlashcards: "noFlashcards",
+  actions: "actions",
+  edit: "edit",
+  delete: "delete",
+  confirmDeleteMessage: "confirmDeleteMessage",
+  requiredFieldError: "requiredFieldError",
 };

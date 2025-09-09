@@ -35,5 +35,20 @@
     "defaultErrorMessage": "Something went wrong.",
     "settingsTitleGeneral": "General",
     "settingsTitleAccount": "Account",
-    "settingsTitleSecurity": "Theme"
+    "settingsTitleSecurity": "Theme",
+    "flashcardsDashboardTitle": "Flashcards Dashboard",
+    "createNewFlashcard": "Create New Flashcard",
+    "uploadStudyMaterials": "Upload Study Materials",
+    "backToList": "Back to List",
+    "frontLabel": "Front",
+    "backLabel": "Back",
+    "userIdLabel": "User ID",
+    "createFlashcardButton": "Create Flashcard",
+    "updateFlashcardButton": "Update Flashcard",
+    "noFlashcards": "No flashcards to display.",
+    "actions": "Actions",
+    "edit": "Edit",
+    "delete": "Delete",
+    "confirmDeleteMessage": "Are you sure you want to delete this flashcard?",
+    "requiredFieldError": "This field is required"
 }

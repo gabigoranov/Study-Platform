@@ -2,40 +2,44 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
-  body {
-    @apply bg-background text-text; /* ✅ Use only the generated class names */
-    font-family: var(--font-body);
-  }
-
-  h1, h2, h3, h4, h5, h6, p, a, span, div {
-    @apply text-inherit;
-  }
-
-  html.dark body {
-    @apply bg-background-dark text-text-light;
-  }
-}
-
 *{
   box-sizing: border-box;
 }
 
-div, a, button, img {
-  transition: all 0.3s ease-in-out;
+@layer base {
+  :root {
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+    --popover: 0 0% 98%;
+    --popover-foreground: 240 5.3% 26.1%;
+    --background: 0 0% 98%;
+    --foreground: 240 5.3% 26.1%;
+  }
+  .dark {
+    --sidebar-background: hsl(0, 0%, 4%);
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+    --background: hsl(0, 0%, 4%); /* dark background */
+    --foreground: hsl(240 4.8% 95.9%); /* light text */
+  }
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-  font-family: var(--font-heading);
-}
-
-a {
-  font-weight: 500;
-  color: theme('colors.primary.DEFAULT');  /* Tailwind primary color */
-  text-decoration: inherit;
-}
-a:hover {
-  color: theme('colors.primary.dark');
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
 }

@@ -35,5 +35,20 @@
     "defaultErrorMessage": "Нещо се обърка.",
     "settingsTitleGeneral": "Общи",
     "settingsTitleAccount": "Профил",
-    "settingsTitleSecurity": "Тема"
+    "settingsTitleSecurity": "Тема",
+    "flashcardsDashboardTitle": "Табло на Флашкарти",
+    "createNewFlashcard": "Създаване на нова флашкарта",
+    "uploadStudyMaterials": "Качване на учебни материали",
+    "backToList": "Обратно към списъка",
+    "frontLabel": "Отпред",
+    "backLabel": "Отзад",
+    "userIdLabel": "Потребителско ID",
+    "createFlashcardButton": "Създай флашкарта",
+    "updateFlashcardButton": "Актуализирай флашкартата",
+    "noFlashcards": "Няма флашкарти за показване.",
+    "actions": "Действия",
+    "edit": "Редактирай",
+    "delete": "Изтрий",
+    "confirmDeleteMessage": "Сигурни ли сте, че искате да изтриете тази флашкарта?",
+    "requiredFieldError": "Това поле е задължително"
 }

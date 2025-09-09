@@ -1,24 +1,46 @@
-import { useState, type ReactNode } from "react";
-import Sidebar from "../Dashboard/Sidebar";
-import Header from "../Dashboard/Header";
-import LanguageToggle from "../Common/LanguageToggle";
-import { keys } from "../../types/keys";
 import { useTranslation } from "react-i18next";
-import { LuSettings } from "react-icons/lu";
-import { MdAccountCircle } from "react-icons/md";
-import { LuSunMoon } from "react-icons/lu";
-import { Link, Outlet } from "react-router-dom";
+import { CircleUser, Settings, SunMoon } from "lucide-react";
+import { SidebarProvider } from "../ui/sidebar";
+import { AppSidebar } from "../Common/AppSidebar";
+import Header from "../Dashboard/Header";
+import { Outlet } from "react-router";
 
 export default function SettingsLayout() {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const { t } = useTranslation();
-
-  const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
-
+  const navItems = [
+    {
+      title: "General",
+      url: "/settings",
+      icon: Settings,
+    },
+    {
+      title: "Account",
+      url: "/settings/account",
+      icon: CircleUser,
+    },
+    {
+      title: "Theme",
+      url: "/settings/theme",
+      icon: SunMoon,
+    },
+  ]
   return (
-    <div className="flex h-screen overflow-hidden">
-      {/* Sidebar */}
-      <Sidebar
+    <SidebarProvider>
+      <div className="flex w-full h-screen overflow-hidden">
+        <AppSidebar items={navItems} title="Settings"/>
+        <div className="flex-1 flex flex-col transition-all duration-300">
+          <Header />
+          <main className="flex-1 p-4 bg-background overflow-auto">
+              <Outlet />
+          </main>
+        </div>
+      </div>
+    </SidebarProvider>
+  );
+}
+
+
+{/* <Sidebar
         isOpen={isSidebarOpen}
       >
         <nav className="pl-4 mt-3">
@@ -53,15 +75,4 @@ export default function SettingsLayout() {
             </ul>
           </nav>
           <LanguageToggle className="hidden md:block mt-auto ml-auto" />
-      </Sidebar>
-
-      {/* Main content */}
-      <div className="flex-1 flex flex-col transition-all duration-300">
-        <Header toggleSidebar={toggleSidebar} isSidebarOpen={isSidebarOpen} />
-        <main className="flex-1 p-6 bg-gray-100 dark:bg-background-dark overflow-auto">
-            <Outlet />
-        </main>
-      </div>
-    </div>
-  );
-}
+      </Sidebar> */}

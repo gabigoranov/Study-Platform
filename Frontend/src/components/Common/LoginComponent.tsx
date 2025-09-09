@@ -1,8 +1,7 @@
-import { useAuth } from "../hooks/useAuth";
-import type { ProfileIconProps } from "./ProfileIcon";
-import ProfileIcon from "./ProfileIcon";
 import { useTranslation } from "react-i18next";
-import { keys } from "../types/keys";
+import { useAuth } from "../../hooks/useAuth";
+import ProfileIcon, { ProfileIconProps } from "../Dashboard/ProfileIcon";
+import { keys } from "../../types/keys";
 
 type LoginComponentProps = {
     iconProps: ProfileIconProps;
