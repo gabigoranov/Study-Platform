@@ -33,9 +33,7 @@ export default function App() {
             }
             errorElement={<ErrorPage />}
           >
-            {/* Nested inside Dashboard */}
-            <Route index element={<FlashcardsDashboard />} />
-            
+            <Route path="flashcards" index element={<FlashcardsDashboard />} />
           </Route>
 
           <Route path="settings" element={

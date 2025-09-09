@@ -1,6 +1,8 @@
 import React from "react";
 import { Flashcard } from "../data/Flashcard";
 import FlashcardDashboardComponent from "./Flashcards/FlashcardDashboardComponent";
+import { useTranslation } from "react-i18next";
+import { keys } from "../types/keys";
 
 interface FlashcardListProps {
   flashcards: Flashcard[];
@@ -9,10 +11,11 @@ interface FlashcardListProps {
 }
 
 export const FlashcardList: React.FC<FlashcardListProps> = ({ flashcards, onEdit, onDelete }) => {
+  const { t } = useTranslation();
   if (flashcards.length === 0) {
     return (
       <div className="h-full flex justify-center items-center">
-        <p className="p-8 text-center text-gray-500">No flashcards to display.</p>
+        <p className="p-8 text-center text-gray-500">{t(keys.noFlashcards)}</p>
       </div>
     )
   }

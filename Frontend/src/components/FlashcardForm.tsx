@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { InputField } from "./InputField";
 import { TextAreaField } from "./TextAreaField";
-import { Button } from "./Button";
 import { Flashcard } from "../data/Flashcard";
+import { Button } from "./ui/button";
 
 interface FlashcardFormProps {
   initialData?: Omit<Flashcard, "id">;

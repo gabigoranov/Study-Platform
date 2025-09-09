@@ -35,7 +35,7 @@
     "defaultErrorMessage": "Something went wrong.",
     "settingsTitleGeneral": "General",
     "settingsTitleAccount": "Account",
-    "settingsTitleSecurity": "Theme",
+    "settingsTitleTheme": "Theme",
     "flashcardsDashboardTitle": "Flashcards Dashboard",
     "createNewFlashcard": "Create New Flashcard",
     "uploadStudyMaterials": "Upload Study Materials",
@@ -50,5 +50,13 @@
     "edit": "Edit",
     "delete": "Delete",
     "confirmDeleteMessage": "Are you sure you want to delete this flashcard?",
-    "requiredFieldError": "This field is required"
+    "requiredFieldError": "This field is required",
+    "createNewButton": "Create new",
+    "flashcardNotFound": "Flashcard not found",
+    "flashcardsSubtitle": "Generate and revise flashcards with AI",
+    "searchPlaceholder": "Search here...",
+    "uploadMaterialsButton": "Upload Materials",
+    "viewButton": "View",
+    "dashboard": "Dashboard",
+    "settings": "Settings"
 }

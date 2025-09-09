@@ -5,9 +5,9 @@ import { keys } from "../../types/keys";
 import { useTranslation } from "react-i18next";
 import { Outlet } from "react-router";
 import { SidebarProvider } from "../ui/sidebar";
-import { AppSidebar } from "../Common/AppSidebar";
 import { Home } from "lucide-react";
 import { PiNoteBlankFill } from "react-icons/pi";
+import { AppSidebar } from "../Sidebar/AppSidebar";
 
 export default function Layout() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -25,16 +25,21 @@ export default function Layout() {
     { value: "biology", label: t(keys.subjectBiology), icon: FaFlask },
   ];
 
-  const navItems = [
+  const navGroups = [
     {
-      title: "Home",
-      url: "/home",
-      icon: Home,
-    },
-    {
-      title: "Flashcards",
-      url: "/flashcards",
-      icon: PiNoteBlankFill,
+      title: t(keys.dashboard),
+      items: [
+        {
+          title: t(keys.navHome),
+          url: "/home",
+          icon: Home,
+        },
+        {
+          title: t(keys.navFlashcards),
+          url: "/flashcards",
+          icon: PiNoteBlankFill,
+        },
+      ]
     },
   ];
 
@@ -45,7 +50,7 @@ export default function Layout() {
 
   return (
     <SidebarProvider>
-      <AppSidebar items={navItems} title="Dashboard" />
+      <AppSidebar groups={navGroups} />
       <div className="flex-1 flex flex-col h-screen">
         <Header />
 

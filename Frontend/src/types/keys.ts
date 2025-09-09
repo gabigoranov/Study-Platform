@@ -35,7 +35,7 @@ export const keys = {
   defaultErrorMessage: 'defaultErrorMessage',
   settingsTitleGeneral: 'settingsTitleGeneral',
   settingsTitleAccount: 'settingsTitleAccount',
-  settingsTitleSecurity: 'settingsTitleSecurity',
+  settingsTitleTheme: 'settingsTitleTheme',
   flashcardsDashboardTitle: "flashcardsDashboardTitle",
   createNewFlashcard: "createNewFlashcard",
   uploadStudyMaterials: "uploadStudyMaterials",
@@ -51,4 +51,12 @@ export const keys = {
   delete: "delete",
   confirmDeleteMessage: "confirmDeleteMessage",
   requiredFieldError: "requiredFieldError",
+  flashcardNotFound: "flashcardNotFound",
+  searchPlaceholder: "searchPlaceholder",
+  flashcardsSubtitle: "flashcardsSubtitle",
+  createNewButton: "createNewButton",
+  viewButton: "viewButton",
+  uploadMaterialsButton: "uploadMaterialsButton",
+  dashboard: "dashboard",
+  settings: "settings"
 };

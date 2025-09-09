@@ -1,33 +1,41 @@
 import { useTranslation } from "react-i18next";
 import { CircleUser, Settings, SunMoon } from "lucide-react";
 import { SidebarProvider } from "../ui/sidebar";
-import { AppSidebar } from "../Common/AppSidebar";
 import Header from "../Dashboard/Header";
 import { Outlet } from "react-router";
+import { AppSidebar } from "../Sidebar/AppSidebar";
+import { keys } from "@/types/keys";
 
 export default function SettingsLayout() {
   const { t } = useTranslation();
-  const navItems = [
+
+  const navGroups = [
     {
-      title: "General",
-      url: "/settings",
-      icon: Settings,
+      title: t(keys.settings),
+      items: [
+        {
+          title: t(keys.settingsTitleGeneral),
+          url: "/settings",
+          icon: Settings,
+        },
+        {
+          title: t(keys.settingsTitleAccount),
+          url: "/settings/account",
+          icon: CircleUser,
+        },
+        {
+          title: t(keys.settingsTitleTheme),
+          url: "/settings/theme",
+          icon: SunMoon,
+        },
+      ]
     },
-    {
-      title: "Account",
-      url: "/settings/account",
-      icon: CircleUser,
-    },
-    {
-      title: "Theme",
-      url: "/settings/theme",
-      icon: SunMoon,
-    },
-  ]
+  ];
+
   return (
     <SidebarProvider>
       <div className="flex w-full h-screen overflow-hidden">
-        <AppSidebar items={navItems} title="Settings"/>
+        <AppSidebar groups={navGroups} />
         <div className="flex-1 flex flex-col transition-all duration-300">
           <Header />
           <main className="flex-1 p-4 bg-background overflow-auto">

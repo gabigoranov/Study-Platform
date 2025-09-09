@@ -7,10 +7,13 @@ import { FaMagnifyingGlass } from "react-icons/fa6";
 import { Input } from "@/components/ui/input";
 import { Edit, Eye, Plus, Upload } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useTranslation } from "react-i18next";
+import { keys } from "../types/keys";
 
 type View = "list" | "create" | "edit";
 
 export default function FlashcardsDashboard() {
+  const { t } = useTranslation();
   const [flashcards, setFlashcards] = useState<Flashcard[]>([]);
   const [view, setView] = useState<View>("list");
   const [editingId, setEditingId] = useState<string | null>(null);
@@ -44,7 +47,7 @@ export default function FlashcardsDashboard() {
   };
 
   const handleDelete = async (id: string) => {
-    if (window.confirm("Are you sure you want to delete this flashcard?")) {
+    if (window.confirm(t(keys.confirmDeleteMessage))) {
       await flashcardService.delete(id);
       setFlashcards(flashcards.filter(fc => fc.id !== id)); // Update UI immediately
     }
@@ -71,15 +74,15 @@ export default function FlashcardsDashboard() {
         return (
           <>
             <Button variant="secondary" onClick={() => setView("list")} className="mb-4">
-              Back to List
+              {t(keys.backToList)}
             </Button>
-            <FlashcardForm submitLabel="Create Flashcard" onSubmit={handleCreate} />
+            <FlashcardForm submitLabel={t(keys.createFlashcardButton)} onSubmit={handleCreate} />
           </>
         );
 
       case "edit":
         const flashcardToEdit = flashcards.find(fc => fc.id === editingId);
-        if (!flashcardToEdit) return <p className="text-center p-4">Flashcard not found.</p>;
+        if (!flashcardToEdit) return <p className="text-center p-4">{t(keys.flashcardNotFound)}</p>;
         return (
           <>
             <Button variant="secondary" onClick={() => { setView("list"); setEditingId(null); }} className="mb-4">
@@ -91,7 +94,7 @@ export default function FlashcardsDashboard() {
                 back: flashcardToEdit.back,
                 userId: flashcardToEdit.userId,
               }}
-              submitLabel="Update Flashcard"
+              submitLabel={t(keys.updateFlashcardButton)}
               onSubmit={handleUpdate}
             />
           </>
@@ -106,14 +109,14 @@ export default function FlashcardsDashboard() {
     <div className="w-full pb-8 flex-col gap-4">
       <div className="flex flex-col items-start sm:flex-row sm:items-end sm:justify-start gap-5 mb-4">
         <div className="">
-          <h1 className="text-3xl font-bold mb-1 text-left">Flashcards</h1>
-          <p className="">Generate and revise flashcards with AI.</p>
+          <h1 className="text-3xl font-bold mb-1 text-left">{t(keys.flashcardsDashboardTitle)}</h1>
+          <p className="">{t(keys.flashcardsSubtitle)}</p>
         </div>
         <form className="flex items-center gap-4 h-fit">
           <Input
             className="p-2 px-4 min-w-[300px] rounded-full"
             type="text"
-            placeholder="Search here..."
+            placeholder={t(keys.searchPlaceholder)}
           />
           <button type="submit">
             <FaMagnifyingGlass className="text-2xl" />
@@ -127,15 +130,15 @@ export default function FlashcardsDashboard() {
             variant="outline"
             onClick={() => setView("create")}
           >
-            <Plus className="inline" /> Create new
+            <Plus className="inline" /> {t(keys.createNewButton)}
           </Button>
 
           <Button className="rounded-3xl" variant="ghost" disabled>
-            <Edit className="inline" /> Edit
+            <Edit className="inline" /> {t(keys.edit)}
           </Button>
 
           <Button className="rounded-3xl" variant="ghost" disabled>
-            <Eye className="inline" /> View
+            <Eye className="inline" /> {t(keys.viewButton)}
           </Button>
         </div>
 
@@ -145,7 +148,7 @@ export default function FlashcardsDashboard() {
             variant="outline"
             onClick={() => fileInputRef.current?.click()}
           >
-            <Upload className="inline" /> Upload Materials
+            <Upload className="inline" /> {t(keys.uploadMaterialsButton)}
           </Button>
 
           <input

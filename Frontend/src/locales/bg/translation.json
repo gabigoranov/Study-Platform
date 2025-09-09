@@ -35,7 +35,7 @@
     "defaultErrorMessage": "Нещо се обърка.",
     "settingsTitleGeneral": "Общи",
     "settingsTitleAccount": "Профил",
-    "settingsTitleSecurity": "Тема",
+    "settingsTitleTheme": "Тема",
     "flashcardsDashboardTitle": "Табло на Флашкарти",
     "createNewFlashcard": "Създаване на нова флашкарта",
     "uploadStudyMaterials": "Качване на учебни материали",
@@ -50,5 +50,13 @@
     "edit": "Редактирай",
     "delete": "Изтрий",
     "confirmDeleteMessage": "Сигурни ли сте, че искате да изтриете тази флашкарта?",
-    "requiredFieldError": "Това поле е задължително"
+    "requiredFieldError": "Това поле е задължително",
+    "createNewButton": "Създай нов",
+    "flashcardNotFound": "Флашкартата не е намерена",
+    "flashcardsSubtitle": "Генерирайте и преглеждайте флаш-карти с изкуствен интелект",
+    "searchPlaceholder": "Търсене...",
+    "uploadMaterialsButton": "Качване на материали",
+    "viewButton": "Преглед",
+    "dashboard": "Табло",
+    "settings": "Настройки"
 }

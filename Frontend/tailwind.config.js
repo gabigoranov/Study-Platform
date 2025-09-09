@@ -44,6 +44,8 @@ module.exports = {
 			"background-dark": "var(--background-dark)", // optional if you want separate
 			foreground: "var(--foreground)",
 			"foreground-dark": "var(--foreground-dark)",
+			surface: "var(--surface)",
+			"surface-dark": "var(--surface-dark)",
   			success: {
   				DEFAULT: '#16A34A',
   				light: '#4ADE80',

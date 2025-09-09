@@ -6,6 +6,8 @@ import { supabase } from "../lib/supabaseClient";
 import InputComponent from "../components/Login/InputComponent";
 import { useTranslation } from "react-i18next";
 import { keys } from '../types/keys';
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 
 export default function SignUp() {
   const { t, i18n } = useTranslation();
@@ -23,11 +25,11 @@ export default function SignUp() {
   const [errors, setErrors] = useState<string[]>([]);
   const [emailConfirmation, setEmailConfirmation] = useState(false);
 
-  if (loading) return <p className="text-center mt-10">{t(keys.loading)}</p>;
-  if (user) {
-    navigate("/");
-    return null;
-  }
+  //if (loading) return <p className="text-center mt-10">{t(keys.loading)}</p>;
+  // if (user) {
+  //   navigate("/");
+  //   return null;
+  // }
 
   const validatePassword = (pwd: string) => {
     const errs: string[] = [];
@@ -88,8 +90,8 @@ export default function SignUp() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-50">
-      <div className="bg-white p-8 rounded-lg shadow-md w-80 sm:w-96 text-center">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-background dark:bg-background-dark">
+      <div className="bg-surface p-8 rounded-lg shadow-md w-80 sm:w-96 text-center">
         {!emailConfirmation ? (
           <>
             <h1 className="text-2xl font-bold mb-6">{t(keys.signUpTitle)}</h1>
@@ -103,17 +105,18 @@ export default function SignUp() {
                 </div>
               )}
 
-              <InputComponent type="text" placeholder={t(keys.firstNamePlaceholder)} value={firstName} onChange={setFirstName} required />
-              <InputComponent type="text" placeholder={t(keys.lastNamePlaceholder)} value={lastName} onChange={setLastName} required />
-              <InputComponent type="email" placeholder={t(keys.emailPlaceholder)} value={email} onChange={setEmail} required />
-              <InputComponent type="password" placeholder={t(keys.passwordPlaceholder)} value={password} onChange={setPassword} required />
+              <Input type="text" placeholder={t(keys.firstNamePlaceholder)} value={firstName} onChange={(e) => setFirstName(e.target.value)} required />
+              <Input type="text" placeholder={t(keys.lastNamePlaceholder)} value={lastName} onChange={(e) => setLastName(e.target.value)} required />
+              <Input type="email" placeholder={t(keys.emailPlaceholder)} value={email} onChange={(e) => setEmail(e.target.value)} required />
+              <Input type="password" placeholder={t(keys.passwordPlaceholder)} value={password} onChange={(e) => setPassword(e.target.value)} required />
               
-              <button
+              <Button
                 type="submit"
-                className="bg-blue-500 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-600 transition-colors"
+                variant="outline"
+                className="rounded-full hover:bg-blue-600 transition-colors"
               >
                 {t(keys.signUpButton)}
-              </button>
+              </Button>
             </form>
 
             <div className="flex items-center mb-6">
@@ -122,13 +125,14 @@ export default function SignUp() {
               <hr className="flex-grow border-gray-300" />
             </div>
 
-            <button
+            <Button
               onClick={handleGoogle}
-              className="flex items-center justify-center w-full bg-neutral-200 px-4 py-2 rounded-lg shadow hover:bg-neutral-300 transition-colors"
+              variant="ghost"
+              className="flex items-center justify-center w-full px-4 py-2 rounded-2xl hover:bg-neutral-200 hover:text-text transition-colors"
             >
               <FcGoogle className="w-5 h-5 mr-2" />
-              {t(keys.signUpWithGoogle)}
-            </button>
+              {t(keys.signInWithGoogle)}
+            </Button>
 
             <p className="mt-6 text-sm text-gray-600">
               {t(keys.haveAccountText)}{" "}
@@ -144,7 +148,7 @@ export default function SignUp() {
               {t(keys.confirmEmailMessage, { email })}
             </p>
 
-            <a href="/login" className="bg-blue-500 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-600 hover:text-white transition-colors">Sign In</a>
+            <a href="/login" className="bg-blue-500 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-600 hover:text-white transition-colors">{t(keys.signInButton)}</a>
           </>
         )}
       </div>
