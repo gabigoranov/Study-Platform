@@ -1,19 +1,38 @@
 import { FlashcardDTO } from "@/data/DTOs/FlashcardDTO";
 import { Flashcard } from "../data/Flashcard";
+import { BASE_URL } from "@/types/urls";
 
 export const flashcardService = {
-  getAll: async (): Promise<Flashcard[]> => {
-    console.log("Fetching all flashcards from API");
-    return []; // Placeholder
+  getAll: async (token: string): Promise<Flashcard[]> => {
+    const response = await fetch(`${BASE_URL}/flashcards`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    const data = await response.json();
+    console.log("API CALL");
+    console.log(data);
+
+    return data;
   },
 
-  getById: async (id: string): Promise<Flashcard> => {
-    console.log(`Fetching flashcard with id: ${id}`);
-    return { id, front: "", back: "", userId: "" }; // Placeholder
+  getById: async (id: string, token: string): Promise<Flashcard> => {
+    const response = await fetch(`${BASE_URL}/flashcards/${id}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      }
+    });
+
+    return response.json();
   },
 
   create: async (flashcard: FlashcardDTO, token: string): Promise<Flashcard> => {
-    const response = await fetch("https://localhost:7238/api/flashcards", {
+    const response = await fetch(`${BASE_URL}/flashcards`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -25,11 +44,26 @@ export const flashcardService = {
     return response.json();
   },
 
-  update: async (id: string, flashcard: FlashcardDTO): Promise<void> => {
-    console.log(`Updating flashcard ${id}`, flashcard);
+  update: async (id: string, flashcard: FlashcardDTO, token: string): Promise<Flashcard> => {
+    const response = await fetch(`${BASE_URL}/flashcards`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(flashcard),
+    });
+
+    return response.json();
   },
 
-  delete: async (id: string): Promise<void> => {
-    console.log(`Deleting flashcard ${id}`);
+  delete: async (id: string, token: string): Promise<void> => {
+    await fetch(`${BASE_URL}/flashcards/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      }
+    });
   },
 };

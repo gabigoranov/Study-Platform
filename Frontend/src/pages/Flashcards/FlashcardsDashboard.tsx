@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { flashcardService } from "../../services/flashcardService";
 import FlashcardsDashboardList from "../../components/Flashcards/FlashcardsDashboardList";
 import { Flashcard } from "../../data/Flashcard";
@@ -10,45 +10,71 @@ import { FlashcardDTO } from "@/data/DTOs/FlashcardDTO";
 import { useAuth } from "@/hooks/useAuth";
 import FlashcardsForm from "@/components/Flashcards/FlashcardsForm";
 import FlashcardsDashboardHeader from "@/components/Flashcards/FlashcardsDashboardHeader";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 
 type View = "list" | "create" | "edit";
 
 export default function FlashcardsDashboard() {
   const { t } = useTranslation();
-  const [flashcards, setFlashcards] = useState<Flashcard[]>([]);
   const [view, setView] = useState<View>("list");
   const [editingId, setEditingId] = useState<string | null>(null);
   const { token } = useAuth();
+  const queryClient = useQueryClient();
 
-  useEffect(() => {
-    async function loadFlashcards() {
-      const data = await flashcardService.getAll();
-      setFlashcards(data);
-    }
-    loadFlashcards();
-  }, []);
+  // --- Query: load all flashcards ---
+  const { data: flashcards, isLoading, error } = useQuery({
+    queryKey: ["flashcards"],
+    queryFn: () => flashcardService.getAll(token!),
+    staleTime: 1000 * 60 * 5,
+  });
 
-  const handleCreate = async (data: FlashcardDTO ) => {
-    // Send to API and save returned data
-    const response = await flashcardService.create(data, token!);
+  // --- Mutation: create ---
+  const createMutation = useMutation({
+    mutationFn: (dto: FlashcardDTO) => flashcardService.create(dto, token!),
+    onSuccess: (newFlashcard) => {
+      queryClient.setQueryData<Flashcard[]>(["flashcards"], (old) =>
+        old ? [...old, newFlashcard] : [newFlashcard]
+      );
+      setView("list");
+    },
+  });
 
-    setFlashcards((prev) => [...prev, response]);
+  // --- Mutation: update ---
+  const updateMutation = useMutation({
+    mutationFn: ({ id, dto }: { id: string; dto: FlashcardDTO }) =>
+      flashcardService.update(id, dto, token!),
+    onSuccess: (updated) => {
+      queryClient.setQueryData<Flashcard[]>(["flashcards"], (old) =>
+        old ? old.map((fc) => (fc.id === updated.id ? updated : fc)) : []
+      );
+      setEditingId(null);
+      setView("list");
+    },
+  });
 
-    setView("list");
+  // --- Mutation: delete ---
+  const deleteMutation = useMutation({
+    mutationFn: (id: string) => flashcardService.delete(id, token!),
+    onSuccess: (_, id) => {
+      queryClient.setQueryData<Flashcard[]>(["flashcards"], (old) =>
+        old ? old.filter((fc) => fc.id !== id) : []
+      );
+    },
+  });
+
+  // --- Handlers ---
+  const handleCreate = (data: FlashcardDTO) => {
+    createMutation.mutate(data);
   };
 
-  const handleUpdate = async (data: FlashcardDTO) => {
+  const handleUpdate = (data: FlashcardDTO) => {
     if (!editingId) return;
-    await flashcardService.update(editingId, data);
-    setEditingId(null);
-    setView("list");
-    // Reload or update flashcards here if you want
+    updateMutation.mutate({ id: editingId, dto: data });
   };
 
-  const handleDelete = async (id: string) => {
+  const handleDelete = (id: string) => {
     if (window.confirm(t(keys.confirmDeleteMessage))) {
-      await flashcardService.delete(id);
-      setFlashcards(flashcards.filter(fc => fc.id !== id)); // Update UI immediately
+      deleteMutation.mutate(id);
     }
   };
 
@@ -65,26 +91,46 @@ export default function FlashcardsDashboard() {
   const renderContent = () => {
     switch (view) {
       case "list":
+        if (isLoading) return <p>Loading...</p>;
+        if (error) return <p>Error loading flashcards</p>;
         return (
-          <FlashcardsDashboardList flashcards={flashcards} onEdit={startEdit} onDelete={handleDelete} />
+          <FlashcardsDashboardList
+            flashcards={flashcards ?? []}
+            onEdit={startEdit}
+            onDelete={handleDelete}
+          />
         );
 
       case "create":
         return (
           <>
-            <Button variant="outline" onClick={() => setView("list")} className="mt-4 p-4 rounded-xl">
+            <Button
+              variant="outline"
+              onClick={() => setView("list")}
+              className="mt-4 p-4 rounded-xl"
+            >
               {<ChevronLeft className="p-0" />}
             </Button>
-            <FlashcardsForm submitLabel={t(keys.createFlashcardButton)} onSubmit={handleCreate} />
+            <FlashcardsForm
+              submitLabel={t(keys.createFlashcardButton)}
+              onSubmit={handleCreate}
+            />
           </>
         );
 
       case "edit":
-        const flashcardToEdit = flashcards.find(fc => fc.id === editingId);
-        if (!flashcardToEdit) return <p className="text-center p-4">{t(keys.flashcardNotFound)}</p>;
+        const flashcardToEdit = flashcards?.find((fc) => fc.id === editingId);
+        if (!flashcardToEdit)
+          return (
+            <p className="text-center p-4">{t(keys.flashcardNotFound)}</p>
+          );
         return (
           <>
-            <Button variant="outline" onClick={() => setView("list")} className="mt-4 p-4 rounded-xl">
+            <Button
+              variant="outline"
+              onClick={() => setView("list")}
+              className="mt-4 p-4 rounded-xl"
+            >
               {<ChevronLeft className="p-0" />}
             </Button>
             <FlashcardsForm
@@ -105,8 +151,11 @@ export default function FlashcardsDashboard() {
 
   return (
     <div className="w-full pb-8 flex-col gap-4">
-      <FlashcardsDashboardHeader setView={(view: "list" | "create" | "edit") => setView(view)} handleFileUpload={handleFileUpload}/>
+      <FlashcardsDashboardHeader
+        setView={(view: "list" | "create" | "edit") => setView(view)}
+        handleFileUpload={handleFileUpload}
+      />
       {renderContent()}
     </div>
   );
-};
+}

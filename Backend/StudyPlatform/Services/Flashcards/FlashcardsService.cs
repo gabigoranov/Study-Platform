@@ -85,21 +85,14 @@ namespace StudyPlatform.Services.Flashcards
         /// <param name="ids">Array of flashcard IDs to retrieve.</param>
         /// <param name="userId">The ID of the user who owns the flashcards.</param>
         /// <returns>A collection of <see cref="Flashcard"/> objects.</returns>
-        public async Task<IEnumerable<FlashcardDTO>> GetAsync(int[] ids, Guid userId)
+        public async Task<FlashcardDTO> GetAsync(Guid userId, int id)
         {
-            if (ids == null || ids.Length == 0)
-            {
-                _logger.LogInformation("GetAsync called with empty or null IDs for user {UserId}", userId);
-                return Array.Empty<FlashcardDTO>();
-            }
-
             var flashcards = await _context.Flashcards
-                .Where(f => ids.Contains(f.Id) && f.UserId == userId)
-                .ToListAsync();
+                .SingleAsync(f => f.Id == id && f.UserId == userId);
 
-            _logger.LogInformation("{Count} flashcards retrieved for user {UserId}", flashcards.Count, userId);
+            _logger.LogInformation("1 flashcard retrieved for user {UserId}", userId);
 
-            return _mapper.Map<IEnumerable<FlashcardDTO>>(flashcards);
+            return _mapper.Map<FlashcardDTO>(flashcards);
         }
 
         /// <summary>
@@ -121,6 +114,13 @@ namespace StudyPlatform.Services.Flashcards
                 .ExecuteDeleteAsync();
 
             _logger.LogInformation("{DeletedCount} flashcards deleted for user {UserId}", deletedCount, userId);
+        }
+
+        public async Task<IEnumerable<FlashcardDTO>> GetAllAsync(Guid userId)
+        {
+            var flashcards = await _context.Flashcards.Where(x => x.UserId == userId).ToListAsync();
+
+            return _mapper.Map<IEnumerable<FlashcardDTO>>(flashcards);
         }
     }
 }

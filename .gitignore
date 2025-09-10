@@ -3,3 +3,6 @@
 ################################################################################
 
 /Backend/StudyPlatform/appsettings.json
+/Backend/StudyPlatform/bin
+/Backend/StudyPlatform/.vs
+/Backend/StudyPlatform/obj

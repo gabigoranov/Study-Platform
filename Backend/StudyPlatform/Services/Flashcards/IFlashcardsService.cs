@@ -32,15 +32,22 @@ namespace StudyPlatform.Services.Flashcards
         Task<FlashcardDTO> UpdateAsync(FlashcardViewModel model, Guid userId, int id);
 
         /// <summary>
-        /// Retrieves flashcards by their IDs for the specified user.
+        /// Retrieves a flashcard by it's ID for the specified user.
         /// </summary>
-        /// <param name="ids">An array of flashcard IDs to retrieve.</param>
+        /// <param name="id">A flashcard ID to retrieve.</param>
         /// <param name="userId">The ID of the user who owns the flashcards.</param>
         /// <returns>
-        /// A <see cref="Task{IEnumerable}"/> representing the asynchronous operation.
-        /// The task result contains a collection of <see cref="Flashcard"/> objects.
+        /// A <see cref="Task{FlashcardDTO}"/> representing the asynchronous operation.
+        /// The task result contains a of <see cref="FlashcardDTO"/> object.
         /// </returns>
-        Task<IEnumerable<FlashcardDTO>> GetAsync(int[] ids, Guid userId);
+        Task<FlashcardDTO> GetAsync(Guid userId, int id);
+
+        /// <summary>
+        /// Retrieves all flashcards for the specified user.
+        /// </summary>
+        /// <param name="userId">The specified userId.</param>
+        /// <returns>A collection of flashcards if successful.</returns>
+        Task<IEnumerable<FlashcardDTO>> GetAllAsync(Guid userId);
 
         /// <summary>
         /// Deletes flashcards by their IDs for the specified user.

@@ -22,11 +22,17 @@
             <param name="model">The model for the flashcard created by the user.</param>
             <returns>A new flashcard if successful.</returns>
         </member>
-        <member name="M:StudyPlatform.Controllers.FlashcardsController.Get(System.Int32[])">
+        <member name="M:StudyPlatform.Controllers.FlashcardsController.Get(System.Int32)">
             <summary>
-            Endpoint for getting a list of flashcards by their IDs.
+            Endpoint for getting a flashcard by it's ID.
             </summary>
-            <param name="ids">The list of ids required.</param>
+            <param name="id">The card id..</param>
+            <returns>A flashcard if successful.</returns>
+        </member>
+        <member name="M:StudyPlatform.Controllers.FlashcardsController.Get">
+            <summary>
+            Endpoint for getting all flashcards that the user owns.
+            </summary>
             <returns>A list of flashcards if successful.</returns>
         </member>
         <member name="M:StudyPlatform.Controllers.FlashcardsController.Update(StudyPlatform.Models.FlashcardViewModel,System.Int32)">
@@ -153,7 +159,7 @@
             <param name="userId">The ID of the user who owns the flashcard.</param>
             <returns>The updated <see cref="T:StudyPlatform.Data.Models.Flashcard"/>.</returns>
         </member>
-        <member name="M:StudyPlatform.Services.Flashcards.FlashcardsService.GetAsync(System.Int32[],System.Guid)">
+        <member name="M:StudyPlatform.Services.Flashcards.FlashcardsService.GetAsync(System.Guid,System.Int32)">
             <summary>
             Retrieves multiple flashcards by their IDs for a specific user.
             </summary>
@@ -196,16 +202,23 @@
             The task result contains the updated <see cref="T:StudyPlatform.Data.Models.Flashcard"/>.
             </returns>
         </member>
-        <member name="M:StudyPlatform.Services.Flashcards.IFlashcardsService.GetAsync(System.Int32[],System.Guid)">
+        <member name="M:StudyPlatform.Services.Flashcards.IFlashcardsService.GetAsync(System.Guid,System.Int32)">
             <summary>
-            Retrieves flashcards by their IDs for the specified user.
+            Retrieves a flashcard by it's ID for the specified user.
             </summary>
-            <param name="ids">An array of flashcard IDs to retrieve.</param>
+            <param name="id">A flashcard ID to retrieve.</param>
             <param name="userId">The ID of the user who owns the flashcards.</param>
             <returns>
             A <see cref="T:System.Threading.Tasks.Task`1"/> representing the asynchronous operation.
-            The task result contains a collection of <see cref="T:StudyPlatform.Data.Models.Flashcard"/> objects.
+            The task result contains a of <see cref="T:StudyPlatform.Models.DTOs.FlashcardDTO"/> object.
             </returns>
+        </member>
+        <member name="M:StudyPlatform.Services.Flashcards.IFlashcardsService.GetAllAsync(System.Guid)">
+            <summary>
+            Retrieves all flashcards for the specified user.
+            </summary>
+            <param name="userId">The specified userId.</param>
+            <returns>A collection of flashcards if successful.</returns>
         </member>
         <member name="M:StudyPlatform.Services.Flashcards.IFlashcardsService.DeleteAsync(System.Int32[],System.Guid)">
             <summary>

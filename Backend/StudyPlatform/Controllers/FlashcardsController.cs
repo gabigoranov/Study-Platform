@@ -47,17 +47,31 @@ namespace StudyPlatform.Controllers
         }
 
         /// <summary>
-        /// Endpoint for getting a list of flashcards by their IDs.
+        /// Endpoint for getting a flashcard by it's ID.
         /// </summary>
-        /// <param name="ids">The list of ids required.</param>
-        /// <returns>A list of flashcards if successful.</returns>
-        [HttpGet]
-        public async Task<IActionResult> Get([FromQuery] int[] ids)
+        /// <param name="id">The card id..</param>
+        /// <returns>A flashcard if successful.</returns>
+        [HttpGet("{id}")]
+        public async Task<IActionResult> Get([FromRoute] int id)
         {
             // Load userId from JWT token
             Guid userId = User.GetUserId();
 
-            IEnumerable<FlashcardDTO> res = await _flashcardsService.GetAsync(ids, userId);
+            FlashcardDTO res = await _flashcardsService.GetAsync(userId, id);
+            return Ok(res);
+        }
+
+        /// <summary>
+        /// Endpoint for getting all flashcards that the user owns.
+        /// </summary>
+        /// <returns>A list of flashcards if successful.</returns>
+        [HttpGet]
+        public async Task<IActionResult> Get()
+        {
+            // Load userId from JWT token
+            Guid userId = User.GetUserId();
+
+            IEnumerable<FlashcardDTO> res = await _flashcardsService.GetAllAsync(userId);
             return Ok(res);
         }
 
