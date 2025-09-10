@@ -7,11 +7,13 @@ import { Edit, Eye, Plus, Trash2, Upload } from "lucide-react";
 import { useRef } from "react";
 
 type FlashcardsDashboardHeaderProps = {
-    setView: (view: "list" | "create" | "edit") => void;
+    setView: (view: "list" | "create" | "edit" | "view") => void;
+    handleDelete: (id: string) => void;
     handleFileUpload: (files: FileList) => void;
+    selectedId: string | null;
 }
 
-export default function FlashcardsDashboardHeader({ setView, handleFileUpload } : FlashcardsDashboardHeaderProps) {
+export default function FlashcardsDashboardHeader({ setView, handleFileUpload, handleDelete, selectedId } : FlashcardsDashboardHeaderProps) {
     const { t } = useTranslation();
     const fileInputRef = useRef<HTMLInputElement | null>(null);
 
@@ -43,15 +45,15 @@ export default function FlashcardsDashboardHeader({ setView, handleFileUpload } 
                 <Plus className="inline" /> {t(keys.createNewButton)}
             </Button>
 
-            <Button className="rounded-3xl" variant="ghost" disabled>
+            <Button className="rounded-3xl" variant="ghost" onClick={() => setView("edit")} disabled={selectedId === null}>
                 <Edit className="inline" /> {t(keys.edit)}
             </Button>
 
-            <Button className="rounded-3xl" variant="ghost" disabled>
+            <Button className="rounded-3xl" variant="ghost" onClick={() => setView("view")} disabled={selectedId === null}>
                 <Eye className="inline" /> {t(keys.viewButton)}
             </Button>
 
-            <Button className="rounded-3xl" variant="ghost" disabled>
+            <Button className="rounded-3xl" variant="ghost" onClick={() => handleDelete(selectedId!)} disabled={selectedId === null}>
                 <Trash2 className="inline" />
             </Button>
             </div>

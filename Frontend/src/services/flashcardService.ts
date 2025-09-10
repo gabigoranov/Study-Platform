@@ -45,7 +45,7 @@ export const flashcardService = {
   },
 
   update: async (id: string, flashcard: FlashcardDTO, token: string): Promise<Flashcard> => {
-    const response = await fetch(`${BASE_URL}/flashcards`, {
+    const response = await fetch(`${BASE_URL}/flashcards/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -58,8 +58,8 @@ export const flashcardService = {
   },
 
   delete: async (id: string, token: string): Promise<void> => {
-    await fetch(`${BASE_URL}/flashcards/${id}`, {
-      method: "PUT",
+    await fetch(`${BASE_URL}/flashcards?ids=${id}`, {
+      method: "DELETE",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,

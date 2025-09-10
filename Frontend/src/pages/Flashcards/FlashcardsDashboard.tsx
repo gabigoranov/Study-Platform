@@ -12,7 +12,7 @@ import FlashcardsForm from "@/components/Flashcards/FlashcardsForm";
 import FlashcardsDashboardHeader from "@/components/Flashcards/FlashcardsDashboardHeader";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 
-type View = "list" | "create" | "edit";
+type View = "list" | "create" | "edit" | "view";
 
 export default function FlashcardsDashboard() {
   const { t } = useTranslation();
@@ -20,6 +20,8 @@ export default function FlashcardsDashboard() {
   const [editingId, setEditingId] = useState<string | null>(null);
   const { token } = useAuth();
   const queryClient = useQueryClient();
+  const [selectedId, setSelectedId] = useState<string | null>(null);
+  const [isFlipped, setIsFlipped] = useState(false);
 
   // --- Query: load all flashcards ---
   const { data: flashcards, isLoading, error } = useQuery({
@@ -68,8 +70,8 @@ export default function FlashcardsDashboard() {
   };
 
   const handleUpdate = (data: FlashcardDTO) => {
-    if (!editingId) return;
-    updateMutation.mutate({ id: editingId, dto: data });
+    if (!selectedId) return;
+    updateMutation.mutate({ id: selectedId, dto: data });
   };
 
   const handleDelete = (id: string) => {
@@ -77,6 +79,11 @@ export default function FlashcardsDashboard() {
       deleteMutation.mutate(id);
     }
   };
+
+  const selectCard = (id: string) => {
+    setSelectedId(id);
+    console.log("Selected card:", id);
+  }
 
   const startEdit = (id: string) => {
     setEditingId(id);
@@ -96,8 +103,8 @@ export default function FlashcardsDashboard() {
         return (
           <FlashcardsDashboardList
             flashcards={flashcards ?? []}
-            onEdit={startEdit}
-            onDelete={handleDelete}
+            onSelect={selectCard}
+            selectedId={selectedId}
           />
         );
 
@@ -119,7 +126,7 @@ export default function FlashcardsDashboard() {
         );
 
       case "edit":
-        const flashcardToEdit = flashcards?.find((fc) => fc.id === editingId);
+        const flashcardToEdit = flashcards?.find((fc) => fc.id === selectedId);
         if (!flashcardToEdit)
           return (
             <p className="text-center p-4">{t(keys.flashcardNotFound)}</p>
@@ -144,6 +151,42 @@ export default function FlashcardsDashboard() {
           </>
         );
 
+      case "view":
+        const flashcardToView = flashcards?.find((fc) => fc.id === selectedId);
+        if (!flashcardToView)
+          return (
+            <p className="text-center p-4">{t(keys.flashcardNotFound)}</p>
+          );
+
+
+        const handleClick = () => {
+          setIsFlipped(!isFlipped);
+        };
+
+        return (
+          <div className="flex justify-center items-center p-4">
+            <div
+              className={`relative w-full max-w-sm h-64 bg-white rounded-lg perspective cursor-pointer`}
+              onClick={handleClick}
+            >
+              <div
+                className={`absolute w-full h-full rounded-lg transition-transform duration-500 ${
+                  isFlipped ? 'rotate-y-180' : ''
+                }`}
+              >
+                <div className="absolute w-full h-full rounded-lg backface-hidden p-4">
+                  <h2 className="text-xl font-bold mb-4">The front side:</h2>
+                  <p className="text-lg">{flashcardToView.front}</p>
+                </div>
+                <div className="absolute w-full h-full rounded-lg backface-hidden p-4 transform rotate-y-180">
+                  <h2 className="text-xl font-bold mb-4">The back side:</h2>
+                  <p className="text-lg">{flashcardToView.back}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        );
+
       default:
         return null;
     }
@@ -152,7 +195,9 @@ export default function FlashcardsDashboard() {
   return (
     <div className="w-full pb-8 flex-col gap-4">
       <FlashcardsDashboardHeader
-        setView={(view: "list" | "create" | "edit") => setView(view)}
+        setView={(view: "list" | "create" | "edit" | "view") => setView(view)}
+        handleDelete={handleDelete}
+        selectedId={selectedId}
         handleFileUpload={handleFileUpload}
       />
       {renderContent()}

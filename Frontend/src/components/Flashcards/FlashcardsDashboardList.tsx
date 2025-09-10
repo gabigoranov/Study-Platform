@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Flashcard } from "../../data/Flashcard";
 import FlashcardDashboardComponent from "./FlashcardDashboardComponent";
 import { useTranslation } from "react-i18next";
@@ -6,12 +6,13 @@ import { keys } from "../../types/keys";
 
 interface FlashcardsDashboardListProps {
   flashcards: Flashcard[];
-  onEdit: (id: string) => void;
-  onDelete: (id: string) => void;
+  onSelect: (id: string) => void;
+  selectedId: string | null;
 }
 
-export default function FlashcardsDashboardList({ flashcards, onEdit, onDelete } : FlashcardsDashboardListProps) {
+export default function FlashcardsDashboardList({ flashcards, onSelect, selectedId } : FlashcardsDashboardListProps) {
   const { t } = useTranslation();
+
   if (flashcards.length === 0) {
     return (
       <div className="h-full flex justify-center items-center">
@@ -21,9 +22,9 @@ export default function FlashcardsDashboardList({ flashcards, onEdit, onDelete }
   }
 
   return (
-    <div className="overflow-x-auto flex gap-2 p-4 ">
+    <div className="w-full flex flex-wrap gap-3 py-4 ">
       {flashcards.map(( element, idx ) => (
-        <FlashcardDashboardComponent key={idx} flashcard={element} />
+        <FlashcardDashboardComponent onSelect={onSelect} key={idx} flashcard={element} isSelected={selectedId === element.id} />
       ))}
     </div>
   );
