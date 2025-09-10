@@ -1,6 +1,8 @@
 @StudyPlatform_HostAddress = http://localhost:5163
+@AccessToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFoYm5qbXdjaXR0ZmdiaGdweWV4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTY5ODA4OTEsImV4cCI6MjA3MjU1Njg5MX0.IgutDgB2C2li3RCY8pYEgtryNwNzzzhHFvswBDXsEHs
 
-GET {{StudyPlatform_HostAddress}}/
+GET {{StudyPlatform_HostAddress}}/api/flashcards
 Accept: application/json
+Authorization: Bearer {{AccessToken}}
 
 ###

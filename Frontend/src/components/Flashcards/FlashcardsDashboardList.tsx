@@ -1,16 +1,16 @@
 import React from "react";
-import { Flashcard } from "../data/Flashcard";
-import FlashcardDashboardComponent from "./Flashcards/FlashcardDashboardComponent";
+import { Flashcard } from "../../data/Flashcard";
+import FlashcardDashboardComponent from "./FlashcardDashboardComponent";
 import { useTranslation } from "react-i18next";
-import { keys } from "../types/keys";
+import { keys } from "../../types/keys";
 
-interface FlashcardListProps {
+interface FlashcardsDashboardListProps {
   flashcards: Flashcard[];
   onEdit: (id: string) => void;
   onDelete: (id: string) => void;
 }
 
-export const FlashcardList: React.FC<FlashcardListProps> = ({ flashcards, onEdit, onDelete }) => {
+export default function FlashcardsDashboardList({ flashcards, onEdit, onDelete } : FlashcardsDashboardListProps) {
   const { t } = useTranslation();
   if (flashcards.length === 0) {
     return (

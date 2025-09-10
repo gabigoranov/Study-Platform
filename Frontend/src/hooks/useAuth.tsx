@@ -3,6 +3,7 @@ import { supabase } from "../lib/supabaseClient";
 
 type AuthContextType = {
   user: any | null;
+  token: string | null;
   loading: boolean;
   signIn: (email: string, password: string) => Promise<void>;
   signInWithGoogle: () => Promise<void>;
@@ -13,12 +14,14 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<any | null>(null);
+  const [token, setToken] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     // Initial load
-    supabase.auth.getUser().then(({ data }) => {
-      setUser(data.user ?? null);
+    supabase.auth.getSession().then(({ data }) => {
+      setUser(data.session?.user ?? null);
+      setToken(data.session?.access_token ?? null);
       setLoading(false);
     });
 
@@ -27,6 +30,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((_event, session) => {
       setUser(session?.user ?? null);
+      setToken(session?.access_token ?? null);
     });
 
     return () => subscription.unsubscribe();
@@ -42,7 +46,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       provider: "google",
     });
     if (error) throw error;
-    // Note: this will redirect the user to Google, then back to your app
   };
 
   const signOut = async () => {
@@ -50,7 +53,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   };
 
   return (
-    <AuthContext.Provider value={{ user, loading, signIn, signInWithGoogle, signOut }}>
+    <AuthContext.Provider value={{ user, token, loading, signIn, signInWithGoogle, signOut }}>
       {children}
     </AuthContext.Provider>
   );

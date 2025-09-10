@@ -1,38 +1,64 @@
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using StudyPlatform.Data;
 using StudyPlatform.Services.Flashcards;
-using Microsoft.OpenApi.Models;
 using StudyPlatform.Middlewares;
+using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddAutoMapper(typeof(Program));
-
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-    .AddJwtBearer(options =>
-    {
-        options.Authority = $"https://{builder.Configuration["Supabase:ProjectRef"]}.supabase.co/auth/v1";
-        options.TokenValidationParameters = new TokenValidationParameters
-        {
-            ValidateIssuer = false, 
-            ValidateAudience = false,
-            ValidateLifetime = true,
-            ValidateIssuerSigningKey = true
-        };
-    });
 
 var connectionString = builder.Configuration.GetConnectionString("Default");
 
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(connectionString));
 
+var httpClient = new HttpClient();
+var jwksJson = await httpClient.GetStringAsync("https://ahbnjmwcittfgbhgpyex.supabase.co/auth/v1/.well-known/jwks.json");
+var jwks = new JsonWebKeySet(jwksJson);
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            IssuerSigningKeys = jwks.Keys,
+
+            ValidateIssuer = true,
+            ValidIssuer = "https://ahbnjmwcittfgbhgpyex.supabase.co/auth/v1",
+
+            ValidateAudience = true,
+            ValidAudience = "authenticated",
+
+            ValidateLifetime = true,
+            ClockSkew = TimeSpan.FromMinutes(2),
+
+            //ValidateIssuerSigningKey = true,
+
+            // Specify ES256 since Supabase signs JWTs with this
+            //ValidAlgorithms = new[] { SecurityAlgorithms.EcdsaSha256 }
+        };
+        options.Events = new JwtBearerEvents
+        {
+            OnAuthenticationFailed = context =>
+            {
+                Console.WriteLine("Auth Failed: " + context.Exception);
+                return Task.CompletedTask;
+            },
+            OnTokenValidated = context =>
+            {
+                Console.WriteLine("Token validated for user: " + context.Principal?.Identity?.Name);
+                return Task.CompletedTask;
+            }
+        };
+
+    });
+
 
 builder.Services.AddAuthorization();
-
-// Add services to the container.
 
 builder.Services.AddControllers();
 
@@ -77,13 +103,12 @@ builder.Services.AddSwaggerGen(c =>
 
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("CorsPolicy",
-            builder =>
-            {
-                builder.AllowAnyMethod()
-                       .AllowAnyHeader()
-                       .AllowAnyOrigin();
-            });
+    options.AddPolicy("FrontendPolicy", policy =>
+    {
+        policy.AllowAnyOrigin()  
+              .AllowAnyHeader()
+              .AllowAnyMethod();
+    });
 });
 
 builder.Services.AddSwaggerGen(c =>
@@ -110,8 +135,9 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.UseAuthorization();
+app.UseCors("FrontendPolicy");
 app.UseAuthentication();
+app.UseAuthorization();
 
 app.MapControllers();
 

@@ -15,9 +15,9 @@ namespace StudyPlatform.Extensions
         /// <exception cref="UnauthorizedAccessException">Returned if the user id claim is missing or invalid.</exception>
         public static Guid GetUserId(this ClaimsPrincipal user)
         {
-            const string userIdClaimType = "sub";
+            var userIdClaim = user.FindFirst("sub")?.Value
+                      ?? user.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
-            var userIdClaim = user.FindFirst(userIdClaimType)?.Value;
             if (string.IsNullOrWhiteSpace(userIdClaim))
                 throw new UnauthorizedAccessException("User ID claim is missing.");
 

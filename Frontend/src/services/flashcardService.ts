@@ -1,3 +1,4 @@
+import { FlashcardDTO } from "@/data/DTOs/FlashcardDTO";
 import { Flashcard } from "../data/Flashcard";
 
 export const flashcardService = {
@@ -11,11 +12,20 @@ export const flashcardService = {
     return { id, front: "", back: "", userId: "" }; // Placeholder
   },
 
-  create: async (flashcard: Omit<Flashcard, "id">): Promise<void> => {
-    console.log("Creating flashcard", flashcard);
+  create: async (flashcard: FlashcardDTO, token: string): Promise<Flashcard> => {
+    const response = await fetch("https://localhost:7238/api/flashcards", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(flashcard),
+    });
+
+    return response.json();
   },
 
-  update: async (id: string, flashcard: Omit<Flashcard, "id">): Promise<void> => {
+  update: async (id: string, flashcard: FlashcardDTO): Promise<void> => {
     console.log(`Updating flashcard ${id}`, flashcard);
   },
 

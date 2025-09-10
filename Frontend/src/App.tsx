@@ -11,9 +11,9 @@ import AccountSettings from "./pages/Settings/AccountSettings";
 import ThemeSettings from "./pages/Settings/ThemeSettings";
 import ErrorPage from "./pages/ErrorPage";
 import { ThemeProvider } from "./hooks/theme-provider";
-import FlashcardsDashboard from "./pages/FlashcardsDashboard";
+import FlashcardsDashboard from "./pages/Flashcards/FlashcardsDashboard";
 
-export default function App() {
+export function App() {
   return (
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
       <AuthProvider>
