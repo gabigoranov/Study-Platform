@@ -10,5 +10,8 @@ namespace StudyPlatform.Models
         [Required]
         public string Back { get; set; }
 
+        [Required]
+        public int MaterialSubGroupId { get; set; }
+
     }
 }

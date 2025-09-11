@@ -42,6 +42,7 @@ namespace StudyPlatform.Services.Flashcards
 
             var flashcard = _mapper.Map<Flashcard>(model);
             flashcard.UserId = userId;
+            flashcard.MaterialSubGroupId = model.MaterialSubGroupId;
 
             await _context.Flashcards.AddAsync(flashcard);
             await _context.SaveChangesAsync();
@@ -56,6 +57,7 @@ namespace StudyPlatform.Services.Flashcards
         /// </summary>
         /// <param name="model">The flashcard view model containing updated data.</param>
         /// <param name="userId">The ID of the user who owns the flashcard.</param>
+        /// <param name="id">The ID of the flashcard.</param>
         /// <returns>The updated <see cref="Flashcard"/>.</returns>
         public async Task<FlashcardDTO> UpdateAsync(FlashcardViewModel model, Guid userId, int id)
         {
@@ -82,8 +84,8 @@ namespace StudyPlatform.Services.Flashcards
         /// <summary>
         /// Retrieves multiple flashcards by their IDs for a specific user.
         /// </summary>
-        /// <param name="ids">Array of flashcard IDs to retrieve.</param>
         /// <param name="userId">The ID of the user who owns the flashcards.</param>
+        /// <param name="id">The ID of the flashcard.</param>
         /// <returns>A collection of <see cref="Flashcard"/> objects.</returns>
         public async Task<FlashcardDTO> GetAsync(Guid userId, int id)
         {
@@ -116,6 +118,11 @@ namespace StudyPlatform.Services.Flashcards
             _logger.LogInformation("{DeletedCount} flashcards deleted for user {UserId}", deletedCount, userId);
         }
 
+        /// <summary>
+        /// Get all flashcards for a specific user.
+        /// </summary>
+        /// <param name="userId">The user id.</param>
+        /// <returns>A list of flashcard dtos.</returns>
         public async Task<IEnumerable<FlashcardDTO>> GetAllAsync(Guid userId)
         {
             var flashcards = await _context.Flashcards.Where(x => x.UserId == userId).ToListAsync();

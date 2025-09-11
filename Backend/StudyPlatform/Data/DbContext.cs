@@ -9,14 +9,22 @@ namespace StudyPlatform.Data
         public AppDbContext(DbContextOptions<AppDbContext> options)
         : base(options)
         {
-            Database.EnsureCreated();
         }
 
-        public DbSet<Flashcard> Flashcards { get; set; }
+        public DbSet<Subject> Subjects { get; set; }
+        public DbSet<MaterialSubGroup> MaterialSubGroups { get; set; }
+        public DbSet<Material> Materials { get; set; }
+        public DbSet<Flashcard> Flashcards { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Material>()
+                .HasDiscriminator<string>("MaterialType")
+                .HasValue<Flashcard>("Flashcard");
+
+            modelBuilder.Entity<Flashcard>().ToTable("Materials");
         }
     }
 }

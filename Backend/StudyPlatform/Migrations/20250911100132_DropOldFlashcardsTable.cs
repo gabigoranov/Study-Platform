@@ -5,7 +5,7 @@
 namespace StudyPlatform.Migrations
 {
     /// <inheritdoc />
-    public partial class Init : Migration
+    public partial class DropOldFlashcardsTable : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

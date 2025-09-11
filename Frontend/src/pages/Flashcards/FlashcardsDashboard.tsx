@@ -160,25 +160,28 @@ export default function FlashcardsDashboard() {
 
 
         const handleClick = () => {
-          setIsFlipped(!isFlipped);
+          setIsFlipped((prev) => !prev);
         };
 
         return (
-          <div className="flex justify-center items-center p-4">
+          <div className="flex justify-center items-center w-full max-w-[1000px] h-full overflow-clip">
             <div
-              className={`relative w-full max-w-sm h-64 bg-white rounded-lg perspective cursor-pointer`}
+              className="relative w-full h-full cursor-pointer [perspective:1000px]"
               onClick={handleClick}
             >
               <div
-                className={`absolute w-full h-full rounded-lg transition-transform duration-500 ${
-                  isFlipped ? 'rotate-y-180' : ''
+                className={`relative w-full h-full transition-transform duration-500 [transform-style:preserve-3d] ${
+                  isFlipped ? "[transform:rotateX(180deg)]" : ""
                 }`}
               >
-                <div className="absolute w-full h-full rounded-lg backface-hidden p-4">
+                {/* Front */}
+                <div className="absolute w-full h-full rounded-3xl bg-neutral-100 p-4 border border-neutral-300 [backface-visibility:hidden]">
                   <h2 className="text-xl font-bold mb-4">The front side:</h2>
                   <p className="text-lg">{flashcardToView.front}</p>
                 </div>
-                <div className="absolute w-full h-full rounded-lg backface-hidden p-4 transform rotate-y-180">
+
+                {/* Back */}
+                <div className="absolute w-full h-full rounded-3xl bg-neutral-100 p-4 border border-neutral-300 [backface-visibility:hidden] [transform:rotateX(180deg)]">
                   <h2 className="text-xl font-bold mb-4">The back side:</h2>
                   <p className="text-lg">{flashcardToView.back}</p>
                 </div>
@@ -193,14 +196,16 @@ export default function FlashcardsDashboard() {
   };
 
   return (
-    <div className="w-full pb-8 flex-col gap-4">
+    <div className="w-full flex flex-col gap-4 h-full">
       <FlashcardsDashboardHeader
         setView={(view: "list" | "create" | "edit" | "view") => setView(view)}
         handleDelete={handleDelete}
         selectedId={selectedId}
         handleFileUpload={handleFileUpload}
       />
-      {renderContent()}
+      <div className="flex items-center justify-center w-full h-full flex-1">
+        {renderContent()}
+      </div>
     </div>
   );
 }

@@ -168,7 +168,6 @@ D:\Projects\StudyPlatform\Backend\StudyPlatform\bin\Debug\net8.0\Microsoft.OpenA
 D:\Projects\StudyPlatform\Backend\StudyPlatform\bin\Debug\net8.0\Swashbuckle.AspNetCore.Swagger.dll
 D:\Projects\StudyPlatform\Backend\StudyPlatform\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerGen.dll
 D:\Projects\StudyPlatform\Backend\StudyPlatform\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerUI.dll
-D:\Projects\StudyPlatform\Backend\StudyPlatform\bin\Debug\net8.0\System.Formats.Asn1.dll
 D:\Projects\StudyPlatform\Backend\StudyPlatform\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll
 D:\Projects\StudyPlatform\Backend\StudyPlatform\bin\Debug\net8.0\appsettings.Development.json
 D:\Projects\StudyPlatform\Backend\StudyPlatform\bin\Debug\net8.0\appsettings.json
@@ -296,3 +295,4 @@ D:\Projects\StudyPlatform\Backend\StudyPlatform\bin\Debug\net8.0\StudyPlatform.p
 D:\Projects\StudyPlatform\Backend\StudyPlatform\bin\Debug\net8.0\StudyPlatform.xml
 D:\Projects\StudyPlatform\Backend\StudyPlatform\obj\Debug\net8.0\StudyPlatform.genruntimeconfig.cache
 D:\Projects\StudyPlatform\Backend\StudyPlatform\obj\Debug\net8.0\ref\StudyPlatform.dll
+D:\Projects\StudyPlatform\Backend\StudyPlatform\bin\Debug\net8.0\System.Formats.Asn1.dll

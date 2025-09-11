@@ -22,7 +22,7 @@ export default function FlashcardsDashboardList({ flashcards, onSelect, selected
   }
 
   return (
-    <div className="w-full flex flex-wrap gap-3 py-4 ">
+    <div className="w-full flex flex-wrap gap-3 py-4 self-start ">
       {flashcards.map(( element, idx ) => (
         <FlashcardDashboardComponent onSelect={onSelect} key={idx} flashcard={element} isSelected={selectedId === element.id} />
       ))}

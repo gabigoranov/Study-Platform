@@ -50,6 +50,31 @@
             <param name="ids">The array of flashcard ids.</param>
             <returns>Nothing.</returns>
         </member>
+        <member name="T:StudyPlatform.Data.Models.Material">
+            <summary>
+            A general material entity that can be extended for specific types of study materials.
+            </summary>
+        </member>
+        <member name="T:StudyPlatform.Data.Models.MaterialSubGroup">
+            <summary>
+            A subgroup within a MaterialGroup that contains specific materials.
+            </summary>
+        </member>
+        <member name="T:StudyPlatform.Data.Models.Subject">
+            <summary>
+            A subject that groups material groups together.
+            </summary>
+        </member>
+        <member name="T:StudyPlatform.Data.Types.MaterialGroupType">
+            <summary>
+            A predefined set of material group types. Used to categorize material subgroups in each subject.
+            </summary>
+        </member>
+        <member name="F:StudyPlatform.Data.Types.MaterialGroupType.Flashcards">
+            <summary>
+            A type for flashcards.
+            </summary>
+        </member>
         <member name="T:StudyPlatform.Exceptions.ForbiddenAccessException">
             <summary>
             A custom excpetion for cases where a request does not have the right roles.
@@ -113,16 +138,16 @@
         <member name="M:StudyPlatform.Migrations.Init.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
         </member>
-        <member name="T:StudyPlatform.Migrations.CreateFlashcardsTable">
+        <member name="T:StudyPlatform.Migrations.DropOldFlashcardsTable">
             <inheritdoc />
         </member>
-        <member name="M:StudyPlatform.Migrations.CreateFlashcardsTable.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+        <member name="M:StudyPlatform.Migrations.DropOldFlashcardsTable.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
             <inheritdoc />
         </member>
-        <member name="M:StudyPlatform.Migrations.CreateFlashcardsTable.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+        <member name="M:StudyPlatform.Migrations.DropOldFlashcardsTable.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
             <inheritdoc />
         </member>
-        <member name="M:StudyPlatform.Migrations.CreateFlashcardsTable.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+        <member name="M:StudyPlatform.Migrations.DropOldFlashcardsTable.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
         </member>
         <member name="T:StudyPlatform.Models.Common.AutoMapper">
@@ -157,14 +182,15 @@
             </summary>
             <param name="model">The flashcard view model containing updated data.</param>
             <param name="userId">The ID of the user who owns the flashcard.</param>
+            <param name="id">The ID of the flashcard.</param>
             <returns>The updated <see cref="T:StudyPlatform.Data.Models.Flashcard"/>.</returns>
         </member>
         <member name="M:StudyPlatform.Services.Flashcards.FlashcardsService.GetAsync(System.Guid,System.Int32)">
             <summary>
             Retrieves multiple flashcards by their IDs for a specific user.
             </summary>
-            <param name="ids">Array of flashcard IDs to retrieve.</param>
             <param name="userId">The ID of the user who owns the flashcards.</param>
+            <param name="id">The ID of the flashcard.</param>
             <returns>A collection of <see cref="T:StudyPlatform.Data.Models.Flashcard"/> objects.</returns>
         </member>
         <member name="M:StudyPlatform.Services.Flashcards.FlashcardsService.DeleteAsync(System.Int32[],System.Guid)">
@@ -174,6 +200,13 @@
             <param name="ids">Array of flashcard IDs to delete.</param>
             <param name="userId">The ID of the user who owns the flashcards.</param>
             <returns>A task representing the asynchronous delete operation.</returns>
+        </member>
+        <member name="M:StudyPlatform.Services.Flashcards.FlashcardsService.GetAllAsync(System.Guid)">
+            <summary>
+            Get all flashcards for a specific user.
+            </summary>
+            <param name="userId">The user id.</param>
+            <returns>A list of flashcard dtos.</returns>
         </member>
         <member name="T:StudyPlatform.Services.Flashcards.IFlashcardsService">
             <summary>
