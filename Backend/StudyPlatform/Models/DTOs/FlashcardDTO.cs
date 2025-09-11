@@ -15,6 +15,5 @@ namespace StudyPlatform.Models.DTOs
 
         [Required]
         public string UserId { get; set; }
-
     }
 }

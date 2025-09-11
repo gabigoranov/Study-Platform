@@ -50,6 +50,83 @@
             <param name="ids">The array of flashcard ids.</param>
             <returns>Nothing.</returns>
         </member>
+        <member name="T:StudyPlatform.Controllers.MaterialSubGroupsController">
+            <summary>
+            API controller for managing material subgroups.
+            </summary>
+        </member>
+        <member name="M:StudyPlatform.Controllers.MaterialSubGroupsController.#ctor(StudyPlatform.Services.MaterialSubGroups.IMaterialSubGroupsService)">
+            <summary>
+            Initializes the controller.
+            </summary>
+            <param name="service">The service DI.</param>
+        </member>
+        <member name="M:StudyPlatform.Controllers.MaterialSubGroupsController.GetBySubject(System.Int32)">
+            <summary>
+            Gets all material subgroups for a subject.
+            </summary>
+            <param name="subjectId">The subject ID.</param>
+            <returns>A list of subgroups.</returns>
+        </member>
+        <member name="M:StudyPlatform.Controllers.MaterialSubGroupsController.Get(System.Int32)">
+            <summary>
+            Gets a single material subgroup by ID.
+            </summary>
+            <param name="id">The subgroup ID.</param>
+            <returns>The subgroup if found.</returns>
+        </member>
+        <member name="M:StudyPlatform.Controllers.MaterialSubGroupsController.Create(StudyPlatform.Models.CreateMaterialSubGroupViewModel)">
+            <summary>
+            Creates a new material subgroup.
+            </summary>
+            <param name="model">The subgroup creation model.</param>
+            <returns>The created subgroup.</returns>
+        </member>
+        <member name="M:StudyPlatform.Controllers.MaterialSubGroupsController.Delete(System.Int32)">
+            <summary>
+            Deletes a material subgroup by ID.
+            </summary>
+            <param name="id">The subgroup ID.</param>
+            <returns>No content if deleted.</returns>
+        </member>
+        <member name="T:StudyPlatform.Controllers.SubjectsController">
+            <summary>
+            API controller for managing subjects.
+            </summary>
+        </member>
+        <member name="M:StudyPlatform.Controllers.SubjectsController.#ctor(StudyPlatform.Services.Subjects.ISubjectsService)">
+            <summary>
+            Initializes a new instance of the <see cref="T:StudyPlatform.Controllers.SubjectsController"/> class.
+            </summary>
+            <param name="service">The subjects service DI.</param>
+        </member>
+        <member name="M:StudyPlatform.Controllers.SubjectsController.GetSubjectsByUser">
+            <summary>
+            Gets all subjects for a user.
+            </summary>
+            <returns>A list of subjects.</returns>
+        </member>
+        <member name="M:StudyPlatform.Controllers.SubjectsController.GetSubject(System.Int32)">
+            <summary>
+            Gets a single subject by ID.
+            </summary>
+            <param name="id">The subject ID.</param>
+            <returns>The subject if found.</returns>
+        </member>
+        <member name="M:StudyPlatform.Controllers.SubjectsController.CreateSubject(StudyPlatform.Models.CreateSubjectViewModel)">
+            <summary>
+            Creates a new subject.
+            </summary>
+            <param name="model">The subject creation model.</param>
+            <returns>The created subject.</returns>
+        </member>
+        <member name="M:StudyPlatform.Controllers.SubjectsController.DeleteSubject(System.Int32)">
+            <summary>
+            Deletes a subject by ID.
+            </summary>
+            <param name="id">The subject ID.</param>
+            <returns>No content if deleted.</returns>
+        </member>
         <member name="T:StudyPlatform.Data.Models.Material">
             <summary>
             A general material entity that can be extended for specific types of study materials.
@@ -153,6 +230,91 @@
         <member name="T:StudyPlatform.Models.Common.AutoMapper">
             <summary>
             Defines the AutoMapper initialization and maps.
+            </summary>
+        </member>
+        <member name="T:StudyPlatform.Models.CreateMaterialSubGroupViewModel">
+            <summary>
+            View model used when creating a new material subgroup.
+            </summary>
+        </member>
+        <member name="P:StudyPlatform.Models.CreateMaterialSubGroupViewModel.Title">
+            <summary>
+            The title of the subgroup.
+            </summary>
+        </member>
+        <member name="P:StudyPlatform.Models.CreateMaterialSubGroupViewModel.MaterialGroupType">
+            <summary>
+            The type of material group this subgroup belongs to.
+            </summary>
+        </member>
+        <member name="P:StudyPlatform.Models.CreateMaterialSubGroupViewModel.SubjectId">
+            <summary>
+            The ID of the subject this subgroup belongs to.
+            </summary>
+        </member>
+        <member name="T:StudyPlatform.Models.CreateSubjectViewModel">
+            <summary>
+            View model used when creating a new subject.
+            </summary>
+        </member>
+        <member name="P:StudyPlatform.Models.CreateSubjectViewModel.Title">
+            <summary>
+            The title of the subject.
+            </summary>
+        </member>
+        <member name="T:StudyPlatform.Models.DTOs.MaterialSubGroupDto">
+            <summary>
+            Data transfer object returned when working with material subgroups.
+            </summary>
+        </member>
+        <member name="P:StudyPlatform.Models.DTOs.MaterialSubGroupDto.Id">
+            <summary>
+            The unique identifier of the material subgroup.
+            </summary>
+        </member>
+        <member name="P:StudyPlatform.Models.DTOs.MaterialSubGroupDto.Title">
+            <summary>
+            The title of the subgroup.
+            </summary>
+        </member>
+        <member name="P:StudyPlatform.Models.DTOs.MaterialSubGroupDto.MaterialGroupType">
+            <summary>
+            The type of material group this subgroup belongs to.
+            </summary>
+        </member>
+        <member name="P:StudyPlatform.Models.DTOs.MaterialSubGroupDto.SubjectId">
+            <summary>
+            The ID of the subject this subgroup belongs to.
+            </summary>
+        </member>
+        <member name="P:StudyPlatform.Models.DTOs.MaterialSubGroupDto.DateCreated">
+            <summary>
+            The UTC date when this subgroup was created.
+            </summary>
+        </member>
+        <member name="T:StudyPlatform.Models.DTOs.SubjectDto">
+            <summary>
+            Data transfer object returned when working with subjects.
+            </summary>
+        </member>
+        <member name="P:StudyPlatform.Models.DTOs.SubjectDto.Id">
+            <summary>
+            The unique identifier of the subject.
+            </summary>
+        </member>
+        <member name="P:StudyPlatform.Models.DTOs.SubjectDto.Title">
+            <summary>
+            The title of the subject.
+            </summary>
+        </member>
+        <member name="P:StudyPlatform.Models.DTOs.SubjectDto.UserId">
+            <summary>
+            The ID of the user who owns this subject.
+            </summary>
+        </member>
+        <member name="P:StudyPlatform.Models.DTOs.SubjectDto.DateCreated">
+            <summary>
+            The UTC date when the subject was created.
             </summary>
         </member>
         <member name="T:StudyPlatform.Services.Flashcards.FlashcardsService">
@@ -260,6 +422,122 @@
             <param name="ids">An array of flashcard IDs to delete.</param>
             <param name="userId">The ID of the user who owns the flashcards.</param>
             <returns>A <see cref="T:System.Threading.Tasks.Task"/> representing the asynchronous delete operation.</returns>
+        </member>
+        <member name="T:StudyPlatform.Services.MaterialSubGroups.IMaterialSubGroupsService">
+            <summary>
+            Defines methods for managing material subgroups.
+            </summary>
+        </member>
+        <member name="M:StudyPlatform.Services.MaterialSubGroups.IMaterialSubGroupsService.GetSubGroupsBySubjectAsync(System.Int32,System.Guid)">
+            <summary>
+            Retrieves all material subgroups for a given subject.
+            </summary>
+            <param name="subjectId">The subject ID.</param>
+            <param name="userId">The ID of the authenticated user.</param>
+            <returns>A collection of subgroups.</returns>
+        </member>
+        <member name="M:StudyPlatform.Services.MaterialSubGroups.IMaterialSubGroupsService.GetSubGroupByIdAsync(System.Int32,System.Guid)">
+            <summary>
+            Retrieves a material subgroup by its ID.
+            </summary>
+            <param name="id">The subgroup ID.</param>
+            <param name="userId">The ID of the authenticated user.</param>
+            <returns>The subgroup if found, otherwise null.</returns>
+        </member>
+        <member name="M:StudyPlatform.Services.MaterialSubGroups.IMaterialSubGroupsService.CreateSubGroupAsync(StudyPlatform.Models.CreateMaterialSubGroupViewModel,System.Guid)">
+            <summary>
+            Creates a new material subgroup.
+            </summary>
+            <param name="model">The subgroup creation model.</param>
+            <param name="userId">The ID of the authenticated user.</param>
+            <returns>The created subgroup DTO.</returns>
+        </member>
+        <member name="M:StudyPlatform.Services.MaterialSubGroups.IMaterialSubGroupsService.DeleteSubGroupAsync(System.Int32,System.Guid)">
+            <summary>
+            Deletes a material subgroup by ID.
+            </summary>
+            <param name="id">The subgroup ID.</param>
+            <param name="userId">The ID of the authenticated user.</param>
+            <returns>True if deleted, false otherwise.</returns>
+        </member>
+        <member name="T:StudyPlatform.Services.MaterialSubGroups.MaterialSubGroupsService">
+            <summary>
+            Service for managing material subgroups.
+            </summary>
+        </member>
+        <member name="M:StudyPlatform.Services.MaterialSubGroups.MaterialSubGroupsService.#ctor(StudyPlatform.Data.AppDbContext,Microsoft.Extensions.Logging.ILogger{StudyPlatform.Services.MaterialSubGroups.MaterialSubGroupsService},AutoMapper.IMapper)">
+            <summary>
+            Initializes a new instance of the <see cref="T:StudyPlatform.Services.MaterialSubGroups.MaterialSubGroupsService"/> class.
+            </summary>
+        </member>
+        <member name="M:StudyPlatform.Services.MaterialSubGroups.MaterialSubGroupsService.GetSubGroupsBySubjectAsync(System.Int32,System.Guid)">
+            <inheritdoc />
+        </member>
+        <member name="M:StudyPlatform.Services.MaterialSubGroups.MaterialSubGroupsService.GetSubGroupByIdAsync(System.Int32,System.Guid)">
+            <inheritdoc />
+        </member>
+        <member name="M:StudyPlatform.Services.MaterialSubGroups.MaterialSubGroupsService.CreateSubGroupAsync(StudyPlatform.Models.CreateMaterialSubGroupViewModel,System.Guid)">
+            <inheritdoc />
+        </member>
+        <member name="M:StudyPlatform.Services.MaterialSubGroups.MaterialSubGroupsService.DeleteSubGroupAsync(System.Int32,System.Guid)">
+            <inheritdoc />
+        </member>
+        <member name="T:StudyPlatform.Services.Subjects.ISubjectsService">
+            <summary>
+            Defines methods for managing subjects.
+            </summary>
+        </member>
+        <member name="M:StudyPlatform.Services.Subjects.ISubjectsService.GetSubjectsByUserAsync(System.Guid)">
+            <summary>
+            Retrieves all subjects belonging to a given user.
+            </summary>
+            <param name="userId">The user ID.</param>
+            <returns>A collection of subjects.</returns>
+        </member>
+        <member name="M:StudyPlatform.Services.Subjects.ISubjectsService.GetSubjectByIdAsync(System.Int32)">
+            <summary>
+            Retrieves a single subject by ID.
+            </summary>
+            <param name="id">The subject ID.</param>
+            <returns>The subject DTO if found, otherwise null.</returns>
+        </member>
+        <member name="M:StudyPlatform.Services.Subjects.ISubjectsService.CreateSubjectAsync(StudyPlatform.Models.CreateSubjectViewModel,System.Guid)">
+            <summary>
+            Creates a new subject.
+            </summary>
+            <param name="model">The subject creation model.</param>
+            <param name="userId">The user ID.</param>
+            <returns>The created subject DTO.</returns>
+        </member>
+        <member name="M:StudyPlatform.Services.Subjects.ISubjectsService.DeleteSubjectAsync(System.Int32,System.Guid)">
+            <summary>
+            Deletes a subject by ID.
+            </summary>
+            <param name="id">The subject ID.</param>
+            <param name="userId">The user ID.</param>
+            <returns>True if deleted, false otherwise.</returns>
+        </member>
+        <member name="T:StudyPlatform.Services.Subjects.SubjectsService">
+            <summary>
+            Service for managing subjects.
+            </summary>
+        </member>
+        <member name="M:StudyPlatform.Services.Subjects.SubjectsService.#ctor(StudyPlatform.Data.AppDbContext,Microsoft.Extensions.Logging.ILogger{StudyPlatform.Services.Subjects.SubjectsService},AutoMapper.IMapper)">
+            <summary>
+            Initializes a new instance of the <see cref="T:StudyPlatform.Services.Subjects.SubjectsService"/> class.
+            </summary>
+        </member>
+        <member name="M:StudyPlatform.Services.Subjects.SubjectsService.GetSubjectsByUserAsync(System.Guid)">
+            <inheritdoc />
+        </member>
+        <member name="M:StudyPlatform.Services.Subjects.SubjectsService.GetSubjectByIdAsync(System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:StudyPlatform.Services.Subjects.SubjectsService.CreateSubjectAsync(StudyPlatform.Models.CreateSubjectViewModel,System.Guid)">
+            <inheritdoc />
+        </member>
+        <member name="M:StudyPlatform.Services.Subjects.SubjectsService.DeleteSubjectAsync(System.Int32,System.Guid)">
+            <inheritdoc />
         </member>
     </members>
 </doc>

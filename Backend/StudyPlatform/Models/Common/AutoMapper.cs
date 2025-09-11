@@ -10,8 +10,17 @@ namespace StudyPlatform.Models.Common
     public class AutoMapper : Profile
     {
         public AutoMapper() { 
+            //Flashcard mappings
             CreateMap<FlashcardViewModel, Flashcard>().ReverseMap();
             CreateMap<Flashcard, FlashcardDTO>().ReverseMap();
+
+            // Subject mappings
+            CreateMap<Subject, SubjectDto>();
+            CreateMap<CreateSubjectViewModel, Subject>();
+
+            // MaterialSubGroup mappings
+            CreateMap<MaterialSubGroup, MaterialSubGroupDto>();
+            CreateMap<CreateMaterialSubGroupViewModel, MaterialSubGroup>();
         }
     }
 }

@@ -6,6 +6,8 @@ using StudyPlatform.Services.Flashcards;
 using StudyPlatform.Middlewares;
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using StudyPlatform.Services.Subjects;
+using StudyPlatform.Services.MaterialSubGroups;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -63,6 +65,8 @@ builder.Services.AddAuthorization();
 builder.Services.AddControllers();
 
 builder.Services.AddScoped<IFlashcardsService, FlashcardsService>();
+builder.Services.AddScoped<ISubjectsService, SubjectsService>();
+builder.Services.AddScoped<IMaterialSubGroupsService, MaterialSubGroupsService>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
