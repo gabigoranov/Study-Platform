@@ -5,7 +5,7 @@ namespace StudyPlatform.Models.DTOs
     /// <summary>
     /// Data transfer object returned when working with material subgroups.
     /// </summary>
-    public class MaterialSubGroupDto
+    public class MaterialSubGroupDTO
     {
         /// <summary>
         /// The unique identifier of the material subgroup.
@@ -31,5 +31,10 @@ namespace StudyPlatform.Models.DTOs
         /// The UTC date when this subgroup was created.
         /// </summary>
         public DateTimeOffset DateCreated { get; set; }
+
+        /// <summary>
+        /// List of materials in the sub group, optional.
+        /// </summary>
+        public ICollection<MaterialDTO> Materials { get; set; } = new List<MaterialDTO>();
     }
 }

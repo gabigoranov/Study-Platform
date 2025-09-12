@@ -29,15 +29,25 @@ namespace StudyPlatform.Services.Subjects
         }
 
         /// <inheritdoc />
-        public async Task<IEnumerable<SubjectDto>> GetSubjectsByUserAsync(Guid userId)
+        public async Task<IEnumerable<SubjectDto>> GetSubjectsByUserAsync(Guid userId, bool includeGroups = false, bool includeGroupsSummary = false)
         {
             _logger.LogInformation("Retrieving all subjects for user {UserId}", userId);
 
-            return await _context.Subjects
-                .Where(s => s.UserId == userId)
+            IQueryable<Subject> query = _context.Subjects
+                .Where(s => s.UserId == userId);
+
+            if (includeGroupsSummary || includeGroups)
+                query = query.Include(s => s.MaterialSubGroups);
+
+            if (includeGroups)
+                query = query.Include(s => s.MaterialSubGroups)
+                             .ThenInclude(g => g.Materials);
+
+            return await query
                 .ProjectTo<SubjectDto>(_mapper.ConfigurationProvider)
                 .ToListAsync();
         }
+
 
         /// <inheritdoc />
         public async Task<SubjectDto?> GetSubjectByIdAsync(int id)

@@ -5,8 +5,13 @@ import { IconBaseProps } from "react-icons";
 import { ChevronDown } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { keys } from "../../types/keys";
+import { Subject } from "@/data/Subject";
 
-export default function AppSidebarHeader() {
+type AppSidebarHeaderProps = {
+  items: Subject[];
+}
+
+export default function AppSidebarHeader({items} : AppSidebarHeaderProps) {
   const { t } = useTranslation();
     return (
       <SidebarHeader>
@@ -15,14 +20,10 @@ export default function AppSidebarHeader() {
             Study<br />Mate
           </h2>
         </Link>
-        <AppSidebarMenu 
+        {items.length > 0 && <AppSidebarMenu 
           dropdownTitle={t(keys.selectSubject)}
           dropdownTitleIcon={ChevronDown}
-          items={[
-            {title: t(keys.subjectInformatics), onSelect: () => {}},
-            {title: t(keys.subjectBiology), onSelect: () => {}},
-            {title: t(keys.subjectMath), onSelect: () => {}},
-          ]} />
+          items={items} />}
       </SidebarHeader>  
     )
 }

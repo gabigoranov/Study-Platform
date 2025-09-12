@@ -35,7 +35,7 @@ export default function SettingsLayout() {
   return (
     <SidebarProvider>
       <div className="flex w-full h-screen overflow-hidden">
-        <AppSidebar groups={navGroups} />
+        <AppSidebar groups={navGroups} subjects={[]} />
         <div className="flex-1 flex flex-col transition-all duration-300">
           <Header />
           <main className="flex-1 p-4 bg-background overflow-auto">

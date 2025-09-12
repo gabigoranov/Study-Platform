@@ -15,7 +15,7 @@
             </summary>
             <param name="flashcardsService">The flashcards service, dependency injected.</param>
         </member>
-        <member name="M:StudyPlatform.Controllers.FlashcardsController.Create(StudyPlatform.Models.FlashcardViewModel)">
+        <member name="M:StudyPlatform.Controllers.FlashcardsController.Create(StudyPlatform.Models.CreateFlashcardViewModel)">
             <summary>
             Endpoint for creating a new flashcard.
             </summary>
@@ -35,7 +35,7 @@
             </summary>
             <returns>A list of flashcards if successful.</returns>
         </member>
-        <member name="M:StudyPlatform.Controllers.FlashcardsController.Update(StudyPlatform.Models.FlashcardViewModel,System.Int32)">
+        <member name="M:StudyPlatform.Controllers.FlashcardsController.Update(StudyPlatform.Models.CreateFlashcardViewModel,System.Int32)">
             <summary>
             Endpoint for updating a specific flashcard that the user owns.
             </summary>
@@ -61,11 +61,12 @@
             </summary>
             <param name="service">The service DI.</param>
         </member>
-        <member name="M:StudyPlatform.Controllers.MaterialSubGroupsController.GetBySubject(System.Int32)">
+        <member name="M:StudyPlatform.Controllers.MaterialSubGroupsController.GetBySubject(System.Int32,System.Boolean)">
             <summary>
             Gets all material subgroups for a subject.
             </summary>
             <param name="subjectId">The subject ID.</param>
+            <param name="includeMaterials">Whether or not to include the materials in each group.</param>
             <returns>A list of subgroups.</returns>
         </member>
         <member name="M:StudyPlatform.Controllers.MaterialSubGroupsController.Get(System.Int32)">
@@ -100,10 +101,12 @@
             </summary>
             <param name="service">The subjects service DI.</param>
         </member>
-        <member name="M:StudyPlatform.Controllers.SubjectsController.GetSubjectsByUser">
+        <member name="M:StudyPlatform.Controllers.SubjectsController.GetSubjectsByUser(System.Boolean,System.Boolean)">
             <summary>
             Gets all subjects for a user.
             </summary>
+            <param name="includeGroups">Whether or not to include material sub groups with their materials.</param>
+            <param name="includeGroupsSummary">Whether or not to include material sub groups without their materials.</param>
             <returns>A list of subjects.</returns>
         </member>
         <member name="M:StudyPlatform.Controllers.SubjectsController.GetSubject(System.Int32)">
@@ -227,6 +230,18 @@
         <member name="M:StudyPlatform.Migrations.DropOldFlashcardsTable.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
         </member>
+        <member name="T:StudyPlatform.Migrations.AddDateCreatedToMaterial">
+            <inheritdoc />
+        </member>
+        <member name="M:StudyPlatform.Migrations.AddDateCreatedToMaterial.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:StudyPlatform.Migrations.AddDateCreatedToMaterial.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:StudyPlatform.Migrations.AddDateCreatedToMaterial.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
         <member name="T:StudyPlatform.Models.Common.AutoMapper">
             <summary>
             Defines the AutoMapper initialization and maps.
@@ -262,34 +277,39 @@
             The title of the subject.
             </summary>
         </member>
-        <member name="T:StudyPlatform.Models.DTOs.MaterialSubGroupDto">
+        <member name="T:StudyPlatform.Models.DTOs.MaterialSubGroupDTO">
             <summary>
             Data transfer object returned when working with material subgroups.
             </summary>
         </member>
-        <member name="P:StudyPlatform.Models.DTOs.MaterialSubGroupDto.Id">
+        <member name="P:StudyPlatform.Models.DTOs.MaterialSubGroupDTO.Id">
             <summary>
             The unique identifier of the material subgroup.
             </summary>
         </member>
-        <member name="P:StudyPlatform.Models.DTOs.MaterialSubGroupDto.Title">
+        <member name="P:StudyPlatform.Models.DTOs.MaterialSubGroupDTO.Title">
             <summary>
             The title of the subgroup.
             </summary>
         </member>
-        <member name="P:StudyPlatform.Models.DTOs.MaterialSubGroupDto.MaterialGroupType">
+        <member name="P:StudyPlatform.Models.DTOs.MaterialSubGroupDTO.MaterialGroupType">
             <summary>
             The type of material group this subgroup belongs to.
             </summary>
         </member>
-        <member name="P:StudyPlatform.Models.DTOs.MaterialSubGroupDto.SubjectId">
+        <member name="P:StudyPlatform.Models.DTOs.MaterialSubGroupDTO.SubjectId">
             <summary>
             The ID of the subject this subgroup belongs to.
             </summary>
         </member>
-        <member name="P:StudyPlatform.Models.DTOs.MaterialSubGroupDto.DateCreated">
+        <member name="P:StudyPlatform.Models.DTOs.MaterialSubGroupDTO.DateCreated">
             <summary>
             The UTC date when this subgroup was created.
+            </summary>
+        </member>
+        <member name="P:StudyPlatform.Models.DTOs.MaterialSubGroupDTO.Materials">
+            <summary>
+            List of materials in the sub group, optional.
             </summary>
         </member>
         <member name="T:StudyPlatform.Models.DTOs.SubjectDto">
@@ -330,7 +350,7 @@
             <param name="logger">The logger instance.</param>
             <param name="mapper">The AutoMapper instance.</param>
         </member>
-        <member name="M:StudyPlatform.Services.Flashcards.FlashcardsService.CreateAsync(StudyPlatform.Models.FlashcardViewModel,System.Guid)">
+        <member name="M:StudyPlatform.Services.Flashcards.FlashcardsService.CreateAsync(StudyPlatform.Models.CreateFlashcardViewModel,System.Guid)">
             <summary>
             Creates a new flashcard for a specific user.
             </summary>
@@ -338,7 +358,7 @@
             <param name="userId">The ID of the user who owns the flashcard.</param>
             <returns>The created <see cref="T:StudyPlatform.Data.Models.Flashcard"/>.</returns>
         </member>
-        <member name="M:StudyPlatform.Services.Flashcards.FlashcardsService.UpdateAsync(StudyPlatform.Models.FlashcardViewModel,System.Guid,System.Int32)">
+        <member name="M:StudyPlatform.Services.Flashcards.FlashcardsService.UpdateAsync(StudyPlatform.Models.CreateFlashcardViewModel,System.Guid,System.Int32)">
             <summary>
             Edits an existing flashcard for a specific user.
             </summary>
@@ -375,7 +395,7 @@
             Provides operations for creating, editing, retrieving, and deleting flashcards.
             </summary>
         </member>
-        <member name="M:StudyPlatform.Services.Flashcards.IFlashcardsService.CreateAsync(StudyPlatform.Models.FlashcardViewModel,System.Guid)">
+        <member name="M:StudyPlatform.Services.Flashcards.IFlashcardsService.CreateAsync(StudyPlatform.Models.CreateFlashcardViewModel,System.Guid)">
             <summary>
             Creates a new flashcard for the specified user.
             </summary>
@@ -383,10 +403,10 @@
             <param name="userId">The ID of the user who owns the flashcard.</param>
             <returns>
             A <see cref="T:System.Threading.Tasks.Task`1"/> representing the asynchronous operation.
-            The task result contains the created <see cref="T:StudyPlatform.Data.Models.Flashcard"/>.
+            The task result contains the created <see cref="T:StudyPlatform.Models.DTOs.FlashcardDTO"/>.
             </returns>
         </member>
-        <member name="M:StudyPlatform.Services.Flashcards.IFlashcardsService.UpdateAsync(StudyPlatform.Models.FlashcardViewModel,System.Guid,System.Int32)">
+        <member name="M:StudyPlatform.Services.Flashcards.IFlashcardsService.UpdateAsync(StudyPlatform.Models.CreateFlashcardViewModel,System.Guid,System.Int32)">
             <summary>
             Edits an existing flashcard for the specified user.
             </summary>
@@ -428,12 +448,13 @@
             Defines methods for managing material subgroups.
             </summary>
         </member>
-        <member name="M:StudyPlatform.Services.MaterialSubGroups.IMaterialSubGroupsService.GetSubGroupsBySubjectAsync(System.Int32,System.Guid)">
+        <member name="M:StudyPlatform.Services.MaterialSubGroups.IMaterialSubGroupsService.GetSubGroupsBySubjectAsync(System.Int32,System.Guid,System.Boolean)">
             <summary>
             Retrieves all material subgroups for a given subject.
             </summary>
             <param name="subjectId">The subject ID.</param>
             <param name="userId">The ID of the authenticated user.</param>
+            <param name="includeMaterials">Whether or not to include the materials in each group.</param>
             <returns>A collection of subgroups.</returns>
         </member>
         <member name="M:StudyPlatform.Services.MaterialSubGroups.IMaterialSubGroupsService.GetSubGroupByIdAsync(System.Int32,System.Guid)">
@@ -470,7 +491,7 @@
             Initializes a new instance of the <see cref="T:StudyPlatform.Services.MaterialSubGroups.MaterialSubGroupsService"/> class.
             </summary>
         </member>
-        <member name="M:StudyPlatform.Services.MaterialSubGroups.MaterialSubGroupsService.GetSubGroupsBySubjectAsync(System.Int32,System.Guid)">
+        <member name="M:StudyPlatform.Services.MaterialSubGroups.MaterialSubGroupsService.GetSubGroupsBySubjectAsync(System.Int32,System.Guid,System.Boolean)">
             <inheritdoc />
         </member>
         <member name="M:StudyPlatform.Services.MaterialSubGroups.MaterialSubGroupsService.GetSubGroupByIdAsync(System.Int32,System.Guid)">
@@ -487,11 +508,13 @@
             Defines methods for managing subjects.
             </summary>
         </member>
-        <member name="M:StudyPlatform.Services.Subjects.ISubjectsService.GetSubjectsByUserAsync(System.Guid)">
+        <member name="M:StudyPlatform.Services.Subjects.ISubjectsService.GetSubjectsByUserAsync(System.Guid,System.Boolean,System.Boolean)">
             <summary>
             Retrieves all subjects belonging to a given user.
             </summary>
             <param name="userId">The user ID.</param>
+            <param name="includeGroups">Query parameter for whether or not to include MaterialSubGroups</param>
+            <param name="includeGroupsSummary">Query parameter for whether or not to include MaterialSubGroups summary ( without materials )</param>
             <returns>A collection of subjects.</returns>
         </member>
         <member name="M:StudyPlatform.Services.Subjects.ISubjectsService.GetSubjectByIdAsync(System.Int32)">
@@ -527,7 +550,7 @@
             Initializes a new instance of the <see cref="T:StudyPlatform.Services.Subjects.SubjectsService"/> class.
             </summary>
         </member>
-        <member name="M:StudyPlatform.Services.Subjects.SubjectsService.GetSubjectsByUserAsync(System.Guid)">
+        <member name="M:StudyPlatform.Services.Subjects.SubjectsService.GetSubjectsByUserAsync(System.Guid,System.Boolean,System.Boolean)">
             <inheritdoc />
         </member>
         <member name="M:StudyPlatform.Services.Subjects.SubjectsService.GetSubjectByIdAsync(System.Int32)">

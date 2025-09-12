@@ -16,9 +16,9 @@ namespace StudyPlatform.Services.Flashcards
         /// <param name="userId">The ID of the user who owns the flashcard.</param>
         /// <returns>
         /// A <see cref="Task{FlashcardDTO}"/> representing the asynchronous operation.
-        /// The task result contains the created <see cref="Flashcard"/>.
+        /// The task result contains the created <see cref="FlashcardDTO"/>.
         /// </returns>
-        Task<FlashcardDTO> CreateAsync(FlashcardViewModel model, Guid userId);
+        Task<FlashcardDTO> CreateAsync(CreateFlashcardViewModel model, Guid userId);
 
         /// <summary>
         /// Edits an existing flashcard for the specified user.
@@ -29,7 +29,7 @@ namespace StudyPlatform.Services.Flashcards
         /// A <see cref="Task{FlashcardDTO}"/> representing the asynchronous operation.
         /// The task result contains the updated <see cref="Flashcard"/>.
         /// </returns>
-        Task<FlashcardDTO> UpdateAsync(FlashcardViewModel model, Guid userId, int id);
+        Task<FlashcardDTO> UpdateAsync(CreateFlashcardViewModel model, Guid userId, int id);
 
         /// <summary>
         /// Retrieves a flashcard by it's ID for the specified user.

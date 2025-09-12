@@ -18,6 +18,8 @@ namespace StudyPlatform.Data.Models
         [Required]
         public Guid UserId { get; set; }
 
+        public DateTimeOffset DateCreated { get; set; } = DateTimeOffset.UtcNow;
+
         [Required]
         [ForeignKey(nameof(MaterialSubGroup))]
         public int MaterialSubGroupId { get; set; }

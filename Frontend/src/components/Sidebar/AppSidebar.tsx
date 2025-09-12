@@ -1,26 +1,23 @@
-import { ChevronDown } from "lucide-react";
 
 import {
   Sidebar,
-  SidebarHeader,
-  SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
 } from "@/components/ui/sidebar";
     
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "../ui/dropdown-menu";
-import { Link } from "react-router";
 import AppSidebarFooter from "./AppSidebarFooter";
-import AppSidebarContent, { AppSidebarProps } from "./AppSidebarContent";
-import AppSidebarMenu from "./AppSidebarMenu";
+import AppSidebarContent, { SidebarGroup } from "./AppSidebarContent";
 import AppSidebarHeader from "./AppSidebarHeader";
+import { Subject } from "@/data/Subject";
+
+type AppSidebarProps = {
+    groups: SidebarGroup[];
+    subjects: Subject[] | [];
+}
 
 
-
-export function AppSidebar({groups} : AppSidebarProps) {
+export function AppSidebar({groups, subjects} : AppSidebarProps) {
   return (
     <Sidebar className="shadow-none">
-      <AppSidebarHeader />
+      <AppSidebarHeader items={subjects} />
       <AppSidebarContent groups={groups} />
       <AppSidebarFooter />
     </Sidebar>

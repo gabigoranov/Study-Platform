@@ -8,7 +8,7 @@ type SidebarGroupItem = {
     icon: IconType;
 }
 
-type SidebarGroup = {
+export type SidebarGroup = {
     title: string;
     items: SidebarGroupItem[];
 }

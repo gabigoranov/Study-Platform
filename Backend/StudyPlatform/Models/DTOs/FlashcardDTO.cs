@@ -1,19 +1,15 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using StudyPlatform.Data.Models;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace StudyPlatform.Models.DTOs
 {
-    public class FlashcardDTO
+    public class FlashcardDTO : MaterialDTO
     {
-        [Key]
-        public int Id { get; set; }
-
         [Required]
         public string Front { get; set; }
 
         [Required]
         public string Back { get; set; }
-
-        [Required]
-        public string UserId { get; set; }
     }
 }

@@ -35,7 +35,7 @@ namespace StudyPlatform.Controllers
         /// <param name="model">The model for the flashcard created by the user.</param>
         /// <returns>A new flashcard if successful.</returns>
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] FlashcardViewModel model)
+        public async Task<IActionResult> Create([FromBody] CreateFlashcardViewModel model)
         {
             // Load userId from JWT token
             Guid userId = User.GetUserId();
@@ -82,7 +82,7 @@ namespace StudyPlatform.Controllers
         /// <param name="id">The id of the flashcard.</param>
         /// <returns>An edited flashcard if successful.</returns>
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update([FromBody] FlashcardViewModel model, [FromRoute] int id)
+        public async Task<IActionResult> Update([FromBody] CreateFlashcardViewModel model, [FromRoute] int id)
         {
             // Load userId from JWT token
             Guid userId = User.GetUserId();

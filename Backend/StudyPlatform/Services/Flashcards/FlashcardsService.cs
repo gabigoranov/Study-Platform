@@ -36,13 +36,12 @@ namespace StudyPlatform.Services.Flashcards
         /// <param name="model">The flashcard view model containing data.</param>
         /// <param name="userId">The ID of the user who owns the flashcard.</param>
         /// <returns>The created <see cref="Flashcard"/>.</returns>
-        public async Task<FlashcardDTO> CreateAsync(FlashcardViewModel model, Guid userId)
+        public async Task<FlashcardDTO> CreateAsync(CreateFlashcardViewModel model, Guid userId)
         {
             _logger.LogInformation("Creating a flashcard for user {UserId}", userId);
 
             var flashcard = _mapper.Map<Flashcard>(model);
             flashcard.UserId = userId;
-            flashcard.MaterialSubGroupId = model.MaterialSubGroupId;
 
             await _context.Flashcards.AddAsync(flashcard);
             await _context.SaveChangesAsync();
@@ -59,7 +58,7 @@ namespace StudyPlatform.Services.Flashcards
         /// <param name="userId">The ID of the user who owns the flashcard.</param>
         /// <param name="id">The ID of the flashcard.</param>
         /// <returns>The updated <see cref="Flashcard"/>.</returns>
-        public async Task<FlashcardDTO> UpdateAsync(FlashcardViewModel model, Guid userId, int id)
+        public async Task<FlashcardDTO> UpdateAsync(CreateFlashcardViewModel model, Guid userId, int id)
         {
             _logger.LogInformation("Editing flashcard {FlashcardId} for user {UserId}", id, userId);
 

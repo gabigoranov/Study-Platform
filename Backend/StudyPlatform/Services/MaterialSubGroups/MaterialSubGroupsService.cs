@@ -29,29 +29,35 @@ namespace StudyPlatform.Services.MaterialSubGroups
         }
 
         /// <inheritdoc />
-        public async Task<IEnumerable<MaterialSubGroupDto>> GetSubGroupsBySubjectAsync(int subjectId, Guid userId)
+        public async Task<IEnumerable<MaterialSubGroupDTO>> GetSubGroupsBySubjectAsync(int subjectId, Guid userId, bool includeMaterials = false)
         {
             _logger.LogInformation("Retrieving subgroups for subject {SubjectId} and user {UserId}", subjectId, userId);
 
-            return await _context.MaterialSubGroups
-                .Where(sg => sg.SubjectId == subjectId && sg.Subject.UserId == userId)
-                .ProjectTo<MaterialSubGroupDto>(_mapper.ConfigurationProvider)
+            var res = _context.MaterialSubGroups.Where(sg => sg.SubjectId == subjectId && sg.Subject.UserId == userId);
+
+            if(includeMaterials) 
+                res = res.Include(sg => sg.Materials);
+
+            var mapped = await res
+                .ProjectTo<MaterialSubGroupDTO>(_mapper.ConfigurationProvider)
                 .ToListAsync();
+
+            return mapped;
         }
 
         /// <inheritdoc />
-        public async Task<MaterialSubGroupDto?> GetSubGroupByIdAsync(int id, Guid userId)
+        public async Task<MaterialSubGroupDTO?> GetSubGroupByIdAsync(int id, Guid userId)
         {
             _logger.LogInformation("Retrieving subgroup {SubGroupId} for user {UserId}", id, userId);
 
             return await _context.MaterialSubGroups
                 .Where(sg => sg.Id == id && sg.Subject.UserId == userId)
-                .ProjectTo<MaterialSubGroupDto>(_mapper.ConfigurationProvider)
+                .ProjectTo<MaterialSubGroupDTO>(_mapper.ConfigurationProvider)
                 .FirstOrDefaultAsync();
         }
 
         /// <inheritdoc />
-        public async Task<MaterialSubGroupDto> CreateSubGroupAsync(CreateMaterialSubGroupViewModel model, Guid userId)
+        public async Task<MaterialSubGroupDTO> CreateSubGroupAsync(CreateMaterialSubGroupViewModel model, Guid userId)
         {
             _logger.LogInformation("Creating subgroup for subject {SubjectId} and user {UserId}", model.SubjectId, userId);
 
@@ -70,7 +76,7 @@ namespace StudyPlatform.Services.MaterialSubGroups
 
             _logger.LogInformation("Subgroup {SubGroupId} created successfully for user {UserId}", subGroup.Id, userId);
 
-            return _mapper.Map<MaterialSubGroupDto>(subGroup);
+            return _mapper.Map<MaterialSubGroupDTO>(subGroup);
         }
 
         /// <inheritdoc />

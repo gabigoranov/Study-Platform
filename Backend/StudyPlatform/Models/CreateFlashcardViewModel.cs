@@ -5,10 +5,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace StudyPlatform.Models
 {
-    public class FlashcardViewModel
+    public class CreateFlashcardViewModel
     {
-        [Key]
-        public int Id { get; set; }
         [Required]
         public string Front { get; set; }
 
@@ -16,7 +14,7 @@ namespace StudyPlatform.Models
         public string Back { get; set; }
 
         [Required]
-        public Guid UserId { get; set; }
+        public string Title { get; set; }
 
         [Required]
         [ForeignKey(nameof(MaterialSubGroup))]

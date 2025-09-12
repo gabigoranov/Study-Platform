@@ -1,0 +1,7 @@
+export type MaterialDTO = {
+    id: string;
+    title: string;
+    userId: string;
+    materialSubGroupId: string;
+    dateCreated: Date
+}

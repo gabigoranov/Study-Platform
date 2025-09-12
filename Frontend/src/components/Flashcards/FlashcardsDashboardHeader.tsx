@@ -3,8 +3,13 @@ import { Input } from "../ui/input";
 import { useTranslation } from "react-i18next";
 import { FaMagnifyingGlass } from "react-icons/fa6";
 import { Button } from "../ui/button";
-import { Edit, Eye, Plus, Trash2, Upload } from "lucide-react";
-import { useRef } from "react";
+import { ChevronDown, ChevronLeft, Edit, Eye, Plus, Trash2, Upload } from "lucide-react";
+import { useEffect, useRef } from "react";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "../ui/dropdown-menu";
+import { useQuery } from "@tanstack/react-query";
+import { useAuth } from "@/hooks/useAuth";
+import { materialSubGroupsService } from "@/services/materialSubGroups";
+import { useVariableContext } from "@/context/VariableContext";
 
 type FlashcardsDashboardHeaderProps = {
     setView: (view: "list" | "create" | "edit" | "view") => void;
@@ -15,7 +20,23 @@ type FlashcardsDashboardHeaderProps = {
 
 export default function FlashcardsDashboardHeader({ setView, handleFileUpload, handleDelete, selectedId } : FlashcardsDashboardHeaderProps) {
     const { t } = useTranslation();
+    const { token } = useAuth();
     const fileInputRef = useRef<HTMLInputElement | null>(null);
+    const { selectedSubjectId } = useVariableContext();
+    const { selectedGroupId, setSelectedGroupId } = useVariableContext();
+
+    // --- Query: load all groups with their flashcards ---
+    const { data: groups, isLoading, error } = useQuery({
+        queryKey: ["materialSubGroups"],
+        queryFn: () => materialSubGroupsService.getAll(token!, selectedSubjectId!),
+        staleTime: 1000 * 60 * 5,
+    });
+
+    useEffect(() => {
+      if (groups && groups.length > 0 && selectedGroupId === null) {
+        setSelectedGroupId(groups[0].id);
+      }
+    }, [groups, selectedSubjectId, setSelectedGroupId]);
 
     return (
       <>
@@ -24,15 +45,42 @@ export default function FlashcardsDashboardHeader({ setView, handleFileUpload, h
             <h1 className="text-3xl font-bold mb-1 text-left">{t(keys.flashcardsDashboardTitle)}</h1>
             <p className="">{t(keys.flashcardsSubtitle)}</p>
             </div>
+            
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                  <Button
+                  className={`flex w-fit shadow-none items-center gap-1`}
+                  >
+                  {
+                    selectedGroupId ? groups?.find((group) => group.id === selectedGroupId)?.title : t(keys.selectGroup)
+                  }
+                  <ChevronDown className="w-4 h-4" />
+                  </Button>
+              </DropdownMenuTrigger>
+
+              <DropdownMenuContent align="start" className="w-32">
+                {groups?.map((group) => (
+                    <DropdownMenuItem
+                        key={group.id}
+                        onClick={() => setSelectedGroupId(group.id)}
+                    >
+                        {group.title}
+                    </DropdownMenuItem>
+                ))}
+                
+                <DropdownMenuItem onSelect={() => setView("list")}></DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+
             <form className="flex items-center gap-4 h-fit">
-            <Input
-                className="p-2 px-4 min-w-[300px] rounded-full"
-                type="text"
-                placeholder={t(keys.searchPlaceholder)}
-            />
-            <button type="submit">
-                <FaMagnifyingGlass className="text-2xl" />
-            </button>
+              <Input
+                  className="p-2 px-4 min-w-[300px] rounded-full"
+                  type="text"
+                  placeholder={t(keys.searchPlaceholder)}
+              />
+              <button type="submit">
+                  <FaMagnifyingGlass className="text-2xl" />
+              </button>
             </form>
         </div>
         <div className="flex flex-col gap-2 sm:flex-row">
@@ -55,6 +103,14 @@ export default function FlashcardsDashboardHeader({ setView, handleFileUpload, h
 
             <Button className="rounded-3xl" variant="ghost" onClick={() => handleDelete(selectedId!)} disabled={selectedId === null}>
                 <Trash2 className="inline" />
+            </Button>
+
+            <Button
+              variant="outline"
+              onClick={() => setView("list")}
+              className="p-4 rounded-xl"
+            >
+              {<ChevronLeft className="p-0" />}
             </Button>
             </div>
 

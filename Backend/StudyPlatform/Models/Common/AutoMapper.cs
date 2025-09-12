@@ -9,9 +9,13 @@ namespace StudyPlatform.Models.Common
     /// </summary>
     public class AutoMapper : Profile
     {
-        public AutoMapper() { 
+        public AutoMapper() {
+            // Include sub categories so AutoMapper maps their unique values.
+            CreateMap<Material, MaterialDTO>()
+                .Include<Flashcard, FlashcardDTO>();
+
             //Flashcard mappings
-            CreateMap<FlashcardViewModel, Flashcard>().ReverseMap();
+            CreateMap<CreateFlashcardViewModel, Flashcard>().ReverseMap();
             CreateMap<Flashcard, FlashcardDTO>().ReverseMap();
 
             // Subject mappings
@@ -19,8 +23,10 @@ namespace StudyPlatform.Models.Common
             CreateMap<CreateSubjectViewModel, Subject>();
 
             // MaterialSubGroup mappings
-            CreateMap<MaterialSubGroup, MaterialSubGroupDto>();
+            CreateMap<MaterialSubGroup, MaterialSubGroupDTO>();
             CreateMap<CreateMaterialSubGroupViewModel, MaterialSubGroup>();
+
+            CreateMap<MaterialSubGroup, MaterialSubGroupDTO>().ReverseMap();
         }
     }
 }

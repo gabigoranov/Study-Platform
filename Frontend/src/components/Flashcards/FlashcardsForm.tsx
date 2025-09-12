@@ -4,6 +4,7 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
+import { useVariableContext } from "@/context/VariableContext";
 
 interface FlashcardsFormProps {
   model?: FlashcardDTO;
@@ -12,7 +13,8 @@ interface FlashcardsFormProps {
 }
 
 export default function FlashcardsForm({ model, onSubmit, submitLabel }: FlashcardsFormProps) {
-  const [data, setData] = useState<FlashcardDTO>(model || { front: "", back: "" });
+  const { selectedGroupId } = useVariableContext();
+  const [data, setData] = useState<FlashcardDTO>(model || { front: "", back: "", title: "", materialSubGroupId: selectedGroupId!});
   const [errors, setErrors] = useState<Partial<Record<keyof FlashcardDTO, string>>>({});
 
   const handleChange = (field: keyof FlashcardDTO, value: string) => {
@@ -23,6 +25,7 @@ export default function FlashcardsForm({ model, onSubmit, submitLabel }: Flashca
     const newErrors: typeof errors = {};
     if (!data.front.trim()) newErrors.front = "Front side is required";
     if (!data.back.trim()) newErrors.back = "Back side is required";
+    if (!data.title.trim()) newErrors.title = "A title is required";
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -36,8 +39,19 @@ export default function FlashcardsForm({ model, onSubmit, submitLabel }: Flashca
   return (
     <form
       onSubmit={handleSubmit}
-      className="flex flex-col gap-4 max-w-lg mx-auto py-8 px-6 bg-white rounded shadow dark:bg-surface"
+      className="flex flex-col gap-4 w-full h-full md:max-w-[50%] md:max-h-[75%] mx-auto py-8 px-6 bg-white rounded shadow dark:bg-surface"
     >
+      <div>
+        <Label htmlFor="front">Title</Label>
+        <Input
+          id="title"
+          value={data.title}
+          onChange={e => handleChange("title", e.target.value)}
+          required
+        />
+        {errors.front && <p className="text-red-500 text-sm mt-1">{errors.title}</p>}
+      </div>
+
       <div>
         <Label htmlFor="front">Front of the card</Label>
         <Input

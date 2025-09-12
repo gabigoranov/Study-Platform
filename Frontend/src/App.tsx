@@ -12,42 +12,45 @@ import ThemeSettings from "./pages/Settings/ThemeSettings";
 import ErrorPage from "./pages/ErrorPage";
 import { ThemeProvider } from "./hooks/theme-provider";
 import FlashcardsDashboard from "./pages/Flashcards/FlashcardsDashboard";
+import { VariableProvider } from "./context/VariableContext";
 
 export function App() {
   return (
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
-      <AuthProvider>
-      <BrowserRouter>
-        <Routes>
-          {/* Public routes */}
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<SignUp />} />
+      <VariableProvider>
+        <AuthProvider>
+          <BrowserRouter>
+            <Routes>
+              {/* Public routes */}
+              <Route path="/login" element={<Login />} />
+              <Route path="/signup" element={<SignUp />} />
 
-          {/* Protected routes */}
-          <Route
-            path="/"
-            element={
-              <ProtectedRoute>
-                <DashboardLayout />
-              </ProtectedRoute>
-            }
-            errorElement={<ErrorPage />}
-          >
-            <Route path="flashcards" index element={<FlashcardsDashboard />} />
-          </Route>
+              {/* Protected routes */}
+              <Route
+                path="/"
+                element={
+                  <ProtectedRoute>
+                    <DashboardLayout />
+                  </ProtectedRoute>
+                }
+                errorElement={<ErrorPage />}
+              >
+                <Route path="flashcards" index element={<FlashcardsDashboard />} />
+              </Route>
 
-          <Route path="settings" element={
-            <ProtectedRoute>
-              <SettingsLayout />
-            </ProtectedRoute>
-          }>
-            <Route index element={<GeneralSettings />} />
-            <Route path="account" element={<AccountSettings />} />
-            <Route path="theme" element={<ThemeSettings />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
-    </AuthProvider>
+              <Route path="settings" element={
+                <ProtectedRoute>
+                  <SettingsLayout />
+                </ProtectedRoute>
+              }>
+                <Route index element={<GeneralSettings />} />
+                <Route path="account" element={<AccountSettings />} />
+                <Route path="theme" element={<ThemeSettings />} />
+              </Route>
+            </Routes>
+          </BrowserRouter>
+        </AuthProvider>
+      </VariableProvider>
     </ThemeProvider>
   );
 }

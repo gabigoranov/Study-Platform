@@ -28,15 +28,17 @@ namespace StudyPlatform.Controllers
         /// <summary>
         /// Gets all subjects for a user.
         /// </summary>
+        /// <param name="includeGroups">Whether or not to include material sub groups with their materials.</param>
+        /// <param name="includeGroupsSummary">Whether or not to include material sub groups without their materials.</param>
         /// <returns>A list of subjects.</returns>
         [HttpGet]
         [ProducesResponseType(typeof(IEnumerable<SubjectDto>), StatusCodes.Status200OK)]
-        public async Task<IActionResult> GetSubjectsByUser()
+        public async Task<IActionResult> GetSubjectsByUser([FromQuery] bool includeGroups = false, [FromQuery] bool includeGroupsSummary = false)
         {
             // Load userId from JWT token
             Guid userId = User.GetUserId();
 
-            var subjects = await _service.GetSubjectsByUserAsync(userId);
+            var subjects = await _service.GetSubjectsByUserAsync(userId, includeGroups, includeGroupsSummary);
             return Ok(subjects);
         }
 

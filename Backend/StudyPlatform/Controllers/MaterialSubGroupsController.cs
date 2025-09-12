@@ -29,13 +29,14 @@ namespace StudyPlatform.Controllers
         /// Gets all material subgroups for a subject.
         /// </summary>
         /// <param name="subjectId">The subject ID.</param>
+        /// <param name="includeMaterials">Whether or not to include the materials in each group.</param>
         /// <returns>A list of subgroups.</returns>
         [HttpGet("subject/{subjectId:int}")]
-        [ProducesResponseType(typeof(IEnumerable<MaterialSubGroupDto>), StatusCodes.Status200OK)]
-        public async Task<IActionResult> GetBySubject(int subjectId)
+        [ProducesResponseType(typeof(IEnumerable<MaterialSubGroupDTO>), StatusCodes.Status200OK)]
+        public async Task<IActionResult> GetBySubject(int subjectId, [FromQuery] bool includeMaterials = false)
         {
             Guid userId = User.GetUserId();
-            var subGroups = await _service.GetSubGroupsBySubjectAsync(subjectId, userId);
+            var subGroups = await _service.GetSubGroupsBySubjectAsync(subjectId, userId, includeMaterials);
             return Ok(subGroups);
         }
 
@@ -45,7 +46,7 @@ namespace StudyPlatform.Controllers
         /// <param name="id">The subgroup ID.</param>
         /// <returns>The subgroup if found.</returns>
         [HttpGet("{id:int}")]
-        [ProducesResponseType(typeof(MaterialSubGroupDto), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(MaterialSubGroupDTO), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> Get(int id)
         {
@@ -61,7 +62,7 @@ namespace StudyPlatform.Controllers
         /// <param name="model">The subgroup creation model.</param>
         /// <returns>The created subgroup.</returns>
         [HttpPost]
-        [ProducesResponseType(typeof(MaterialSubGroupDto), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(MaterialSubGroupDTO), StatusCodes.Status201Created)]
         public async Task<IActionResult> Create([FromBody] CreateMaterialSubGroupViewModel model)
         {
             Guid userId = User.GetUserId();

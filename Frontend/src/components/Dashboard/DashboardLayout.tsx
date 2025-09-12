@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Header from "./Header";
 import { FaLaptopCode, FaCalculator, FaFlask } from "react-icons/fa";
 import { keys } from "../../types/keys";
@@ -8,22 +8,30 @@ import { SidebarProvider } from "../ui/sidebar";
 import { Home } from "lucide-react";
 import { PiNoteBlankFill } from "react-icons/pi";
 import { AppSidebar } from "../Sidebar/AppSidebar";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { subjectService } from "@/services/subjectService";
+import { useAuth } from "@/hooks/useAuth";
+import { useVariableContext } from "@/context/VariableContext";
 
 export default function Layout() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const { t } = useTranslation();
+  const queryClient = useQueryClient();
+  const { token } = useAuth();
+  const { selectedSubjectId, setSelectedSubjectId } = useVariableContext();
 
-  const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
+  // --- Query: load all subjects ---
+  const { data: subjects, isLoading, error } = useQuery({
+    queryKey: ["subjects"],
+    queryFn: () => subjectService.getAll(token!), // return the promise
+    staleTime: 1000 * 60 * 10,
+  });
 
-  const options = [
-    {
-      value: "informatics",
-      label: t(keys.subjectInformatics),
-      icon: FaLaptopCode,
-    },
-    { value: "math", label: t(keys.subjectMath), icon: FaCalculator },
-    { value: "biology", label: t(keys.subjectBiology), icon: FaFlask },
-  ];
+  useEffect(() => {
+    if (subjects && subjects.length > 0 && selectedSubjectId === null) {
+      setSelectedSubjectId(subjects[0].id);
+    }
+  }, [subjects, selectedSubjectId, setSelectedSubjectId]);
 
   const navGroups = [
     {
@@ -43,14 +51,9 @@ export default function Layout() {
     },
   ];
 
-  const handleSelect = (value: string) => {
-    console.log(`Selected subject: ${value}`);
-    // You can add additional logic here based on the selected value
-  };
-
   return (
     <SidebarProvider>
-      <AppSidebar groups={navGroups} />
+      <AppSidebar groups={navGroups} subjects={subjects || []} />
       <div className="flex-1 flex flex-col h-screen">
         <Header />
 

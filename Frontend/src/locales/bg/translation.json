@@ -58,5 +58,6 @@
     "uploadMaterialsButton": "Качване на материали",
     "viewButton": "Преглед",
     "dashboard": "Табло",
-    "settings": "Настройки"
+    "settings": "Настройки",
+    "selectGroup": "Изберете група"
 }

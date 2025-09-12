@@ -58,5 +58,6 @@
     "uploadMaterialsButton": "Upload Materials",
     "viewButton": "View",
     "dashboard": "Dashboard",
-    "settings": "Settings"
+    "settings": "Settings",
+    "selectGroup": "Select a group"
 }

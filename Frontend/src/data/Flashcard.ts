@@ -1,6 +1,6 @@
-export interface Flashcard {
-  id: string;
+import { Material } from "./Material";
+
+export type Flashcard = Material & {
   front: string;
   back: string;
-  userId: string;
 }

@@ -8,6 +8,9 @@ using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using StudyPlatform.Services.Subjects;
 using StudyPlatform.Services.MaterialSubGroups;
+using System.Text.Json.Serialization.Metadata;
+using Microsoft.AspNetCore.Http.Json;
+using StudyPlatform.Models.DTOs;
 
 var builder = WebApplication.CreateBuilder(args);
 

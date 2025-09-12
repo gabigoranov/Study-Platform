@@ -58,5 +58,6 @@ export const keys = {
   viewButton: "viewButton",
   uploadMaterialsButton: "uploadMaterialsButton",
   dashboard: "dashboard",
-  settings: "settings"
+  settings: "settings",
+  selectGroup: "selectGroup"
 };

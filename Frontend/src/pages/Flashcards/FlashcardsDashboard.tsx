@@ -11,6 +11,7 @@ import { useAuth } from "@/hooks/useAuth";
 import FlashcardsForm from "@/components/Flashcards/FlashcardsForm";
 import FlashcardsDashboardHeader from "@/components/Flashcards/FlashcardsDashboardHeader";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { useVariableContext } from "@/context/VariableContext";
 
 type View = "list" | "create" | "edit" | "view";
 
@@ -20,8 +21,8 @@ export default function FlashcardsDashboard() {
   const [editingId, setEditingId] = useState<string | null>(null);
   const { token } = useAuth();
   const queryClient = useQueryClient();
-  const [selectedId, setSelectedId] = useState<string | null>(null);
   const [isFlipped, setIsFlipped] = useState(false);
+  const {selectedFlashcardId, setSelectedFlashcardId, selectedGroupId } = useVariableContext();
 
   // --- Query: load all flashcards ---
   const { data: flashcards, isLoading, error } = useQuery({
@@ -70,8 +71,8 @@ export default function FlashcardsDashboard() {
   };
 
   const handleUpdate = (data: FlashcardDTO) => {
-    if (!selectedId) return;
-    updateMutation.mutate({ id: selectedId, dto: data });
+    if (!selectedFlashcardId) return;
+    updateMutation.mutate({ id: selectedFlashcardId, dto: data });
   };
 
   const handleDelete = (id: string) => {
@@ -81,7 +82,7 @@ export default function FlashcardsDashboard() {
   };
 
   const selectCard = (id: string) => {
-    setSelectedId(id);
+    setSelectedFlashcardId(id);
     console.log("Selected card:", id);
   }
 
@@ -104,55 +105,39 @@ export default function FlashcardsDashboard() {
           <FlashcardsDashboardList
             flashcards={flashcards ?? []}
             onSelect={selectCard}
-            selectedId={selectedId}
+            selectedId={selectedFlashcardId}
           />
         );
 
       case "create":
         return (
-          <>
-            <Button
-              variant="outline"
-              onClick={() => setView("list")}
-              className="mt-4 p-4 rounded-xl"
-            >
-              {<ChevronLeft className="p-0" />}
-            </Button>
-            <FlashcardsForm
-              submitLabel={t(keys.createFlashcardButton)}
-              onSubmit={handleCreate}
-            />
-          </>
+          <FlashcardsForm
+            submitLabel={t(keys.createFlashcardButton)}
+            onSubmit={handleCreate}
+          />
         );
 
       case "edit":
-        const flashcardToEdit = flashcards?.find((fc) => fc.id === selectedId);
+        const flashcardToEdit = flashcards?.find((fc) => fc.id === selectedFlashcardId);
         if (!flashcardToEdit)
           return (
             <p className="text-center p-4">{t(keys.flashcardNotFound)}</p>
           );
         return (
-          <>
-            <Button
-              variant="outline"
-              onClick={() => setView("list")}
-              className="mt-4 p-4 rounded-xl"
-            >
-              {<ChevronLeft className="p-0" />}
-            </Button>
-            <FlashcardsForm
-              model={{
-                front: flashcardToEdit.front,
-                back: flashcardToEdit.back,
-              }}
-              submitLabel={t(keys.updateFlashcardButton)}
-              onSubmit={handleUpdate}
-            />
-          </>
+          <FlashcardsForm
+            model={{
+              front: flashcardToEdit.front,
+              back: flashcardToEdit.back,
+              title: flashcardToEdit.title,
+              materialSubGroupId: selectedGroupId!,
+            }}
+            submitLabel={t(keys.updateFlashcardButton)}
+            onSubmit={handleUpdate}
+          />
         );
 
       case "view":
-        const flashcardToView = flashcards?.find((fc) => fc.id === selectedId);
+        const flashcardToView = flashcards?.find((fc) => fc.id === selectedFlashcardId);
         if (!flashcardToView)
           return (
             <p className="text-center p-4">{t(keys.flashcardNotFound)}</p>
@@ -175,13 +160,13 @@ export default function FlashcardsDashboard() {
                 }`}
               >
                 {/* Front */}
-                <div className="absolute w-full h-full rounded-3xl bg-neutral-100 p-4 border border-neutral-300 [backface-visibility:hidden]">
+                <div className="absolute w-full h-full rounded-3xl bg-neutral-100 p-4 border border-neutral-300 dark:bg-background-dark dark:border-neutral-800 [backface-visibility:hidden]">
                   <h2 className="text-xl font-bold mb-4">The front side:</h2>
                   <p className="text-lg">{flashcardToView.front}</p>
                 </div>
 
                 {/* Back */}
-                <div className="absolute w-full h-full rounded-3xl bg-neutral-100 p-4 border border-neutral-300 [backface-visibility:hidden] [transform:rotateX(180deg)]">
+                <div className="absolute w-full h-full rounded-3xl bg-neutral-100 p-4 border border-neutral-300 dark:bg-background-dark dark:border-neutral-800 [backface-visibility:hidden] [transform:rotateX(180deg)]">
                   <h2 className="text-xl font-bold mb-4">The back side:</h2>
                   <p className="text-lg">{flashcardToView.back}</p>
                 </div>
@@ -190,7 +175,7 @@ export default function FlashcardsDashboard() {
           </div>
         );
 
-      default:
+        default:
         return null;
     }
   };
@@ -200,10 +185,10 @@ export default function FlashcardsDashboard() {
       <FlashcardsDashboardHeader
         setView={(view: "list" | "create" | "edit" | "view") => setView(view)}
         handleDelete={handleDelete}
-        selectedId={selectedId}
+        selectedId={selectedFlashcardId}
         handleFileUpload={handleFileUpload}
       />
-      <div className="flex items-center justify-center w-full h-full flex-1">
+      <div className="flex items-center justify-center w-full h-full flex-1 relative">
         {renderContent()}
       </div>
     </div>

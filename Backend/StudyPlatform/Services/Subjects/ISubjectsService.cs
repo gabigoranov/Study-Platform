@@ -12,8 +12,10 @@ namespace StudyPlatform.Services.Subjects
         /// Retrieves all subjects belonging to a given user.
         /// </summary>
         /// <param name="userId">The user ID.</param>
+        /// <param name="includeGroups">Query parameter for whether or not to include MaterialSubGroups</param>
+        /// <param name="includeGroupsSummary">Query parameter for whether or not to include MaterialSubGroups summary ( without materials )</param>
         /// <returns>A collection of subjects.</returns>
-        Task<IEnumerable<SubjectDto>> GetSubjectsByUserAsync(Guid userId);
+        Task<IEnumerable<SubjectDto>> GetSubjectsByUserAsync(Guid userId, bool includeGroups = false, bool includeGroupsSummary = false);
 
         /// <summary>
         /// Retrieves a single subject by ID.
