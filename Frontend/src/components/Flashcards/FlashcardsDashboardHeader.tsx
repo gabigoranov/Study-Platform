@@ -8,8 +8,9 @@ import { useEffect, useRef } from "react";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "../ui/dropdown-menu";
 import { useQuery } from "@tanstack/react-query";
 import { useAuth } from "@/hooks/useAuth";
-import { materialSubGroupsService } from "@/services/materialSubGroups";
 import { useVariableContext } from "@/context/VariableContext";
+import { materialSubGroupsService } from "@/services/materialSubGroupsService";
+
 
 type FlashcardsDashboardHeaderProps = {
     setView: (view: "list" | "create" | "edit" | "view") => void;
@@ -28,7 +29,9 @@ export default function FlashcardsDashboardHeader({ setView, handleFileUpload, h
     // --- Query: load all groups with their flashcards ---
     const { data: groups, isLoading, error } = useQuery({
         queryKey: ["materialSubGroups"],
-        queryFn: () => materialSubGroupsService.getAll(token!, selectedSubjectId!),
+        queryFn: () => materialSubGroupsService.getAll(token!, `subject/${selectedSubjectId}`, {
+            includeMaterials: true
+        }),
         staleTime: 1000 * 60 * 5,
     });
 
@@ -49,7 +52,7 @@ export default function FlashcardsDashboardHeader({ setView, handleFileUpload, h
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                   <Button
-                  className={`flex w-fit shadow-none items-center gap-1`}
+                  className={`flex w-fit shadow-none items-center gap-1 bg-surface rounded-xl hover:bg-surface`}
                   >
                   {
                     selectedGroupId ? groups?.find((group) => group.id === selectedGroupId)?.title : t(keys.selectGroup)

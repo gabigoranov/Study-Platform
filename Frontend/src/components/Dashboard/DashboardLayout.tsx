@@ -9,9 +9,9 @@ import { Home } from "lucide-react";
 import { PiNoteBlankFill } from "react-icons/pi";
 import { AppSidebar } from "../Sidebar/AppSidebar";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { subjectService } from "@/services/subjectService";
 import { useAuth } from "@/hooks/useAuth";
 import { useVariableContext } from "@/context/VariableContext";
+import { subjectService } from "@/services/subjectService";
 
 export default function Layout() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -22,8 +22,8 @@ export default function Layout() {
 
   // --- Query: load all subjects ---
   const { data: subjects, isLoading, error } = useQuery({
-    queryKey: ["subjects"],
-    queryFn: () => subjectService.getAll(token!), // return the promise
+    queryKey: ["subjects", selectedSubjectId],
+    queryFn: () => subjectService.getAll(token!),
     staleTime: 1000 * 60 * 10,
   });
 

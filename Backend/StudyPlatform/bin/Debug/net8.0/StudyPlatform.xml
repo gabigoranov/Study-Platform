@@ -35,6 +35,12 @@
             </summary>
             <returns>A list of flashcards if successful.</returns>
         </member>
+        <member name="M:StudyPlatform.Controllers.FlashcardsController.GetAllFromGroup(System.Int32)">
+            <summary>
+            Endpoint for getting all flashcards that the user owns in a certain group.
+            </summary>
+            <returns>A list of flashcards if successful.</returns>
+        </member>
         <member name="M:StudyPlatform.Controllers.FlashcardsController.Update(StudyPlatform.Models.CreateFlashcardViewModel,System.Int32)">
             <summary>
             Endpoint for updating a specific flashcard that the user owns.
@@ -383,12 +389,8 @@
             <param name="userId">The ID of the user who owns the flashcards.</param>
             <returns>A task representing the asynchronous delete operation.</returns>
         </member>
-        <member name="M:StudyPlatform.Services.Flashcards.FlashcardsService.GetAllAsync(System.Guid)">
-            <summary>
-            Get all flashcards for a specific user.
-            </summary>
-            <param name="userId">The user id.</param>
-            <returns>A list of flashcard dtos.</returns>
+        <member name="M:StudyPlatform.Services.Flashcards.FlashcardsService.GetAllAsync(System.Guid,System.Nullable{System.Int32})">
+            <inheritdoc />
         </member>
         <member name="T:StudyPlatform.Services.Flashcards.IFlashcardsService">
             <summary>
@@ -428,11 +430,12 @@
             The task result contains a of <see cref="T:StudyPlatform.Models.DTOs.FlashcardDTO"/> object.
             </returns>
         </member>
-        <member name="M:StudyPlatform.Services.Flashcards.IFlashcardsService.GetAllAsync(System.Guid)">
+        <member name="M:StudyPlatform.Services.Flashcards.IFlashcardsService.GetAllAsync(System.Guid,System.Nullable{System.Int32})">
             <summary>
             Retrieves all flashcards for the specified user.
             </summary>
             <param name="userId">The specified userId.</param>
+            <param name="groupId">Specifies the group from which to select flashcards. If left unspecified will return all flashcards..</param>
             <returns>A collection of flashcards if successful.</returns>
         </member>
         <member name="M:StudyPlatform.Services.Flashcards.IFlashcardsService.DeleteAsync(System.Int32[],System.Guid)">

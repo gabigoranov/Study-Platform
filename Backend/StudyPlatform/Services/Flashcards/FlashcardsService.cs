@@ -117,14 +117,10 @@ namespace StudyPlatform.Services.Flashcards
             _logger.LogInformation("{DeletedCount} flashcards deleted for user {UserId}", deletedCount, userId);
         }
 
-        /// <summary>
-        /// Get all flashcards for a specific user.
-        /// </summary>
-        /// <param name="userId">The user id.</param>
-        /// <returns>A list of flashcard dtos.</returns>
-        public async Task<IEnumerable<FlashcardDTO>> GetAllAsync(Guid userId)
+        /// <inheritdoc />
+        public async Task<IEnumerable<FlashcardDTO>> GetAllAsync(Guid userId, int? groupId = null)
         {
-            var flashcards = await _context.Flashcards.Where(x => x.UserId == userId).ToListAsync();
+            var flashcards = await _context.Flashcards.Where(x => groupId != null ? x.MaterialSubGroupId == groupId && x.UserId == userId : x.UserId == userId).ToListAsync();
 
             return _mapper.Map<IEnumerable<FlashcardDTO>>(flashcards);
         }

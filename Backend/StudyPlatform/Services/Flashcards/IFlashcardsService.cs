@@ -46,8 +46,9 @@ namespace StudyPlatform.Services.Flashcards
         /// Retrieves all flashcards for the specified user.
         /// </summary>
         /// <param name="userId">The specified userId.</param>
+        /// <param name="groupId">Specifies the group from which to select flashcards. If left unspecified will return all flashcards..</param>
         /// <returns>A collection of flashcards if successful.</returns>
-        Task<IEnumerable<FlashcardDTO>> GetAllAsync(Guid userId);
+        Task<IEnumerable<FlashcardDTO>> GetAllAsync(Guid userId, int? groupId = null);
 
         /// <summary>
         /// Deletes flashcards by their IDs for the specified user.

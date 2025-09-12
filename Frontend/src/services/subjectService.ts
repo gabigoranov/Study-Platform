@@ -1,69 +1,72 @@
 import { Subject } from "@/data/Subject";
-import { BASE_URL } from "@/types/urls";
+import { apiService } from "./apiService";
+import { SubjectDTO } from "@/data/DTOs/SubjectDTO";
 
-export const subjectService = {
-  getAll: async (token: string): Promise<Subject[]> => {
-    const response = await fetch(`${BASE_URL}/subjects`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-    });
+export const subjectService = apiService<Subject, SubjectDTO, SubjectDTO>("subjects");
 
-    const data = await response.json();
+// export const subjectService = {
+//   getAll: async (token: string): Promise<Subject[]> => {
+//     const response = await fetch(`${BASE_URL}/subjects`, {
+//       method: "GET",
+//       headers: {
+//         "Content-Type": "application/json",
+//         Authorization: `Bearer ${token}`,
+//       },
+//     });
 
-    console.log("API CALL");
-    console.log(data);
+//     const data = await response.json();
 
-    return data;
-  },
+//     console.log("API CALL");
+//     console.log(data);
 
-  getById: async (id: string, token: string): Promise<Subject> => {
-    const response = await fetch(`${BASE_URL}/subjects/${id}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      }
-    });
+//     return data;
+//   },
 
-    return response.json();
-  },
+//   getById: async (id: string, token: string): Promise<Subject> => {
+//     const response = await fetch(`${BASE_URL}/subjects/${id}`, {
+//       method: "GET",
+//       headers: {
+//         "Content-Type": "application/json",
+//         Authorization: `Bearer ${token}`,
+//       }
+//     });
 
-  // create: async (flashcard: FlashcardDTO, token: string): Promise<Flashcard> => {
-  //   const response = await fetch(`${BASE_URL}/flashcards`, {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //       Authorization: `Bearer ${token}`,
-  //     },
-  //     body: JSON.stringify(flashcard),
-  //   });
+//     return response.json();
+//   },
 
-  //   return response.json();
-  // },
+//   // create: async (flashcard: FlashcardDTO, token: string): Promise<Flashcard> => {
+//   //   const response = await fetch(`${BASE_URL}/flashcards`, {
+//   //     method: "POST",
+//   //     headers: {
+//   //       "Content-Type": "application/json",
+//   //       Authorization: `Bearer ${token}`,
+//   //     },
+//   //     body: JSON.stringify(flashcard),
+//   //   });
 
-  // update: async (id: string, flashcard: FlashcardDTO, token: string): Promise<Flashcard> => {
-  //   const response = await fetch(`${BASE_URL}/flashcards/${id}`, {
-  //     method: "PUT",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //       Authorization: `Bearer ${token}`,
-  //     },
-  //     body: JSON.stringify(flashcard),
-  //   });
+//   //   return response.json();
+//   // },
 
-  //   return response.json();
-  // },
+//   // update: async (id: string, flashcard: FlashcardDTO, token: string): Promise<Flashcard> => {
+//   //   const response = await fetch(`${BASE_URL}/flashcards/${id}`, {
+//   //     method: "PUT",
+//   //     headers: {
+//   //       "Content-Type": "application/json",
+//   //       Authorization: `Bearer ${token}`,
+//   //     },
+//   //     body: JSON.stringify(flashcard),
+//   //   });
 
-  delete: async (id: string, token: string): Promise<void> => {
-    await fetch(`${BASE_URL}/subjects/${id}`, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      }
-    });
-  },
-};
+//   //   return response.json();
+//   // },
+
+//   delete: async (id: string, token: string): Promise<void> => {
+//     await fetch(`${BASE_URL}/subjects/${id}`, {
+//       method: "DELETE",
+//       headers: {
+//         "Content-Type": "application/json",
+//         Authorization: `Bearer ${token}`,
+//       }
+//     });
+//   },
+// };

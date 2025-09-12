@@ -1,9 +1,6 @@
 import { useState } from "react";
-import { flashcardService } from "../../services/flashcardService";
 import FlashcardsDashboardList from "../../components/Flashcards/FlashcardsDashboardList";
 import { Flashcard } from "../../data/Flashcard";
-import { ChevronLeft } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { useTranslation } from "react-i18next";
 import { keys } from "../../types/keys";
 import { FlashcardDTO } from "@/data/DTOs/FlashcardDTO";
@@ -12,8 +9,10 @@ import FlashcardsForm from "@/components/Flashcards/FlashcardsForm";
 import FlashcardsDashboardHeader from "@/components/Flashcards/FlashcardsDashboardHeader";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useVariableContext } from "@/context/VariableContext";
+import { apiService } from "@/services/apiService";
 
 type View = "list" | "create" | "edit" | "view";
+export const flashcardService = apiService<Flashcard, FlashcardDTO, FlashcardDTO>("flashcards");
 
 export default function FlashcardsDashboard() {
   const { t } = useTranslation();
@@ -26,8 +25,8 @@ export default function FlashcardsDashboard() {
 
   // --- Query: load all flashcards ---
   const { data: flashcards, isLoading, error } = useQuery({
-    queryKey: ["flashcards"],
-    queryFn: () => flashcardService.getAll(token!),
+    queryKey: ["flashcards", selectedGroupId],
+    queryFn: () => flashcardService.getAll(token!, selectedGroupId ? `group/${selectedGroupId}` : null),
     staleTime: 1000 * 60 * 5,
   });
 
@@ -35,7 +34,7 @@ export default function FlashcardsDashboard() {
   const createMutation = useMutation({
     mutationFn: (dto: FlashcardDTO) => flashcardService.create(dto, token!),
     onSuccess: (newFlashcard) => {
-      queryClient.setQueryData<Flashcard[]>(["flashcards"], (old) =>
+      queryClient.setQueryData<Flashcard[]>(["flashcards", selectedGroupId], (old) =>
         old ? [...old, newFlashcard] : [newFlashcard]
       );
       setView("list");
@@ -47,7 +46,7 @@ export default function FlashcardsDashboard() {
     mutationFn: ({ id, dto }: { id: string; dto: FlashcardDTO }) =>
       flashcardService.update(id, dto, token!),
     onSuccess: (updated) => {
-      queryClient.setQueryData<Flashcard[]>(["flashcards"], (old) =>
+      queryClient.setQueryData<Flashcard[]>(["flashcards", selectedGroupId], (old) =>
         old ? old.map((fc) => (fc.id === updated.id ? updated : fc)) : []
       );
       setEditingId(null);
@@ -57,9 +56,11 @@ export default function FlashcardsDashboard() {
 
   // --- Mutation: delete ---
   const deleteMutation = useMutation({
-    mutationFn: (id: string) => flashcardService.delete(id, token!),
+    mutationFn: (id: string) => flashcardService.delete(token!, {
+      ids: id
+    }),
     onSuccess: (_, id) => {
-      queryClient.setQueryData<Flashcard[]>(["flashcards"], (old) =>
+      queryClient.setQueryData<Flashcard[]>(["flashcards", selectedGroupId], (old) =>
         old ? old.filter((fc) => fc.id !== id) : []
       );
     },
@@ -193,4 +194,8 @@ export default function FlashcardsDashboard() {
       </div>
     </div>
   );
+}
+
+function createApiService<T, U, V>(arg0: string) {
+  throw new Error("Function not implemented.");
 }

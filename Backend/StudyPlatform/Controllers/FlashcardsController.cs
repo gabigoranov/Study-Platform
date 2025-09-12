@@ -76,6 +76,20 @@ namespace StudyPlatform.Controllers
         }
 
         /// <summary>
+        /// Endpoint for getting all flashcards that the user owns in a certain group.
+        /// </summary>
+        /// <returns>A list of flashcards if successful.</returns>
+        [HttpGet("group/{id}")]
+        public async Task<IActionResult> GetAllFromGroup([FromRoute] int id)
+        {
+            // Load userId from JWT token
+            Guid userId = User.GetUserId();
+
+            IEnumerable<FlashcardDTO> res = await _flashcardsService.GetAllAsync(userId, id);
+            return Ok(res);
+        }
+
+        /// <summary>
         /// Endpoint for updating a specific flashcard that the user owns.
         /// </summary>
         /// <param name="model">The model for updating the flashcard.</param>

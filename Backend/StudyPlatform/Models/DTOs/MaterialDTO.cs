@@ -15,6 +15,9 @@ namespace StudyPlatform.Models.DTOs
         public string UserId { get; set; }
 
         [Required]
+        public string Title { get; set; }
+
+        [Required]
         [ForeignKey(nameof(MaterialSubGroup))]
         public int MaterialSubGroupId { get; set; }
     }
