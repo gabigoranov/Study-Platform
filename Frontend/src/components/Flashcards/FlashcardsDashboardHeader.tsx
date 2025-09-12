@@ -42,52 +42,54 @@ export default function FlashcardsDashboardHeader({ setView, handleFileUpload, h
     }, [groups, selectedSubjectId, setSelectedGroupId]);
 
     return (
-      <>
-        <div className="flex flex-col items-start sm:flex-row sm:items-end sm:justify-start gap-5 mb-4">
-            <div className="">
-            <h1 className="text-3xl font-bold mb-1 text-left">{t(keys.flashcardsDashboardTitle)}</h1>
-            <p className="">{t(keys.flashcardsSubtitle)}</p>
-            </div>
+      <div className="flex flex-col gap-1">
+        <h1 className="text-3xl font-bold mb-1 text-left">{t(keys.flashcardsDashboardTitle)}</h1>
+        <div className="flex flex-col items-start sm:flex-row sm:items-end sm:justify-start gap-4 mb-4">
+            <p className="w-auto">{t(keys.flashcardsSubtitle)}</p>
             
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                  <Button
-                  className={`flex w-fit shadow-none items-center gap-1 bg-surface rounded-xl hover:bg-surface`}
-                  >
-                  {
-                    selectedGroupId ? groups?.find((group) => group.id === selectedGroupId)?.title : t(keys.selectGroup)
-                  }
-                  <ChevronDown className="w-4 h-4" />
-                  </Button>
-              </DropdownMenuTrigger>
-
-              <DropdownMenuContent align="start" className="w-32">
-                {groups?.map((group) => (
-                    <DropdownMenuItem
-                        key={group.id}
-                        onClick={() => setSelectedGroupId(group.id)}
+            <div className="flex items-center gap-2 w-full">
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                    <Button
+                    className={`flex w-fit shadow-none items-center gap-1 bg-surface rounded-xl hover:bg-surface`}
                     >
-                        {group.title}
-                    </DropdownMenuItem>
-                ))}
-                
-                <DropdownMenuItem onSelect={() => setView("list")}></DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
+                    {
+                      selectedGroupId ? groups?.find((group) => group.id === selectedGroupId)?.title : t(keys.selectGroup)
+                    }
+                    <ChevronDown className="w-4 h-4" />
+                    </Button>
+                </DropdownMenuTrigger>
+  
+                <DropdownMenuContent align="start" className="w-32">
+                  {groups?.map((group) => (
+                      <DropdownMenuItem
+                          key={group.id}
+                          onClick={() => setSelectedGroupId(group.id)}
+                      >
+                          {group.title}
+                      </DropdownMenuItem>
+                  ))}
+                  
+                  <DropdownMenuItem onSelect={() => setView("list")}></DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+  
+              <form className="flex items-center gap-4 h-fit w-full">
+                <Input
+                    className="p-2 px-4 min-w-[10px] max-w-[300px] rounded-full"
+                    type="text"
+                    placeholder={t(keys.searchPlaceholder)}
+                />
+                <button type="submit">
+                    <FaMagnifyingGlass className="text-2xl" />
+                </button>
+              </form>
+            </div>
 
-            <form className="flex items-center gap-4 h-fit">
-              <Input
-                  className="p-2 px-4 min-w-[300px] rounded-full"
-                  type="text"
-                  placeholder={t(keys.searchPlaceholder)}
-              />
-              <button type="submit">
-                  <FaMagnifyingGlass className="text-2xl" />
-              </button>
-            </form>
+            
         </div>
         <div className="flex flex-col gap-2 sm:flex-row">
-            <div className="flex gap-2">
+            <div className="flex gap-1 flex-wrap">
             <Button
                 className="rounded-3xl"
                 variant="outline"
@@ -135,6 +137,6 @@ export default function FlashcardsDashboardHeader({ setView, handleFileUpload, h
             />
             </div>
         </div>
-      </>
+      </div>
     )
 }

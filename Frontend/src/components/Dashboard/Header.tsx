@@ -8,9 +8,9 @@ export default function Header() {
     const { t } = useTranslation();
     
     return (
-        <header className="w-full h-15 p-4 flex justify-start gap-4 items-center">
+        <header className="w-full h-15 p-4 flex justify-between items-center">
             <SidebarTrigger size="icon" className="[&_svg]:size-6" />
-            <div className="ml-auto">
+            <div className="">
                 <LoginComponent iconProps={{}}/>
             </div>
         </header>   

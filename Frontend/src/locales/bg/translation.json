@@ -51,7 +51,7 @@
     "delete": "Изтрий",
     "confirmDeleteMessage": "Сигурни ли сте, че искате да изтриете тази флашкарта?",
     "requiredFieldError": "Това поле е задължително",
-    "createNewButton": "Създай нов",
+    "createNewButton": "Добави",
     "flashcardNotFound": "Флашкартата не е намерена",
     "flashcardsSubtitle": "Генерирайте и преглеждайте флаш-карти с изкуствен интелект",
     "searchPlaceholder": "Търсене...",
