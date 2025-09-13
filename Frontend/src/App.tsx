@@ -4,6 +4,7 @@ import ProtectedRoute from "./routes/ProtectedRoute";
 
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
+import HomeDashboard from "./pages/Home/HomeDashboard";
 import DashboardLayout from "./components/Dashboard/DashboardLayout";
 import SettingsLayout from "./components/Settings/SettingsLayout";
 import GeneralSettings from "./pages/Settings/GeneralSettings";
@@ -35,7 +36,8 @@ export function App() {
                 }
                 errorElement={<ErrorPage />}
               >
-                <Route path="flashcards" index element={<FlashcardsDashboard />} />
+                <Route index element={<HomeDashboard />} />
+                <Route path="flashcards" element={<FlashcardsDashboard />} />
               </Route>
 
               <Route path="settings" element={

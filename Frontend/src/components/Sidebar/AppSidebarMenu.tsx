@@ -5,6 +5,7 @@ import { Subject } from "@/data/Subject";
 import { useVariableContext } from "@/context/VariableContext";
 import { Button } from "../ui/button";
 import { Plus, Trash2 } from "lucide-react";
+import { useNavigate } from "react-router";
 
 export type AppSidebarMenuProps = {
     dropdownTitle: string;
@@ -13,45 +14,28 @@ export type AppSidebarMenuProps = {
 }
 
 export default function AppSidebarMenu({dropdownTitle, dropdownTitleIcon: DropdownTitleIcon, items} : AppSidebarMenuProps) {
-    const { selectedSubjectId, setSelectedSubjectId } = useVariableContext()
+    const { selectedSubjectId, setSelectedSubjectId } = useVariableContext();
+    const navigate = useNavigate();
 
     return (
-      <div className="flex gap-2">
-        <SidebarMenu>
-          <SidebarMenuItem>
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <SidebarMenuButton>
-                  {selectedSubjectId
-                    ? items.find((item) => item.id == selectedSubjectId)?.title
-                    : dropdownTitle}
-                  <DropdownTitleIcon className="ml-auto" />
-                </SidebarMenuButton>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent className="w-[--radix-popper-anchor-width]">
-                {items?.map((item, index) => (
-                  <DropdownMenuItem key={index} onSelect={() => setSelectedSubjectId(item.id)}>{item?.title}</DropdownMenuItem>
-                ))}
-              </DropdownMenuContent>
-            </DropdownMenu>
-          </SidebarMenuItem>
-        </SidebarMenu>
-        <Button
-          variant="outline"
-          size="icon"
-          className="w-12 h-8 p-0 flex justify-center items-center"
-        >
-          <Plus className="w-4 h-4" />
-        </Button>
-
-        <Button
-          variant="outline"
-          size="icon"
-          className="w-12 h-8 p-0 flex justify-center items-center"
-        >
-          <Trash2 className="w-4 h-4" />
-        </Button>
-
-      </div>
+      <SidebarMenu>
+        <SidebarMenuItem>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <SidebarMenuButton>
+                {selectedSubjectId
+                  ? items.find((item) => item.id == selectedSubjectId)?.title
+                  : dropdownTitle}
+                <DropdownTitleIcon className="ml-auto" />
+              </SidebarMenuButton>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="w-[--radix-popper-anchor-width]">
+              {items?.map((item, index) => (
+                <DropdownMenuItem key={index} onSelect={() => setSelectedSubjectId(item.id)}>{item?.title}</DropdownMenuItem>
+              ))}
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </SidebarMenuItem>
+      </SidebarMenu>
     )
 }
