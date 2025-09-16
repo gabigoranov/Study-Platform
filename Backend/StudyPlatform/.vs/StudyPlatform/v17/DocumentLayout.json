@@ -87,8 +87,11 @@
               "ViewState": "AQIAADMAAAAAAAAAAAAcwEUAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-09-12T06:41:21.64Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
             },
             {
               "$type": "Document",
@@ -100,8 +103,7 @@
               "RelativeToolTip": "Services\\Subjects\\SubjectsService.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-12T13:18:43.064Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-12T13:18:43.064Z"
             },
             {
               "$type": "Document",
@@ -113,12 +115,7 @@
               "RelativeToolTip": "Services\\Flashcards\\IFlashcardsService.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-12T13:17:03.397Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+              "WhenOpened": "2025-09-12T13:17:03.397Z"
             },
             {
               "$type": "Document",
@@ -130,8 +127,7 @@
               "RelativeToolTip": "Models\\DTOs\\MaterialDTO.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAABEAAAApAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-12T06:16:57.955Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-12T06:16:57.955Z"
             },
             {
               "$type": "Document",
@@ -156,8 +152,7 @@
               "RelativeToolTip": "Models\\CreateFlashcardViewModel.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAABAAAAApAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-11T19:07:41.698Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-11T19:07:41.698Z"
             },
             {
               "$type": "Document",
@@ -169,8 +164,7 @@
               "RelativeToolTip": "Data\\Models\\Material.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-11T19:07:19.07Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-11T19:07:19.07Z"
             },
             {
               "$type": "Document",
@@ -182,8 +176,7 @@
               "RelativeToolTip": "Services\\Flashcards\\FlashcardsService.cs",
               "ViewState": "AQIAAFkAAAAAAAAAAAAIwHoAAABRAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-11T19:06:47.863Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-11T19:06:47.863Z"
             },
             {
               "$type": "Document",
@@ -195,8 +188,7 @@
               "RelativeToolTip": "Controllers\\FlashcardsController.cs",
               "ViewState": "AQIAADYAAAAAAAAAAAArwFEAAAAXAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-06T16:43:48.884Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-06T16:43:48.884Z"
             },
             {
               "$type": "Document",
@@ -208,8 +200,7 @@
               "RelativeToolTip": "Models\\DTOs\\FlashcardDTO.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAAFAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-12T06:16:59.228Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-12T06:16:59.228Z"
             },
             {
               "$type": "Document",
@@ -221,8 +212,7 @@
               "RelativeToolTip": "Services\\MaterialSubGroups\\MaterialSubGroupsService.cs",
               "ViewState": "AQIAAA4AAAAAAAAAAAAxwC0AAAAIAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-11T19:36:01.856Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-11T19:36:01.856Z"
             },
             {
               "$type": "Document",
@@ -234,8 +224,7 @@
               "RelativeToolTip": "Models\\DTOs\\MaterialSubGroupDTO.cs",
               "ViewState": "AQIAABMAAAAAAAAAAAAawCUAAAA0AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-12T06:16:07.112Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-12T06:16:07.112Z"
             },
             {
               "$type": "Document",
@@ -247,8 +236,7 @@
               "RelativeToolTip": "Models\\Common\\AutoMapper.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAB4AAAAFAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-12T06:21:56.894Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-12T06:21:56.894Z"
             },
             {
               "$type": "Document",
@@ -260,8 +248,7 @@
               "RelativeToolTip": "Data\\DbContext.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAB4AAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-12T06:27:21.71Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-12T06:27:21.71Z"
             },
             {
               "$type": "Document",
@@ -273,8 +260,7 @@
               "RelativeToolTip": "Services\\MaterialSubGroups\\IMaterialSubGroupsService.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAABAAAAAMAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-11T19:35:23.973Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-11T19:35:23.973Z"
             },
             {
               "$type": "Document",

@@ -1,5 +1,6 @@
 import { useState, useEffect, useContext, createContext } from "react";
 import { supabase } from "../lib/supabaseClient";
+import { storageService } from "@/services/storageService";
 
 type UserProfile = {
   id: string;
@@ -78,15 +79,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         const fileName = `avatar`;
         const filePath = `${user?.id}/${fileName}`;
 
-        const { error: uploadError } = await supabase.storage
-          .from('avatars')
-          .upload(filePath, updates.avatar);
-
-        if (uploadError) throw uploadError;
-
-        const { data: { publicUrl } } = supabase.storage
-          .from('avatars')
-          .getPublicUrl(filePath);
+        const publicUrl = await storageService.uploadFile(user?.id as string, updates.avatar, 'avatars');
 
         const { error: updateError } = await supabase.auth.updateUser({
           data: { avatar_url: publicUrl }

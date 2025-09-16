@@ -10,6 +10,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useAuth } from "@/hooks/useAuth";
 import { useVariableContext } from "@/context/VariableContext";
 import { materialSubGroupsService } from "@/services/materialSubGroupsService";
+import UploadFileButton from "../Common/UploadFileButton";
 
 
 type FlashcardsDashboardHeaderProps = {
@@ -120,7 +121,8 @@ export default function FlashcardsDashboardHeader({ setView, handleFileUpload, h
             </div>
 
             <div className="sm:ml-auto">
-            <Button
+              <UploadFileButton />
+            {/* <Button
                 className="rounded-3xl"
                 variant="outline"
                 onClick={() => fileInputRef.current?.click()}
@@ -134,7 +136,7 @@ export default function FlashcardsDashboardHeader({ setView, handleFileUpload, h
                 className="hidden"
                 multiple
                 onChange={(e) => e.target.files && handleFileUpload(e.target.files)}
-            />
+            /> */}
             </div>
         </div>
       </div>
