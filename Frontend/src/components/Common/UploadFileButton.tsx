@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { Button } from "../ui/button";
 import { Upload } from "lucide-react";
-import { storageService } from "@/services/storageService"; // import your Supabase service
 import { useAuth } from "@/hooks/useAuth";
+import PdfViewer from "./PdfViewer";
+import { storageService } from "@/services/storageService";
 
 export default function UploadFileButton() {
   const userId = useAuth().user?.id!;
@@ -11,6 +12,7 @@ export default function UploadFileButton() {
   const [isVisible, setIsVisible] = useState(false);
   const [selectedAction, setSelectedAction] = useState("");
   const [loading, setLoading] = useState(false);
+  const [file, setFile] = useState<File>();
 
   const openForm = () => {
     setIsVisible(true);
@@ -25,6 +27,8 @@ export default function UploadFileButton() {
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files || e.target.files.length === 0) return;
     const file = e.target.files[0];
+
+    setFile(file);
 
     setLoading(true);
     try {
@@ -58,16 +62,19 @@ export default function UploadFileButton() {
           onClick={closeForm}
         >
           <div
-            className="flex flex-col w-full max-w-md p-6 bg-surface rounded-xl"
+            className="flex flex-col sm:flex-row w-full h-full max-h-[90%] gap-4 max-w-[90%] p-6 bg-surface rounded-xl"
             onClick={(e) => e.stopPropagation()}
           >
+            <div className="w-full sm:max-w-[50%]">
+              <PdfViewer file={file}/>
+            </div>
             {loading ? (
               <div className="flex flex-col items-center justify-center py-12">
                 <div className="w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin mb-4"></div>
                 <span>Uploading file...</span>
               </div>
             ) : (
-              <>
+              <div className="h-full">
                 {/* Upload area */}
                 <label className="flex flex-col items-center justify-center border-2 border-dashed border-gray-400 rounded-xl h-40 cursor-pointer hover:border-gray-600 transition">
                   <Upload className="w-10 h-10 text-gray-500 mb-2" />
@@ -99,7 +106,7 @@ export default function UploadFileButton() {
                     Submit
                   </Button>
                 </div>
-              </>
+              </div>
             )}
           </div>
         </div>
