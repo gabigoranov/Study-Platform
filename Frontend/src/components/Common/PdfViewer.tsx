@@ -40,14 +40,14 @@ export default function PdfViewer({ file }: PdfViewerProps) {
   return (
     <div
       ref={containerRef}
-      className="flex flex-col items-center w-full max-w-full h-[50vh] sm:h-full overflow-y-auto p-4"
+      className="flex flex-col items-center w-full max-w-full h-[50vh] sm:h-full overflow-y-auto rounded-xl scrollbar-none sm:scrollbar-thin"
     >
       {file ? (
         <Document
           file={file}
           onLoadSuccess={({ numPages }) => setNumPages(numPages)}
-          loading={<p>Loading PDF...</p>}
-          error={<p>Failed to load PDF</p>}
+          loading={<p className="relative top-1/2 transform -translate-y-1/2">Loading PDF...</p>}
+          error={<p className="relative top-1/2 transform -translate-y-1/2">Failed to load PDF</p>}
         >
           {Array.from(new Array(numPages), (_, index) => (
             <Page
@@ -60,7 +60,7 @@ export default function PdfViewer({ file }: PdfViewerProps) {
           ))}
         </Document>
       ) : (
-        <p className="text-gray-500">No PDF selected</p>
+        <p className="text-gray-500 relative top-1/2 transform -translate-y-1/2">No PDF selected</p>
       )}
     </div>
   );

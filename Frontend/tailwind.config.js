@@ -8,34 +8,23 @@ module.exports = {
   theme: {
   	extend: {
 		keyframes: {
-			backdropBlurIn: {
-			"0%": {
-				backdropFilter: "blur(0px)",
-			},
-			"10%": {
-				backdropFilter: "blur(0.5px)",
-			},
-			"70%": {
-				backdropFilter: "blur(2px)",
-			},
-			"100%": {
-				backdropFilter: "blur(4px)",
-			},
-			},
-			backdropBlurOut: {
-			"0%": {
-				backdropFilter: "blur(4px)",
-			},
-			"30%": {
-				backdropFilter: "blur(2px)",
-			},
-			"90%": {
-				backdropFilter: "blur(0.5px)",
-			},
-			"100%": {
-				backdropFilter: "blur(0px)",
-			},
-			},
+		  backdropBlurIn: {
+            "0%": {
+              backdropFilter: "blur(0px)",
+            },
+            "100%": {
+              backdropFilter: "blur(4px)",
+            },
+          },
+          backdropBlurOut: {
+            "0%": {
+              backdropFilter: "blur(4px)",
+            },
+            "100%": {
+              backdropFilter: "blur(0px)",
+            },
+          },
+	
 		},
 		animation: {
 			backdropBlurIn: "backdropBlurIn 0.3s ease-in-out forwards",

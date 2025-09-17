@@ -122,21 +122,6 @@ export default function FlashcardsDashboardHeader({ setView, handleFileUpload, h
 
             <div className="sm:ml-auto">
               <UploadFileButton />
-            {/* <Button
-                className="rounded-3xl"
-                variant="outline"
-                onClick={() => fileInputRef.current?.click()}
-            >
-                <Upload className="inline" /> {t(keys.uploadMaterialsButton)}
-            </Button>
-
-            <input
-                type="file"
-                ref={fileInputRef}
-                className="hidden"
-                multiple
-                onChange={(e) => e.target.files && handleFileUpload(e.target.files)}
-            /> */}
             </div>
         </div>
       </div>
