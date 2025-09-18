@@ -3,26 +3,6 @@
   "WorkspaceRootPath": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|d:\\projects\\studyplatform\\backend\\studyplatform\\controllers\\materialsubgroupscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|solutionrelative:controllers\\materialsubgroupscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|d:\\projects\\studyplatform\\backend\\studyplatform\\models\\dtos\\materialdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|solutionrelative:models\\dtos\\materialdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|d:\\projects\\studyplatform\\backend\\studyplatform\\models\\dtos\\flashcarddto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|solutionrelative:models\\dtos\\flashcarddto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|d:\\projects\\studyplatform\\backend\\studyplatform\\models\\createflashcardviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|solutionrelative:models\\createflashcardviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|d:\\projects\\studyplatform\\backend\\studyplatform\\data\\models\\material.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|solutionrelative:data\\models\\material.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|d:\\projects\\studyplatform\\backend\\studyplatform\\controllers\\flashcardscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|solutionrelative:controllers\\flashcardscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -35,36 +15,12 @@
       "RelativeMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|solutionrelative:services\\flashcards\\flashcardsservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|d:\\projects\\studyplatform\\backend\\studyplatform\\services\\subjects\\subjectsservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|solutionrelative:services\\subjects\\subjectsservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|d:\\projects\\studyplatform\\backend\\studyplatform\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|d:\\projects\\studyplatform\\backend\\studyplatform\\models\\dtos\\materialsubgroupdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|solutionrelative:models\\dtos\\materialsubgroupdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|d:\\projects\\studyplatform\\backend\\studyplatform\\services\\materialsubgroups\\materialsubgroupsservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|solutionrelative:services\\materialsubgroups\\materialsubgroupsservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|d:\\projects\\studyplatform\\backend\\studyplatform\\models\\common\\automapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|solutionrelative:models\\common\\automapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|d:\\projects\\studyplatform\\backend\\studyplatform\\data\\dbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|solutionrelative:data\\dbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|d:\\projects\\studyplatform\\backend\\studyplatform\\services\\materialsubgroups\\imaterialsubgroupsservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|solutionrelative:services\\materialsubgroups\\imaterialsubgroupsservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|d:\\projects\\studyplatform\\backend\\studyplatform\\data\\models\\flashcard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|solutionrelative:data\\models\\flashcard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|d:\\projects\\studyplatform\\backend\\studyplatform\\data\\common\\apiclient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|solutionrelative:data\\common\\apiclient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -77,202 +33,73 @@
           "SelectedChildIndex": 5,
           "Children": [
             {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "Program.cs",
-              "DocumentMoniker": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Program.cs",
-              "RelativeDocumentMoniker": "Program.cs",
-              "ToolTip": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Program.cs",
-              "RelativeToolTip": "Program.cs",
-              "ViewState": "AQIAADMAAAAAAAAAAAAcwEUAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-12T06:41:21.64Z",
-              "IsPinned": true
-            },
-            {
               "$type": "Bookmark",
               "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "SubjectsService.cs",
-              "DocumentMoniker": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Services\\Subjects\\SubjectsService.cs",
-              "RelativeDocumentMoniker": "Services\\Subjects\\SubjectsService.cs",
-              "ToolTip": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Services\\Subjects\\SubjectsService.cs",
-              "RelativeToolTip": "Services\\Subjects\\SubjectsService.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "DocumentIndex": 4,
+              "Title": "APIClient.cs",
+              "DocumentMoniker": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Data\\Common\\APIClient.cs",
+              "RelativeDocumentMoniker": "Data\\Common\\APIClient.cs",
+              "ToolTip": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Data\\Common\\APIClient.cs",
+              "RelativeToolTip": "Data\\Common\\APIClient.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAjAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-12T13:18:43.064Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "IFlashcardsService.cs",
-              "DocumentMoniker": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Services\\Flashcards\\IFlashcardsService.cs",
-              "RelativeDocumentMoniker": "Services\\Flashcards\\IFlashcardsService.cs",
-              "ToolTip": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Services\\Flashcards\\IFlashcardsService.cs",
-              "RelativeToolTip": "Services\\Flashcards\\IFlashcardsService.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-12T13:17:03.397Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "MaterialDTO.cs",
-              "DocumentMoniker": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Models\\DTOs\\MaterialDTO.cs",
-              "RelativeDocumentMoniker": "Models\\DTOs\\MaterialDTO.cs",
-              "ToolTip": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Models\\DTOs\\MaterialDTO.cs",
-              "RelativeToolTip": "Models\\DTOs\\MaterialDTO.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABEAAAApAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-12T06:16:57.955Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "MaterialSubGroupsController.cs",
-              "DocumentMoniker": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Controllers\\MaterialSubGroupsController.cs",
-              "RelativeDocumentMoniker": "Controllers\\MaterialSubGroupsController.cs",
-              "ToolTip": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Controllers\\MaterialSubGroupsController.cs",
-              "RelativeToolTip": "Controllers\\MaterialSubGroupsController.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAACIAAABhAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-11T19:28:57.222Z",
+              "WhenOpened": "2025-09-18T13:55:39.672Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "CreateFlashcardViewModel.cs",
-              "DocumentMoniker": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Models\\CreateFlashcardViewModel.cs",
-              "RelativeDocumentMoniker": "Models\\CreateFlashcardViewModel.cs",
-              "ToolTip": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Models\\CreateFlashcardViewModel.cs",
-              "RelativeToolTip": "Models\\CreateFlashcardViewModel.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABAAAAApAAAA",
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AQIAACUAAAAAAAAAAAAAADkAAAANAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-11T19:07:41.698Z"
+              "WhenOpened": "2025-09-18T13:53:08.844Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Material.cs",
-              "DocumentMoniker": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Data\\Models\\Material.cs",
-              "RelativeDocumentMoniker": "Data\\Models\\Material.cs",
-              "ToolTip": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Data\\Models\\Material.cs",
-              "RelativeToolTip": "Data\\Models\\Material.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-11T19:07:19.07Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 2,
               "Title": "FlashcardsService.cs",
               "DocumentMoniker": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Services\\Flashcards\\FlashcardsService.cs",
               "RelativeDocumentMoniker": "Services\\Flashcards\\FlashcardsService.cs",
               "ToolTip": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Services\\Flashcards\\FlashcardsService.cs",
               "RelativeToolTip": "Services\\Flashcards\\FlashcardsService.cs",
-              "ViewState": "AQIAAFkAAAAAAAAAAAAIwHoAAABRAAAA",
+              "ViewState": "AQIAAHsAAAAAAAAAAAAgwJMAAAAXAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-11T19:06:47.863Z"
+              "WhenOpened": "2025-09-18T13:33:13.123Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 1,
+              "Title": "IFlashcardsService.cs",
+              "DocumentMoniker": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Services\\Flashcards\\IFlashcardsService.cs",
+              "RelativeDocumentMoniker": "Services\\Flashcards\\IFlashcardsService.cs",
+              "ToolTip": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Services\\Flashcards\\IFlashcardsService.cs",
+              "RelativeToolTip": "Services\\Flashcards\\IFlashcardsService.cs",
+              "ViewState": "AQIAABwAAAAAAAAAAAAgwEAAAAAtAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-18T13:31:02.159Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
               "Title": "FlashcardsController.cs",
               "DocumentMoniker": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Controllers\\FlashcardsController.cs",
               "RelativeDocumentMoniker": "Controllers\\FlashcardsController.cs",
-              "ToolTip": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Controllers\\FlashcardsController.cs",
-              "RelativeToolTip": "Controllers\\FlashcardsController.cs",
-              "ViewState": "AQIAADYAAAAAAAAAAAArwFEAAAAXAAAA",
+              "ToolTip": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Controllers\\FlashcardsController.cs*",
+              "RelativeToolTip": "Controllers\\FlashcardsController.cs*",
+              "ViewState": "AQIAAGcAAAAAAAAAAAAhwIsAAAAMAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-06T16:43:48.884Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "FlashcardDTO.cs",
-              "DocumentMoniker": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Models\\DTOs\\FlashcardDTO.cs",
-              "RelativeDocumentMoniker": "Models\\DTOs\\FlashcardDTO.cs",
-              "ToolTip": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Models\\DTOs\\FlashcardDTO.cs",
-              "RelativeToolTip": "Models\\DTOs\\FlashcardDTO.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAAFAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-12T06:16:59.228Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "MaterialSubGroupsService.cs",
-              "DocumentMoniker": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Services\\MaterialSubGroups\\MaterialSubGroupsService.cs",
-              "RelativeDocumentMoniker": "Services\\MaterialSubGroups\\MaterialSubGroupsService.cs",
-              "ToolTip": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Services\\MaterialSubGroups\\MaterialSubGroupsService.cs",
-              "RelativeToolTip": "Services\\MaterialSubGroups\\MaterialSubGroupsService.cs",
-              "ViewState": "AQIAAA4AAAAAAAAAAAAxwC0AAAAIAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-11T19:36:01.856Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "MaterialSubGroupDTO.cs",
-              "DocumentMoniker": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Models\\DTOs\\MaterialSubGroupDTO.cs",
-              "RelativeDocumentMoniker": "Models\\DTOs\\MaterialSubGroupDTO.cs",
-              "ToolTip": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Models\\DTOs\\MaterialSubGroupDTO.cs",
-              "RelativeToolTip": "Models\\DTOs\\MaterialSubGroupDTO.cs",
-              "ViewState": "AQIAABMAAAAAAAAAAAAawCUAAAA0AAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-12T06:16:07.112Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "AutoMapper.cs",
-              "DocumentMoniker": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Models\\Common\\AutoMapper.cs",
-              "RelativeDocumentMoniker": "Models\\Common\\AutoMapper.cs",
-              "ToolTip": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Models\\Common\\AutoMapper.cs",
-              "RelativeToolTip": "Models\\Common\\AutoMapper.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAB4AAAAFAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-12T06:21:56.894Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "DbContext.cs",
-              "DocumentMoniker": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Data\\DbContext.cs",
-              "RelativeDocumentMoniker": "Data\\DbContext.cs",
-              "ToolTip": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Data\\DbContext.cs",
-              "RelativeToolTip": "Data\\DbContext.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAB4AAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-12T06:27:21.71Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "IMaterialSubGroupsService.cs",
-              "DocumentMoniker": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Services\\MaterialSubGroups\\IMaterialSubGroupsService.cs",
-              "RelativeDocumentMoniker": "Services\\MaterialSubGroups\\IMaterialSubGroupsService.cs",
-              "ToolTip": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Services\\MaterialSubGroups\\IMaterialSubGroupsService.cs",
-              "RelativeToolTip": "Services\\MaterialSubGroups\\IMaterialSubGroupsService.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABAAAAAMAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-11T19:35:23.973Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 15,
-              "Title": "Flashcard.cs",
-              "DocumentMoniker": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Data\\Models\\Flashcard.cs",
-              "RelativeDocumentMoniker": "Data\\Models\\Flashcard.cs",
-              "ToolTip": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Data\\Models\\Flashcard.cs",
-              "RelativeToolTip": "Data\\Models\\Flashcard.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-11T19:07:16.178Z"
+              "WhenOpened": "2025-09-06T16:43:48.884Z",
+              "EditorCaption": ""
             }
           ]
         }

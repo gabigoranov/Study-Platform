@@ -121,5 +121,23 @@ namespace StudyPlatform.Controllers
             await _flashcardsService.DeleteAsync(ids, userId);
             return NoContent();
         }
+
+        /// <summary>
+        /// Endpoint for generating flashcards from a file.
+        /// </summary>
+        /// <param name="model">The model containing the file's download url and other prompt data.</param>
+        /// <returns>A list of flashcards if successful.</returns>
+        [HttpPost("generate")]
+        public async Task<IActionResult> Generate([FromBody] GenerateFlashcardsViewModel model)
+        {
+            // Load userId from JWT token
+            Guid userId = User.GetUserId();
+
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+
+            string res = await _flashcardsService.GenerateAsync(userId, model);
+
+            return Ok(res);
+        }
     }
 }

@@ -10,11 +10,16 @@ export const storageService = {
 
     if (error) throw error;
 
-    const { data: publicUrlData } = supabase.storage
-      .from(bucket)
-      .getPublicUrl(filePath);
+    return this.getSignedUrl(bucket, filePath, 3600);
+  },
 
-    return publicUrlData.publicUrl;
+  async getSignedUrl(bucket: string, filePath: string, expiresIn: number) {
+    const { data: signedUrlData, error } = await supabase.storage
+      .from(bucket)
+      .createSignedUrl(filePath, expiresIn);
+
+    if (error) throw error;
+    return signedUrlData.signedUrl;
   },
 
   // List all files for a user

@@ -57,5 +57,13 @@ namespace StudyPlatform.Services.Flashcards
         /// <param name="userId">The ID of the user who owns the flashcards.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous delete operation.</returns>
         Task DeleteAsync(int[] ids, Guid userId);
+
+        /// <summary>
+        /// Request the generation of flashcards using AI based on the provided model from a microservice.
+        /// </summary>
+        /// <param name="userId">The user's ID</param>
+        /// <param name="model">The model containing the download url and other prompt data.</param>
+        /// <returns></returns>
+        Task<string> GenerateAsync(Guid userId, GenerateFlashcardsViewModel model);
     }
 }

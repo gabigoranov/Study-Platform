@@ -1,11 +1,15 @@
 import os
 import re
 import tempfile
+import unicodedata
 import requests
 import pdfplumber
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from supabase import create_client, Client
+from dotenv import load_dotenv
+
+load_dotenv(dotenv_path=os.path.join(os.path.dirname(__file__), "..", ".env"))
 
 # --- Supabase client ---
 url: str = os.environ.get("SUPABASE_URL")
@@ -18,17 +22,23 @@ app = FastAPI()
 
 # --- Request schema ---
 class FlashcardRequest(BaseModel):
-    file_url: str  # Supabase file URL
-    num_flashcards: int = 20  # optional limit
-    style: str = "concise"    # e.g., concise, detailed, exam
+    fileDownloadUrl: str  # Supabase file URL
 
 
 # --- Text cleaning ---
 def clean_text(text: str) -> str:
+    # Normalize text (keeps accents, non-Latin scripts intact)
+    text = unicodedata.normalize("NFC", text)
+
+    # Collapse multiple spaces/newlines into one space
     text = re.sub(r"\s+", " ", text)
+
+    # Remove "Page X" markers (case-insensitive)
     text = re.sub(r"Page \d+", "", text, flags=re.IGNORECASE)
-    text = re.sub(r"[^\x00-\x7F]+", " ", text)
+
+    # Remove space before punctuation, but don’t drop non-English chars
     text = re.sub(r"\s([?.!,;:])", r"\1", text)
+
     return text.strip()
 
 
@@ -53,18 +63,8 @@ def extract_text_from_pdf(file_url: str) -> str:
     return clean_text(text)
 
 
-# --- Dummy flashcard generator (replace with your LLM call) ---
-def generate_flashcards(text: str, num: int, style: str):
-    # 🔥 Replace this with your LLM integration
-    return [
-        {"Q": f"Sample Question {i+1}", "A": f"Sample Answer {i+1}"}
-        for i in range(num)
-    ]
-
-
 # --- Endpoint ---
 @app.post("/generate-flashcards")
 def generate_flashcards_endpoint(req: FlashcardRequest):
-    text = extract_text_from_pdf(req.file_url)
-    flashcards = generate_flashcards(text, req.num_flashcards, req.style)
-    return {"flashcards": flashcards}
+    text = extract_text_from_pdf(req.fileDownloadUrl)
+    return {"text": text}

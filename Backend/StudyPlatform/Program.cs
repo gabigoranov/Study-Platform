@@ -11,6 +11,7 @@ using StudyPlatform.Services.MaterialSubGroups;
 using System.Text.Json.Serialization.Metadata;
 using Microsoft.AspNetCore.Http.Json;
 using StudyPlatform.Models.DTOs;
+using StudyPlatform.Data.Common;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -64,6 +65,11 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 
 
 builder.Services.AddAuthorization();
+
+builder.Services.AddHttpClient<APIClient>(client =>
+{
+    client.BaseAddress = new Uri("http://localhost:8000/");
+});
 
 builder.Services.AddControllers();
 

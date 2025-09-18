@@ -5,6 +5,8 @@ using StudyPlatform.Data;
 using StudyPlatform.Data.Models;
 using StudyPlatform.Models;
 using StudyPlatform.Models.DTOs;
+using System.Diagnostics;
+using System.Net.Http;
 
 namespace StudyPlatform.Services.Flashcards
 {
@@ -16,6 +18,9 @@ namespace StudyPlatform.Services.Flashcards
         private readonly AppDbContext _context;
         private readonly ILogger<FlashcardsService> _logger;
         private readonly IMapper _mapper;
+        private const string MICROSERVICE_BASE_URL = "http://localhost:8000";
+        private readonly HttpClient _client;
+
 
         /// <summary>
         /// Initializes a new instance of the <see cref="FlashcardsService"/> class.
@@ -23,11 +28,13 @@ namespace StudyPlatform.Services.Flashcards
         /// <param name="context">The database context.</param>
         /// <param name="logger">The logger instance.</param>
         /// <param name="mapper">The AutoMapper instance.</param>
-        public FlashcardsService(AppDbContext context, ILogger<FlashcardsService> logger, IMapper mapper)
+        /// <param name="client">The HttpClient instance.</param>
+        public FlashcardsService(AppDbContext context, ILogger<FlashcardsService> logger, IMapper mapper, HttpClient client)
         {
             _context = context;
             _logger = logger;
             _mapper = mapper;
+            _client = client;
         }
 
         /// <summary>
@@ -123,6 +130,22 @@ namespace StudyPlatform.Services.Flashcards
             var flashcards = await _context.Flashcards.Where(x => groupId != null ? x.MaterialSubGroupId == groupId && x.UserId == userId : x.UserId == userId).ToListAsync();
 
             return _mapper.Map<IEnumerable<FlashcardDTO>>(flashcards);
+        }
+
+        /// <inheritdoc />
+        public async Task<string> GenerateAsync(Guid userId, GenerateFlashcardsViewModel model)
+        {
+
+            using var content = new MultipartFormDataContent();
+            
+            var response = await _client.PostAsJsonAsync($"{MICROSERVICE_BASE_URL}/generate-flashcards", model);
+            response.EnsureSuccessStatusCode();
+
+            string text = await response.Content.ReadAsStringAsync();
+
+            Debug.WriteLine(text);
+
+            return text;
         }
     }
 }

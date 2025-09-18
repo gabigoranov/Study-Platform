@@ -4,6 +4,8 @@ import { useState } from "react";
 import PdfViewer from "./PdfViewer";
 import { Upload } from "lucide-react";
 import { Button } from "../ui/button";
+import { BASE_URL } from "@/types/urls";
+import { flashcardService } from "@/services/flashcardService";
 
 type UploadFileFormProps ={
     isFormOpen: boolean;
@@ -18,7 +20,7 @@ interface Action {
 }
 
 export default function UploadFileForm({isFormOpen, closeForm, actions, label} : UploadFileFormProps) {
-  const userId = useAuth().user?.id!;
+  const { user, token } = useAuth();
 
   const [loading, setLoading] = useState(false);
   const [file, setFile] = useState<File>();
@@ -36,9 +38,24 @@ export default function UploadFileForm({isFormOpen, closeForm, actions, label} :
 
     setLoading(true);
     try {
-      const publicUrl = await storageService.uploadFile(userId, file, "user-files");
-      console.log("File uploaded:", publicUrl);
+      const downloadUrl = await storageService.uploadFile(user?.id as string, file, "user-files");
+      console.log("File uploaded:", downloadUrl);
+
+      let response = await fetch(`${BASE_URL}/flashcards/generate`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          fileDownloadUrl: downloadUrl,
+        }),
+      });
+
+      console.log(await response.json())
+
       // Here you can trigger flashcard generation or any further processing
+    
     } catch (err) {
       console.error("Upload error:", err);
     } finally {
@@ -65,7 +82,7 @@ export default function UploadFileForm({isFormOpen, closeForm, actions, label} :
               <PdfViewer file={file}/>
             </div>
             {loading ? (
-              <div className="flex flex-col items-center justify-center py-12">
+              <div className="flex flex-col items-center justify-center py-12 w-full">
                 <div className="w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin mb-4"></div>
                 <span>Uploading file...</span>
               </div>
