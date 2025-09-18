@@ -143,6 +143,16 @@
             <param name="id">The subject ID.</param>
             <returns>No content if deleted.</returns>
         </member>
+        <member name="T:StudyPlatform.Data.Common.AppConstants">
+            <summary>
+            A static class used to abstract the commonly used constants, such as the base URL for microservices.
+            </summary>
+        </member>
+        <member name="F:StudyPlatform.Data.Common.AppConstants.FLASHCARDS_MICROSERVICE_BASE_URL">
+            <summary>
+            Base url for flashcards microservice.
+            </summary>
+        </member>
         <member name="T:StudyPlatform.Data.Models.Material">
             <summary>
             A general material entity that can be extended for specific types of study materials.

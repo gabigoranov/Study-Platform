@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using StudyPlatform.Data;
+using StudyPlatform.Data.Common;
 using StudyPlatform.Data.Models;
 using StudyPlatform.Models;
 using StudyPlatform.Models.DTOs;
@@ -18,7 +19,6 @@ namespace StudyPlatform.Services.Flashcards
         private readonly AppDbContext _context;
         private readonly ILogger<FlashcardsService> _logger;
         private readonly IMapper _mapper;
-        private const string MICROSERVICE_BASE_URL = "http://localhost:8000";
         private readonly HttpClient _client;
 
 
@@ -135,10 +135,9 @@ namespace StudyPlatform.Services.Flashcards
         /// <inheritdoc />
         public async Task<string> GenerateAsync(Guid userId, GenerateFlashcardsViewModel model)
         {
-
             using var content = new MultipartFormDataContent();
             
-            var response = await _client.PostAsJsonAsync($"{MICROSERVICE_BASE_URL}/generate-flashcards", model);
+            var response = await _client.PostAsJsonAsync($"{AppConstants.FLASHCARDS_MICROSERVICE_BASE_URL}/generate", model);
             response.EnsureSuccessStatusCode();
 
             string text = await response.Content.ReadAsStringAsync();
