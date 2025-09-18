@@ -8,6 +8,7 @@ using StudyPlatform.Models;
 using StudyPlatform.Models.DTOs;
 using System.Diagnostics;
 using System.Net.Http;
+using System.Text.Json;
 
 namespace StudyPlatform.Services.Flashcards
 {
@@ -133,18 +134,30 @@ namespace StudyPlatform.Services.Flashcards
         }
 
         /// <inheritdoc />
-        public async Task<string> GenerateAsync(Guid userId, GenerateFlashcardsViewModel model)
+        public async Task<List<GeneratedFlashcardDTO>> GenerateAsync(Guid userId, GenerateFlashcardsViewModel model)
         {
             using var content = new MultipartFormDataContent();
             
             var response = await _client.PostAsJsonAsync($"{AppConstants.FLASHCARDS_MICROSERVICE_BASE_URL}/generate", model);
             response.EnsureSuccessStatusCode();
 
-            string text = await response.Content.ReadAsStringAsync();
+            var jsonString = await response.Content.ReadAsStringAsync();
+            if(jsonString == null) 
+            {
+                _logger.LogError("Failed to get a valid response from the flashcards microservice for user {UserId}", userId);
+                throw new Exception("Failed to get a valid response from the flashcards microservice.");
+            }
 
-            Debug.WriteLine(text);
+            var options = new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true
+            };
 
-            return text;
+            // Convert to list of FlashcardModel
+            var flashcards = JsonSerializer.Deserialize<List<GeneratedFlashcardDTO>>(jsonString, options)
+                 ?? new List<GeneratedFlashcardDTO>();
+
+            return flashcards;
         }
     }
 }

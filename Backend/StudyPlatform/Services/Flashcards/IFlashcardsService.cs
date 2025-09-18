@@ -64,6 +64,6 @@ namespace StudyPlatform.Services.Flashcards
         /// <param name="userId">The user's ID</param>
         /// <param name="model">The model containing the download url and other prompt data.</param>
         /// <returns></returns>
-        Task<string> GenerateAsync(Guid userId, GenerateFlashcardsViewModel model);
+        Task<List<GeneratedFlashcardDTO>> GenerateAsync(Guid userId, GenerateFlashcardsViewModel model);
     }
 }

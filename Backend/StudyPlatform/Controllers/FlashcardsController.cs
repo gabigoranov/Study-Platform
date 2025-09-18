@@ -135,7 +135,7 @@ namespace StudyPlatform.Controllers
 
             if (!ModelState.IsValid) return BadRequest(ModelState);
 
-            string res = await _flashcardsService.GenerateAsync(userId, model);
+            List<GeneratedFlashcardDTO> res = await _flashcardsService.GenerateAsync(userId, model);
 
             return Ok(res);
         }
