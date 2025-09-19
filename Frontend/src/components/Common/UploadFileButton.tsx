@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Button } from "../ui/button";
 import { Upload } from "lucide-react";
 import PdfViewer from "./PdfViewer";
-import UploadFileForm from "./UploadFileForm";
+import UploadFileMenu from "./UploadFileMenu";
 
 export default function UploadFileButton() {
   const [isVisible, setIsVisible] = useState(false);
@@ -25,7 +25,7 @@ export default function UploadFileButton() {
       </Button>
 
       {isVisible && (
-        <UploadFileForm closeForm={closeForm} isFormOpen={isFormOpen} actions={[
+        <UploadFileMenu closeForm={closeForm} isFormOpen={isFormOpen} actions={[
           {
             id: "generateFlashcards",
             title: "Generate Flashcards"

@@ -10,6 +10,7 @@ import FlashcardsDashboardHeader from "@/components/Flashcards/FlashcardsDashboa
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useVariableContext } from "@/context/VariableContext";
 import { apiService } from "@/services/apiService";
+import ViewFlashcardComponent from "@/components/Flashcards/ViewFlashcardComponent";
 
 type View = "list" | "create" | "edit" | "view";
 export const flashcardService = apiService<Flashcard, FlashcardDTO, FlashcardDTO>("flashcards");
@@ -20,7 +21,6 @@ export default function FlashcardsDashboard() {
   const [editingId, setEditingId] = useState<string | null>(null);
   const { token } = useAuth();
   const queryClient = useQueryClient();
-  const [isFlipped, setIsFlipped] = useState(false);
   const {selectedFlashcardId, setSelectedFlashcardId, selectedGroupId } = useVariableContext();
 
   // --- Query: load all flashcards ---
@@ -144,35 +144,9 @@ export default function FlashcardsDashboard() {
             <p className="text-center p-4">{t(keys.flashcardNotFound)}</p>
           );
 
-
-        const handleClick = () => {
-          setIsFlipped((prev) => !prev);
-        };
-
         return (
           <div className="flex justify-center items-center w-full max-w-[1000px] h-full overflow-clip">
-            <div
-              className="relative w-full h-full cursor-pointer [perspective:1000px]"
-              onClick={handleClick}
-            >
-              <div
-                className={`relative w-full h-full transition-transform duration-500 [transform-style:preserve-3d] ${
-                  isFlipped ? "[transform:rotateX(180deg)]" : ""
-                }`}
-              >
-                {/* Front */}
-                <div className="absolute w-full h-full rounded-3xl bg-neutral-100 p-4 border border-neutral-300 dark:bg-background-dark dark:border-neutral-800 [backface-visibility:hidden]">
-                  <h2 className="text-xl font-bold mb-4">The front side:</h2>
-                  <p className="text-lg">{flashcardToView.front}</p>
-                </div>
-
-                {/* Back */}
-                <div className="absolute w-full h-full rounded-3xl bg-neutral-100 p-4 border border-neutral-300 dark:bg-background-dark dark:border-neutral-800 [backface-visibility:hidden] [transform:rotateX(180deg)]">
-                  <h2 className="text-xl font-bold mb-4">The back side:</h2>
-                  <p className="text-lg">{flashcardToView.back}</p>
-                </div>
-              </div>
-            </div>
+            <ViewFlashcardComponent flashcard={flashcardToView} />
           </div>
         );
 

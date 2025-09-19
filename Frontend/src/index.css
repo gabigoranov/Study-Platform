@@ -47,7 +47,7 @@
 }
 
 .scrollbar-thin {
-  scrollbar-width: thin;
+  scrollbar-width: thin !important;
   scrollbar-color: white transparent;
 }
 
