@@ -1,35 +1,24 @@
 import { FlashcardDTO } from "@/data/DTOs/FlashcardDTO";
 import ViewFlashcardComponent from "./ViewFlashcardComponent";
 import { Button } from "../ui/button";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import FlashcardsForm from "./FlashcardsForm";
-import { zodResolver } from "@hookform/resolvers/zod"
-import { z } from "zod";
-import { useForm } from "react-hook-form";
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "../ui/form";
-import { Input } from "../ui/input";
-import { Textarea } from "../ui/textarea";
+import Loading from "../Common/Loading";
 
 type ReviewGeneratedFlashcardsProps = {
-    flashcards: FlashcardDTO[];
-    onClose: () => void;
-    onApprove: (flashcards: FlashcardDTO[]) => void;
-    onCancel: () => void;
-}
-
-const editFlashcardFormSchema = z.object({
-    title: z.string().min(6).max(30),
-    front: z.string().min(6).max(1000),
-    back: z.string().min(6).max(1000),
-});
+  flashcards: FlashcardDTO[];
+  onApprove: (flashcards: FlashcardDTO[]) => void;
+  loading?: boolean | false;
+  onCancel: () => void;
+};
 
 export default function ReviewGeneratedFlashcards({
   flashcards,
-  onClose,
   onApprove,
+  loading = false,
   onCancel,
 }: ReviewGeneratedFlashcardsProps) {
-  const [data, setData] = useState<FlashcardDTO[]>([
+  const [data, setData] = useState<FlashcardDTO[]>(flashcards ?? [
     {
       title: "Какво е TypeScript?",
       front: "Отговори на въпроса какво е TypeScript?",
@@ -41,39 +30,76 @@ export default function ReviewGeneratedFlashcards({
       front: "Отговори на въпроса какво е TypeScript?",
       back: "То е ташачно неяо",
       materialSubGroupId: 1,
-    }
+    },
+    {
+      title: "Какво е TypeScript?",
+      front: "Отговори на въпроса какво е TypeScript?",
+      back: "То е ташачно неяо",
+      materialSubGroupId: 1,
+    },
+    {
+      title: "Какво е TypeScript?",
+      front: "Отговори на въпроса какво е TypeScript?",
+      back: "То е ташачно неяо",
+      materialSubGroupId: 1,
+    },
+    {
+      title: "Какво е TypeScript?",
+      front: "Отговори на въпроса какво е TypeScript?",
+      back: "То е ташачно неяо",
+      materialSubGroupId: 1,
+    },
+    {
+      title: "Какво е TypeScript?",
+      front: "Отговори на въпроса какво е TypeScript?",
+      back: "То е ташачно неяо",
+      materialSubGroupId: 1,
+    },
+    {
+      title: "Какво е TypeScript?",
+      front: "Отговори на въпроса какво е TypeScript?",
+      back: "То е ташачно неяо",
+      materialSubGroupId: 1,
+    },
+    {
+      title: "Какво е TypeScript?",
+      front: "Отговори на въпроса какво е TypeScript?",
+      back: "То е ташачно неяо",
+      materialSubGroupId: 1,
+    },
+    {
+      title: "Какво е TypeScript?",
+      front: "Отговори на въпроса какво е TypeScript?",
+      back: "То е ташачно неяо",
+      materialSubGroupId: 1,
+    },
+    {
+      title: "Какво е TypeScript?",
+      front: "Отговори на въпроса какво е TypeScript?",
+      back: "То е ташачно неяо",
+      materialSubGroupId: 1,
+    },
+    {
+      title: "Какво е TypeScript?",
+      front: "Отговори на въпроса какво е TypeScript?",
+      back: "То е ташачно неяо",
+      materialSubGroupId: 1,
+    },
+    {
+      title: "Какво е TypeScript?",
+      front: "Отговори на въпроса какво е TypeScript?",
+      back: "То е ташачно неяо",
+      materialSubGroupId: 1,
+    },
   ]);
 
   const [isEditing, setIsEditing] = useState(false);
   const [editingIndex, setEditingIndex] = useState<number | null>(null);
 
-  const form = useForm<z.infer<typeof editFlashcardFormSchema>>({
-    resolver: zodResolver(editFlashcardFormSchema),
-    defaultValues: {
-      title: "",
-      front: "",
-      back: "",
-    },
-  });
-
-  useEffect(() => {
-    if (editingIndex !== null) {
-      const card = data[editingIndex];
-      form.reset({
-        title: card.title,
-        front: card.front,
-        back: card.back,
-      });
-    }
-  }, [editingIndex, form, data]);
-
-  function onSubmit(values: z.infer<typeof editFlashcardFormSchema>) {
+  function handleEditSubmit(updatedCard: FlashcardDTO) {
     if (editingIndex !== null) {
       const updated = [...data];
-      updated[editingIndex] = {
-        ...updated[editingIndex],
-        ...values,
-      };
+      updated[editingIndex] = updatedCard;
       setData(updated);
       setIsEditing(false);
       setEditingIndex(null);
@@ -98,78 +124,35 @@ export default function ReviewGeneratedFlashcards({
         />
       ))}
       {onApprove && (
-        <div className="fixed bottom-[2rem] right-[3rem] sm:bottom-[4rem] sm:right-[4rem] h-fit flex gap-4">
-          <Button variant="outline" onClick={onCancel} className="px-6 py-3 rounded-xl shadow-lg hover:bg-primary-dark">
+        <div className="fixed bottom-[2rem] right-[3rem] sm:bottom-[4rem] sm:right-[4rem] flex gap-4">
+          <Button
+            variant="outline"
+            onClick={onCancel}
+            className="px-6 py-3 rounded-xl shadow-lg"
+          >
             Cancel
           </Button>
-          <Button variant="outline" onClick={() => onApprove(data)} className="px-6 py-3 rounded-xl shadow-lg hover:bg-primary-dark">
+          <Button
+            variant="outline"
+            onClick={() => onApprove(data)}
+            className="px-6 py-3 rounded-xl shadow-lg"
+          >
             Approve All
           </Button>
         </div>
       )}
     </div>
+  ) : loading ? (
+    <Loading isLoading={loading} label={"Submitting Flashcards..."}/>
   ) : (
-    <Form {...form}>
-      <form
-        onSubmit={form.handleSubmit(onSubmit)}
-        className="space-y-2 min-w-[50%] h-fit relative top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
-      >
-        <FormField
-          control={form.control}
-          name="title"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Title</FormLabel>
-              <FormControl>
-                <Input placeholder="Enter title here..." {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="front"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Front</FormLabel>
-              <FormControl>
-                <Textarea placeholder="Enter question here..." {...field} className="h-[100px]" />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="back"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Back</FormLabel>
-              <FormControl>
-                <Textarea placeholder="Enter answer here..." {...field} className="min-h-[100px]" />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <div className="flex gap-2 justify-end">
-          <Button
-            onClick={() => {
-              setIsEditing(false);
-              setEditingIndex(null);
-            }}
-            type="button"
-            variant="secondary"
-            className="rounded-xl !mt-6"
-          >
-            Return
-          </Button>
-          <Button type="submit" variant="outline" className="rounded-xl !mt-6">
-            Submit
-          </Button>
-        </div>
-      </form>
-    </Form>
+    <FlashcardsForm
+      model={editingIndex !== null ? data[editingIndex] : undefined}
+      onSubmit={handleEditSubmit}
+      submitLabel="Update"
+      onCancel={() => {
+        setIsEditing(false);
+        setEditingIndex(null);
+      }}
+    />
   );
 }

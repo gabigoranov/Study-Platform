@@ -1,0 +1,96 @@
+import { useAuth } from "@/hooks/useAuth";
+import { useVariableContext } from "@/context/VariableContext";
+import { storageService } from "@/services/storageService";
+import { flashcardService } from "@/services/flashcardService";
+import { GeneratedFlashcardDTO } from "@/data/DTOs/GeneratedFlashcardDTO";
+import { FlashcardDTO } from "@/data/DTOs/FlashcardDTO";
+import { Flashcard } from "@/data/Flashcard";
+import { BASE_URL } from "@/types/urls";
+import { useQueryClient } from "@tanstack/react-query";
+import { useState } from "react";
+
+export function useHandleMaterialGeneration(closeForm: () => void) {
+  const { user, token } = useAuth();
+  const { selectedGroupId } = useVariableContext();
+  const queryClient = useQueryClient();
+
+  const [loading, setLoading] = useState(false);
+  const [reviewing, setReviewing] = useState(false);
+  const [file, setFile] = useState<File>();
+  const [generatedFlashcards, setGeneratedFlashcards] = useState<
+    GeneratedFlashcardDTO[]
+  >([]);
+
+  const [selectedActionId, setSelectedActionId] = useState<string>();
+  const [customPrompt, setCustomPrompt] = useState<string>();
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!e.target.files?.length) return;
+    setFile(e.target.files[0]);
+  };
+
+  const handleSubmit = async (actionId: string, customPrompt: string) => {
+    if (!file) return;
+
+    setLoading(true);
+    try {
+      const downloadUrl = await storageService.uploadFile(
+        user?.id as string,
+        file,
+        "user-files"
+      );
+
+      const response = await fetch(`${BASE_URL}/flashcards/generate`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ fileDownloadUrl: downloadUrl }),
+      });
+
+      let json: GeneratedFlashcardDTO[] = await response.json();
+      json.forEach((element) => {
+        element.materialSubGroupId = selectedGroupId;
+      });
+
+      setGeneratedFlashcards(json);
+      setReviewing(true);
+    } catch (err) {
+      console.error("Upload error:", err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleApprove = async (flashcards: FlashcardDTO[]) => {
+    if (!token) return alert("You must be logged in to approve flashcards");
+
+    setLoading(true);
+    setReviewing(false);
+
+    const result = await flashcardService.createBulk(flashcards, token);
+
+    queryClient.setQueryData<Flashcard[]>(
+      ["flashcards", selectedGroupId],
+      (old) => (old ? [...old, ...result] : [...result])
+    );
+
+    setLoading(false);
+    closeForm();
+  };
+
+  return {
+    file,
+    loading,
+    reviewing,
+    generatedFlashcards,
+    selectedActionId,
+    setSelectedActionId,
+    customPrompt,
+    setCustomPrompt,
+    handleFileChange,
+    handleSubmit,
+    handleApprove,
+  };
+}

@@ -3,6 +3,7 @@ import PdfViewer from "./PdfViewer";
 import { Button } from "../ui/button";
 import { Action } from "./UploadFileMenu";
 import { Textarea } from "../ui/textarea";
+import Loading from "./Loading";
 
 type UploadFileFormProps = {
   loading: boolean;
@@ -38,10 +39,7 @@ export default function UploadFileForm({
       </div>
 
       {loading ? (
-        <div className="flex flex-col items-center justify-center py-12 w-full">
-          <div className="w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin mb-4"></div>
-          <span>Uploading file...</span>
-        </div>
+        <Loading isLoading={loading} label={"Uploading file..."} />
       ) : (
         <div className="h-full w-full flex flex-col gap-4">
           {/* Upload area */}

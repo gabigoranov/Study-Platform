@@ -177,7 +177,7 @@ namespace StudyPlatform.Services.Flashcards
 
             await _context.SaveChangesAsync();
 
-            // foreach(var card in model)
+            // foreach(var card in model)   
             // {
             //     await CreateAsync(card, userId);
             // }

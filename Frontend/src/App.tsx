@@ -11,7 +11,7 @@ import GeneralSettings from "./pages/Settings/GeneralSettings";
 import AccountSettings from "./pages/Settings/AccountSettings";
 import ThemeSettings from "./pages/Settings/ThemeSettings";
 import ErrorPage from "./pages/ErrorPage";
-import { ThemeProvider } from "./hooks/theme-provider";
+import { ThemeProvider } from "./hooks/useThemeProvider";
 import FlashcardsDashboard from "./pages/Flashcards/FlashcardsDashboard";
 import { VariableProvider } from "./context/VariableContext";
 

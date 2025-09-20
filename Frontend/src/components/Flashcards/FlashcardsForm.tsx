@@ -1,81 +1,130 @@
-import React, { useState } from "react";
 import { FlashcardDTO } from "@/data/DTOs/FlashcardDTO";
-import { Label } from "@/components/ui/label";
+import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Button } from "@/components/ui/button";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
 import { useVariableContext } from "@/context/VariableContext";
+import { useEffect } from "react";
 
 interface FlashcardsFormProps {
   model?: FlashcardDTO;
   onSubmit: (data: FlashcardDTO) => void;
-  submitLabel: string;
+  submitLabel?: string;
+  onCancel?: () => void; // optional for edit mode
 }
 
-export default function FlashcardsForm({ model, onSubmit, submitLabel }: FlashcardsFormProps) {
+const flashcardSchema = z.object({
+  title: z.string().min(1, "A title is required"),
+  front: z.string().min(1, "Front side is required"),
+  back: z.string().min(1, "Back side is required"),
+});
+
+export default function FlashcardsForm({
+  model,
+  onSubmit,
+  submitLabel = "Save",
+  onCancel,
+}: FlashcardsFormProps) {
   const { selectedGroupId } = useVariableContext();
-  const [data, setData] = useState<FlashcardDTO>(model || { front: "", back: "", title: "", materialSubGroupId: selectedGroupId!});
-  const [errors, setErrors] = useState<Partial<Record<keyof FlashcardDTO, string>>>({});
 
-  const handleChange = (field: keyof FlashcardDTO, value: string) => {
-    setData(prev => ({ ...prev, [field]: value }));
-  };
+  const form = useForm<z.infer<typeof flashcardSchema>>({
+    resolver: zodResolver(flashcardSchema),
+    defaultValues: {
+      title: model?.title ?? "",
+      front: model?.front ?? "",
+      back: model?.back ?? "",
+    },
+  });
 
-  const validate = (): boolean => {
-    const newErrors: typeof errors = {};
-    if (!data.front.trim()) newErrors.front = "Front side is required";
-    if (!data.back.trim()) newErrors.back = "Back side is required";
-    if (!data.title.trim()) newErrors.title = "A title is required";
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
+  useEffect(() => {
+    if (model) {
+      form.reset({
+        title: model.title,
+        front: model.front,
+        back: model.back,
+      });
+    }
+  }, [model, form]);
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!validate()) return;
-    onSubmit(data);
-  };
+  function handleSubmit(values: z.infer<typeof flashcardSchema>) {
+    onSubmit({
+      ...model,
+      ...values,
+      materialSubGroupId: model?.materialSubGroupId ?? selectedGroupId!,
+    });
+  }
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="flex flex-col gap-4 w-full h-full md:max-w-[50%] md:max-h-[75%] mx-auto py-8 px-6 bg-white rounded shadow dark:bg-surface"
-    >
-      <div>
-        <Label htmlFor="front">Title</Label>
-        <Input
-          id="title"
-          value={data.title}
-          onChange={e => handleChange("title", e.target.value)}
-          required
+    <Form {...form}>
+      <form
+        onSubmit={form.handleSubmit(handleSubmit)}
+        className="flex flex-col gap-4 w-full md:max-w-[50%] mx-auto py-8 px-6 bg-white rounded shadow dark:bg-surface"
+      >
+        <FormField
+          control={form.control}
+          name="title"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Title</FormLabel>
+              <FormControl>
+                <Input placeholder="Enter title" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
         />
-        {errors.front && <p className="text-red-500 text-sm mt-1">{errors.title}</p>}
-      </div>
-
-      <div>
-        <Label htmlFor="front">Front of the card</Label>
-        <Input
-          id="front"
-          value={data.front}
-          onChange={e => handleChange("front", e.target.value)}
-          required
+        <FormField
+          control={form.control}
+          name="front"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Front</FormLabel>
+              <FormControl>
+                <Input placeholder="Enter question here..." {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
         />
-        {errors.front && <p className="text-red-500 text-sm mt-1">{errors.front}</p>}
-      </div>
-
-      <div>
-        <Label htmlFor="back">Back of the card</Label>
-        <Textarea
-          id="back"
-          value={data.back}
-          onChange={e => handleChange("back", e.target.value)}
-          rows={4}
-          required
+        <FormField
+          control={form.control}
+          name="back"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Back</FormLabel>
+              <FormControl>
+                <Textarea placeholder="Enter answer here..." {...field} rows={4} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
         />
-        {errors.back && <p className="text-red-500 text-sm mt-1">{errors.back}</p>}
-      </div>
-
-      <Button type="submit" className="w-full">{submitLabel}</Button>
-    </form>
+        <div className="flex gap-2 justify-end">
+          {onCancel && (
+            <Button
+              type="button"
+              variant="secondary"
+              onClick={onCancel}
+              className="rounded-xl"
+            >
+              Cancel
+            </Button>
+          )}
+          <Button type="submit" className="rounded-xl">
+            {submitLabel}
+          </Button>
+        </div>
+      </form>
+    </Form>
   );
 }

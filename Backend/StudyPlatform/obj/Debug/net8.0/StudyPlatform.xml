@@ -272,6 +272,18 @@
         <member name="M:StudyPlatform.Migrations.AddDateCreatedToMaterial.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
         </member>
+        <member name="T:StudyPlatform.Migrations.UnrestrictMaterialTitleLength">
+            <inheritdoc />
+        </member>
+        <member name="M:StudyPlatform.Migrations.UnrestrictMaterialTitleLength.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:StudyPlatform.Migrations.UnrestrictMaterialTitleLength.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:StudyPlatform.Migrations.UnrestrictMaterialTitleLength.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
         <member name="T:StudyPlatform.Models.Common.AutoMapper">
             <summary>
             Defines the AutoMapper initialization and maps.

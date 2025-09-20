@@ -63,6 +63,8 @@ export default function FlashcardsDashboard() {
       queryClient.setQueryData<Flashcard[]>(["flashcards", selectedGroupId], (old) =>
         old ? old.filter((fc) => fc.id !== id) : []
       );
+
+      setSelectedFlashcardId(null); // reset selected flashcard after deletion
     },
   });
 
@@ -160,7 +162,6 @@ export default function FlashcardsDashboard() {
       <FlashcardsDashboardHeader
         setView={(view: "list" | "create" | "edit" | "view") => setView(view)}
         handleDelete={handleDelete}
-        selectedId={selectedFlashcardId}
         handleFileUpload={handleFileUpload}
       />
       <div className="flex items-center justify-center w-full h-full flex-1 relative">

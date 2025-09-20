@@ -17,14 +17,12 @@ type FlashcardsDashboardHeaderProps = {
     setView: (view: "list" | "create" | "edit" | "view") => void;
     handleDelete: (id: number) => void;
     handleFileUpload: (files: FileList) => void;
-    selectedId: number | null;
 }
 
-export default function FlashcardsDashboardHeader({ setView, handleFileUpload, handleDelete, selectedId } : FlashcardsDashboardHeaderProps) {
+export default function FlashcardsDashboardHeader({ setView, handleFileUpload, handleDelete } : FlashcardsDashboardHeaderProps) {
     const { t } = useTranslation();
     const { token } = useAuth();
-    const fileInputRef = useRef<HTMLInputElement | null>(null);
-    const { selectedSubjectId } = useVariableContext();
+    const { selectedSubjectId, selectedFlashcardId } = useVariableContext();
     const { selectedGroupId, setSelectedGroupId } = useVariableContext();
 
     // --- Query: load all groups with their flashcards ---
@@ -86,8 +84,6 @@ export default function FlashcardsDashboardHeader({ setView, handleFileUpload, h
                 </button>
               </form>
             </div>
-
-            
         </div>
         <div className="flex flex-col gap-2 sm:flex-row">
             <div className="flex gap-1 flex-wrap">
@@ -99,15 +95,15 @@ export default function FlashcardsDashboardHeader({ setView, handleFileUpload, h
                 <Plus className="inline" /> {t(keys.createNewButton)}
             </Button>
 
-            <Button className="rounded-3xl" variant="ghost" onClick={() => setView("edit")} disabled={selectedId === null}>
+            <Button className="rounded-3xl" variant="ghost" onClick={() => setView("edit")} disabled={selectedFlashcardId === null}>
                 <Edit className="inline" /> {t(keys.edit)}
             </Button>
 
-            <Button className="rounded-3xl" variant="ghost" onClick={() => setView("view")} disabled={selectedId === null}>
+            <Button className="rounded-3xl" variant="ghost" onClick={() => setView("view")} disabled={selectedFlashcardId === null}>
                 <Eye className="inline" /> {t(keys.viewButton)}
             </Button>
 
-            <Button className="rounded-3xl" variant="ghost" onClick={() => handleDelete(selectedId!)} disabled={selectedId === null}>
+            <Button className="rounded-3xl" variant="ghost" onClick={() => handleDelete(selectedFlashcardId!)} disabled={selectedFlashcardId === null}>
                 <Trash2 className="inline" />
             </Button>
 

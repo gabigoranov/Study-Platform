@@ -46,8 +46,9 @@ export default function PdfViewer({ file }: PdfViewerProps) {
         <Document
           file={file}
           onLoadSuccess={({ numPages }) => setNumPages(numPages)}
-          loading={<p className="relative top-1/2 transform -translate-y-1/2">Loading PDF...</p>}
-          error={<p className="relative top-1/2 transform -translate-y-1/2">Failed to load PDF</p>}
+          className={"w-full h-full text-center"}
+          loading={<p className="mt-auto">Loading PDF...</p>}
+          error={<p className="mt-auto">Failed to load PDF</p>}
         >
           {Array.from(new Array(numPages), (_, index) => (
             <Page
