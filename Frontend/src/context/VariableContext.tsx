@@ -1,14 +1,14 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from "react";
 
 type VariableState = {
-  selectedSubjectId: string | null;
-  setSelectedSubjectId: (id: string | null) => void;
+  selectedSubjectId: number | null;
+  setSelectedSubjectId: (id: number | null) => void;
 
-  selectedGroupId: string | null;
-  setSelectedGroupId: (id: string | null) => void;
+  selectedGroupId: number | null;
+  setSelectedGroupId: (id: number | null) => void;
 
-  selectedFlashcardId: string | null;
-  setSelectedFlashcardId: (id: string | null) => void;
+  selectedFlashcardId: number | null;
+  setSelectedFlashcardId: (id: number | null) => void;
 };
 
 const VariableContext = createContext<VariableState | undefined>(undefined);
@@ -28,15 +28,15 @@ function usePersistedState<T>(key: string, defaultValue: T) {
 }
 
 export const VariableProvider = ({ children }: { children: ReactNode }) => {
-  const [selectedSubjectId, setSelectedSubjectId] = usePersistedState<string | null>(
+  const [selectedSubjectId, setSelectedSubjectId] = usePersistedState<number | null>(
     "selectedSubjectId",
     null
   );
-  const [selectedGroupId, setSelectedGroupId] = usePersistedState<string | null>(
+  const [selectedGroupId, setSelectedGroupId] = usePersistedState<number | null>(
     "selectedGroupId",
     null
   );
-  const [selectedFlashcardId, setSelectedFlashcardId] = usePersistedState<string | null>(
+  const [selectedFlashcardId, setSelectedFlashcardId] = usePersistedState<number | null>(
     "selectedFlashcardId",
     null
   );

@@ -6,8 +6,8 @@ import { keys } from "../../types/keys";
 
 interface FlashcardsDashboardListProps {
   flashcards: Flashcard[];
-  onSelect: (id: string) => void;
-  selectedId: string | null;
+  onSelect: (id: number) => void;
+  selectedId: number | null;
 }
 
 export default function FlashcardsDashboardList({ flashcards, onSelect, selectedId } : FlashcardsDashboardListProps) {

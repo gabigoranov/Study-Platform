@@ -21,6 +21,17 @@ namespace StudyPlatform.Services.Flashcards
         Task<FlashcardDTO> CreateAsync(CreateFlashcardViewModel model, Guid userId);
 
         /// <summary>
+        /// Creates new flashcards for the specified user.
+        /// </summary>
+        /// <param name="model">The flashcards data to create.</param>
+        /// <param name="userId">The ID of the user who owns the flashcard.</param>
+        /// <returns>
+        /// A <see cref="Task{IEnumerable}"/> representing the asynchronous operation.
+        /// The task result contains the created <see cref="FlashcardDTO"/>.
+        /// </returns>
+        Task<IEnumerable<FlashcardDTO>> CreateBulkAsync(IEnumerable<CreateFlashcardViewModel> model, Guid userId);
+
+        /// <summary>
         /// Edits an existing flashcard for the specified user.
         /// </summary>
         /// <param name="model">The updated flashcard data.</param>

@@ -47,6 +47,23 @@ namespace StudyPlatform.Controllers
         }
 
         /// <summary>
+        /// Endpoint for creating a new flashcards from a list of models.
+        /// </summary>
+        /// <param name="model">The model for the flashcard created by the user.</param>
+        /// <returns>A new flashcard if successful.</returns>
+        [HttpPost("bulk")]
+        public async Task<IActionResult> CreateBulk([FromBody] IEnumerable<CreateFlashcardViewModel> model)
+        {
+            // Load userId from JWT token
+            Guid userId = User.GetUserId();
+
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+
+            IEnumerable<FlashcardDTO> res = await _flashcardsService.CreateBulkAsync(model, userId);
+            return Ok(res);
+        }
+
+        /// <summary>
         /// Endpoint for getting a flashcard by it's ID.
         /// </summary>
         /// <param name="id">The card id..</param>

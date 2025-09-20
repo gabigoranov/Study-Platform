@@ -18,7 +18,7 @@ export const flashcardService = apiService<Flashcard, FlashcardDTO, FlashcardDTO
 export default function FlashcardsDashboard() {
   const { t } = useTranslation();
   const [view, setView] = useState<View>("list");
-  const [editingId, setEditingId] = useState<string | null>(null);
+  const [editingId, setEditingId] = useState<number | null>(null);
   const { token } = useAuth();
   const queryClient = useQueryClient();
   const {selectedFlashcardId, setSelectedFlashcardId, selectedGroupId } = useVariableContext();
@@ -43,8 +43,8 @@ export default function FlashcardsDashboard() {
 
   // --- Mutation: update ---
   const updateMutation = useMutation({
-    mutationFn: ({ id, dto }: { id: string; dto: FlashcardDTO }) =>
-      flashcardService.update(id, dto, token!),
+    mutationFn: ({ id, dto }: { id: number; dto: FlashcardDTO }) =>
+      flashcardService.update(id.toString(), dto, token!),
     onSuccess: (updated) => {
       queryClient.setQueryData<Flashcard[]>(["flashcards", selectedGroupId], (old) =>
         old ? old.map((fc) => (fc.id === updated.id ? updated : fc)) : []
@@ -56,7 +56,7 @@ export default function FlashcardsDashboard() {
 
   // --- Mutation: delete ---
   const deleteMutation = useMutation({
-    mutationFn: (id: string) => flashcardService.delete(token!, {
+    mutationFn: (id: number) => flashcardService.delete(token!, {
       ids: id
     }),
     onSuccess: (_, id) => {
@@ -76,18 +76,18 @@ export default function FlashcardsDashboard() {
     updateMutation.mutate({ id: selectedFlashcardId, dto: data });
   };
 
-  const handleDelete = (id: string) => {
+  const handleDelete = (id: number) => {
     if (window.confirm(t(keys.confirmDeleteMessage))) {
       deleteMutation.mutate(id);
     }
   };
 
-  const selectCard = (id: string) => {
+  const selectCard = (id: number) => {
     setSelectedFlashcardId(id);
     console.log("Selected card:", id);
   }
 
-  const startEdit = (id: string) => {
+  const startEdit = (id: number) => {
     setEditingId(id);
     setView("edit");
   };
@@ -168,8 +168,4 @@ export default function FlashcardsDashboard() {
       </div>
     </div>
   );
-}
-
-function createApiService<T, U, V>(arg0: string) {
-  throw new Error("Function not implemented.");
 }

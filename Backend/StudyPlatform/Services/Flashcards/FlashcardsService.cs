@@ -159,5 +159,32 @@ namespace StudyPlatform.Services.Flashcards
 
             return flashcards;
         }
+
+        /// <inheritdoc />
+        public async Task<IEnumerable<FlashcardDTO>> CreateBulkAsync(IEnumerable<CreateFlashcardViewModel> model, Guid userId)
+        {
+
+            _logger.LogInformation("Creating {Count} flashcards for user {UserId}", model.Count(), userId);
+
+            List<Flashcard> flashcards = new List<Flashcard>();
+            await _context.Flashcards.AddRangeAsync(model.Select(m =>
+            {
+                var flashcard = _mapper.Map<Flashcard>(m);
+                flashcard.UserId = userId;
+                flashcards.Add(flashcard);
+                return flashcard;
+            }));
+
+            await _context.SaveChangesAsync();
+
+            // foreach(var card in model)
+            // {
+            //     await CreateAsync(card, userId);
+            // }
+
+            _logger.LogInformation("{Count} flashcards created successfully for user {UserId}", model.Count(), userId);
+
+            return _mapper.Map<IEnumerable<FlashcardDTO>>(flashcards);
+        }
     }
 }

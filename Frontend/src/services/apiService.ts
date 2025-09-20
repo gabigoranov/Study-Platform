@@ -61,6 +61,23 @@ export const apiService = <T, TCreate = Partial<T>, TUpdate = Partial<T>>(resour
         return response.json();
     },
 
+    createBulk: async (model: TCreate[], token: string, params?: Record<string, string | number | boolean>): Promise<T[]> => {
+        let url = `${BASE_URL}/${resource}/bulk`;
+
+        if (params) url += "?" + new URLSearchParams(params as any).toString();
+        
+        const response = await fetch(url, {
+          method: "POST",
+          headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify(model),
+        });
+        
+        return response.json();
+    },
+
     update: async (id: string, model: TUpdate, token: string, params?: Record<string, string | number | boolean>): Promise<T> => {
         let url = `${BASE_URL}/${resource}/${id}`;
 

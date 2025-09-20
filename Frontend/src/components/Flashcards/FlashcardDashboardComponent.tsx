@@ -2,7 +2,7 @@ import { Flashcard } from "../../data/Flashcard"
 
 type FlashcardDashboardProps = {
     flashcard: Flashcard
-    onSelect: (id: string) => void
+    onSelect: (id: number) => void
     isSelected: boolean
 }
 

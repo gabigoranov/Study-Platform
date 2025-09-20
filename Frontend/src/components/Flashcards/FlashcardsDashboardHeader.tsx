@@ -15,9 +15,9 @@ import UploadFileButton from "../Common/UploadFileButton";
 
 type FlashcardsDashboardHeaderProps = {
     setView: (view: "list" | "create" | "edit" | "view") => void;
-    handleDelete: (id: string) => void;
+    handleDelete: (id: number) => void;
     handleFileUpload: (files: FileList) => void;
-    selectedId: string | null;
+    selectedId: number | null;
 }
 
 export default function FlashcardsDashboardHeader({ setView, handleFileUpload, handleDelete, selectedId } : FlashcardsDashboardHeaderProps) {

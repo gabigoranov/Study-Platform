@@ -22,6 +22,13 @@
             <param name="model">The model for the flashcard created by the user.</param>
             <returns>A new flashcard if successful.</returns>
         </member>
+        <member name="M:StudyPlatform.Controllers.FlashcardsController.CreateBulk(System.Collections.Generic.IEnumerable{StudyPlatform.Models.CreateFlashcardViewModel})">
+            <summary>
+            Endpoint for creating a new flashcards from a list of models.
+            </summary>
+            <param name="model">The model for the flashcard created by the user.</param>
+            <returns>A new flashcard if successful.</returns>
+        </member>
         <member name="M:StudyPlatform.Controllers.FlashcardsController.Get(System.Int32)">
             <summary>
             Endpoint for getting a flashcard by it's ID.
@@ -413,6 +420,9 @@
         <member name="M:StudyPlatform.Services.Flashcards.FlashcardsService.GenerateAsync(System.Guid,StudyPlatform.Models.GenerateFlashcardsViewModel)">
             <inheritdoc />
         </member>
+        <member name="M:StudyPlatform.Services.Flashcards.FlashcardsService.CreateBulkAsync(System.Collections.Generic.IEnumerable{StudyPlatform.Models.CreateFlashcardViewModel},System.Guid)">
+            <inheritdoc />
+        </member>
         <member name="T:StudyPlatform.Services.Flashcards.IFlashcardsService">
             <summary>
             Provides operations for creating, editing, retrieving, and deleting flashcards.
@@ -423,6 +433,17 @@
             Creates a new flashcard for the specified user.
             </summary>
             <param name="model">The flashcard data to create.</param>
+            <param name="userId">The ID of the user who owns the flashcard.</param>
+            <returns>
+            A <see cref="T:System.Threading.Tasks.Task`1"/> representing the asynchronous operation.
+            The task result contains the created <see cref="T:StudyPlatform.Models.DTOs.FlashcardDTO"/>.
+            </returns>
+        </member>
+        <member name="M:StudyPlatform.Services.Flashcards.IFlashcardsService.CreateBulkAsync(System.Collections.Generic.IEnumerable{StudyPlatform.Models.CreateFlashcardViewModel},System.Guid)">
+            <summary>
+            Creates new flashcards for the specified user.
+            </summary>
+            <param name="model">The flashcards data to create.</param>
             <param name="userId">The ID of the user who owns the flashcard.</param>
             <returns>
             A <see cref="T:System.Threading.Tasks.Task`1"/> representing the asynchronous operation.

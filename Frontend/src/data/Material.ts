@@ -1,7 +1,7 @@
 export type Material = {
-    id: string;
+    id: number;
     title: string;
     userId: string;
-    materialSubGroupId: string;
+    materialSubGroupId: number;
     dateCreated: Date
 }

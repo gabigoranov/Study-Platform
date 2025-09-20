@@ -4,5 +4,5 @@ export type FlashcardDTO = {
   front: string;
   back: string;
   title: string;
-  materialSubGroupId: string;
+  materialSubGroupId: number;
 }

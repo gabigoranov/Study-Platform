@@ -24,7 +24,6 @@ namespace StudyPlatform.Data
                 .HasDiscriminator<string>("MaterialType")
                 .HasValue<Flashcard>("Flashcard");
 
-            modelBuilder.Entity<Flashcard>().ToTable("Materials");
         }
     }
 }

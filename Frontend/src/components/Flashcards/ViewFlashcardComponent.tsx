@@ -22,7 +22,7 @@ export default function ViewFlashcardComponent({
 
   return (
     <div
-      className="w-full relative min-w-[400px] max-w-[33.33%] min-h-[400px] cursor-pointer [perspective:1000px] basis-[400px] flex-1"
+      className="relative min-w-[50vw] sm:min-w-[400px] sm:max-w-[33.33%] min-h-[400px] cursor-pointer [perspective:1000px] basis-[400px] flex-1"
       onClick={handleClick}
     >
       <div

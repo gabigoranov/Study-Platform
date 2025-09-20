@@ -11,6 +11,8 @@ import { GeneratedFlashcardDTO } from "@/data/DTOs/GeneratedFlashcardDTO";
 import ReviewGeneratedFlashcards from "../Flashcards/ReviewGeneratedFlashcards";
 import { FlashcardDTO } from "@/data/DTOs/FlashcardDTO";
 import UploadFileForm from "./UploadFileForm";
+import { useQueryClient } from "@tanstack/react-query";
+import { Flashcard } from "@/data/Flashcard";
 
 type UploadFileMenuProps = {
   isFormOpen: boolean;
@@ -41,7 +43,9 @@ export default function UploadFileMenu({
   const [generatedFlashcards, setGeneratedFlashcards] = useState<
     GeneratedFlashcardDTO[]
   >([]);
+  const queryClient = useQueryClient();
 
+  //TODO: Extract logic to a separate hook
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files || e.target.files.length === 0) return;
     const file = e.target.files[0];
@@ -49,6 +53,7 @@ export default function UploadFileMenu({
     setFile(file);
   };
 
+  //TODO: Extract logic to a separate hook
   const handleSubmit = async (actionId: string, customPrompt: string) => {
     if (!file) return;
 
@@ -78,7 +83,7 @@ export default function UploadFileMenu({
       // Add the selected material group ID to the generated flashcards
       let json: GeneratedFlashcardDTO[] = await response.json();
       json.forEach((element) => {
-        element.materialSubGroupId = selectedGroupId as string;
+        element.materialSubGroupId = selectedGroupId;
       });
 
       setGeneratedFlashcards(json);
@@ -92,22 +97,41 @@ export default function UploadFileMenu({
     }
   };
 
+  const handleApprove = async (flashcards: FlashcardDTO[]) => {
+    if(!token) 
+      return alert("You must be logged in to approve flashcards");
+
+    setReviewing(false);
+    setLoading(true);
+
+    //Call api to create approved flashcards
+
+    let result = await flashcardService.createBulk(flashcards, token);
+    
+    queryClient.setQueryData<Flashcard[]>(["flashcards", selectedGroupId], (old) =>
+      old ? [...old, ...result] : [...result]
+    );
+
+    setLoading(false);
+    closeForm();
+  };
+
   return (
     <div
-      className={`fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center z-10 ${
+      className={`fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center z-10 p-4 sm:p-12 ${
         isFormOpen ? "animate-backdropBlurIn" : "animate-backdropBlurOut"
       }`}
       onClick={closeForm}
     >
       <div
-        className="flex flex-col sm:flex-row w-full h-full max-h-[90%] gap-4 max-w-[90%] p-6 bg-surface rounded-xl overflow-y-scroll sm:overflow-y-auto sm:overflow-x-auto scrollbar-none"
+        className="flex flex-col sm:flex-row w-full h-full  gap-4p-6 bg-surface rounded-xl overflow-y-scroll sm:overflow-y-auto sm:overflow-x-auto scrollbar-none"
         onClick={(e) => e.stopPropagation()}
       >
         {reviewing ? (
           <ReviewGeneratedFlashcards
             flashcards={generatedFlashcards as FlashcardDTO[]}
             onClose={closeForm}
-            onApprove={() => {}}
+            onApprove={handleApprove}
             onCancel={() => {}}
           />
         ) : (

@@ -13,7 +13,7 @@ import { Textarea } from "../ui/textarea";
 type ReviewGeneratedFlashcardsProps = {
     flashcards: FlashcardDTO[];
     onClose: () => void;
-    onApprove: () => void;
+    onApprove: (flashcards: FlashcardDTO[]) => void;
     onCancel: () => void;
 }
 
@@ -31,47 +31,17 @@ export default function ReviewGeneratedFlashcards({
 }: ReviewGeneratedFlashcardsProps) {
   const [data, setData] = useState<FlashcardDTO[]>([
     {
-      title: "Полиморфизъм: дефиниция",
-      front: "Какво е полиморфизъм в ООП?",
-      back: "Възможност обект да заема много форми...",
-      materialSubGroupId: "1",
+      title: "Какво е TypeScript?",
+      front: "Отговори на въпроса какво е TypeScript?",
+      back: "То е ташачно неяо",
+      materialSubGroupId: 1,
     },
     {
-      title: "Типове полиморфизъм",
-      front: "Кои са основните типове полиморфизъм?",
-      back: "Статичен (compile-time) ...",
-      materialSubGroupId: "1",
-    },
-    {
-      title: "Типове полиморфизъм",
-      front: "Кои са основните типове полиморфизъм?",
-      back: "Статичен (compile-time) ...",
-      materialSubGroupId: "1",
-    },
-    {
-      title: "Типове полиморфизъм",
-      front: "Кои са основните типове полиморфизъм?",
-      back: "Статичен (compile-time) ...",
-      materialSubGroupId: "1",
-    },
-    {
-      title: "Типове полиморфизъм",
-      front: "Кои са основните типове полиморфизъм?",
-      back: "Статичен (compile-time) ...",
-      materialSubGroupId: "1",
-    },
-    {
-      title: "Типове полиморфизъм",
-      front: "Кои са основните типове полиморфизъм?",
-      back: "Статичен (compile-time) ...",
-      materialSubGroupId: "1",
-    },
-    {
-      title: "Типове полиморфизъм",
-      front: "Кои са основните типове полиморфизъм?",
-      back: "Статичен (compile-time) ...",
-      materialSubGroupId: "1",
-    },
+      title: "Какво е TypeScript?",
+      front: "Отговори на въпроса какво е TypeScript?",
+      back: "То е ташачно неяо",
+      materialSubGroupId: 1,
+    }
   ]);
 
   const [isEditing, setIsEditing] = useState(false);
@@ -115,7 +85,7 @@ export default function ReviewGeneratedFlashcards({
   }
 
   return !isEditing ? (
-    <div className="relative flex flex-wrap gap-4 w-fit h-full p-4 justify-center sm:justify-start">
+    <div className="relative flex flex-wrap gap-4 w-fit h-full p-4 justify-center">
       {data.map((card, idx) => (
         <ViewFlashcardComponent
           key={idx}
@@ -128,11 +98,11 @@ export default function ReviewGeneratedFlashcards({
         />
       ))}
       {onApprove && (
-        <div className="fixed bottom-[80px] right-[100px] h-fit flex gap-4">
+        <div className="fixed bottom-[2rem] right-[3rem] sm:bottom-[4rem] sm:right-[4rem] h-fit flex gap-4">
           <Button variant="outline" onClick={onCancel} className="px-6 py-3 rounded-xl shadow-lg hover:bg-primary-dark">
             Cancel
           </Button>
-          <Button variant="outline" onClick={onApprove} className="px-6 py-3 rounded-xl shadow-lg hover:bg-primary-dark">
+          <Button variant="outline" onClick={() => onApprove(data)} className="px-6 py-3 rounded-xl shadow-lg hover:bg-primary-dark">
             Approve All
           </Button>
         </div>
