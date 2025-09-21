@@ -1,11 +1,12 @@
 {
   "Version": 1,
-  "Hash": "kLTNNa9p5WeAK1hdVhttbh0urKbJ3fo6DBsNGg1NqSQ=",
+  "Hash": "L9G0SZ+XNRB4tvKJLwZx725mLlzb5VTeuC3WHbdKiqk=",
   "Source": "StudyPlatform",
   "BasePath": "_content/StudyPlatform",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
   "DiscoveryPatterns": [],
-  "Assets": []
+  "Assets": [],
+  "Endpoints": []
 }

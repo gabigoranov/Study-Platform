@@ -19,7 +19,7 @@ export default function ViewFlashcardComponent({
   const handleClick = () => {
     setIsFlipped((prev) => !prev);
   };
-
+  
   return (
     <div
       className="relative min-w-[50vw] sm:min-w-[400px] sm:max-w-[33.33%] min-h-[400px] cursor-pointer [perspective:1000px] basis-[400px] flex-1"

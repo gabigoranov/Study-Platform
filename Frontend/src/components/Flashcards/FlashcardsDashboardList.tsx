@@ -3,6 +3,7 @@ import { Flashcard } from "../../data/Flashcard";
 import FlashcardDashboardComponent from "./FlashcardDashboardComponent";
 import { useTranslation } from "react-i18next";
 import { keys } from "../../types/keys";
+import ViewFlashcardComponent from "./ViewFlashcardComponent";
 
 interface FlashcardsDashboardListProps {
   flashcards: Flashcard[];

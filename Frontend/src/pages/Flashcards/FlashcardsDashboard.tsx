@@ -11,6 +11,7 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useVariableContext } from "@/context/VariableContext";
 import { apiService } from "@/services/apiService";
 import ViewFlashcardComponent from "@/components/Flashcards/ViewFlashcardComponent";
+import ScrollToTopButton from "@/components/Common/ScrollToTopButton";
 
 type View = "list" | "create" | "edit" | "view";
 export const flashcardService = apiService<Flashcard, FlashcardDTO, FlashcardDTO>("flashcards");
@@ -166,6 +167,7 @@ export default function FlashcardsDashboard() {
       />
       <div className="flex items-center justify-center w-full h-full flex-1 relative">
         {renderContent()}
+        <ScrollToTopButton />
       </div>
     </div>
   );
