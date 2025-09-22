@@ -148,7 +148,7 @@ export default function FlashcardsDashboard() {
           );
 
         return (
-          <div className="flex justify-center items-center w-full max-w-[1000px] h-full overflow-clip">
+          <div className="w-full flex flex-wrap gap-3 py-4 self-center justify-center">
             <ViewFlashcardComponent flashcard={flashcardToView} />
           </div>
         );

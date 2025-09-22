@@ -8,11 +8,9 @@ import { Label } from '../../components/ui/label';
 import { Avatar, AvatarImage, AvatarFallback } from '../../components/ui/avatar';
 import { Card, CardHeader, CardTitle, CardContent } from '../../components/ui/card';
 import { Alert, AlertDescription } from '../../components/ui/alert';
-import { useCurrentUserImage } from '@/hooks/useCurrentUserImage';
 
 export default function AccountSettings() {
   const { t } = useTranslation();
-  const profileImage  = useCurrentUserImage();
 
   const { 
     user, 
@@ -25,16 +23,10 @@ export default function AccountSettings() {
   
   const [fullName, setFullName] = useState(user?.user_metadata?.full_name || '');
   const [email, setEmail] = useState(user?.email || '');
-  const [avatarPreview, setAvatarPreview] = useState('');
+  const [avatarPreview, setAvatarPreview] = useState(user?.user_metadata?.avatar_url ?? '');
   const [isDeleting, setIsDeleting] = useState(false);
   const [deleteConfirm, setDeleteConfirm] = useState('');
   const fileInputRef = useRef<HTMLInputElement>(null);
-
-  useEffect(() => {
-    if (profileImage) {
-      setAvatarPreview(profileImage);
-    }
-  }, [profileImage]);
 
   const handleAvatarChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];

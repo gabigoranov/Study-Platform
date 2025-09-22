@@ -75,11 +75,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     setError(null);
     try {
       if (updates.avatar) {
-        const fileExt = updates.avatar.name.split('.').pop();
-        const fileName = `avatar`;
-        const filePath = `${user?.id}/${fileName}`;
+        const filePath = `${user?.id}/avatar`;
 
-        const publicUrl = await storageService.uploadFile(user?.id as string, updates.avatar, 'avatars');
+        const publicUrl = await storageService.uploadFile(filePath, updates.avatar, 'avatars');
+
+        console.log('publicUrl', publicUrl);
 
         const { error: updateError } = await supabase.auth.updateUser({
           data: { avatar_url: publicUrl }
