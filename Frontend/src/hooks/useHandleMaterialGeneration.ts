@@ -15,6 +15,7 @@ export function useHandleMaterialGeneration(closeForm: () => void) {
   const queryClient = useQueryClient();
 
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
   const [reviewing, setReviewing] = useState(false);
   const [file, setFile] = useState<File>();
   const [generatedFlashcards, setGeneratedFlashcards] = useState<
@@ -32,6 +33,7 @@ export function useHandleMaterialGeneration(closeForm: () => void) {
   const handleSubmit = async (actionId: string, customPrompt: string) => {
     if (!file) return;
 
+    setError(false);
     setLoading(true);
     try {
       const downloadUrl = await storageService.uploadFile(
@@ -58,6 +60,7 @@ export function useHandleMaterialGeneration(closeForm: () => void) {
       setReviewing(true);
     } catch (err) {
       console.error("Upload error:", err);
+      setError(true);
     } finally {
       setLoading(false);
     }
@@ -66,23 +69,31 @@ export function useHandleMaterialGeneration(closeForm: () => void) {
   const handleApprove = async (flashcards: FlashcardDTO[]) => {
     if (!token) return alert("You must be logged in to approve flashcards");
 
+    setError(false);
     setLoading(true);
     setReviewing(false);
 
-    const result = await flashcardService.createBulk(flashcards, token);
-
-    queryClient.setQueryData<Flashcard[]>(
-      ["flashcards", selectedGroupId],
-      (old) => (old ? [...old, ...result] : [...result])
-    );
-
-    setLoading(false);
-    closeForm();
+    try {
+      const result = await flashcardService.createBulk(flashcards, token);
+      queryClient.setQueryData<Flashcard[]>(
+        ["flashcards", selectedGroupId],
+        (old) => (old ? [...old, ...result] : [...result])
+      );
+    }
+    catch (err) {
+      setError(true);
+      return;
+    }
+    finally {
+      setLoading(false);
+      closeForm();
+    }
   };
 
   return {
     file,
     loading,
+    error,
     reviewing,
     generatedFlashcards,
     selectedActionId,

@@ -15,10 +15,15 @@ export interface Action {
   title: string;
 }
 
-export default function UploadFileMenu({ isFormOpen, closeForm, actions }: UploadFileMenuProps) {
+export default function UploadFileMenu({
+  isFormOpen,
+  closeForm,
+  actions,
+}: UploadFileMenuProps) {
   const {
     file,
     loading,
+    error,
     reviewing,
     generatedFlashcards,
     selectedActionId,
@@ -42,17 +47,21 @@ export default function UploadFileMenu({ isFormOpen, closeForm, actions }: Uploa
         onClick={(e) => e.stopPropagation()}
       >
         {reviewing ? (
-          <ReviewGeneratedFlashcards
-            flashcards={generatedFlashcards as FlashcardDTO[]}
-            onCancel={closeForm}
-            onApprove={handleApprove}
-            loading={loading}
-          />
+          selectedActionId === "generateFlashcards" && (
+            <ReviewGeneratedFlashcards
+              flashcards={generatedFlashcards as FlashcardDTO[]}
+              onCancel={closeForm}
+              onApprove={handleApprove}
+              loading={loading}
+              error={error}
+            />
+          )
         ) : (
           <UploadFileForm
             handleFileChange={handleFileChange}
             handleSubmit={handleSubmit}
             loading={loading}
+            error={error}
             resetForm={closeForm}
             file={file}
             actions={actions}

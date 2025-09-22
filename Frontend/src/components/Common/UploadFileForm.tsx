@@ -4,9 +4,12 @@ import { Button } from "../ui/button";
 import { Action } from "./UploadFileMenu";
 import { Textarea } from "../ui/textarea";
 import Loading from "./Loading";
+import { useEffect } from "react";
+import ErrorScreen from "./ErrorScreen";
 
 type UploadFileFormProps = {
   loading: boolean;
+  error: boolean;
   resetForm: () => void;
   file: File | undefined;
   actions: Action[];
@@ -21,6 +24,7 @@ type UploadFileFormProps = {
 
 export default function UploadFileForm({
   loading,
+  error,
   resetForm,
   file,
   actions,
@@ -32,6 +36,14 @@ export default function UploadFileForm({
   customPrompt,
   setCustomPrompt
 }: UploadFileFormProps) {
+
+  // If an error occurs, show the error screen with buttons to retry or cancel
+  if(error) {
+    return (
+      <ErrorScreen onRetry={() => handleSubmit(selectedActionId!, customPrompt!)} onCancel={closeForm} />
+    )
+  }
+  
   return (
     <>
       <div className="w-full sm:max-w-[50%]">

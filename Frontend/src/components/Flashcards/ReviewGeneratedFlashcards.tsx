@@ -4,94 +4,104 @@ import { Button } from "../ui/button";
 import { useState } from "react";
 import FlashcardsForm from "./FlashcardsForm";
 import Loading from "../Common/Loading";
+import ErrorScreen from "../Common/ErrorScreen";
 
 type ReviewGeneratedFlashcardsProps = {
   flashcards: FlashcardDTO[];
   onApprove: (flashcards: FlashcardDTO[]) => void;
   loading?: boolean | false;
   onCancel: () => void;
+  error: boolean | false;
 };
 
 export default function ReviewGeneratedFlashcards({
   flashcards,
   onApprove,
   loading = false,
+  error = false,
   onCancel,
 }: ReviewGeneratedFlashcardsProps) {
-  const [data, setData] = useState<FlashcardDTO[]>(flashcards ?? [
-    {
-      title: "Какво е TypeScript?",
-      front: "Отговори на въпроса какво е TypeScript?",
-      back: "То е ташачно неяо",
-      materialSubGroupId: 1,
-    },
-    {
-      title: "Какво е TypeScript?",
-      front: "Отговори на въпроса какво е TypeScript?",
-      back: "То е ташачно неяо",
-      materialSubGroupId: 1,
-    },
-    {
-      title: "Какво е TypeScript?",
-      front: "Отговори на въпроса какво е TypeScript?",
-      back: "То е ташачно неяо",
-      materialSubGroupId: 1,
-    },
-    {
-      title: "Какво е TypeScript?",
-      front: "Отговори на въпроса какво е TypeScript?",
-      back: "То е ташачно неяо",
-      materialSubGroupId: 1,
-    },
-    {
-      title: "Какво е TypeScript?",
-      front: "Отговори на въпроса какво е TypeScript?",
-      back: "То е ташачно неяо",
-      materialSubGroupId: 1,
-    },
-    {
-      title: "Какво е TypeScript?",
-      front: "Отговори на въпроса какво е TypeScript?",
-      back: "То е ташачно неяо",
-      materialSubGroupId: 1,
-    },
-    {
-      title: "Какво е TypeScript?",
-      front: "Отговори на въпроса какво е TypeScript?",
-      back: "То е ташачно неяо",
-      materialSubGroupId: 1,
-    },
-    {
-      title: "Какво е TypeScript?",
-      front: "Отговори на въпроса какво е TypeScript?",
-      back: "То е ташачно неяо",
-      materialSubGroupId: 1,
-    },
-    {
-      title: "Какво е TypeScript?",
-      front: "Отговори на въпроса какво е TypeScript?",
-      back: "То е ташачно неяо",
-      materialSubGroupId: 1,
-    },
-    {
-      title: "Какво е TypeScript?",
-      front: "Отговори на въпроса какво е TypeScript?",
-      back: "То е ташачно неяо",
-      materialSubGroupId: 1,
-    },
-    {
-      title: "Какво е TypeScript?",
-      front: "Отговори на въпроса какво е TypeScript?",
-      back: "То е ташачно неяо",
-      materialSubGroupId: 1,
-    },
-    {
-      title: "Какво е TypeScript?",
-      front: "Отговори на въпроса какво е TypeScript?",
-      back: "То е ташачно неяо",
-      materialSubGroupId: 1,
-    },
-  ]);
+  // If an error occurs, show the error screen with buttons to retry or cancel
+  if (error) {
+    return <ErrorScreen onRetry={() => onApprove(flashcards)} onCancel={onCancel} />;
+  }
+
+  const [data, setData] = useState<FlashcardDTO[]>(
+    flashcards ?? [
+      {
+        title: "Какво е TypeScript?",
+        front: "Отговори на въпроса какво е TypeScript?",
+        back: "То е ташачно неяо",
+        materialSubGroupId: 1,
+      },
+      {
+        title: "Какво е TypeScript?",
+        front: "Отговори на въпроса какво е TypeScript?",
+        back: "То е ташачно неяо",
+        materialSubGroupId: 1,
+      },
+      {
+        title: "Какво е TypeScript?",
+        front: "Отговори на въпроса какво е TypeScript?",
+        back: "То е ташачно неяо",
+        materialSubGroupId: 1,
+      },
+      {
+        title: "Какво е TypeScript?",
+        front: "Отговори на въпроса какво е TypeScript?",
+        back: "То е ташачно неяо",
+        materialSubGroupId: 1,
+      },
+      {
+        title: "Какво е TypeScript?",
+        front: "Отговори на въпроса какво е TypeScript?",
+        back: "То е ташачно неяо",
+        materialSubGroupId: 1,
+      },
+      {
+        title: "Какво е TypeScript?",
+        front: "Отговори на въпроса какво е TypeScript?",
+        back: "То е ташачно неяо",
+        materialSubGroupId: 1,
+      },
+      {
+        title: "Какво е TypeScript?",
+        front: "Отговори на въпроса какво е TypeScript?",
+        back: "То е ташачно неяо",
+        materialSubGroupId: 1,
+      },
+      {
+        title: "Какво е TypeScript?",
+        front: "Отговори на въпроса какво е TypeScript?",
+        back: "То е ташачно неяо",
+        materialSubGroupId: 1,
+      },
+      {
+        title: "Какво е TypeScript?",
+        front: "Отговори на въпроса какво е TypeScript?",
+        back: "То е ташачно неяо",
+        materialSubGroupId: 1,
+      },
+      {
+        title: "Какво е TypeScript?",
+        front: "Отговори на въпроса какво е TypeScript?",
+        back: "То е ташачно неяо",
+        materialSubGroupId: 1,
+      },
+      {
+        title: "Какво е TypeScript?",
+        front: "Отговори на въпроса какво е TypeScript?",
+        back: "То е ташачно неяо",
+        materialSubGroupId: 1,
+      },
+      {
+        title: "Какво е TypeScript?",
+        front: "Отговори на въпроса какво е TypeScript?",
+        back: "То е ташачно неяо",
+        materialSubGroupId: 1,
+      },
+    ]
+  );
 
   const [isEditing, setIsEditing] = useState(false);
   const [editingIndex, setEditingIndex] = useState<number | null>(null);
@@ -143,7 +153,7 @@ export default function ReviewGeneratedFlashcards({
       )}
     </div>
   ) : loading ? (
-    <Loading isLoading={loading} label={"Submitting Flashcards..."}/>
+    <Loading isLoading={loading} label={"Submitting Flashcards..."} />
   ) : (
     <FlashcardsForm
       model={editingIndex !== null ? data[editingIndex] : undefined}
