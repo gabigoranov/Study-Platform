@@ -5,20 +5,13 @@ import { useHandleMaterialGeneration } from "@/hooks/useHandleMaterialGeneration
 
 type UploadFileMenuProps = {
   isFormOpen: boolean;
-  actions: Action[];
   label?: string;
   closeForm: () => void;
 };
 
-export interface Action {
-  id: string;
-  title: string;
-}
-
 export default function UploadFileMenu({
   isFormOpen,
   closeForm,
-  actions,
 }: UploadFileMenuProps) {
   const {
     file,
@@ -33,6 +26,7 @@ export default function UploadFileMenu({
     handleFileChange,
     handleSubmit,
     handleApprove,
+    actions,
   } = useHandleMaterialGeneration(closeForm);
 
   return (
@@ -47,7 +41,7 @@ export default function UploadFileMenu({
         onClick={(e) => e.stopPropagation()}
       >
         {reviewing ? (
-          selectedActionId === "generateFlashcards" && (
+          selectedActionId == "generateFlashcards" && (
             <ReviewGeneratedFlashcards
               flashcards={generatedFlashcards as FlashcardDTO[]}
               onCancel={closeForm}

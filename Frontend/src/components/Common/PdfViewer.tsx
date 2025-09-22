@@ -46,7 +46,6 @@ export default function PdfViewer({ file }: PdfViewerProps) {
         <Document
           file={file}
           onLoadSuccess={({ numPages }) => setNumPages(numPages)}
-          className={"w-full h-full text-center"}
           loading={<p className="mt-auto">Loading PDF...</p>}
           error={<p className="mt-auto">Failed to load PDF</p>}
         >

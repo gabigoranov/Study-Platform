@@ -1,3 +1,4 @@
+import { Difficulty } from "../Difficulty";
 import { MaterialDTO } from "./MaterialDTO";
 
 export type GeneratedFlashcardDTO = {
@@ -5,4 +6,5 @@ export type GeneratedFlashcardDTO = {
   back: string;
   title: string;
   materialSubGroupId?: number | null;
+  difficulty: Difficulty;
 }

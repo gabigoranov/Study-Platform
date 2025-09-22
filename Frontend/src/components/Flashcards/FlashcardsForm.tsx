@@ -15,6 +15,14 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { useVariableContext } from "@/context/VariableContext";
 import { useEffect } from "react";
+import { Difficulty } from "@/data/Difficulty";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "../ui/select";
 
 interface FlashcardsFormProps {
   model?: FlashcardDTO;
@@ -27,6 +35,7 @@ const flashcardSchema = z.object({
   title: z.string().min(1, "A title is required"),
   front: z.string().min(1, "Front side is required"),
   back: z.string().min(1, "Back side is required"),
+  difficulty: z.enum(Difficulty),
 });
 
 export default function FlashcardsForm({
@@ -43,6 +52,7 @@ export default function FlashcardsForm({
       title: model?.title ?? "",
       front: model?.front ?? "",
       back: model?.back ?? "",
+      difficulty: model?.difficulty ?? Difficulty.Easy,
     },
   });
 
@@ -52,6 +62,7 @@ export default function FlashcardsForm({
         title: model.title,
         front: model.front,
         back: model.back,
+        difficulty: model?.difficulty ?? Difficulty.Easy,
       });
     }
   }, [model, form]);
@@ -103,12 +114,53 @@ export default function FlashcardsForm({
             <FormItem>
               <FormLabel>Back</FormLabel>
               <FormControl>
-                <Textarea placeholder="Enter answer here..." {...field} rows={4} />
+                <Textarea
+                  placeholder="Enter answer here..."
+                  {...field}
+                  rows={4}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
+        
+        <FormField
+          control={form.control}
+          name="difficulty"
+          render={({ field }) => {
+            const stringValue = field.value.toString(); // convert enum number to string
+
+            return (
+              <FormItem>
+                <FormLabel>Difficulty</FormLabel>
+                <FormControl>
+                  <Select
+                    value={stringValue}
+                    onValueChange={(val) => field.onChange(Number(val))} // convert back to number
+                  >
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select difficulty" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value={Difficulty.Easy.toString()}>
+                        Easy
+                      </SelectItem>
+                      <SelectItem value={Difficulty.Medium.toString()}>
+                        Medium
+                      </SelectItem>
+                      <SelectItem value={Difficulty.Hard.toString()}>
+                        Hard
+                      </SelectItem>
+                    </SelectContent>
+                  </Select>
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            );
+          }}
+        />
+
         <div className="flex gap-2 justify-end">
           {onCancel && (
             <Button

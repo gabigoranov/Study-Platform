@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Flashcard } from "../../data/Flashcard";
+import DifficultyTag from "../Common/DifficultyTag";
 
 type FlashcardDashboardProps = {
   flashcard: Flashcard;
@@ -32,21 +33,29 @@ export default function FlashcardDashboardComponent({
         {/* Front */}
         <div
           className={`absolute w-full h-full rounded-3xl bg-neutral-100 p-4 border border-neutral-300 dark:bg-background-dark dark:border-neutral-800 [backface-visibility:hidden] ${
-            isSelected ? "ring-2 ring-primary-dark" : ''
+            isSelected ? "ring-2 ring-primary-dark" : ""
           }`}
         >
           <h2 className="text-xl font-bold mb-4">{flashcard.title}</h2>
           <p className="text-lg">{flashcard.front}</p>
+          <DifficultyTag
+            difficulty={flashcard.difficulty}
+            className="absolute bottom-3 right-3"
+          />
         </div>
 
         {/* Back */}
         <div
           className={`absolute w-full h-full rounded-3xl bg-neutral-100 p-4 border border-neutral-300 dark:bg-background-dark dark:border-neutral-800 [backface-visibility:hidden] [transform:rotateX(180deg)] ${
-            isSelected ? "ring-2 ring-primary-dark" : ''
+            isSelected ? "ring-2 ring-primary-dark" : ""
           }`}
         >
           <h2 className="text-xl font-bold mb-4">Answer:</h2>
           <p className="text-lg">{flashcard.back}</p>
+          <DifficultyTag
+            difficulty={flashcard.difficulty}
+            className="absolute bottom-3 right-3"
+          />
         </div>
       </div>
     </div>

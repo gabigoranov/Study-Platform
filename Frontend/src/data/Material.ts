@@ -1,7 +1,10 @@
+import { Difficulty } from "./Difficulty";
+
 export type Material = {
     id: number;
     title: string;
     userId: string;
     materialSubGroupId: number;
-    dateCreated: Date
+    dateCreated: Date;
+    difficulty: Difficulty;
 }

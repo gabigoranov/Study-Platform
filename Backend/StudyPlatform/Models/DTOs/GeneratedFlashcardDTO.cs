@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using StudyPlatform.Data.Models;
+using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
 namespace StudyPlatform.Models.DTOs
@@ -16,5 +17,9 @@ namespace StudyPlatform.Models.DTOs
         [JsonPropertyName("back")]
         [Required]
         public string Back { get; set; }
+
+        [JsonPropertyName("difficulty")]
+        [Required]
+        public Difficulty Difficulty { get; set; }
     }
 }

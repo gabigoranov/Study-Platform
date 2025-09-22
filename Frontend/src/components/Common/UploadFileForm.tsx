@@ -1,11 +1,11 @@
 import { Upload } from "lucide-react";
 import PdfViewer from "./PdfViewer";
 import { Button } from "../ui/button";
-import { Action } from "./UploadFileMenu";
 import { Textarea } from "../ui/textarea";
 import Loading from "./Loading";
 import { useEffect } from "react";
 import ErrorScreen from "./ErrorScreen";
+import { Action } from "@/hooks/useHandleMaterialGeneration";
 
 type UploadFileFormProps = {
   loading: boolean;

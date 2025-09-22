@@ -23,6 +23,9 @@ namespace StudyPlatform.Data.Models
         [ForeignKey(nameof(MaterialSubGroup))]
         public int MaterialSubGroupId { get; set; }
 
+        [Required]
+        public Difficulty Difficulty { get; set; } = Difficulty.Medium;
+
         public virtual MaterialSubGroup MaterialSubGroup { get; set; }
     }
 }

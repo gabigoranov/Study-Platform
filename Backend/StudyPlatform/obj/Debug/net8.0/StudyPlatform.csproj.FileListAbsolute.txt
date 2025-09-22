@@ -295,6 +295,4 @@ D:\Projects\StudyPlatform\Backend\StudyPlatform\bin\Debug\net8.0\StudyPlatform.p
 D:\Projects\StudyPlatform\Backend\StudyPlatform\bin\Debug\net8.0\StudyPlatform.xml
 D:\Projects\StudyPlatform\Backend\StudyPlatform\obj\Debug\net8.0\StudyPlatform.genruntimeconfig.cache
 D:\Projects\StudyPlatform\Backend\StudyPlatform\obj\Debug\net8.0\ref\StudyPlatform.dll
-D:\Projects\StudyPlatform\Backend\StudyPlatform\bin\Debug\net8.0\StudyPlatform.staticwebassets.endpoints.json
-D:\Projects\StudyPlatform\Backend\StudyPlatform\obj\Debug\net8.0\staticwebassets.build.endpoints.json
-D:\Projects\StudyPlatform\Backend\StudyPlatform\obj\Debug\net8.0\staticwebassets\msbuild.StudyPlatform.Microsoft.AspNetCore.StaticWebAssetEndpoints.props
+D:\Projects\StudyPlatform\Backend\StudyPlatform\bin\Debug\net8.0\System.Formats.Asn1.dll

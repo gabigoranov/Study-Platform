@@ -2,6 +2,7 @@ import { FlashcardDTO } from "@/data/DTOs/FlashcardDTO";
 import { useState } from "react";
 import { Button } from "../ui/button";
 import { Edit, Trash } from "lucide-react";
+import DifficultyTag from "../Common/DifficultyTag";
 
 type ViewFlashcardProps = {
   flashcard: FlashcardDTO;
@@ -19,7 +20,7 @@ export default function ViewFlashcardComponent({
   const handleClick = () => {
     setIsFlipped((prev) => !prev);
   };
-  
+
   return (
     <div
       className="relative min-w-[50vw] sm:min-w-[400px] sm:max-w-[33.33%] min-h-[400px] cursor-pointer [perspective:1000px] basis-[400px] flex-1"
@@ -59,6 +60,8 @@ export default function ViewFlashcardComponent({
                 <Trash className="w-4 h-4" />
               </Button>
             )}
+
+            <DifficultyTag difficulty={flashcard.difficulty} />
           </div>
         </div>
 
@@ -91,6 +94,8 @@ export default function ViewFlashcardComponent({
                 <Trash className="w-4 h-4" />
               </Button>
             )}
+
+            <DifficultyTag difficulty={flashcard.difficulty} />
           </div>
         </div>
       </div>

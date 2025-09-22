@@ -23,6 +23,7 @@ export default function ReviewGeneratedFlashcards({
 }: ReviewGeneratedFlashcardsProps) {
   // If an error occurs, show the error screen with buttons to retry or cancel
   if (error) {
+    console.log("error");
     return <ErrorScreen onRetry={() => onApprove(flashcards)} onCancel={onCancel} />;
   }
 
@@ -33,72 +34,95 @@ export default function ReviewGeneratedFlashcards({
         front: "Отговори на въпроса какво е TypeScript?",
         back: "То е ташачно неяо",
         materialSubGroupId: 1,
+        difficulty: 0
       },
       {
         title: "Какво е TypeScript?",
         front: "Отговори на въпроса какво е TypeScript?",
         back: "То е ташачно неяо",
         materialSubGroupId: 1,
+        difficulty: 0
+
       },
       {
         title: "Какво е TypeScript?",
         front: "Отговори на въпроса какво е TypeScript?",
         back: "То е ташачно неяо",
         materialSubGroupId: 1,
+        difficulty: 0
+
       },
       {
         title: "Какво е TypeScript?",
         front: "Отговори на въпроса какво е TypeScript?",
         back: "То е ташачно неяо",
         materialSubGroupId: 1,
+        difficulty: 0
+
       },
       {
         title: "Какво е TypeScript?",
         front: "Отговори на въпроса какво е TypeScript?",
         back: "То е ташачно неяо",
         materialSubGroupId: 1,
+        difficulty: 0
+
       },
       {
         title: "Какво е TypeScript?",
         front: "Отговори на въпроса какво е TypeScript?",
         back: "То е ташачно неяо",
         materialSubGroupId: 1,
+        difficulty: 0
+
       },
       {
         title: "Какво е TypeScript?",
         front: "Отговори на въпроса какво е TypeScript?",
         back: "То е ташачно неяо",
         materialSubGroupId: 1,
+        difficulty: 0
+
       },
       {
         title: "Какво е TypeScript?",
         front: "Отговори на въпроса какво е TypeScript?",
         back: "То е ташачно неяо",
         materialSubGroupId: 1,
+        difficulty: 0
+
       },
       {
         title: "Какво е TypeScript?",
         front: "Отговори на въпроса какво е TypeScript?",
         back: "То е ташачно неяо",
         materialSubGroupId: 1,
+        difficulty: 0
+
       },
       {
         title: "Какво е TypeScript?",
         front: "Отговори на въпроса какво е TypeScript?",
         back: "То е ташачно неяо",
         materialSubGroupId: 1,
+        difficulty: 0
+
       },
       {
         title: "Какво е TypeScript?",
         front: "Отговори на въпроса какво е TypeScript?",
         back: "То е ташачно неяо",
         materialSubGroupId: 1,
+        difficulty: 0
+
       },
       {
         title: "Какво е TypeScript?",
         front: "Отговори на въпроса какво е TypeScript?",
         back: "То е ташачно неяо",
         materialSubGroupId: 1,
+        difficulty: 0
+
       },
     ]
   );

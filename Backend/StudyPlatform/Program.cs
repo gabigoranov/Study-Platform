@@ -12,6 +12,7 @@ using System.Text.Json.Serialization.Metadata;
 using Microsoft.AspNetCore.Http.Json;
 using StudyPlatform.Models.DTOs;
 using StudyPlatform.Data.Common;
+using System.Text.Json;
 
 var builder = WebApplication.CreateBuilder(args);
 

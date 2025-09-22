@@ -4,6 +4,7 @@ import { Upload } from "lucide-react";
 import PdfViewer from "./PdfViewer";
 import UploadFileMenu from "./UploadFileMenu";
 import ReviewGeneratedFlashcards from "../Flashcards/ReviewGeneratedFlashcards";
+import { useHandleMaterialGeneration } from "@/hooks/useHandleMaterialGeneration";
 
 export default function UploadFileButton() {
   const [isVisible, setIsVisible] = useState(false);
@@ -26,12 +27,7 @@ export default function UploadFileButton() {
       </Button>
 
       {isVisible && (
-        <UploadFileMenu closeForm={closeForm} isFormOpen={isFormOpen} actions={[
-          {
-            id: "generateFlashcards",
-            title: "Generate Flashcards",
-          },
-        ]} />
+        <UploadFileMenu closeForm={closeForm} isFormOpen={isFormOpen} />
       )}
     </>
   );

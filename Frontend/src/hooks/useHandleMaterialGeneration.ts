@@ -9,6 +9,11 @@ import { BASE_URL } from "@/types/urls";
 import { useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 
+export interface Action {
+  id: string;
+  title: string;
+}
+
 export function useHandleMaterialGeneration(closeForm: () => void) {
   const { user, token } = useAuth();
   const { selectedGroupId } = useVariableContext();
@@ -22,8 +27,18 @@ export function useHandleMaterialGeneration(closeForm: () => void) {
     GeneratedFlashcardDTO[]
   >([]);
 
-  const [selectedActionId, setSelectedActionId] = useState<string>();
   const [customPrompt, setCustomPrompt] = useState<string>();
+
+  const actions: Action[] = [
+    {
+      id: "generateFlashcards",
+      title: "Generate Flashcards",
+    },
+  ];
+
+  const [selectedActionId, setSelectedActionId] = useState<string | undefined>(
+    actions[0].id
+  );
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files?.length) return;
@@ -56,6 +71,8 @@ export function useHandleMaterialGeneration(closeForm: () => void) {
         element.materialSubGroupId = selectedGroupId;
       });
 
+      console.log(json);
+
       setGeneratedFlashcards(json);
       setReviewing(true);
     } catch (err) {
@@ -79,12 +96,10 @@ export function useHandleMaterialGeneration(closeForm: () => void) {
         ["flashcards", selectedGroupId],
         (old) => (old ? [...old, ...result] : [...result])
       );
-    }
-    catch (err) {
+    } catch (err) {
       setError(true);
       return;
-    }
-    finally {
+    } finally {
       setLoading(false);
       closeForm();
     }
@@ -103,5 +118,6 @@ export function useHandleMaterialGeneration(closeForm: () => void) {
     handleFileChange,
     handleSubmit,
     handleApprove,
+    actions,
   };
 }

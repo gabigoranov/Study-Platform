@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StudyPlatform.Data;
 
@@ -11,9 +12,11 @@ using StudyPlatform.Data;
 namespace StudyPlatform.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250922153553_AddDifficultyEnumToMaterials")]
+    partial class AddDifficultyEnumToMaterials
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -55,7 +58,7 @@ namespace StudyPlatform.Migrations
 
                     b.HasIndex("MaterialSubGroupId");
 
-                    b.ToTable("Materials", (string)null);
+                    b.ToTable("Materials");
 
                     b.HasDiscriminator<string>("MaterialType").HasValue("Material");
 
@@ -88,7 +91,7 @@ namespace StudyPlatform.Migrations
 
                     b.HasIndex("SubjectId");
 
-                    b.ToTable("MaterialSubGroups", (string)null);
+                    b.ToTable("MaterialSubGroups");
                 });
 
             modelBuilder.Entity("StudyPlatform.Data.Models.Subject", b =>
@@ -112,7 +115,7 @@ namespace StudyPlatform.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Subjects", (string)null);
+                    b.ToTable("Subjects");
                 });
 
             modelBuilder.Entity("StudyPlatform.Data.Models.Flashcard", b =>

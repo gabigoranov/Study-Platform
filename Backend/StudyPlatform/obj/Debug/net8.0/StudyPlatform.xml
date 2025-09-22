@@ -160,6 +160,11 @@
             Base url for flashcards microservice.
             </summary>
         </member>
+        <member name="T:StudyPlatform.Data.Models.Difficulty">
+            <summary>
+            An enum class for material difficulty levels.
+            </summary>
+        </member>
         <member name="T:StudyPlatform.Data.Models.Material">
             <summary>
             A general material entity that can be extended for specific types of study materials.
@@ -282,6 +287,18 @@
             <inheritdoc />
         </member>
         <member name="M:StudyPlatform.Migrations.UnrestrictMaterialTitleLength.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:StudyPlatform.Migrations.AddDifficultyEnumToMaterials">
+            <inheritdoc />
+        </member>
+        <member name="M:StudyPlatform.Migrations.AddDifficultyEnumToMaterials.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:StudyPlatform.Migrations.AddDifficultyEnumToMaterials.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:StudyPlatform.Migrations.AddDifficultyEnumToMaterials.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
         </member>
         <member name="T:StudyPlatform.Models.Common.AutoMapper">

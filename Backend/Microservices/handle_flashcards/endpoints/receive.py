@@ -34,10 +34,17 @@ def generate_flashcards_endpoint(req: FlashcardRequest):
     {{
     "title": "...",
     "front": "...",
-    "back": "..."
+    "back": "...",
+    "difficulty": 0
     }}
 
     Requirements:
+    - "difficulty" must be an integer:
+    - 0 = Easy
+    - 1 = Medium
+    - 2 = Hard
+    - Output only 0, 1, or 2 for difficulty.
+    - Do NOT output text like "Easy" or "Medium".
     - Keep language simple and consistent with the source.
     - Do not include foreign words, obscure terminology, or source-specific names.
     - Do not include examples, exercises, or data-specific scenarios.

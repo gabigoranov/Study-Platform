@@ -133,6 +133,7 @@ export default function FlashcardsDashboard() {
               front: flashcardToEdit.front,
               back: flashcardToEdit.back,
               title: flashcardToEdit.title,
+              difficulty: flashcardToEdit.difficulty,
               materialSubGroupId: selectedGroupId!,
             }}
             submitLabel={t(keys.updateFlashcardButton)}
