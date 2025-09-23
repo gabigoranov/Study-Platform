@@ -216,16 +216,18 @@
         </member>
         <member name="T:StudyPlatform.Middlewares.ExceptionHandlingMiddleware">
             <summary>
-            Middleware that handles exceptions globally for the application.
-            Catches unhandled exceptions, maps them to appropriate HTTP status codes,
-            and returns a JSON error response.
+            Middleware for global exception handling in the application.
+            Converts unhandled exceptions into consistent JSON error responses
+            based on <see cref="T:Microsoft.AspNetCore.Mvc.ProblemDetails"/> (RFC 7807).
             </summary>
         </member>
-        <member name="M:StudyPlatform.Middlewares.ExceptionHandlingMiddleware.#ctor(Microsoft.AspNetCore.Http.RequestDelegate)">
+        <member name="M:StudyPlatform.Middlewares.ExceptionHandlingMiddleware.#ctor(Microsoft.AspNetCore.Http.RequestDelegate,Microsoft.Extensions.Logging.ILogger{StudyPlatform.Middlewares.ExceptionHandlingMiddleware},Microsoft.Extensions.Hosting.IHostEnvironment)">
             <summary>
             Initializes a new instance of the <see cref="T:StudyPlatform.Middlewares.ExceptionHandlingMiddleware"/> class.
             </summary>
             <param name="next">The next middleware component in the pipeline.</param>
+            <param name="logger">The logger used to log exception details.</param>
+            <param name="environment">The hosting environment (used to show detailed errors in Development).</param>
         </member>
         <member name="M:StudyPlatform.Middlewares.ExceptionHandlingMiddleware.Invoke(Microsoft.AspNetCore.Http.HttpContext)">
             <summary>
@@ -236,7 +238,7 @@
         </member>
         <member name="M:StudyPlatform.Middlewares.ExceptionHandlingMiddleware.HandleExceptionAsync(Microsoft.AspNetCore.Http.HttpContext,System.Exception)">
             <summary>
-            Maps exceptions to HTTP status codes and writes a JSON error response.
+            Maps exceptions to HTTP status codes and writes a standardized JSON error response.
             </summary>
             <param name="context">The current <see cref="T:Microsoft.AspNetCore.Http.HttpContext"/>.</param>
             <param name="ex">The exception that was thrown.</param>

@@ -37,7 +37,7 @@ export function App() {
                 errorElement={<ErrorPage />}
               >
                 <Route index element={<HomeDashboard />} />
-                <Route path="flashcards" element={<FlashcardsDashboard />} />
+                <Route path="flashcards/*" element={<FlashcardsDashboard />} />
               </Route>
 
               <Route path="settings" element={

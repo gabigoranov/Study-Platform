@@ -23,9 +23,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../ui/select";
+import { t } from "i18next";
+import { keys } from "@/types/keys";
 
 interface FlashcardsFormProps {
-  model?: FlashcardDTO;
+  model?: FlashcardDTO | undefined;
   onSubmit: (data: FlashcardDTO) => void;
   submitLabel?: string;
   onCancel?: () => void; // optional for edit mode

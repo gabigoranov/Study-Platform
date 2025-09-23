@@ -12,6 +12,8 @@ import { useVariableContext } from "@/context/VariableContext";
 import { apiService } from "@/services/apiService";
 import ViewFlashcardComponent from "@/components/Flashcards/ViewFlashcardComponent";
 import ScrollToTopButton from "@/components/Common/ScrollToTopButton";
+import { Route, Routes, useNavigate } from "react-router";
+import Loading from "@/components/Common/Loading";
 
 type View = "list" | "create" | "edit" | "view";
 export const flashcardService = apiService<Flashcard, FlashcardDTO, FlashcardDTO>("flashcards");
@@ -19,10 +21,10 @@ export const flashcardService = apiService<Flashcard, FlashcardDTO, FlashcardDTO
 export default function FlashcardsDashboard() {
   const { t } = useTranslation();
   const [view, setView] = useState<View>("list");
-  const [editingId, setEditingId] = useState<number | null>(null);
   const { token } = useAuth();
   const queryClient = useQueryClient();
   const {selectedFlashcardId, setSelectedFlashcardId, selectedGroupId } = useVariableContext();
+  const navigate = useNavigate();
 
   // --- Query: load all flashcards ---
   const { data: flashcards, isLoading, error } = useQuery({
@@ -50,7 +52,6 @@ export default function FlashcardsDashboard() {
       queryClient.setQueryData<Flashcard[]>(["flashcards", selectedGroupId], (old) =>
         old ? old.map((fc) => (fc.id === updated.id ? updated : fc)) : []
       );
-      setEditingId(null);
       setView("list");
     },
   });
@@ -71,6 +72,7 @@ export default function FlashcardsDashboard() {
 
   // --- Handlers ---
   const handleCreate = (data: FlashcardDTO) => {
+    console.log("creating")
     createMutation.mutate(data);
   };
 
@@ -90,84 +92,60 @@ export default function FlashcardsDashboard() {
     console.log("Selected card:", id);
   }
 
-  const startEdit = (id: number) => {
-    setEditingId(id);
-    setView("edit");
-  };
-
   const handleFileUpload = (files: FileList) => {
     if (!files) return;
     console.log("Selected files for uploading:", files);
   };
 
-  const renderContent = () => {
-    switch (view) {
-      case "list":
-        if (isLoading) return <p>Loading...</p>;
-        if (error) return <p>Error loading flashcards</p>;
-        return (
-          <FlashcardsDashboardList
-            flashcards={flashcards ?? []}
-            onSelect={selectCard}
-            selectedId={selectedFlashcardId}
-          />
-        );
-
-      case "create":
-        return (
-          <FlashcardsForm
-            submitLabel={t(keys.createFlashcardButton)}
-            onSubmit={handleCreate}
-          />
-        );
-
-      case "edit":
-        const flashcardToEdit = flashcards?.find((fc) => fc.id === selectedFlashcardId);
-        if (!flashcardToEdit)
-          return (
-            <p className="text-center p-4">{t(keys.flashcardNotFound)}</p>
-          );
-        return (
-          <FlashcardsForm
-            model={{
-              front: flashcardToEdit.front,
-              back: flashcardToEdit.back,
-              title: flashcardToEdit.title,
-              difficulty: flashcardToEdit.difficulty,
-              materialSubGroupId: selectedGroupId!,
-            }}
-            submitLabel={t(keys.updateFlashcardButton)}
-            onSubmit={handleUpdate}
-          />
-        );
-
-      case "view":
-        const flashcardToView = flashcards?.find((fc) => fc.id === selectedFlashcardId);
-        if (!flashcardToView)
-          return (
-            <p className="text-center p-4">{t(keys.flashcardNotFound)}</p>
-          );
-
-        return (
-          <div className="w-full flex flex-wrap gap-3 py-4 self-center justify-center">
-            <ViewFlashcardComponent flashcard={flashcardToView} />
-          </div>
-        );
-
-        default:
-        return null;
-    }
-  };
-
   return (
     <div className="w-full flex flex-col gap-4 h-full">
       <FlashcardsDashboardHeader
-        setView={(view: "list" | "create" | "edit" | "view") => setView(view)}
+        setView={(view: View) => {
+          setView(view);
+          navigate(view === "list" ? "/flashcards" : `/flashcards/${view}`)
+        }}
         handleDelete={handleDelete}
         handleFileUpload={handleFileUpload}
       />
       <div className="flex items-center justify-center w-full h-full flex-1 relative">
-        {renderContent()}
+        <Routes>
+          <Route path="/" element={
+            isLoading ? <Loading isLoading={isLoading} /> :
+
+            <FlashcardsDashboardList
+              flashcards={flashcards ?? []}
+              onSelect={selectCard}
+              selectedId={selectedFlashcardId}
+            />
+          } />
+          <Route path="create" element={
+            <FlashcardsForm
+              submitLabel={t(keys.createFlashcardButton)}
+              onSubmit={(data: FlashcardDTO) => {
+                handleCreate(data);
+
+                setView("list");
+                navigate("/flashcards");
+              }}
+            />
+          } />
+          <Route path="edit" element={
+            <FlashcardsForm
+              model={flashcards?.find((fc) => fc.id === selectedFlashcardId)}
+              submitLabel={t(keys.updateFlashcardButton)}
+              onSubmit={(data: FlashcardDTO) => {
+                handleUpdate(data);
+                setView("list");
+                navigate("/flashcards");
+              }}
+            />
+          } />
+          <Route path="view" element={
+            <div className="w-full flex flex-wrap gap-3 py-4 self-center justify-center">
+              <ViewFlashcardComponent flashcard={flashcards?.find((fc) => fc.id === selectedFlashcardId)} />
+            </div>
+          } />
+        </Routes>
         <ScrollToTopButton />
       </div>
     </div>

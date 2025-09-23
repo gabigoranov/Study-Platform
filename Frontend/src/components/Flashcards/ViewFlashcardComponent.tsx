@@ -3,9 +3,11 @@ import { useState } from "react";
 import { Button } from "../ui/button";
 import { Edit, Trash } from "lucide-react";
 import DifficultyTag from "../Common/DifficultyTag";
+import { keys } from "@/types/keys";
+import { t } from "i18next";
 
 type ViewFlashcardProps = {
-  flashcard: FlashcardDTO;
+  flashcard?: FlashcardDTO | undefined;
   onEdit?: (flashcard: FlashcardDTO) => void;
   onDelete?: (flashcard: FlashcardDTO) => void;
 };
@@ -20,6 +22,10 @@ export default function ViewFlashcardComponent({
   const handleClick = () => {
     setIsFlipped((prev) => !prev);
   };
+
+  if(flashcard == undefined) {
+    return <p className="text-center p-4">{t(keys.flashcardNotFound)}</p>;
+  }
 
   return (
     <div
