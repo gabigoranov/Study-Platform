@@ -82,5 +82,12 @@
     "deleteAccountHint": "Това действие не може да бъде отменено. Всичките ви данни ще бъдат изтрити за постоянно.",
     "deleteAccountConfirmText": "изтрий акаунта ми",
     "deleting": "Изтриване...",
-    "deleteAccount": "Изтрий акаунт"
+    "deleteAccount": "Изтрий акаунт",
+    "loadingUploadFile": "Зареждане на файла...",
+    "uploadFileLabel": "Качете Файл",
+    "selectActionPlaceholder": "Изберете действие",
+    "customPromptPlaceholder": "Въведете информация за ИИ. Например... 'Фокусирай върху този предмет.'",
+    "closeButton": "Затвори",
+    "submitButton": "Публикувай",
+    "failedFileLoad": "Възникна грешка при зареждането на файла."
 }

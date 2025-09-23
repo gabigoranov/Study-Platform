@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useTransition } from "react";
 import { Button } from "../ui/button";
 import { Upload } from "lucide-react";
 import PdfViewer from "./PdfViewer";
@@ -9,6 +9,7 @@ import { useHandleMaterialGeneration } from "@/hooks/useHandleMaterialGeneration
 export default function UploadFileButton() {
   const [isVisible, setIsVisible] = useState(false);
   const [isFormOpen, setIsFormOpen] = useState(false);
+  const [ t ] = useTransition();
 
   const openForm = () => {
     setIsVisible(true);
@@ -23,7 +24,7 @@ export default function UploadFileButton() {
   return (
     <>
       <Button className="rounded-3xl" variant="outline" onClick={openForm}>
-        <Upload className="inline" /> Upload File
+        <Upload className="inline" /> t(keys.UploadFileButton)
       </Button>
 
       {isVisible && (

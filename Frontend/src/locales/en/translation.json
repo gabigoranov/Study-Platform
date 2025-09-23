@@ -82,5 +82,12 @@
     "deleteAccountHint": "This action cannot be undone. All your data will be permanently deleted.",
     "deleteAccountConfirmText": "delete my account",
     "deleting": "Deleting...",
-    "deleteAccount": "Delete Account"
+    "deleteAccount": "Delete Account",
+    "loadingUploadFile": "Loading the file...",
+    "uploadFileLabel": "Upload File",
+    "selectActionPlaceholder": "Select an action",
+    "customPromptPlaceholder": "Enter a custom prompt for the AI. For example... 'Focus on this topic.'",
+    "closeButton": "Close",
+    "submitButton": "Submit",
+    "failedFileLoad": "Failed to load file."
 }

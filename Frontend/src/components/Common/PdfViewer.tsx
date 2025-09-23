@@ -1,6 +1,8 @@
 "use client";
 
+import { keys } from "@/types/keys";
 import { useState, useRef, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { Document, Page, pdfjs } from "react-pdf";
 import "react-pdf/dist/Page/AnnotationLayer.css";
 import "react-pdf/dist/Page/TextLayer.css";
@@ -18,6 +20,7 @@ export default function PdfViewer({ file }: PdfViewerProps) {
   const [numPages, setNumPages] = useState<number>(0);
   const [pageWidth, setPageWidth] = useState<number>(600);
   const containerRef = useRef<HTMLDivElement>(null);
+  const [ t ] = useTranslation();
 
   const MAX_WIDTH = 600; // 👈 maximum PDF width on larger devices
 
@@ -46,7 +49,7 @@ export default function PdfViewer({ file }: PdfViewerProps) {
         <Document
           file={file}
           onLoadSuccess={({ numPages }) => setNumPages(numPages)}
-          loading={<p className="mt-auto">Loading PDF...</p>}
+          loading={<p className="mt-auto">{t(keys.loadingUploadFile)}</p>}
           error={<p className="mt-auto">Failed to load PDF</p>}
         >
           {Array.from(new Array(numPages), (_, index) => (

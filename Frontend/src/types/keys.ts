@@ -82,5 +82,12 @@ export const keys = {
   deleteAccountHint: "deleteAccountHint",
   deleteAccountConfirmText: "deleteAccountConfirmText",
   deleting: "deleting",
-  deleteAccount: "deleteAccount"
+  deleteAccount: "deleteAccount",
+  loadingUploadFile: "loadingUploadFile",
+  uploadFileLabel: "uploadFileLabel", 
+  selectActionPlaceholder: "selectActionPlaceholder",
+  customPromptPlaceholder: "customPromptPlaceholder",
+  closeButton: "closeButton",
+  submitButton: "submitButton",
+  failedFileLoad: "failedFileLoad"
 };

@@ -17,7 +17,7 @@ namespace StudyPlatform.Services.Flashcards
     /// </summary>
     public class FlashcardsService : IFlashcardsService
     {
-        private readonly AppDbContext _context;
+        private readonly IRepository _repo;
         private readonly ILogger<FlashcardsService> _logger;
         private readonly IMapper _mapper;
         private readonly HttpClient _client;
@@ -26,13 +26,13 @@ namespace StudyPlatform.Services.Flashcards
         /// <summary>
         /// Initializes a new instance of the <see cref="FlashcardsService"/> class.
         /// </summary>
-        /// <param name="context">The database context.</param>
+        /// <param name="repo">The Repository instance.</param>
         /// <param name="logger">The logger instance.</param>
         /// <param name="mapper">The AutoMapper instance.</param>
         /// <param name="client">The HttpClient instance.</param>
-        public FlashcardsService(AppDbContext context, ILogger<FlashcardsService> logger, IMapper mapper, HttpClient client)
+        public FlashcardsService(IRepository repo, ILogger<FlashcardsService> logger, IMapper mapper, HttpClient client)
         {
-            _context = context;
+            _repo = repo;
             _logger = logger;
             _mapper = mapper;
             _client = client;
@@ -51,8 +51,8 @@ namespace StudyPlatform.Services.Flashcards
             var flashcard = _mapper.Map<Flashcard>(model);
             flashcard.UserId = userId;
 
-            await _context.Flashcards.AddAsync(flashcard);
-            await _context.SaveChangesAsync();
+            await _repo.AddAsync<Flashcard>(flashcard);
+            await _repo.SaveChangesAsync();
 
             _logger.LogInformation("Flashcard {FlashcardId} created successfully for user {UserId}", flashcard.Id, userId);
 
@@ -70,8 +70,7 @@ namespace StudyPlatform.Services.Flashcards
         {
             _logger.LogInformation("Editing flashcard {FlashcardId} for user {UserId}", id, userId);
 
-            var flashcard = await _context.Flashcards
-                .FirstOrDefaultAsync(f => f.Id == id && f.UserId == userId);
+            var flashcard = await _repo.All<Flashcard>().FirstOrDefaultAsync(f => f.Id == id && f.UserId == userId);
 
             if (flashcard == null)
             {
@@ -81,7 +80,7 @@ namespace StudyPlatform.Services.Flashcards
 
             _mapper.Map(model, flashcard); // maps updated fields from ViewModel to entity
 
-            await _context.SaveChangesAsync();
+            await _repo.SaveChangesAsync();
 
             _logger.LogInformation("Flashcard {FlashcardId} edited successfully for user {UserId}", flashcard.Id, userId);
 
@@ -96,7 +95,7 @@ namespace StudyPlatform.Services.Flashcards
         /// <returns>A collection of <see cref="Flashcard"/> objects.</returns>
         public async Task<FlashcardDTO> GetAsync(Guid userId, int id)
         {
-            var flashcards = await _context.Flashcards
+            var flashcards = await _repo.All<Flashcard>()
                 .SingleAsync(f => f.Id == id && f.UserId == userId);
 
             _logger.LogInformation("1 flashcard retrieved for user {UserId}", userId);
@@ -118,7 +117,7 @@ namespace StudyPlatform.Services.Flashcards
                 return;
             }
 
-            int deletedCount = await _context.Flashcards
+            int deletedCount = await _repo.All<Flashcard>()
                 .Where(f => ids.Contains(f.Id) && f.UserId == userId)
                 .ExecuteDeleteAsync();
 
@@ -128,7 +127,7 @@ namespace StudyPlatform.Services.Flashcards
         /// <inheritdoc />
         public async Task<IEnumerable<FlashcardDTO>> GetAllAsync(Guid userId, int? groupId = null)
         {
-            var flashcards = await _context.Flashcards.Where(x => groupId != null ? x.MaterialSubGroupId == groupId && x.UserId == userId : x.UserId == userId).ToListAsync();
+            var flashcards = await _repo.All<Flashcard>().Where(x => groupId != null ? x.MaterialSubGroupId == groupId && x.UserId == userId : x.UserId == userId).ToListAsync();
 
             return _mapper.Map<IEnumerable<FlashcardDTO>>(flashcards);
         }
@@ -167,7 +166,7 @@ namespace StudyPlatform.Services.Flashcards
             _logger.LogInformation("Creating {Count} flashcards for user {UserId}", model.Count(), userId);
 
             List<Flashcard> flashcards = new List<Flashcard>();
-            await _context.Flashcards.AddRangeAsync(model.Select(m =>
+            await _repo.AddRangeAsync<Flashcard>(model.Select(m =>
             {
                 var flashcard = _mapper.Map<Flashcard>(m);
                 flashcard.UserId = userId;
@@ -175,12 +174,7 @@ namespace StudyPlatform.Services.Flashcards
                 return flashcard;
             }));
 
-            await _context.SaveChangesAsync();
-
-            // foreach(var card in model)   
-            // {
-            //     await CreateAsync(card, userId);
-            // }
+            await _repo.SaveChangesAsync();
 
             _logger.LogInformation("{Count} flashcards created successfully for user {UserId}", model.Count(), userId);
 

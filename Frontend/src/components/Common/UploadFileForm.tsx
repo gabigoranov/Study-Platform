@@ -6,6 +6,8 @@ import Loading from "./Loading";
 import { useEffect } from "react";
 import ErrorScreen from "./ErrorScreen";
 import { Action } from "@/hooks/useHandleMaterialGeneration";
+import { useTranslation } from "react-i18next";
+import { keys } from "@/types/keys";
 
 type UploadFileFormProps = {
   loading: boolean;
@@ -36,6 +38,7 @@ export default function UploadFileForm({
   customPrompt,
   setCustomPrompt
 }: UploadFileFormProps) {
+  const [ t ] = useTranslation();
 
   // If an error occurs, show the error screen with buttons to retry or cancel
   if(error) {
@@ -43,7 +46,7 @@ export default function UploadFileForm({
       <ErrorScreen onRetry={() => handleSubmit(selectedActionId!, customPrompt!)} onCancel={closeForm} />
     )
   }
-  
+
   return (
     <>
       <div className="w-full sm:max-w-[50%]">
@@ -57,7 +60,7 @@ export default function UploadFileForm({
           {/* Upload area */}
           <label className="flex flex-col items-center justify-center border-2 border-dashed border-gray-400 rounded-xl h-[600px] cursor-pointer hover:border-gray-600 transition">
             <Upload className="w-10 h-10 text-gray-500 mb-2" />
-            <span className="text-gray-500">Click to upload a file</span>
+            <span className="text-gray-500">{t(keys.uploadFileLabel)}</span>
             <input type="file" className="hidden" onChange={handleFileChange} />
           </label>
           {/* Action select */}
@@ -67,9 +70,9 @@ export default function UploadFileForm({
             onChange={(e) => setSelectedActionId(e.target.value)}
           >
             {selectedActionId ? (
-              <option>Select Action</option>
+              <option>{t(keys.selectActionPlaceholder)}</option>
             ) : (
-              actions?.map((action) => (
+              actions.map((action) => (
                 <option value={action.id} key={action.id}>
                   {action.title}
                 </option>
@@ -82,14 +85,14 @@ export default function UploadFileForm({
           {/* Buttons row */}
           <div className="mt-auto flex justify-end gap-2 self-end">
             <Button onClick={closeForm} className="px-4 py-2">
-              Close
+              {t(keys.closeButton)}
             </Button>
             <Button
               onClick={() =>handleSubmit(selectedActionId!, customPrompt!)}
               variant="outline"
               className="px-4 py-2 rounded-xl"
             >
-              Submit
+              {t(keys.submitButton)}
             </Button>
           </div>
         </div>
