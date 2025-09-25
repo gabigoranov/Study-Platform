@@ -98,25 +98,34 @@ namespace StudyPlatform.Tests.Helpers
         {
             var repoMock = new Mock<IRepository>();
 
-            // Generic All<T>() with no filter
-            repoMock.Setup(r => r.All<Flashcard>()).Returns(Flashcards.AsQueryable());
-            repoMock.Setup(r => r.All<MaterialSubGroup>()).Returns(SubGroups.AsQueryable());
-            repoMock.Setup(r => r.All<Subject>()).Returns(Subjects.AsQueryable());
+            // Helper to wrap lists into async queryables
+            IQueryable<T> AsAsyncQueryable<T>(IEnumerable<T> source)
+                where T : class =>
+                new TestAsyncEnumerable<T>(source);
 
-            // Generic All<T>(predicate)
+            // All<T>() no filter
+            repoMock.Setup(r => r.All<Flashcard>()).Returns(AsAsyncQueryable(TestData.Flashcards));
+            repoMock.Setup(r => r.All<MaterialSubGroup>()).Returns(AsAsyncQueryable(TestData.SubGroups));
+            repoMock.Setup(r => r.All<Subject>()).Returns(AsAsyncQueryable(TestData.Subjects));
+
+            // All<T>(predicate)
             repoMock.Setup(r => r.All<Flashcard>(It.IsAny<Expression<Func<Flashcard, bool>>>()))
-                .Returns((Expression<Func<Flashcard, bool>> pred) => Flashcards.AsQueryable().Where(pred.Compile()));
+                .Returns((Expression<Func<Flashcard, bool>> pred) =>
+                    AsAsyncQueryable(TestData.Flashcards.Where(pred.Compile())));
             repoMock.Setup(r => r.All<MaterialSubGroup>(It.IsAny<Expression<Func<MaterialSubGroup, bool>>>()))
-                .Returns((Expression<Func<MaterialSubGroup, bool>> pred) => SubGroups.AsQueryable().Where(pred.Compile()));
+                .Returns((Expression<Func<MaterialSubGroup, bool>> pred) =>
+                    AsAsyncQueryable(TestData.SubGroups.Where(pred.Compile())));
             repoMock.Setup(r => r.All<Subject>(It.IsAny<Expression<Func<Subject, bool>>>()))
-                .Returns((Expression<Func<Subject, bool>> pred) => Subjects.AsQueryable().Where(pred.Compile()));
+                .Returns((Expression<Func<Subject, bool>> pred) =>
+                    AsAsyncQueryable(TestData.Subjects.Where(pred.Compile())));
 
-            // Optional AddAsync
+            // AddAsync
             repoMock.Setup(r => r.AddAsync(It.IsAny<Flashcard>())).Returns((Flashcard f) => Task.FromResult(f));
             repoMock.Setup(r => r.AddAsync(It.IsAny<MaterialSubGroup>())).Returns((MaterialSubGroup sg) => Task.FromResult(sg));
             repoMock.Setup(r => r.AddAsync(It.IsAny<Subject>())).Returns((Subject s) => Task.FromResult(s));
 
             return repoMock;
         }
+
     }
 }

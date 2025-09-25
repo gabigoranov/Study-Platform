@@ -1,15 +1,14 @@
 import { useState, useTransition } from "react";
 import { Button } from "../ui/button";
 import { Upload } from "lucide-react";
-import PdfViewer from "./PdfViewer";
 import UploadFileMenu from "./UploadFileMenu";
-import ReviewGeneratedFlashcards from "../Flashcards/ReviewGeneratedFlashcards";
-import { useHandleMaterialGeneration } from "@/hooks/useHandleMaterialGeneration";
+import { keys } from "@/types/keys";
+import { useTranslation } from "react-i18next";
 
 export default function UploadFileButton() {
   const [isVisible, setIsVisible] = useState(false);
   const [isFormOpen, setIsFormOpen] = useState(false);
-  const [ t ] = useTransition();
+  const [ t ] = useTranslation();
 
   const openForm = () => {
     setIsVisible(true);
@@ -24,7 +23,8 @@ export default function UploadFileButton() {
   return (
     <>
       <Button className="rounded-3xl" variant="outline" onClick={openForm}>
-        <Upload className="inline" /> t(keys.UploadFileButton)
+        <Upload className="inline" /> 
+        {t(keys.uploadMaterialsButton)}
       </Button>
 
       {isVisible && (

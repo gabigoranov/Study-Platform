@@ -378,6 +378,54 @@
             </summary>
             <param name="message">The message returned by the exception.</param>
         </member>
+        <member name="T:StudyPlatform.Exceptions.MaterialCreationException">
+            <summary>
+            Exception thrown when there is an error during the creation of study material.
+            </summary>
+        </member>
+        <member name="M:StudyPlatform.Exceptions.MaterialCreationException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes the exception instance.
+            </summary>
+            <param name="message">The text message of the exception.</param>
+            <param name="inner">The inner exception.</param>
+        </member>
+        <member name="T:StudyPlatform.Exceptions.MaterialDeletionException">
+            <summary>
+            Exception thrown when a material cannot be deleted due to existing dependencies or other causes.
+            </summary>
+        </member>
+        <member name="M:StudyPlatform.Exceptions.MaterialDeletionException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes the exception instance.
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+        </member>
+        <member name="T:StudyPlatform.Exceptions.MaterialFetchingException">
+            <summary>
+            Exception thrown when there is an error during the fetching of study material.
+            </summary>
+        </member>
+        <member name="M:StudyPlatform.Exceptions.MaterialFetchingException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes the exception instance.
+            </summary>
+            <param name="message">The text message.</param>
+            <param name="innerException">The inner exception instance.</param>
+        </member>
+        <member name="T:StudyPlatform.Exceptions.MaterialUpdateException">
+            <summary>
+            Exception thrown when there is an error during the update of study material.
+            </summary>
+        </member>
+        <member name="M:StudyPlatform.Exceptions.MaterialUpdateException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:StudyPlatform.Exceptions.MaterialUpdateException"/> class.
+            </summary>
+            <param name="message">The texte message.</param>
+            <param name="innerException">The inner exception instance.</param>
+        </member>
         <member name="T:StudyPlatform.Extensions.ClaimsPrincipalExtensions">
             <summary>
             An extension class for the claims prinicpal.

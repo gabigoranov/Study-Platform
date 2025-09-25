@@ -8,6 +8,7 @@ import { Label } from '../../components/ui/label';
 import { Avatar, AvatarImage, AvatarFallback } from '../../components/ui/avatar';
 import { Card, CardHeader, CardTitle, CardContent } from '../../components/ui/card';
 import { Alert, AlertDescription } from '../../components/ui/alert';
+import Loading from '@/components/Common/Loading';
 
 export default function AccountSettings() {
   const { t } = useTranslation();
@@ -56,6 +57,7 @@ export default function AccountSettings() {
   };
 
   return (
+    loading ? <Loading isLoading={loading} /> :
     <div className="space-y-6">
       <Card>
         <CardHeader>

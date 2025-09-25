@@ -89,16 +89,15 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       }
 
       if (updates.fullName || updates.email) {
-        const { error } = await supabase.auth.updateUser({
+        const { data: { user: updatedUser }, error } = await supabase.auth.updateUser({
           email: updates.email,
           data: { full_name: updates.fullName }
         });
         if (error) throw error;
+        
+        setUser(updatedUser);
+      
       }
-
-      // Refresh user data
-      const { data: { user: updatedUser } } = await supabase.auth.getUser();
-      setUser(updatedUser);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to update profile');
       throw err;

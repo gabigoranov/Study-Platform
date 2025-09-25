@@ -1,6 +1,7 @@
 ﻿namespace StudyPlatform.Middlewares
 {
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Hosting;
     using StudyPlatform.Exceptions;
     using System.Net;
@@ -115,6 +116,36 @@
                 case ApplicationException:
                     statusCode = HttpStatusCode.UnprocessableEntity;
                     title = "Unprocessable entity";
+                    break;
+
+                // 400: Material creation error
+                case MaterialCreationException:
+                    statusCode = HttpStatusCode.BadRequest;
+                    title = "Material creation error";
+                    break;
+
+                // 400: Material update error
+                case MaterialUpdateException:
+                    statusCode = HttpStatusCode.BadRequest;
+                    title = "Material update error";
+                    break;
+
+                // 400: Material fetching error
+                case MaterialFetchingException:
+                    statusCode = HttpStatusCode.BadRequest;
+                    title = "Material fetching error";
+                    break;
+
+                // 400: Material deletion error
+                case MaterialDeletionException:
+                    statusCode = HttpStatusCode.BadRequest;
+                    title = "Material deletion error";
+                    break;
+
+                // 500: DB update error
+                case DbUpdateException:
+                    statusCode = HttpStatusCode.InternalServerError;
+                    title = "Database update error";
                     break;
 
                 // 500 Internal Server Error (fallback)

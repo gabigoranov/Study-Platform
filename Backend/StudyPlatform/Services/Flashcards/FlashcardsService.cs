@@ -1,9 +1,11 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using StudyPlatform.Data;
 using StudyPlatform.Data.Common;
 using StudyPlatform.Data.Models;
+using StudyPlatform.Exceptions;
 using StudyPlatform.Models;
 using StudyPlatform.Models.DTOs;
 using System.Diagnostics;
@@ -46,17 +48,33 @@ namespace StudyPlatform.Services.Flashcards
         /// <returns>The created <see cref="Flashcard"/>.</returns>
         public async Task<FlashcardDTO> CreateAsync(CreateFlashcardViewModel model, Guid userId)
         {
-            _logger.LogInformation("Creating a flashcard for user {UserId}", userId);
+            if (model == null) throw new ArgumentNullException("The flashcard model can not be null or empty.");
+            if (userId == Guid.Empty) throw new ArgumentNullException("UserId can not be null or empty.");
 
-            var flashcard = _mapper.Map<Flashcard>(model);
-            flashcard.UserId = userId;
+            try
+            {
+                _logger.LogInformation("Creating a flashcard for user {UserId}", userId);
 
-            await _repo.AddAsync<Flashcard>(flashcard);
-            await _repo.SaveChangesAsync();
+                var flashcard = _mapper.Map<Flashcard>(model);
+                flashcard.UserId = userId;
 
-            _logger.LogInformation("Flashcard {FlashcardId} created successfully for user {UserId}", flashcard.Id, userId);
+                await _repo.AddAsync<Flashcard>(flashcard);
+                await _repo.SaveChangesAsync();
 
-            return _mapper.Map<FlashcardDTO>(flashcard);
+                _logger.LogInformation("Flashcard {FlashcardId} created successfully for user {UserId}", flashcard.Id, userId);
+
+                return _mapper.Map<FlashcardDTO>(flashcard);
+            }
+            catch (DbUpdateException ex)
+            {
+                _logger.LogError("Could not save Flashcard for user {UserId}", userId);
+                throw new DbUpdateException("Failed to save the new material to the database.", ex);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("Could not create Flashcard for user {UserId}", userId);
+                throw new MaterialCreationException("Something went wrong while creating the new material. Please try again!", ex);
+            }
         }
 
         /// <summary>
@@ -68,23 +86,40 @@ namespace StudyPlatform.Services.Flashcards
         /// <returns>The updated <see cref="Flashcard"/>.</returns>
         public async Task<FlashcardDTO> UpdateAsync(CreateFlashcardViewModel model, Guid userId, int id)
         {
-            _logger.LogInformation("Editing flashcard {FlashcardId} for user {UserId}", id, userId);
+            if (model == null) throw new ArgumentNullException("The flashcard model can not be null or empty.");
+            if (userId == Guid.Empty) throw new ArgumentNullException("UserId can not be null or empty.");
 
-            var flashcard = await _repo.All<Flashcard>().FirstOrDefaultAsync(f => f.Id == id && f.UserId == userId);
-
-            if (flashcard == null)
+            try
             {
-                _logger.LogWarning("Flashcard {FlashcardId} not found for user {UserId}", id, userId);
-                throw new KeyNotFoundException("Flashcard not found.");
+                _logger.LogInformation("Editing flashcard {FlashcardId} for user {UserId}", id, userId);
+
+                var flashcard = await _repo.All<Flashcard>().FirstOrDefaultAsync(f => f.Id == id && f.UserId == userId);
+
+                if (flashcard == null)
+                {
+                    _logger.LogWarning("Flashcard {FlashcardId} not found for user {UserId}", id, userId);
+                    throw new KeyNotFoundException("Could not find the requested flashcard.");
+                }
+
+                _mapper.Map(model, flashcard); // maps updated fields from ViewModel to entity
+
+                await _repo.SaveChangesAsync();
+
+                _logger.LogInformation("Flashcard {FlashcardId} edited successfully for user {UserId}", flashcard.Id, userId);
+
+                return _mapper.Map<FlashcardDTO>(flashcard);
+            }
+            catch (DbUpdateException ex)
+            {
+                _logger.LogError("Could not update Flashcard for user {UserId}", userId);
+                throw new DbUpdateException("Failed to save the new material to the database.", ex);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("Could not update Flashcard for user {UserId}", userId);
+                throw new MaterialUpdateException("Something went wrong while updating the new material. Please try again!", ex);
             }
 
-            _mapper.Map(model, flashcard); // maps updated fields from ViewModel to entity
-
-            await _repo.SaveChangesAsync();
-
-            _logger.LogInformation("Flashcard {FlashcardId} edited successfully for user {UserId}", flashcard.Id, userId);
-
-            return _mapper.Map<FlashcardDTO>(flashcard);
         }
 
         /// <summary>
@@ -95,12 +130,25 @@ namespace StudyPlatform.Services.Flashcards
         /// <returns>A collection of <see cref="Flashcard"/> objects.</returns>
         public async Task<FlashcardDTO> GetAsync(Guid userId, int id)
         {
-            var flashcards = await _repo.All<Flashcard>()
-                .SingleAsync(f => f.Id == id && f.UserId == userId);
+            if (userId == Guid.Empty) throw new ArgumentNullException("UserId can not be null or empty.");
 
-            _logger.LogInformation("1 flashcard retrieved for user {UserId}", userId);
+            try
+            {
+                Flashcard? flashcards = await _repo.AllReadonly<Flashcard>()
+                    .SingleAsync(f => f.Id == id && f.UserId == userId);
 
-            return _mapper.Map<FlashcardDTO>(flashcards);
+                if (flashcards == null)
+                    throw new KeyNotFoundException("Could not find a flashcard with the specified Id and UserId."); 
+
+                _logger.LogInformation("1 flashcard retrieved for user {UserId}", userId);
+    
+                return _mapper.Map<FlashcardDTO>(flashcards);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("Could not fetch Flashcard for user {UserId}", userId);
+                throw new MaterialFetchingException("Something went wrong while fetching the material. Please try again!", ex);
+            }
         }
 
         /// <summary>
@@ -114,22 +162,48 @@ namespace StudyPlatform.Services.Flashcards
             if (ids == null || ids.Length == 0)
             {
                 _logger.LogInformation("DeleteAsync called with empty or null IDs for user {UserId}", userId);
-                return;
+                throw new KeyNotFoundException("No flashcard IDs provided for deletion.");
             }
+            if (userId == Guid.Empty) throw new ArgumentNullException("UserId can not be null or empty.");
 
-            int deletedCount = await _repo.All<Flashcard>()
-                .Where(f => ids.Contains(f.Id) && f.UserId == userId)
-                .ExecuteDeleteAsync();
+            try
+            {
+                int deletedCount = await _repo.All<Flashcard>()
+                   .Where(f => ids.Contains(f.Id) && f.UserId == userId)
+                   .ExecuteDeleteAsync();
 
-            _logger.LogInformation("{DeletedCount} flashcards deleted for user {UserId}", deletedCount, userId);
+                _logger.LogInformation("{DeletedCount} flashcards deleted for user {UserId}", deletedCount, userId);
+            }
+            catch (DbUpdateException ex)
+            {
+                _logger.LogError("Could not save changes for deleted Flashcards for user {UserId}", userId);
+                throw new DbUpdateException("Failed to execute the deletion of the material from the database.", ex);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("Could not delete Flashcards for user {UserId}", userId);
+                throw new MaterialDeletionException("Something went wrong while deleting the material. Please try again!", ex);
+            }
         }
 
         /// <inheritdoc />
         public async Task<IEnumerable<FlashcardDTO>> GetAllAsync(Guid userId, int? groupId = null)
         {
-            var flashcards = await _repo.All<Flashcard>().Where(x => groupId != null ? x.MaterialSubGroupId == groupId && x.UserId == userId : x.UserId == userId).ToListAsync();
+            if (userId == Guid.Empty) throw new ArgumentNullException("UserId can not be null or empty.");
+            if (groupId != null && groupId <= 0) throw new ArgumentOutOfRangeException("GroupId must be a positive integer.");
 
-            return _mapper.Map<IEnumerable<FlashcardDTO>>(flashcards);
+            try
+            {
+                _logger.LogInformation("Fetching flashcards for user {UserId}", userId);
+                var flashcards = await _repo.AllReadonly<Flashcard>().Where(x => groupId != null ? x.MaterialSubGroupId == groupId && x.UserId == userId : x.UserId == userId).ToListAsync();
+
+                return _mapper.Map<IEnumerable<FlashcardDTO>>(flashcards);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("Could not fetch Flashcards for user {UserId}", userId);
+                throw new MaterialFetchingException("Something went wrong while fetching the material. Please try again!", ex);
+            }
         }
 
         /// <inheritdoc />
@@ -162,23 +236,38 @@ namespace StudyPlatform.Services.Flashcards
         /// <inheritdoc />
         public async Task<IEnumerable<FlashcardDTO>> CreateBulkAsync(IEnumerable<CreateFlashcardViewModel> model, Guid userId)
         {
+            if(model == null || !model.Any()) throw new ArgumentNullException("The flashcards model can not be null or empty.");
+            if (userId == Guid.Empty) throw new ArgumentNullException("UserId can not be null or empty.");
 
-            _logger.LogInformation("Creating {Count} flashcards for user {UserId}", model.Count(), userId);
-
-            List<Flashcard> flashcards = new List<Flashcard>();
-            await _repo.AddRangeAsync<Flashcard>(model.Select(m =>
+            try
             {
-                var flashcard = _mapper.Map<Flashcard>(m);
-                flashcard.UserId = userId;
-                flashcards.Add(flashcard);
-                return flashcard;
-            }));
+                _logger.LogInformation("Creating {Count} flashcards for user {UserId}", model.Count(), userId);
 
-            await _repo.SaveChangesAsync();
+                List<Flashcard> flashcards = new List<Flashcard>();
+                await _repo.AddRangeAsync<Flashcard>(model.Select(m =>
+                {
+                    var flashcard = _mapper.Map<Flashcard>(m);
+                    flashcard.UserId = userId;
+                    flashcards.Add(flashcard);
+                    return flashcard;
+                }));
 
-            _logger.LogInformation("{Count} flashcards created successfully for user {UserId}", model.Count(), userId);
+                await _repo.SaveChangesAsync();
 
-            return _mapper.Map<IEnumerable<FlashcardDTO>>(flashcards);
+                _logger.LogInformation("{Count} flashcards created successfully for user {UserId}", model.Count(), userId);
+
+                return _mapper.Map<IEnumerable<FlashcardDTO>>(flashcards);
+            }
+            catch (DbUpdateException ex)
+            {
+                _logger.LogError("Could not save Flashcards for user {UserId}", userId);
+                throw new DbUpdateException("Failed to save the new material to the database.", ex);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("Could not create Flashcards for user {UserId}", userId);
+                throw new MaterialCreationException("Something went wrong while creating the new flashcards. Please try again!", ex);
+            }
         }
     }
 }
