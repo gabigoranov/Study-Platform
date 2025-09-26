@@ -426,6 +426,30 @@
             <param name="message">The texte message.</param>
             <param name="innerException">The inner exception instance.</param>
         </member>
+        <member name="T:StudyPlatform.Exceptions.SubGroupCreationException">
+            <summary>
+            Exception thrown when there is an error creating a material subgroup.
+            </summary>
+        </member>
+        <member name="M:StudyPlatform.Exceptions.SubGroupCreationException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes the <see cref="T:StudyPlatform.Exceptions.SubGroupCreationException"/> class.
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+        </member>
+        <member name="T:StudyPlatform.Exceptions.SubGroupFetchingException">
+            <summary>
+            An exception thrown in case of an unexpected error during the fetching of material subgroups.
+            </summary>
+        </member>
+        <member name="M:StudyPlatform.Exceptions.SubGroupFetchingException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:StudyPlatform.Exceptions.SubGroupFetchingException"/> class.
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+        </member>
         <member name="T:StudyPlatform.Extensions.ClaimsPrincipalExtensions">
             <summary>
             An extension class for the claims prinicpal.
