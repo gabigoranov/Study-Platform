@@ -795,7 +795,7 @@
             Service for managing material subgroups.
             </summary>
         </member>
-        <member name="M:StudyPlatform.Services.MaterialSubGroups.MaterialSubGroupsService.#ctor(StudyPlatform.Data.AppDbContext,Microsoft.Extensions.Logging.ILogger{StudyPlatform.Services.MaterialSubGroups.MaterialSubGroupsService},AutoMapper.IMapper)">
+        <member name="M:StudyPlatform.Services.MaterialSubGroups.MaterialSubGroupsService.#ctor(StudyPlatform.Data.Common.IRepository,Microsoft.Extensions.Logging.ILogger{StudyPlatform.Services.MaterialSubGroups.MaterialSubGroupsService},AutoMapper.IMapper)">
             <summary>
             Initializes a new instance of the <see cref="T:StudyPlatform.Services.MaterialSubGroups.MaterialSubGroupsService"/> class.
             </summary>

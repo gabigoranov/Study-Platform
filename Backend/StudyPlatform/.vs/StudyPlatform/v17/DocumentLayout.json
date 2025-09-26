@@ -3,9 +3,6 @@
   "WorkspaceRootPath": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{3F8DA37D-D8FC-45C2-B38A-77737B9023C9}|..\\StudyPlatformTests\\StudyPlatformTests.csproj|d:\\projects\\studyplatform\\backend\\studyplatformtests\\flashcardsservicetests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|d:\\projects\\studyplatform\\backend\\studyplatform\\services\\flashcards\\flashcardsservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|solutionrelative:services\\flashcards\\flashcardsservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -14,12 +11,14 @@
       "RelativeMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|solutionrelative:middlewares\\exceptionhandlingmiddleware.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|d:\\projects\\studyplatform\\backend\\studyplatform\\exceptions\\materialdeletionexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|solutionrelative:exceptions\\materialdeletionexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|d:\\projects\\studyplatform\\backend\\studyplatform\\services\\materialsubgroups\\materialsubgroupsservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|solutionrelative:services\\materialsubgroups\\materialsubgroupsservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|d:\\projects\\studyplatform\\backend\\studyplatform\\data\\common\\repository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|solutionrelative:data\\common\\repository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{3F8DA37D-D8FC-45C2-B38A-77737B9023C9}|..\\StudyPlatformTests\\StudyPlatformTests.csproj|d:\\projects\\studyplatform\\backend\\studyplatformtests\\materialsubgroupsservicetests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3F8DA37D-D8FC-45C2-B38A-77737B9023C9}|..\\StudyPlatformTests\\StudyPlatformTests.csproj|d:\\projects\\studyplatform\\backend\\studyplatformtests\\flashcardsservicetests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{3F8DA37D-D8FC-45C2-B38A-77737B9023C9}|..\\StudyPlatformTests\\StudyPlatformTests.csproj|d:\\projects\\studyplatform\\backend\\studyplatformtests\\testdata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
@@ -30,6 +29,10 @@
     {
       "AbsoluteMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|d:\\projects\\studyplatform\\backend\\studyplatform\\data\\common\\irepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|solutionrelative:data\\common\\irepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|d:\\projects\\studyplatform\\backend\\studyplatform\\data\\common\\repository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|solutionrelative:data\\common\\repository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|d:\\projects\\studyplatform\\backend\\studyplatform\\data\\models\\material.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -43,11 +46,24 @@
       "DocumentGroups": [
         {
           "DockedWidth": 135,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "MaterialSubGroupsServiceTests.cs",
+              "DocumentMoniker": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatformTests\\MaterialSubGroupsServiceTests.cs",
+              "RelativeDocumentMoniker": "..\\StudyPlatformTests\\MaterialSubGroupsServiceTests.cs",
+              "ToolTip": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatformTests\\MaterialSubGroupsServiceTests.cs",
+              "RelativeToolTip": "..\\StudyPlatformTests\\MaterialSubGroupsServiceTests.cs",
+              "ViewState": "AQIAADsAAAAAAAAAAAAkwFkAAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-26T12:16:06.674Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -57,22 +73,9 @@
               "RelativeDocumentMoniker": "..\\StudyPlatformTests\\TestAsyncEnumerable.cs",
               "ToolTip": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatformTests\\TestAsyncEnumerable.cs",
               "RelativeToolTip": "..\\StudyPlatformTests\\TestAsyncEnumerable.cs",
-              "ViewState": "AQIAABcAAAAAAAAAAAAowDUAAAAEAAAA",
+              "ViewState": "AQIAACkAAAAAAAAAAAAuwEAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-09-25T16:13:49.921Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "Material.cs",
-              "DocumentMoniker": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Data\\Models\\Material.cs",
-              "RelativeDocumentMoniker": "Data\\Models\\Material.cs",
-              "ToolTip": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Data\\Models\\Material.cs",
-              "RelativeToolTip": "Data\\Models\\Material.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-24T12:05:17.347Z",
               "EditorCaption": ""
             },
             {
@@ -83,20 +86,20 @@
               "RelativeDocumentMoniker": "..\\StudyPlatformTests\\TestData.cs",
               "ToolTip": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatformTests\\TestData.cs",
               "RelativeToolTip": "..\\StudyPlatformTests\\TestData.cs",
-              "ViewState": "AQIAAGAAAAAAAAAAAAA2wHEAAABRAAAA",
+              "ViewState": "AQIAABEAAAAAAAAAAAAAwHMAAAAgAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-09-23T16:32:22.932Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 4,
               "Title": "FlashcardsServiceTests.cs",
               "DocumentMoniker": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatformTests\\FlashcardsServiceTests.cs",
               "RelativeDocumentMoniker": "..\\StudyPlatformTests\\FlashcardsServiceTests.cs",
               "ToolTip": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatformTests\\FlashcardsServiceTests.cs",
               "RelativeToolTip": "..\\StudyPlatformTests\\FlashcardsServiceTests.cs",
-              "ViewState": "AQIAADABAAAAAAAAAAAcwFEBAAAAAAAA",
+              "ViewState": "AQIAAMUAAAAAAAAAAAAYwNMAAABKAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-09-23T16:16:52.022Z",
               "EditorCaption": ""
@@ -109,10 +112,35 @@
               "RelativeDocumentMoniker": "Data\\Common\\IRepository.cs",
               "ToolTip": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Data\\Common\\IRepository.cs",
               "RelativeToolTip": "Data\\Common\\IRepository.cs",
-              "ViewState": "AQIAAAgAAAAAAAAAAAAQwBMAAABCAAAA",
+              "ViewState": "AQIAAEIAAAAAAAAAAAAkwFAAAABSAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-09-24T11:43:46.111Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Repository.cs",
+              "DocumentMoniker": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Data\\Common\\Repository.cs",
+              "RelativeDocumentMoniker": "Data\\Common\\Repository.cs",
+              "ToolTip": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Data\\Common\\Repository.cs",
+              "RelativeToolTip": "Data\\Common\\Repository.cs",
+              "ViewState": "AQIAAKIAAAAAAAAAAAAmwLYAAAAsAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-25T16:12:08.33Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Material.cs",
+              "DocumentMoniker": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Data\\Models\\Material.cs",
+              "RelativeDocumentMoniker": "Data\\Models\\Material.cs",
+              "ToolTip": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Data\\Models\\Material.cs",
+              "RelativeToolTip": "Data\\Models\\Material.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-24T12:05:17.347Z"
             }
           ]
         },
@@ -122,54 +150,41 @@
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "MaterialDeletionException.cs",
-              "DocumentMoniker": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Exceptions\\MaterialDeletionException.cs",
-              "RelativeDocumentMoniker": "Exceptions\\MaterialDeletionException.cs",
-              "ToolTip": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Exceptions\\MaterialDeletionException.cs",
-              "RelativeToolTip": "Exceptions\\MaterialDeletionException.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAiAAAA",
+              "DocumentIndex": 2,
+              "Title": "MaterialSubGroupsService.cs",
+              "DocumentMoniker": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Services\\MaterialSubGroups\\MaterialSubGroupsService.cs",
+              "RelativeDocumentMoniker": "Services\\MaterialSubGroups\\MaterialSubGroupsService.cs",
+              "ToolTip": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Services\\MaterialSubGroups\\MaterialSubGroupsService.cs",
+              "RelativeToolTip": "Services\\MaterialSubGroups\\MaterialSubGroupsService.cs",
+              "ViewState": "AQIAAB0AAAAAAAAAAAAgwC8AAAAkAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-25T17:04:54.962Z",
+              "WhenOpened": "2025-09-26T12:22:25.693Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "FlashcardsService.cs",
               "DocumentMoniker": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Services\\Flashcards\\FlashcardsService.cs",
               "RelativeDocumentMoniker": "Services\\Flashcards\\FlashcardsService.cs",
               "ToolTip": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Services\\Flashcards\\FlashcardsService.cs",
               "RelativeToolTip": "Services\\Flashcards\\FlashcardsService.cs",
-              "ViewState": "AQIAAOcAAAAAAAAAAAAuwOwAAAAHAAAA",
+              "ViewState": "AQIAAOcAAAAAAAAAAAAswA8BAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-09-23T16:18:49.193Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "ExceptionHandlingMiddleware.cs",
               "DocumentMoniker": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Middlewares\\ExceptionHandlingMiddleware.cs",
               "RelativeDocumentMoniker": "Middlewares\\ExceptionHandlingMiddleware.cs",
               "ToolTip": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Middlewares\\ExceptionHandlingMiddleware.cs",
               "RelativeToolTip": "Middlewares\\ExceptionHandlingMiddleware.cs",
-              "ViewState": "AQIAAF4AAAAAAAAAAAAwwI0AAAAuAAAA",
+              "ViewState": "AQIAACQAAAAAAAAAAAAgwCwAAAANAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-09-24T13:35:06.078Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Repository.cs",
-              "DocumentMoniker": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Data\\Common\\Repository.cs",
-              "RelativeDocumentMoniker": "Data\\Common\\Repository.cs",
-              "ToolTip": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Data\\Common\\Repository.cs",
-              "RelativeToolTip": "Data\\Common\\Repository.cs",
-              "ViewState": "AQIAADMAAAAAAAAAAAAAAJoAAAARAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-25T16:12:08.33Z",
               "EditorCaption": ""
             }
           ]

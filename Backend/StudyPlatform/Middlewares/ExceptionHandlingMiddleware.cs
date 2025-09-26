@@ -142,6 +142,12 @@
                     title = "Material deletion error";
                     break;
 
+                // 400: MaterialSubGroup fetching error
+                case SubGroupFetchingException:
+                    statusCode = HttpStatusCode.BadRequest;
+                    title = "Material group fetching error";
+                    break;
+
                 // 500: DB update error
                 case DbUpdateException:
                     statusCode = HttpStatusCode.InternalServerError;

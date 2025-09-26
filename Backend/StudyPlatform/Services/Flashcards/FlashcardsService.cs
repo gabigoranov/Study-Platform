@@ -168,11 +168,9 @@ namespace StudyPlatform.Services.Flashcards
 
             try
             {
-                int deletedCount = await _repo.All<Flashcard>()
-                   .Where(f => ids.Contains(f.Id) && f.UserId == userId)
-                   .ExecuteDeleteAsync();
+                await _repo.ExecuteDeleteAsync<Flashcard>(f => ids.Contains(f.Id) && f.UserId == userId);
 
-                _logger.LogInformation("{DeletedCount} flashcards deleted for user {UserId}", deletedCount, userId);
+                _logger.LogInformation("Flashcards deleted for user {UserId}", userId);
             }
             catch (DbUpdateException ex)
             {
@@ -190,7 +188,7 @@ namespace StudyPlatform.Services.Flashcards
         public async Task<IEnumerable<FlashcardDTO>> GetAllAsync(Guid userId, int? groupId = null)
         {
             if (userId == Guid.Empty) throw new ArgumentNullException("UserId can not be null or empty.");
-            if (groupId != null && groupId <= 0) throw new ArgumentOutOfRangeException("GroupId must be a positive integer.");
+            if (groupId != null && groupId < 0) throw new ArgumentOutOfRangeException("GroupId must be greater than or equal to zero.");
 
             try
             {

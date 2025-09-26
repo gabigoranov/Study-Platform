@@ -71,7 +71,7 @@ namespace StudyPlatform.Tests.Helpers
 
         public T Current => _inner.Current;
 
-        public ValueTask DisposeAsync()
+        public ValueTask DisposeAsync()  
         {
             _inner.Dispose();
             return ValueTask.CompletedTask;

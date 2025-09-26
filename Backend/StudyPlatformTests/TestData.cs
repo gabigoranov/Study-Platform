@@ -108,6 +108,11 @@ namespace StudyPlatform.Tests.Helpers
             repoMock.Setup(r => r.All<MaterialSubGroup>()).Returns(AsAsyncQueryable(TestData.SubGroups));
             repoMock.Setup(r => r.All<Subject>()).Returns(AsAsyncQueryable(TestData.Subjects));
 
+            // AllReadonly<T>() no filter
+            repoMock.Setup(r => r.AllReadonly<Flashcard>()).Returns(AsAsyncQueryable(TestData.Flashcards));
+            repoMock.Setup(r => r.AllReadonly<MaterialSubGroup>()).Returns(AsAsyncQueryable(TestData.SubGroups));
+            repoMock.Setup(r => r.AllReadonly<Subject>()).Returns(AsAsyncQueryable(TestData.Subjects));
+
             // All<T>(predicate)
             repoMock.Setup(r => r.All<Flashcard>(It.IsAny<Expression<Func<Flashcard, bool>>>()))
                 .Returns((Expression<Func<Flashcard, bool>> pred) =>
@@ -116,6 +121,17 @@ namespace StudyPlatform.Tests.Helpers
                 .Returns((Expression<Func<MaterialSubGroup, bool>> pred) =>
                     AsAsyncQueryable(TestData.SubGroups.Where(pred.Compile())));
             repoMock.Setup(r => r.All<Subject>(It.IsAny<Expression<Func<Subject, bool>>>()))
+                .Returns((Expression<Func<Subject, bool>> pred) =>
+                    AsAsyncQueryable(TestData.Subjects.Where(pred.Compile())));
+
+            // AllReadonly<T>(predicate)
+            repoMock.Setup(r => r.AllReadonly<Flashcard>(It.IsAny<Expression<Func<Flashcard, bool>>>()))
+                .Returns((Expression<Func<Flashcard, bool>> pred) =>
+                    AsAsyncQueryable(TestData.Flashcards.Where(pred.Compile())));
+            repoMock.Setup(r => r.AllReadonly<MaterialSubGroup>(It.IsAny<Expression<Func<MaterialSubGroup, bool>>>()))
+                .Returns((Expression<Func<MaterialSubGroup, bool>> pred) =>
+                    AsAsyncQueryable(TestData.SubGroups.Where(pred.Compile())));
+            repoMock.Setup(r => r.AllReadonly<Subject>(It.IsAny<Expression<Func<Subject, bool>>>()))
                 .Returns((Expression<Func<Subject, bool>> pred) =>
                     AsAsyncQueryable(TestData.Subjects.Where(pred.Compile())));
 

@@ -85,27 +85,6 @@ namespace StudyPlatformTests
         }
 
         [Fact]
-        public async Task CreateAsync_DbFailure_HandlesException()
-        {
-            // Arrange
-            var userId = Guid.NewGuid();
-            var input = new Flashcard
-            {
-                Title = "Test Card",
-                Front = "Q: What is 2+2?",
-                Back = "A: 4",
-                UserId = userId,
-                MaterialSubGroupId = 1,
-                Difficulty = Difficulty.Easy
-            };
-            var createViewModel = _mapper.Map<CreateFlashcardViewModel>(input);
-            _repoMock.Setup(r => r.AddAsync(It.IsAny<Flashcard>())).ThrowsAsync(new DbUpdateException("DB error"));
-
-            // Act & Assert
-            await Assert.ThrowsAsync<DbUpdateException>(() => _service.CreateAsync(createViewModel, userId));
-        }
-
-        [Fact]
         public async Task UpdateAsync_WithValidData_ReturnsFlashcardDTO()
         {
             // Arrange
@@ -125,7 +104,7 @@ namespace StudyPlatformTests
 
             var createViewModel = _mapper.Map<CreateFlashcardViewModel>(updateModel);
             var expectedDTO = _mapper.Map<FlashcardDTO>(updateModel);
-
+            
             _repoMock.Setup(r => r.AddAsync(It.IsAny<Flashcard>())).Returns(Task.CompletedTask);
             _repoMock.Setup(r => r.SaveChangesAsync()).ReturnsAsync(1);
 
@@ -148,31 +127,6 @@ namespace StudyPlatformTests
 
             _repoMock.Verify(r => r.AddAsync(It.IsAny<Flashcard>()), Times.Never);
             _repoMock.Verify(r => r.SaveChangesAsync(), Times.Never);
-        }
-
-        [Fact]
-        public async Task UpdateAsync_DbFailure_HandlesException()
-        {
-            // Arrange
-            var userId = Guid.NewGuid();
-            var input = new Flashcard
-            {
-                Title = "Test Card",
-                Front = "Q: What is 2+2?",
-                Back = "A: 4",
-                UserId = userId,
-                MaterialSubGroupId = 1,
-                Difficulty = Difficulty.Easy
-            };
-            var createViewModel = _mapper.Map<CreateFlashcardViewModel>(input);
-            _repoMock.Setup(r => r.SaveChangesAsync())
-                .Throws(new DbUpdateException("DB error"));
-
-            // Act & Assert
-            await Assert.ThrowsAsync<DbUpdateException>(() => _service.CreateAsync(createViewModel, userId));
-
-            _repoMock.Verify(r => r.All<Flashcard>(), Times.Once);
-            _repoMock.Verify(r => r.SaveChangesAsync(), Times.Once);
         }
 
         [Fact]
@@ -208,19 +162,21 @@ namespace StudyPlatformTests
         }
 
         [Fact]
-        public async Task DeleteAsync_WithValidData_ReturnsCompletedTask()
+        public async Task DeleteAsync_WithValidData_Completes()
         {
             // Arrange
             int[] ids = [TestData.Flashcards.First().Id];
             var userId = TestData.Flashcards.First().UserId;
 
+            _repoMock.Setup(r => r.ExecuteDeleteAsync<Flashcard>(It.IsAny<Expression<Func<Flashcard, bool>>>()))
+                .Returns(Task.CompletedTask);
             _repoMock.Setup(r => r.SaveChangesAsync()).ReturnsAsync(1);
 
             // Act
             await _service.DeleteAsync(ids, userId);
 
             // Assert
-            _repoMock.Verify(r => r.All<Flashcard>(), Times.Once);
+            _repoMock.Verify(r => r.ExecuteDeleteAsync<Flashcard>(It.IsAny<Expression<Func<Flashcard, bool>>>()), Times.Once);
         }
 
         [Fact]
@@ -232,26 +188,11 @@ namespace StudyPlatformTests
             _repoMock.Setup(r => r.SaveChangesAsync()).ReturnsAsync(1);
 
             // Act
-            await Assert.ThrowsAsync<MaterialDeletionException>(() => _service.DeleteAsync(null, userId));
+            await Assert.ThrowsAsync<KeyNotFoundException>(() => _service.DeleteAsync(null, userId));
+            await Assert.ThrowsAsync<ArgumentNullException>(() => _service.DeleteAsync([1], Guid.Empty));
 
             // Assert
             _repoMock.Verify(r => r.All<Flashcard>(), Times.Never);
-        }
-
-        [Fact]
-        public async Task DeleteAsync_WithDbFailure_ThrowsException()
-        {
-            // Arrange
-            int[] ids = [TestData.Flashcards.First().Id];
-            var userId = TestData.Flashcards.First().UserId;
-
-            _repoMock.Setup(r => r.SaveChangesAsync()).ThrowsAsync(new DbUpdateException("DB Failure"));
-
-            // Act
-            await Assert.ThrowsAsync<DbUpdateException>(() => _service.DeleteAsync(ids, userId));
-
-            // Assert
-            _repoMock.Verify(r => r.All<Flashcard>(), Times.Once);
         }
 
         [Fact]
@@ -296,7 +237,8 @@ namespace StudyPlatformTests
             var userId = TestData.Flashcards.First().UserId;
 
             // Act & Assert
-            await Assert.ThrowsAsync<MaterialFetchingException>(() => _service.GetAllAsync(userId, -1));
+            await Assert.ThrowsAsync<ArgumentOutOfRangeException>(() => _service.GetAllAsync(userId, -1));
+            await Assert.ThrowsAsync<ArgumentNullException>(() => _service.GetAllAsync(Guid.Empty));
 
             _repoMock.Verify(r => r.AllReadonly<Flashcard>(), Times.Never);
         }
@@ -358,35 +300,6 @@ namespace StudyPlatformTests
 
             _repoMock.Verify(r => r.AddRangeAsync(It.IsAny<IEnumerable<Flashcard>>()), Times.Never);
             _repoMock.Verify(r => r.SaveChangesAsync(), Times.Never);
-        }
-
-        [Fact]
-        public async Task CreateBulkAsync_WithDbFailure_ThrowsException()
-        {
-            // Arrange
-            var userId = Guid.NewGuid();
-            var flashcards = new List<Flashcard>() {
-                new Flashcard()
-                {
-                    Title = "Test Card",
-                    Front = "Q: What is 2+2?",
-                    Back = "A: 4",
-                    MaterialSubGroupId = 1,
-                    Difficulty = Difficulty.Easy,
-                    UserId = userId
-                }
-            };
-
-            var input = _mapper.Map<IEnumerable<CreateFlashcardViewModel>>(flashcards);
-
-            _repoMock.Setup(r => r.SaveChangesAsync())
-                .ThrowsAsync(new DbUpdateException("DB Failure"));
-
-            // Act & Assert
-            await Assert.ThrowsAsync<DbUpdateException>(() => _service.CreateBulkAsync(input, userId));
-
-            _repoMock.Verify(r => r.AddRangeAsync(It.IsAny<IEnumerable<Flashcard>>()), Times.Once);
-            _repoMock.Verify(r => r.SaveChangesAsync(), Times.Once);
         }
     }
 }

@@ -78,6 +78,7 @@ namespace StudyPlatform.Data.Common
 
             void DeleteRange<T>(IEnumerable<T> entities) where T : class;
             void DeleteRange<T>(Expression<Func<T, bool>> deleteWhereClause) where T : class;
+            Task ExecuteDeleteAsync<T>(Expression<Func<T, bool>> deleteWhereClause) where T : class;
 
 
             /// <summary>

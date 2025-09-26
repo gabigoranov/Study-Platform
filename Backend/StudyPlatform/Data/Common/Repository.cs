@@ -179,5 +179,10 @@ namespace StudyPlatform.Data.Common
             var entities = All<T>(deleteWhereClause);
             DeleteRange(entities);
         }
+
+        public async Task ExecuteDeleteAsync<T>(Expression<Func<T, bool>> deleteWhereClause) where T : class
+        {
+            await All<T>(deleteWhereClause).ExecuteDeleteAsync();
+        }
     }
 }
