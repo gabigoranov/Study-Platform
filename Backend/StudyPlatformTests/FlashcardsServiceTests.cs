@@ -231,6 +231,24 @@ namespace StudyPlatformTests
         }
 
         [Fact]
+        public async Task GetAllAsync_WithValidSubjectId_ReturnsFlashcardDTOs()
+        {
+            // Arrange
+            var userId = TestData.Flashcards.First().UserId;
+            var subjectId = TestData.Flashcards.First().MaterialSubGroup.SubjectId;
+            var expectedDTOs = _mapper.Map<IEnumerable<FlashcardDTO>>(TestData.Flashcards.Where(f => f.UserId == userId && f.MaterialSubGroup.SubjectId == subjectId));
+
+            // Act
+            IEnumerable<FlashcardDTO> result = await _service.GetAllAsync(userId, subjectId: subjectId);
+
+            // Assert
+            Assert.NotNull(result);
+            result.Should().BeEquivalentTo(expectedDTOs);
+
+            _repoMock.Verify(r => r.AllReadonly<Flashcard>(), Times.Once);
+        }
+
+        [Fact]
         public async Task GetAllAsync_WithInvalidData_ThrowsException()
         {
             // Arrange

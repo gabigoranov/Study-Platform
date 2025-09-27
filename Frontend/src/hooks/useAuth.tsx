@@ -71,7 +71,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     fullName?: string;
     email?: string;
   }) => {
-    setLoading(true);
     setError(null);
     try {
       if (updates.avatar) {
@@ -79,13 +78,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
         const publicUrl = await storageService.uploadFile(filePath, updates.avatar, 'avatars');
 
-        console.log('publicUrl', publicUrl);
-
-        const { error: updateError } = await supabase.auth.updateUser({
-          data: { avatar_url: publicUrl }
+        await supabase.from("profiles").upsert({
+          id: user?.id,
+          full_name: updates.fullName,
+          avatar_url: publicUrl,
+          updated_at: new Date(),
         });
 
-        if (updateError) throw updateError;
       }
 
       if (updates.fullName || updates.email) {
@@ -101,8 +100,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to update profile');
       throw err;
-    } finally {
-      setLoading(false);
     }
   };
 

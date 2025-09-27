@@ -97,12 +97,12 @@ namespace StudyPlatform.Controllers
         /// </summary>
         /// <returns>A list of flashcards if successful.</returns>
         [HttpGet("group/{id}")]
-        public async Task<IActionResult> GetAllFromGroup([FromRoute] int id)
+        public async Task<IActionResult> GetAllFromGroup([FromRoute] int id, [FromQuery] int subjectId)
         {
             // Load userId from JWT token
             Guid userId = User.GetUserId();
 
-            IEnumerable<FlashcardDTO> res = await _flashcardsService.GetAllAsync(userId, id);
+            IEnumerable<FlashcardDTO> res = await _flashcardsService.GetAllAsync(userId, id, subjectId);
             return Ok(res);
         }
 

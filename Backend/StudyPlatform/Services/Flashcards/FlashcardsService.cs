@@ -185,17 +185,26 @@ namespace StudyPlatform.Services.Flashcards
         }
 
         /// <inheritdoc />
-        public async Task<IEnumerable<FlashcardDTO>> GetAllAsync(Guid userId, int? groupId = null)
+        public async Task<IEnumerable<FlashcardDTO>> GetAllAsync(Guid userId, int? groupId = null, int? subjectId = null)
         {
             if (userId == Guid.Empty) throw new ArgumentNullException("UserId can not be null or empty.");
             if (groupId != null && groupId < 0) throw new ArgumentOutOfRangeException("GroupId must be greater than or equal to zero.");
+            if (groupId != null && groupId < 0) throw new ArgumentOutOfRangeException("SubjectId must be greater than or equal to zero.");
 
             try
             {
                 _logger.LogInformation("Fetching flashcards for user {UserId}", userId);
-                var flashcards = await _repo.AllReadonly<Flashcard>().Where(x => groupId != null ? x.MaterialSubGroupId == groupId && x.UserId == userId : x.UserId == userId).ToListAsync();
+                var query = _repo.AllReadonly<Flashcard>().Where(x => x.UserId == userId);
 
-                return _mapper.Map<IEnumerable<FlashcardDTO>>(flashcards);
+                if(groupId != null)
+                    query = query.Where(x => x.MaterialSubGroupId == groupId);
+
+                if (subjectId != null)
+                    query = query.Where(x => x.MaterialSubGroup.SubjectId == subjectId);
+
+                var entities = await query.ToListAsync();   
+
+                return _mapper.Map<IEnumerable<FlashcardDTO>>(entities);
             }
             catch (Exception ex)
             {

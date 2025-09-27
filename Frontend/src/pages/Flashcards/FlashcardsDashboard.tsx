@@ -23,13 +23,13 @@ export default function FlashcardsDashboard() {
   const [view, setView] = useState<View>("list");
   const { token } = useAuth();
   const queryClient = useQueryClient();
-  const {selectedFlashcardId, setSelectedFlashcardId, selectedGroupId } = useVariableContext();
+  const {selectedFlashcardId, setSelectedFlashcardId, selectedGroupId, selectedSubjectId } = useVariableContext();
   const navigate = useNavigate();
 
   // --- Query: load all flashcards ---
   const { data: flashcards, isLoading, error } = useQuery({
-    queryKey: ["flashcards", selectedGroupId],
-    queryFn: () => flashcardService.getAll(token!, selectedGroupId ? `group/${selectedGroupId}` : null),
+    queryKey: ["flashcards", selectedGroupId, selectedSubjectId],
+    queryFn: () => flashcardService.getAll(token!, selectedGroupId ? `group/${selectedGroupId}` : null, selectedSubjectId ? { subjectId: selectedSubjectId} : undefined),
     staleTime: 1000 * 60 * 5,
   });
 

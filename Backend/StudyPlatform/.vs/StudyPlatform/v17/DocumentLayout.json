@@ -3,11 +3,26 @@
   "WorkspaceRootPath": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|d:\\projects\\studyplatform\\backend\\studyplatform\\services\\materialsubgroups\\materialsubgroupsservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|solutionrelative:services\\materialsubgroups\\materialsubgroupsservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|d:\\projects\\studyplatform\\backend\\studyplatform\\services\\flashcards\\flashcardsservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|solutionrelative:services\\flashcards\\flashcardsservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|d:\\projects\\studyplatform\\backend\\studyplatform\\controllers\\flashcardscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|solutionrelative:controllers\\flashcardscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3F8DA37D-D8FC-45C2-B38A-77737B9023C9}|..\\StudyPlatformTests\\StudyPlatformTests.csproj|d:\\projects\\studyplatform\\backend\\studyplatformtests\\flashcardsservicetests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|d:\\projects\\studyplatform\\backend\\studyplatform\\services\\flashcards\\iflashcardsservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|solutionrelative:services\\flashcards\\iflashcardsservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{3F8DA37D-D8FC-45C2-B38A-77737B9023C9}|..\\StudyPlatformTests\\StudyPlatformTests.csproj|d:\\projects\\studyplatform\\backend\\studyplatformtests\\materialsubgroupsservicetests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|d:\\projects\\studyplatform\\backend\\studyplatform\\services\\materialsubgroups\\materialsubgroupsservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|solutionrelative:services\\materialsubgroups\\materialsubgroupsservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{3F8DA37D-D8FC-45C2-B38A-77737B9023C9}|..\\StudyPlatformTests\\StudyPlatformTests.csproj|d:\\projects\\studyplatform\\backend\\studyplatformtests\\subjectsservicetests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
@@ -37,14 +52,7 @@
       "RelativeMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|solutionrelative:exceptions\\subgroupcreationexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|d:\\projects\\studyplatform\\backend\\studyplatform\\services\\flashcards\\flashcardsservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|solutionrelative:services\\flashcards\\flashcardsservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{3F8DA37D-D8FC-45C2-B38A-77737B9023C9}|..\\StudyPlatformTests\\StudyPlatformTests.csproj|d:\\projects\\studyplatform\\backend\\studyplatformtests\\testdata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{3F8DA37D-D8FC-45C2-B38A-77737B9023C9}|..\\StudyPlatformTests\\StudyPlatformTests.csproj|d:\\projects\\studyplatform\\backend\\studyplatformtests\\flashcardsservicetests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{3F8DA37D-D8FC-45C2-B38A-77737B9023C9}|..\\StudyPlatformTests\\StudyPlatformTests.csproj|d:\\projects\\studyplatform\\backend\\studyplatformtests\\testasyncenumerable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
@@ -77,7 +85,33 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
+              "Title": "IFlashcardsService.cs",
+              "DocumentMoniker": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Services\\Flashcards\\IFlashcardsService.cs",
+              "RelativeDocumentMoniker": "Services\\Flashcards\\IFlashcardsService.cs",
+              "ToolTip": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Services\\Flashcards\\IFlashcardsService.cs",
+              "RelativeToolTip": "Services\\Flashcards\\IFlashcardsService.cs",
+              "ViewState": "AQIAADUAAAAAAAAAAAAswD4AAABtAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-27T15:41:34.144Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "FlashcardsController.cs",
+              "DocumentMoniker": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Controllers\\FlashcardsController.cs",
+              "RelativeDocumentMoniker": "Controllers\\FlashcardsController.cs",
+              "ToolTip": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Controllers\\FlashcardsController.cs",
+              "RelativeToolTip": "Controllers\\FlashcardsController.cs",
+              "ViewState": "AQIAAFAAAAAAAAAAAADwv2QAAAAIAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-27T15:40:54.833Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
               "Title": "SubjectsServiceTests.cs",
               "DocumentMoniker": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatformTests\\SubjectsServiceTests.cs",
               "RelativeDocumentMoniker": "..\\StudyPlatformTests\\SubjectsServiceTests.cs",
@@ -90,20 +124,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 4,
               "Title": "MaterialSubGroupsServiceTests.cs",
               "DocumentMoniker": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatformTests\\MaterialSubGroupsServiceTests.cs",
               "RelativeDocumentMoniker": "..\\StudyPlatformTests\\MaterialSubGroupsServiceTests.cs",
               "ToolTip": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatformTests\\MaterialSubGroupsServiceTests.cs",
               "RelativeToolTip": "..\\StudyPlatformTests\\MaterialSubGroupsServiceTests.cs",
-              "ViewState": "AQIAAIoAAAAAAAAAAAAmwJwAAABAAAAA",
+              "ViewState": "AQIAAIoAAAAAAAAAAAAmwK8AAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-09-26T12:16:06.674Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 14,
               "Title": "TestAsyncEnumerable.cs",
               "DocumentMoniker": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatformTests\\TestAsyncEnumerable.cs",
               "RelativeDocumentMoniker": "..\\StudyPlatformTests\\TestAsyncEnumerable.cs",
@@ -115,7 +149,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 13,
               "Title": "TestData.cs",
               "DocumentMoniker": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatformTests\\TestData.cs",
               "RelativeDocumentMoniker": "..\\StudyPlatformTests\\TestData.cs",
@@ -127,19 +161,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 2,
               "Title": "FlashcardsServiceTests.cs",
               "DocumentMoniker": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatformTests\\FlashcardsServiceTests.cs",
               "RelativeDocumentMoniker": "..\\StudyPlatformTests\\FlashcardsServiceTests.cs",
               "ToolTip": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatformTests\\FlashcardsServiceTests.cs",
               "RelativeToolTip": "..\\StudyPlatformTests\\FlashcardsServiceTests.cs",
-              "ViewState": "AQIAAMUAAAAAAAAAAAAYwNMAAABKAAAA",
+              "ViewState": "AQIAAOgAAAAAAAAAAADwv/EAAABSAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-23T16:16:52.022Z"
+              "WhenOpened": "2025-09-23T16:16:52.022Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 15,
               "Title": "IRepository.cs",
               "DocumentMoniker": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Data\\Common\\IRepository.cs",
               "RelativeDocumentMoniker": "Data\\Common\\IRepository.cs",
@@ -151,7 +186,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 16,
               "Title": "Repository.cs",
               "DocumentMoniker": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Data\\Common\\Repository.cs",
               "RelativeDocumentMoniker": "Data\\Common\\Repository.cs",
@@ -163,7 +198,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 17,
               "Title": "Material.cs",
               "DocumentMoniker": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Data\\Models\\Material.cs",
               "RelativeDocumentMoniker": "Data\\Models\\Material.cs",
@@ -177,11 +212,11 @@
         },
         {
           "DockedWidth": 133,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 6,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 9,
               "Title": "SubjectCreationException.cs",
               "DocumentMoniker": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Exceptions\\SubjectCreationException.cs",
               "RelativeDocumentMoniker": "Exceptions\\SubjectCreationException.cs",
@@ -194,7 +229,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 11,
               "Title": "ISubjectsService.cs",
               "DocumentMoniker": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Services\\Subjects\\ISubjectsService.cs",
               "RelativeDocumentMoniker": "Services\\Subjects\\ISubjectsService.cs",
@@ -207,7 +242,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 10,
               "Title": "SubjectFetchingException.cs",
               "DocumentMoniker": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Exceptions\\SubjectFetchingException.cs",
               "RelativeDocumentMoniker": "Exceptions\\SubjectFetchingException.cs",
@@ -220,7 +255,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 7,
               "Title": "SubjectsService.cs",
               "DocumentMoniker": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Services\\Subjects\\SubjectsService.cs",
               "RelativeDocumentMoniker": "Services\\Subjects\\SubjectsService.cs",
@@ -233,7 +268,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 12,
               "Title": "SubGroupCreationException.cs",
               "DocumentMoniker": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Exceptions\\SubGroupCreationException.cs",
               "RelativeDocumentMoniker": "Exceptions\\SubGroupCreationException.cs",
@@ -246,7 +281,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 5,
               "Title": "MaterialSubGroupsService.cs",
               "DocumentMoniker": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Services\\MaterialSubGroups\\MaterialSubGroupsService.cs",
               "RelativeDocumentMoniker": "Services\\MaterialSubGroups\\MaterialSubGroupsService.cs",
@@ -259,20 +294,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 0,
               "Title": "FlashcardsService.cs",
               "DocumentMoniker": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Services\\Flashcards\\FlashcardsService.cs",
               "RelativeDocumentMoniker": "Services\\Flashcards\\FlashcardsService.cs",
               "ToolTip": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Services\\Flashcards\\FlashcardsService.cs",
               "RelativeToolTip": "Services\\Flashcards\\FlashcardsService.cs",
-              "ViewState": "AQIAADMAAAAAAAAAAAAcwEUAAAAAAAAA",
+              "ViewState": "AQIAAK4AAAAAAAAAAAAswMoAAAAiAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-09-23T16:18:49.193Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 8,
               "Title": "ExceptionHandlingMiddleware.cs",
               "DocumentMoniker": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Middlewares\\ExceptionHandlingMiddleware.cs",
               "RelativeDocumentMoniker": "Middlewares\\ExceptionHandlingMiddleware.cs",

@@ -42,7 +42,7 @@
             </summary>
             <returns>A list of flashcards if successful.</returns>
         </member>
-        <member name="M:StudyPlatform.Controllers.FlashcardsController.GetAllFromGroup(System.Int32)">
+        <member name="M:StudyPlatform.Controllers.FlashcardsController.GetAllFromGroup(System.Int32,System.Int32)">
             <summary>
             Endpoint for getting all flashcards that the user owns in a certain group.
             </summary>
@@ -718,7 +718,7 @@
             <param name="userId">The ID of the user who owns the flashcards.</param>
             <returns>A task representing the asynchronous delete operation.</returns>
         </member>
-        <member name="M:StudyPlatform.Services.Flashcards.FlashcardsService.GetAllAsync(System.Guid,System.Nullable{System.Int32})">
+        <member name="M:StudyPlatform.Services.Flashcards.FlashcardsService.GetAllAsync(System.Guid,System.Nullable{System.Int32},System.Nullable{System.Int32})">
             <inheritdoc />
         </member>
         <member name="M:StudyPlatform.Services.Flashcards.FlashcardsService.GenerateAsync(System.Guid,StudyPlatform.Models.GenerateFlashcardsViewModel)">
@@ -776,11 +776,12 @@
             The task result contains a of <see cref="T:StudyPlatform.Models.DTOs.FlashcardDTO"/> object.
             </returns>
         </member>
-        <member name="M:StudyPlatform.Services.Flashcards.IFlashcardsService.GetAllAsync(System.Guid,System.Nullable{System.Int32})">
+        <member name="M:StudyPlatform.Services.Flashcards.IFlashcardsService.GetAllAsync(System.Guid,System.Nullable{System.Int32},System.Nullable{System.Int32})">
             <summary>
             Retrieves all flashcards for the specified user.
             </summary>
             <param name="userId">The specified userId.</param>
+            <param name="subjectId">The optional subjectId parameter.</param>
             <param name="groupId">Specifies the group from which to select flashcards. If left unspecified will return all flashcards..</param>
             <returns>A collection of flashcards if successful.</returns>
         </member>

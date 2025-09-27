@@ -39,7 +39,7 @@ export default function Layout() {
       items: [
         {
           title: t(keys.navHome),
-          url: "/home",
+          url: "/",
           icon: Home,
         },
         {

@@ -9,6 +9,7 @@ import { Avatar, AvatarImage, AvatarFallback } from '../../components/ui/avatar'
 import { Card, CardHeader, CardTitle, CardContent } from '../../components/ui/card';
 import { Alert, AlertDescription } from '../../components/ui/alert';
 import Loading from '@/components/Common/Loading';
+import { useCurrentUserAvatar } from '@/hooks/useCurrentUserAvatar';
 
 export default function AccountSettings() {
   const { t } = useTranslation();
@@ -24,12 +25,14 @@ export default function AccountSettings() {
   
   const [fullName, setFullName] = useState(user?.user_metadata?.full_name || '');
   const [email, setEmail] = useState(user?.email || '');
-  const [avatarPreview, setAvatarPreview] = useState(user?.user_metadata?.avatar_url ?? '');
+  const [avatarPreview, setAvatarPreview] = useState(useCurrentUserAvatar().avatarUrl);
   const [isDeleting, setIsDeleting] = useState(false);
   const [deleteConfirm, setDeleteConfirm] = useState('');
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleAvatarChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
+
     const file = e.target.files?.[0];
     if (file) {
       const reader = new FileReader();
