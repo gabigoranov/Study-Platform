@@ -148,6 +148,18 @@
                     title = "Material group fetching error";
                     break;
 
+                // 400: Subject fetching error
+                case SubjectFetchingException:
+                    statusCode = HttpStatusCode.BadRequest;
+                    title = "Subject fetching error";
+                    break;
+
+                // 400: Subject creation error
+                case SubjectCreationException:
+                    statusCode = HttpStatusCode.BadRequest;
+                    title = "Subject creation error";
+                    break;
+
                 // 500: DB update error
                 case DbUpdateException:
                     statusCode = HttpStatusCode.InternalServerError;

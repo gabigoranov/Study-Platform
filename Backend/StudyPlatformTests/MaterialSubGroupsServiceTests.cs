@@ -154,7 +154,7 @@ namespace StudyPlatformTests
         {
             // Act & Assert
             await Assert.ThrowsAsync<ArgumentNullException>(() => _service.CreateSubGroupAsync(null, Guid.Empty));
-            await Assert.ThrowsAsync<SubGroupCreationException>(() => _service.CreateSubGroupAsync(new CreateMaterialSubGroupViewModel(), Guid.NewGuid()));
+            await Assert.ThrowsAsync<UnauthorizedAccessException>(() => _service.CreateSubGroupAsync(new CreateMaterialSubGroupViewModel(), Guid.NewGuid()));
 
             _repoMock.Verify(r => r.AddAsync(It.IsAny<MaterialSubGroup>()), Times.Never);
             _repoMock.Verify(r => r.SaveChangesAsync(), Times.Never);

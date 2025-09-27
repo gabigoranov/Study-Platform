@@ -52,7 +52,10 @@ namespace StudyPlatform.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetSubject(int id)
         {
-            var subject = await _service.GetSubjectByIdAsync(id);
+            // Load userId from JWT token
+            Guid userId = User.GetUserId();
+
+            var subject = await _service.GetSubjectByIdAsync(id, userId);
             if (subject == null) return NotFound();
             return Ok(subject);
         }

@@ -450,6 +450,30 @@
             <param name="message"></param>
             <param name="innerException"></param>
         </member>
+        <member name="T:StudyPlatform.Exceptions.SubjectCreationException">
+            <summary>
+            An exception thrown in case of an error during the creation of a subject
+            </summary>
+        </member>
+        <member name="M:StudyPlatform.Exceptions.SubjectCreationException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes the <see cref="T:StudyPlatform.Exceptions.SubjectCreationException"/> class.
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+        </member>
+        <member name="T:StudyPlatform.Exceptions.SubjectFetchingException">
+            <summary>
+            An exception thrown in case of an error while fetching subjects.
+            </summary>
+        </member>
+        <member name="M:StudyPlatform.Exceptions.SubjectFetchingException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:StudyPlatform.Exceptions.SubjectFetchingException"/> class.
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+        </member>
         <member name="T:StudyPlatform.Extensions.ClaimsPrincipalExtensions">
             <summary>
             An extension class for the claims prinicpal.
@@ -850,11 +874,12 @@
             <param name="includeGroupsSummary">Query parameter for whether or not to include MaterialSubGroups summary ( without materials )</param>
             <returns>A collection of subjects.</returns>
         </member>
-        <member name="M:StudyPlatform.Services.Subjects.ISubjectsService.GetSubjectByIdAsync(System.Int32)">
+        <member name="M:StudyPlatform.Services.Subjects.ISubjectsService.GetSubjectByIdAsync(System.Int32,System.Guid)">
             <summary>
             Retrieves a single subject by ID.
             </summary>
             <param name="id">The subject ID.</param>
+            <param name="userId">The user ID.</param>
             <returns>The subject DTO if found, otherwise null.</returns>
         </member>
         <member name="M:StudyPlatform.Services.Subjects.ISubjectsService.CreateSubjectAsync(StudyPlatform.Models.CreateSubjectViewModel,System.Guid)">
@@ -878,7 +903,7 @@
             Service for managing subjects.
             </summary>
         </member>
-        <member name="M:StudyPlatform.Services.Subjects.SubjectsService.#ctor(StudyPlatform.Data.AppDbContext,Microsoft.Extensions.Logging.ILogger{StudyPlatform.Services.Subjects.SubjectsService},AutoMapper.IMapper)">
+        <member name="M:StudyPlatform.Services.Subjects.SubjectsService.#ctor(StudyPlatform.Data.Common.IRepository,Microsoft.Extensions.Logging.ILogger{StudyPlatform.Services.Subjects.SubjectsService},AutoMapper.IMapper)">
             <summary>
             Initializes a new instance of the <see cref="T:StudyPlatform.Services.Subjects.SubjectsService"/> class.
             </summary>
@@ -886,7 +911,7 @@
         <member name="M:StudyPlatform.Services.Subjects.SubjectsService.GetSubjectsByUserAsync(System.Guid,System.Boolean,System.Boolean)">
             <inheritdoc />
         </member>
-        <member name="M:StudyPlatform.Services.Subjects.SubjectsService.GetSubjectByIdAsync(System.Int32)">
+        <member name="M:StudyPlatform.Services.Subjects.SubjectsService.GetSubjectByIdAsync(System.Int32,System.Guid)">
             <inheritdoc />
         </member>
         <member name="M:StudyPlatform.Services.Subjects.SubjectsService.CreateSubjectAsync(StudyPlatform.Models.CreateSubjectViewModel,System.Guid)">

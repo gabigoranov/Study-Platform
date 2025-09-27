@@ -21,8 +21,9 @@ namespace StudyPlatform.Services.Subjects
         /// Retrieves a single subject by ID.
         /// </summary>
         /// <param name="id">The subject ID.</param>
+        /// <param name="userId">The user ID.</param>
         /// <returns>The subject DTO if found, otherwise null.</returns>
-        Task<SubjectDto?> GetSubjectByIdAsync(int id);
+        Task<SubjectDto> GetSubjectByIdAsync(int id, Guid userId);
 
         /// <summary>
         /// Creates a new subject.
