@@ -5,6 +5,8 @@ import { useState } from "react";
 import FlashcardsForm from "./FlashcardsForm";
 import Loading from "../Common/Loading";
 import ErrorScreen from "../Common/ErrorScreen";
+import { t } from "i18next";
+import { keys } from "@/types/keys";
 
 type ReviewGeneratedFlashcardsProps = {
   flashcards: FlashcardDTO[];
@@ -177,12 +179,12 @@ export default function ReviewGeneratedFlashcards({
       )}
     </div>
   ) : loading ? (
-    <Loading isLoading={loading} label={"Submitting Flashcards..."} />
+    <Loading isLoading={loading} label={t(keys.submittingFlashcardsLabel)} />
   ) : (
     <FlashcardsForm
       model={editingIndex !== null ? data[editingIndex] : undefined}
       onSubmit={handleEditSubmit}
-      submitLabel="Update"
+      submitLabel={t(keys.updateFlashcardButton)}
       onCancel={() => {
         setIsEditing(false);
         setEditingIndex(null);

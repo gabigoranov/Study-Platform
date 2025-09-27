@@ -89,5 +89,10 @@ export const keys = {
   customPromptPlaceholder: "customPromptPlaceholder",
   closeButton: "closeButton",
   submitButton: "submitButton",
-  failedFileLoad: "failedFileLoad"
+  failedFileLoad: "failedFileLoad",
+  answerTextLabel: "answerTextLabel",
+  noFileSelectedLabel: "noFileSelectedLabel",
+  uploadingFileLabel: "uploadingFileLabel",
+  submittingFlashcardsLabel: "submittingFlashcardsLabel" 
+
 };

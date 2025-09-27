@@ -89,5 +89,9 @@
     "customPromptPlaceholder": "Enter a custom prompt for the AI. For example... 'Focus on this topic.'",
     "closeButton": "Close",
     "submitButton": "Submit",
-    "failedFileLoad": "Failed to load file."
+    "failedFileLoad": "Failed to load file.",
+    "answerTextLabel": "Answer:",
+    "noFileSelectedLabel": "No File selected",
+    "uploadingFileLabel": "Uploading the File...",
+    "submittingFlashcardsLabel": "Зареждаме флаш-картите..."
 }

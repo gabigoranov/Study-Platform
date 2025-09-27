@@ -89,5 +89,10 @@
     "customPromptPlaceholder": "Въведете информация за ИИ. Например... 'Фокусирай върху този предмет.'",
     "closeButton": "Затвори",
     "submitButton": "Публикувай",
-    "failedFileLoad": "Възникна грешка при зареждането на файла."
+    "failedFileLoad": "Възникна грешка при зареждането на файла.",
+    "answerTextLabel": "Отговор:",
+    "noFileSelectedLabel": "Не сте избрали файл",
+    "uploadingFileLabel": "Файлът се публикува...",
+    "submittingFlashcardsLabel": "Submitting Flashcards..."
+
 }

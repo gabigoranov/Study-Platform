@@ -54,7 +54,7 @@ export default function UploadFileForm({
       </div>
 
       {loading ? (
-        <Loading isLoading={loading} label={"Uploading file..."} />
+        <Loading isLoading={loading} label={t(keys.uploadingFileLabel)} />
       ) : (
         <div className="h-full w-full flex flex-col gap-4">
           {/* Upload area */}
@@ -80,7 +80,7 @@ export default function UploadFileForm({
             )}
           </select>
           {/* Custom prompt textarea */}
-          <Textarea placeholder="Enter a custom prompt for the AI. For example, 'Focus on ...'" value={customPrompt} onChange={(e) => setCustomPrompt(e.target.value)} />  
+          <Textarea placeholder={t(keys.customPromptPlaceholder)} value={customPrompt} onChange={(e) => setCustomPrompt(e.target.value)} />  
 
           {/* Buttons row */}
           <div className="mt-auto flex justify-end gap-2 self-end">

@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Flashcard } from "../../data/Flashcard";
 import DifficultyTag from "../Common/DifficultyTag";
+import { keys } from "@/types/keys";
+import { t } from "i18next";
 
 type FlashcardDashboardProps = {
   flashcard: Flashcard;
@@ -50,7 +52,7 @@ export default function FlashcardDashboardComponent({
             isSelected ? "ring-2 ring-primary-dark" : ""
           }`}
         >
-          <h2 className="text-xl font-bold mb-4">Answer:</h2>
+          <h2 className="text-xl font-bold mb-4">{t(keys.answerTextLabel)}</h2>
           <p className="text-lg">{flashcard.back}</p>
           <DifficultyTag
             difficulty={flashcard.difficulty}

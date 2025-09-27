@@ -1,3 +1,4 @@
+import { useTheme } from "@/hooks/useThemeProvider";
 import { CSSProperties, useState } from "react";
 import { BarLoader, CircleLoader, ClipLoader, DotLoader } from "react-spinners";
 
@@ -11,7 +12,8 @@ type LoadingProps = {
 }
 
 export default function Loading({isLoading, label} : LoadingProps) {
-  let [color, setColor] = useState("#ffffff");
+  const { theme } = useTheme()
+  let [color, setColor] = useState(theme == 'light' ? '#0f0f0f' : '#fafafa');
 
   return (
     <div className="w-full h-full flex flex-col gap-12 items-center justify-center">

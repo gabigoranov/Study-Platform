@@ -50,7 +50,7 @@ export default function PdfViewer({ file }: PdfViewerProps) {
           file={file}
           onLoadSuccess={({ numPages }) => setNumPages(numPages)}
           loading={<p className="mt-auto">{t(keys.loadingUploadFile)}</p>}
-          error={<p className="mt-auto">Failed to load PDF</p>}
+          error={<p className="mt-auto">{t(keys.failedFileLoad)}</p>}
         >
           {Array.from(new Array(numPages), (_, index) => (
             <Page
@@ -63,7 +63,7 @@ export default function PdfViewer({ file }: PdfViewerProps) {
           ))}
         </Document>
       ) : (
-        <p className="text-gray-500 relative top-1/2 transform -translate-y-1/2">No PDF selected</p>
+        <p className="text-gray-500 relative top-1/2 transform -translate-y-1/2">{t(keys.noFileSelectedLabel)}</p>
       )}
     </div>
   );

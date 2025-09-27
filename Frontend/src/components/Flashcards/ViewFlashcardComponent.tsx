@@ -4,7 +4,7 @@ import { Button } from "../ui/button";
 import { Edit, Trash } from "lucide-react";
 import DifficultyTag from "../Common/DifficultyTag";
 import { keys } from "@/types/keys";
-import { t } from "i18next";
+import { useTranslation } from "react-i18next";
 
 type ViewFlashcardProps = {
   flashcard?: FlashcardDTO | undefined;
@@ -18,6 +18,7 @@ export default function ViewFlashcardComponent({
   onDelete,
 }: ViewFlashcardProps) {
   const [isFlipped, setIsFlipped] = useState(false);
+  const { t } = useTranslation();
 
   const handleClick = () => {
     setIsFlipped((prev) => !prev);
@@ -73,7 +74,7 @@ export default function ViewFlashcardComponent({
 
         {/* Back */}
         <div className="absolute w-full h-full rounded-3xl bg-neutral-100 p-4 border border-neutral-300 dark:bg-background-dark dark:border-neutral-800 [backface-visibility:hidden] [transform:rotateX(180deg)]">
-          <h2 className="text-xl font-bold mb-4">Answer:</h2>
+          <h2 className="text-xl font-bold mb-4">{t(keys.answerTextLabel)}:</h2>
           <p className="text-lg">{flashcard.back}</p>
 
           {/* Buttons on back too */}
