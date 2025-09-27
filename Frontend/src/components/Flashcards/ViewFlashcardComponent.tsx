@@ -74,7 +74,7 @@ export default function ViewFlashcardComponent({
 
         {/* Back */}
         <div className="absolute w-full h-full rounded-3xl bg-neutral-100 p-4 border border-neutral-300 dark:bg-background-dark dark:border-neutral-800 [backface-visibility:hidden] [transform:rotateX(180deg)]">
-          <h2 className="text-xl font-bold mb-4">{t(keys.answerTextLabel)}:</h2>
+          <h2 className="text-xl font-bold mb-4">{t(keys.answerTextLabel)}</h2>
           <p className="text-lg">{flashcard.back}</p>
 
           {/* Buttons on back too */}

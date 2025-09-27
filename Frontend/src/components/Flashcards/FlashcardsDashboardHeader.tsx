@@ -3,7 +3,7 @@ import { Input } from "../ui/input";
 import { useTranslation } from "react-i18next";
 import { FaMagnifyingGlass } from "react-icons/fa6";
 import { Button } from "../ui/button";
-import { ChevronDown, ChevronLeft, Edit, Eye, Plus, Trash2, Upload } from "lucide-react";
+import { ChevronDown, ChevronLeft, Edit, Eye, Plus, TextSelection, Trash2, Upload } from "lucide-react";
 import { useEffect, useRef } from "react";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "../ui/dropdown-menu";
 import { useQuery } from "@tanstack/react-query";
@@ -14,7 +14,7 @@ import UploadFileButton from "../Common/UploadFileButton";
 
 
 type FlashcardsDashboardHeaderProps = {
-    setView: (view: "list" | "create" | "edit" | "view") => void;
+    setView: (view: "list" | "create" | "edit" | "view" | "revise") => void;
     handleDelete: (id: number) => void;
     handleFileUpload: (files: FileList) => void;
 }
@@ -116,7 +116,10 @@ export default function FlashcardsDashboardHeader({ setView, handleFileUpload, h
             </Button>
             </div>
 
-            <div className="sm:ml-auto">
+            <div className="sm:ml-auto flex gap-4">
+              <Button className="rounded-3xl" variant="ghost" onClick={() => setView("revise")}>
+                  <TextSelection className="inline" /> {t(keys.reviseButtonLabel)}
+              </Button>
               <UploadFileButton />
             </div>
         </div>

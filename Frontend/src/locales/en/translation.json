@@ -93,5 +93,7 @@
     "answerTextLabel": "Answer:",
     "noFileSelectedLabel": "No File selected",
     "uploadingFileLabel": "Uploading the File...",
-    "submittingFlashcardsLabel": "Зареждаме флаш-картите..."
+    "submittingFlashcardsLabel": "Зареждаме флаш-картите...",
+    "reviseButtonLabel": "Revise",
+    "noRevisionAvailableLabel": "No materials available for revising."
 }

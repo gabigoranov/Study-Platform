@@ -14,6 +14,7 @@ import ViewFlashcardComponent from "@/components/Flashcards/ViewFlashcardCompone
 import ScrollToTopButton from "@/components/Common/ScrollToTopButton";
 import { Route, Routes, useNavigate } from "react-router";
 import Loading from "@/components/Common/Loading";
+import FlashcardsRevision from "./FlashcardsRevision";
 
 type View = "list" | "create" | "edit" | "view";
 export const flashcardService = apiService<Flashcard, FlashcardDTO, FlashcardDTO>("flashcards");
@@ -139,6 +140,9 @@ export default function FlashcardsDashboard() {
                 navigate("/flashcards");
               }}
             />
+          } />
+          <Route path="revise" element={
+            <FlashcardsRevision flashcards={flashcards}/>
           } />
           <Route path="view" element={
             <div className="w-full flex flex-wrap gap-3 py-4 self-center justify-center">

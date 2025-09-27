@@ -93,6 +93,8 @@
     "answerTextLabel": "Отговор:",
     "noFileSelectedLabel": "Не сте избрали файл",
     "uploadingFileLabel": "Файлът се публикува...",
-    "submittingFlashcardsLabel": "Submitting Flashcards..."
+    "submittingFlashcardsLabel": "Submitting Flashcards...",
+    "reviseButtonLabel": "Преговори",
+    "noRevisionAvailableLabel": "Няма налични материали за преговор."
 
 }

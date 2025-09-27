@@ -93,6 +93,8 @@ export const keys = {
   answerTextLabel: "answerTextLabel",
   noFileSelectedLabel: "noFileSelectedLabel",
   uploadingFileLabel: "uploadingFileLabel",
-  submittingFlashcardsLabel: "submittingFlashcardsLabel" 
+  submittingFlashcardsLabel: "submittingFlashcardsLabel",
+  reviseButtonLabel: "reviseButtonLabel",
+  noRevisionAvailableLabel: "noRevisionAvailableLabel"
 
 };
