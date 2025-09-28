@@ -26,7 +26,9 @@ export default function ReviewGeneratedFlashcards({
   // If an error occurs, show the error screen with buttons to retry or cancel
   if (error) {
     console.log("error");
-    return <ErrorScreen onRetry={() => onApprove(flashcards)} onCancel={onCancel} />;
+    return (
+      <ErrorScreen onRetry={() => onApprove(flashcards)} onCancel={onCancel} />
+    );
   }
 
   const [data, setData] = useState<FlashcardDTO[]>(
@@ -36,101 +38,91 @@ export default function ReviewGeneratedFlashcards({
         front: "Отговори на въпроса какво е TypeScript?",
         back: "То е ташачно неяо",
         materialSubGroupId: 1,
-        difficulty: 0
+        difficulty: 0,
       },
       {
         title: "Какво е TypeScript?",
         front: "Отговори на въпроса какво е TypeScript?",
         back: "То е ташачно неяо",
         materialSubGroupId: 1,
-        difficulty: 0
-
+        difficulty: 0,
       },
       {
         title: "Какво е TypeScript?",
         front: "Отговори на въпроса какво е TypeScript?",
         back: "То е ташачно неяо",
         materialSubGroupId: 1,
-        difficulty: 0
-
+        difficulty: 0,
       },
       {
         title: "Какво е TypeScript?",
         front: "Отговори на въпроса какво е TypeScript?",
         back: "То е ташачно неяо",
         materialSubGroupId: 1,
-        difficulty: 0
-
+        difficulty: 0,
       },
       {
         title: "Какво е TypeScript?",
         front: "Отговори на въпроса какво е TypeScript?",
         back: "То е ташачно неяо",
         materialSubGroupId: 1,
-        difficulty: 0
-
+        difficulty: 0,
       },
       {
         title: "Какво е TypeScript?",
         front: "Отговори на въпроса какво е TypeScript?",
         back: "То е ташачно неяо",
         materialSubGroupId: 1,
-        difficulty: 0
-
+        difficulty: 0,
       },
       {
         title: "Какво е TypeScript?",
         front: "Отговори на въпроса какво е TypeScript?",
         back: "То е ташачно неяо",
         materialSubGroupId: 1,
-        difficulty: 0
-
+        difficulty: 0,
       },
       {
         title: "Какво е TypeScript?",
         front: "Отговори на въпроса какво е TypeScript?",
         back: "То е ташачно неяо",
         materialSubGroupId: 1,
-        difficulty: 0
-
+        difficulty: 0,
       },
       {
         title: "Какво е TypeScript?",
         front: "Отговори на въпроса какво е TypeScript?",
         back: "То е ташачно неяо",
         materialSubGroupId: 1,
-        difficulty: 0
-
+        difficulty: 0,
       },
       {
         title: "Какво е TypeScript?",
         front: "Отговори на въпроса какво е TypeScript?",
         back: "То е ташачно неяо",
         materialSubGroupId: 1,
-        difficulty: 0
-
+        difficulty: 0,
       },
       {
         title: "Какво е TypeScript?",
         front: "Отговори на въпроса какво е TypeScript?",
         back: "То е ташачно неяо",
         materialSubGroupId: 1,
-        difficulty: 0
-
+        difficulty: 0,
       },
       {
         title: "Какво е TypeScript?",
         front: "Отговори на въпроса какво е TypeScript?",
         back: "То е ташачно неяо",
         materialSubGroupId: 1,
-        difficulty: 0
-
+        difficulty: 0,
       },
     ]
   );
 
   const [isEditing, setIsEditing] = useState(false);
   const [editingIndex, setEditingIndex] = useState<number | null>(null);
+  const [flippedCards, setFlippedCards] = useState<boolean[]>(data.map(() => false));
 
   function handleEditSubmit(updatedCard: FlashcardDTO) {
     if (editingIndex !== null) {
@@ -152,6 +144,14 @@ export default function ReviewGeneratedFlashcards({
         <ViewFlashcardComponent
           key={idx}
           flashcard={card}
+          isFlipped={flippedCards[idx]}
+          onToggleAnswer={() => {
+            setFlippedCards((prev) => {
+              const copy = [...prev];
+              copy[idx] = !copy[idx];
+              return copy;
+            });
+          }}
           onEdit={() => {
             setIsEditing(true);
             setEditingIndex(idx);

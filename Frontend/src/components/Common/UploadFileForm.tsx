@@ -84,12 +84,11 @@ export default function UploadFileForm({
 
           {/* Buttons row */}
           <div className="mt-auto flex justify-end gap-2 self-end">
-            <Button onClick={closeForm} className="px-4 py-2">
+            <Button variant="secondary" onClick={closeForm} className="px-4 py-2">
               {t(keys.closeButton)}
             </Button>
             <Button
               onClick={() =>handleSubmit(selectedActionId!, customPrompt!)}
-              variant="outline"
               className="px-4 py-2 rounded-xl"
             >
               {t(keys.submitButton)}

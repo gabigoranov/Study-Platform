@@ -16,7 +16,7 @@ import { Route, Routes, useNavigate } from "react-router";
 import Loading from "@/components/Common/Loading";
 import FlashcardsRevision from "./FlashcardsRevision";
 
-type View = "list" | "create" | "edit" | "view";
+type View = "list" | "create" | "edit" | "view" | "revise";
 export const flashcardService = apiService<Flashcard, FlashcardDTO, FlashcardDTO>("flashcards");
 
 export default function FlashcardsDashboard() {
@@ -25,6 +25,7 @@ export default function FlashcardsDashboard() {
   const { token } = useAuth();
   const queryClient = useQueryClient();
   const {selectedFlashcardId, setSelectedFlashcardId, selectedGroupId, selectedSubjectId } = useVariableContext();
+  const [isFlipped, setIsFlipped] = useState<boolean>(false);
   const navigate = useNavigate();
 
   // --- Query: load all flashcards ---
@@ -146,7 +147,7 @@ export default function FlashcardsDashboard() {
           } />
           <Route path="view" element={
             <div className="w-full flex flex-wrap gap-3 py-4 self-center justify-center">
-              <ViewFlashcardComponent flashcard={flashcards?.find((fc) => fc.id === selectedFlashcardId)} />
+              <ViewFlashcardComponent flashcard={flashcards?.find((fc) => fc.id === selectedFlashcardId)} isFlipped={isFlipped} onToggleAnswer={() => setIsFlipped(prev => !prev)} />
             </div>
           } />
         </Routes>

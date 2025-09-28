@@ -9,9 +9,9 @@ export default function DifficultyTag({ difficulty, className } : DifficultyTagP
     const baseClasses = "inline-flex items-center justify-center px-3 py-1.5 text-xs font-bold rounded-full";
 
     const difficultyClasses =
-        difficulty === Difficulty.Easy ? "bg-green-500 text-white" :
-        difficulty === Difficulty.Medium ? "bg-yellow-500 text-white" :
-        "bg-red-500 text-white";
+        difficulty === Difficulty.Easy ? "bg-success text-white" :
+        difficulty === Difficulty.Medium ? "bg-warning text-white" :
+        "bg-error text-white";
 
     return (
         <span className={`${baseClasses} ${difficultyClasses} ${className ?? ""}`}>

@@ -5,13 +5,14 @@ import { Edit, Trash } from "lucide-react";
 import DifficultyTag from "../Common/DifficultyTag";
 import { keys } from "@/types/keys";
 import { useTranslation } from "react-i18next";
+import { motion } from "framer-motion";
 
 type ViewFlashcardProps = {
   flashcard?: FlashcardDTO | undefined;
   onEdit?: (flashcard: FlashcardDTO) => void;
   onDelete?: (flashcard: FlashcardDTO) => void;
   isFlipped?: boolean;
-  onToggleAnswer?: () => void;
+  onToggleAnswer: () => void;
   disableAnimation?: boolean;
 };
 
@@ -20,7 +21,7 @@ export default function ViewFlashcardComponent({
   onEdit,
   onDelete,
   isFlipped = false,
-  onToggleAnswer = () => {isFlipped = !isFlipped},
+  onToggleAnswer,
   disableAnimation = false,
 }: ViewFlashcardProps) {
   const { t } = useTranslation();
@@ -37,7 +38,7 @@ export default function ViewFlashcardComponent({
     }, 500);
   };
 
-  if(flashcard == undefined) {
+  if (flashcard == undefined) {
     return <p className="text-center p-4">{t(keys.flashcardNotFound)}</p>;
   }
 
@@ -46,13 +47,13 @@ export default function ViewFlashcardComponent({
       className="relative min-w-[50vw] sm:min-w-[400px] sm:max-w-[33.33%] min-h-[400px] cursor-pointer [perspective:1000px] basis-[400px] flex-1"
       onClick={handleClick}
     >
-      <div
-        className={`relative w-full h-full [transform-style:preserve-3d] 
-          ${disableAnimation ? "" : "transition-transform duration-500"}
-          ${isFlipped ? "[transform:rotateX(180deg)]" : ""}`}
+      <motion.div
+        className="relative w-full h-full [transform-style:preserve-3d]"
+        animate={{ rotateX: isFlipped ? 180 : 0 }}
+        transition={{ duration: disableAnimation ? 0 : 0.5, ease: "easeInOut" }}
       >
         {/* Front */}
-        <div className="absolute w-full h-full rounded-3xl bg-neutral-100 p-4 border border-neutral-300 dark:bg-background-dark dark:border-neutral-800 [backface-visibility:hidden]">
+        <div className="absolute w-full h-full rounded-3xl bg-surface p-4 border border-border [backface-visibility:hidden]">
           <h2 className="text-xl font-bold mb-4">{flashcard.title}</h2>
           <p className="text-lg">{flashcard.front}</p>
 
@@ -86,7 +87,7 @@ export default function ViewFlashcardComponent({
         </div>
 
         {/* Back */}
-        <div className="absolute w-full h-full rounded-3xl bg-neutral-100 p-4 border border-neutral-300 dark:bg-background-dark dark:border-neutral-800 [backface-visibility:hidden] [transform:rotateX(180deg)]">
+        <div className="absolute w-full h-full rounded-3xl bg-background-muted p-4 border border-border [backface-visibility:hidden] [transform:rotateX(180deg)]">
           <h2 className="text-xl font-bold mb-4">{t(keys.answerTextLabel)}</h2>
           <p className="text-lg">{flashcard.back}</p>
 
@@ -118,7 +119,7 @@ export default function ViewFlashcardComponent({
             <DifficultyTag difficulty={flashcard.difficulty} />
           </div>
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 }

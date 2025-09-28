@@ -42,15 +42,15 @@ export default function FlashcardsDashboardHeader({ setView, handleFileUpload, h
 
     return (
       <div className="flex flex-col gap-1">
-        <h1 className="text-3xl font-bold mb-1 text-left">{t(keys.flashcardsDashboardTitle)}</h1>
+        <h1 className="text-3xl text-text font-bold mb-1 text-left">{t(keys.flashcardsDashboardTitle)}</h1>
         <div className="flex flex-col items-start sm:flex-row sm:items-end sm:justify-start gap-4 mb-4">
-            <p className="w-auto">{t(keys.flashcardsSubtitle)}</p>
+            <p className="w-auto text-text-muted">{t(keys.flashcardsSubtitle)}</p>
             
             <div className="flex items-center gap-2 w-full">
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                     <Button
-                    className={`flex w-fit shadow-none items-center gap-1 bg-surface rounded-xl hover:bg-surface`}
+                    className={`flex w-fit shadow-none items-center gap-1 bg-background-muted text-text rounded-xl hover:bg-surface-muted`}
                     >
                     {
                       selectedGroupId ? groups?.find((group) => group.id === selectedGroupId)?.title : t(keys.selectGroup)

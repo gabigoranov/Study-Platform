@@ -3,6 +3,7 @@ import { Flashcard } from "../../data/Flashcard";
 import DifficultyTag from "../Common/DifficultyTag";
 import { keys } from "@/types/keys";
 import { t } from "i18next";
+import { motion } from "motion/react";
 
 type FlashcardDashboardProps = {
   flashcard: Flashcard;
@@ -27,15 +28,15 @@ export default function FlashcardDashboardComponent({
       className={`relative min-w-[50vw] sm:min-w-[400px] sm:max-w-[33.33%] min-h-[400px] cursor-pointer [perspective:1000px] basis-[400px] flex-1`}
       onClick={handleClick}
     >
-      <div
-        className={`relative w-full h-full transition-transform duration-500 [transform-style:preserve-3d] ${
-          isFlipped ? "[transform:rotateX(180deg)]" : ""
-        }`}
+      <motion.div
+        className="relative w-full h-full [transform-style:preserve-3d]"
+        animate={{ rotateX: isFlipped ? 180 : 0 }}
+        transition={{ duration: 0.5, ease: "easeInOut" }}
       >
         {/* Front */}
         <div
-          className={`absolute w-full h-full rounded-3xl bg-neutral-100 p-4 border border-neutral-300 dark:bg-background-dark dark:border-neutral-800 [backface-visibility:hidden] ${
-            isSelected ? "ring-2 ring-primary-dark" : ""
+          className={`absolute w-full h-full rounded-3xl bg-surface p-4 border border-border [backface-visibility:hidden] ${
+            isSelected ? "ring-1 ring-primary-light" : ""
           }`}
         >
           <h2 className="text-xl font-bold mb-4">{flashcard.title}</h2>
@@ -48,7 +49,7 @@ export default function FlashcardDashboardComponent({
 
         {/* Back */}
         <div
-          className={`absolute w-full h-full rounded-3xl bg-neutral-100 p-4 border border-neutral-300 dark:bg-background-dark dark:border-neutral-800 [backface-visibility:hidden] [transform:rotateX(180deg)] ${
+          className={`absolute w-full h-full rounded-3xl bg-background-muted p-4 border border-border [backface-visibility:hidden] [transform:rotateX(180deg)] ${
             isSelected ? "ring-2 ring-primary-dark" : ""
           }`}
         >
@@ -59,7 +60,7 @@ export default function FlashcardDashboardComponent({
             className="absolute bottom-3 right-3"
           />
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 }

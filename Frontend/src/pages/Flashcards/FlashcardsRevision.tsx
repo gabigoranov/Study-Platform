@@ -93,7 +93,7 @@ export default function FlashcardsRevision({
   ) : (
     <div className="relative flex flex-row gap-4 w-full h-full justify-center items-center overflow-hidden">
       <div className="absolute top-0 left-0 flex gap-4">
-        <div className="h-4 bg-surface w-fit p-4 rounded-full flex items-center">
+        <div className="h-4 bg-background-muted w-fit p-4 rounded-full flex items-center">
           {currentCardIndex + 1} / {flashcards.length}
         </div>
 
@@ -117,31 +117,31 @@ export default function FlashcardsRevision({
         </div>
         <div className="flex sm:flex-col sm:gap-2 self-center flex-wrap">
           <button
-            className="text-right text-md sm:text-xl p-4 sm:px-8 rounded-xl hover:bg-surface transition-colors duration-300 ease-in-out whitespace-nowrap"
+            className="text-right text-md sm:text-xl p-4 sm:px-8 rounded-xl hover:bg-error/30 hover:text-error text-error-dark transition-colors duration-300 ease-in-out whitespace-nowrap"
             onClick={() => handleNextCard(RevisionDifficulty.VeryHard)}
           >
             {t(keys.revisionDifficultyLabelVeryHard)}
           </button>
           <button
-            className="text-right text-md sm:text-xl p-4 sm:px-8 rounded-xl hover:bg-surface transition-colors duration-300 ease-in-out"
+            className="text-right text-md sm:text-xl p-4 sm:px-8 rounded-xl hover:bg-error-light/20 hover:text-erorr text-error-light transition-colors duration-300 ease-in-out"
             onClick={() => handleNextCard(RevisionDifficulty.Hard)}
           >
             {t(keys.revisionDifficultyLabelHard)}
           </button>
           <button
-            className="text-right text-md sm:text-xl p-4 sm:px-8 rounded-xl hover:bg-surface transition-colors duration-300 ease-in-out"
+            className="text-right text-md sm:text-xl p-4 sm:px-8 rounded-xl hover:bg-surface hover:text-text text-text-muted transition-colors duration-300 ease-in-out"
             onClick={() => handleNextCard(RevisionDifficulty.Normal)}
           >
             {t(keys.revisionDifficultyLabelNormal)}
           </button>
           <button
-            className="text-right text-md sm:text-xl p-4 sm:px-8 rounded-xl hover:bg-surface transition-colors duration-300 ease-in-out"
+            className="text-right text-md sm:text-xl p-4 sm:px-8 rounded-xl hover:bg-success-light hover:text-text text-success transition-colors duration-300 ease-in-out"
             onClick={() => handleNextCard(RevisionDifficulty.Easy)}
           >
             {t(keys.revisionDifficultyLabelEasy)}
           </button>
           <button
-            className="text-right text-md sm:text-xl p-4 sm:px-8 rounded-xl hover:bg-surface transition-colors duration-300 ease-in-out"
+            className="text-right text-md sm:text-xl p-4 sm:px-8 rounded-xl hover:bg-success-light/20 hover:text-text text-success transition-colors duration-300 ease-in-out"
             onClick={() => handleNextCard(RevisionDifficulty.VeryEasy)}
           >
             {t(keys.revisionDifficultyLabelVeryEasy)}

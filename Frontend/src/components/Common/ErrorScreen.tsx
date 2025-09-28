@@ -29,7 +29,7 @@ export default function ErrorScreen({
 } : ErrorScreenProps) {
   return (
     <div
-      className={`w-full h-full flex flex-col justify-center items-center gap-6 p-6 bg-background text-red-700 rounded-xl ${className}`}
+      className={`w-full h-full flex flex-col justify-center items-center gap-6 p-6 bg-background text-error rounded-xl ${className}`}
     >
       {imageUrl && (
         <img
@@ -44,7 +44,7 @@ export default function ErrorScreen({
         {onRetry && (
           <Button
             onClick={onRetry}
-            className="px-6 py-2 bg-red-600 hover:bg-red-700 text-white rounded-xl transition-transform transform hover:scale-105"
+            className="px-6 py-2 bg-error hover:bg-error-light text-text-inverted rounded-xl transition-transform transform hover:scale-105"
           >
             {retryLabel}
           </Button>
@@ -52,7 +52,8 @@ export default function ErrorScreen({
         {onCancel && (
           <Button
             onClick={onCancel}
-            className="px-6 py-2 border border-red-600 text-red-600 hover:bg-surface rounded-xl transition-transform transform hover:scale-105"
+            variant="secondary"
+            className="px-6 py-2 border border-error-light text-error hover:bg-surface rounded-xl transition-transform transform hover:scale-105"
           >
             {cancelLabel}
           </Button>

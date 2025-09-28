@@ -13,7 +13,7 @@ type LoadingProps = {
 
 export default function Loading({isLoading, label} : LoadingProps) {
   const { theme } = useTheme()
-  let [color, setColor] = useState(theme == 'light' ? '#0f0f0f' : '#fafafa');
+  let [color, setColor] = useState(theme == 'light' ? '#0a0a0a' : '#fafafa');
 
   return (
     <div className="w-full h-full flex flex-col gap-12 items-center justify-center">

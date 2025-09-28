@@ -29,6 +29,7 @@ export default function LanguageToggle({ className }: LanguageToggleProps) {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button
+          variant="outline"
           className={`flex w-fit shadow-none items-center gap-1 ${className ?? ""}`}
         >
           {languages.find((lang) => lang.code === i18n.language)?.label}
@@ -54,7 +55,7 @@ export default function LanguageToggle({ className }: LanguageToggleProps) {
             key={lang.code}
             onClick={() => changeLanguage(lang.code)}
             className={
-              i18n.language === lang.code ? "bg-accent text-accent-foreground" : ""
+              i18n.language === lang.code ? "bg-surface text-text" : ""
             }
           >
             {lang.label}
