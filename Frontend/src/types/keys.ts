@@ -95,6 +95,11 @@ export const keys = {
   uploadingFileLabel: "uploadingFileLabel",
   submittingFlashcardsLabel: "submittingFlashcardsLabel",
   reviseButtonLabel: "reviseButtonLabel",
-  noRevisionAvailableLabel: "noRevisionAvailableLabel"
+  noRevisionAvailableLabel: "noRevisionAvailableLabel",
+  revisionDifficultyLabelVeryEasy: "revisionDifficultyLabelVeryEasy",
+  revisionDifficultyLabelEasy: "revisionDifficultyLabelEasy",
+  revisionDifficultyLabelNormal: "revisionDifficultyLabelNormal",
+  revisionDifficultyLabelHard: "revisionDifficultyLabelHard",
+  revisionDifficultyLabelVeryHard: "revisionDifficultyLabelVeryHard",
 
 };

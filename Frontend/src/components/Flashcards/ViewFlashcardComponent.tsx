@@ -1,5 +1,5 @@
 import { FlashcardDTO } from "@/data/DTOs/FlashcardDTO";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "../ui/button";
 import { Edit, Trash } from "lucide-react";
 import DifficultyTag from "../Common/DifficultyTag";
@@ -10,18 +10,31 @@ type ViewFlashcardProps = {
   flashcard?: FlashcardDTO | undefined;
   onEdit?: (flashcard: FlashcardDTO) => void;
   onDelete?: (flashcard: FlashcardDTO) => void;
+  isFlipped?: boolean;
+  onToggleAnswer?: () => void;
+  disableAnimation?: boolean;
 };
 
 export default function ViewFlashcardComponent({
   flashcard,
   onEdit,
   onDelete,
+  isFlipped = false,
+  onToggleAnswer = () => {isFlipped = !isFlipped},
+  disableAnimation = false,
 }: ViewFlashcardProps) {
-  const [isFlipped, setIsFlipped] = useState(false);
   const { t } = useTranslation();
+  const [isFlipping, setIsFlipping] = useState<boolean>(false);
 
   const handleClick = () => {
-    setIsFlipped((prev) => !prev);
+    if (isFlipping) return; // ignore clicks while flipping
+
+    onToggleAnswer();
+    setIsFlipping(true);
+
+    setTimeout(() => {
+      setIsFlipping(false); // re-enable after 500ms
+    }, 500);
   };
 
   if(flashcard == undefined) {
@@ -34,9 +47,9 @@ export default function ViewFlashcardComponent({
       onClick={handleClick}
     >
       <div
-        className={`relative w-full h-full transition-transform duration-500 [transform-style:preserve-3d] ${
-          isFlipped ? "[transform:rotateX(180deg)]" : ""
-        }`}
+        className={`relative w-full h-full [transform-style:preserve-3d] 
+          ${disableAnimation ? "" : "transition-transform duration-500"}
+          ${isFlipped ? "[transform:rotateX(180deg)]" : ""}`}
       >
         {/* Front */}
         <div className="absolute w-full h-full rounded-3xl bg-neutral-100 p-4 border border-neutral-300 dark:bg-background-dark dark:border-neutral-800 [backface-visibility:hidden]">

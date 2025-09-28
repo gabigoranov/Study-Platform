@@ -95,5 +95,10 @@
     "uploadingFileLabel": "Uploading the File...",
     "submittingFlashcardsLabel": "Зареждаме флаш-картите...",
     "reviseButtonLabel": "Revise",
-    "noRevisionAvailableLabel": "No materials available for revising."
+    "noRevisionAvailableLabel": "No materials available for revising.",
+    "revisionDifficultyLabelVeryEasy": "Very Easy",
+    "revisionDifficultyLabelEasy": "Easy",
+    "revisionDifficultyLabelNormal": "Normal",
+    "revisionDifficultyLabelHard": "Hard",
+    "revisionDifficultyLabelVeryHard": "Very Hard"
 }

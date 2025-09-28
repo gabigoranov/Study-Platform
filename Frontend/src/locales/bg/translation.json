@@ -95,6 +95,11 @@
     "uploadingFileLabel": "Файлът се публикува...",
     "submittingFlashcardsLabel": "Submitting Flashcards...",
     "reviseButtonLabel": "Преговори",
-    "noRevisionAvailableLabel": "Няма налични материали за преговор."
+    "noRevisionAvailableLabel": "Няма налични материали за преговор.",
+    "revisionDifficultyLabelVeryEasy": "Много Лесно",
+    "revisionDifficultyLabelEasy": "Лесно",
+    "revisionDifficultyLabelNormal": "Нормално",
+    "revisionDifficultyLabelHard": "Трудно",
+    "revisionDifficultyLabelVeryHard": "Много Трудно"
 
 }
