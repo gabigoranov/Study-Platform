@@ -112,12 +112,11 @@ export default function FlashcardsDashboard() {
       <div className="flex items-center justify-center w-full h-full flex-1 relative">
         <Routes>
           <Route path="/" element={
-            isLoading ? <Loading isLoading={isLoading} /> :
-
             <FlashcardsDashboardList
               flashcards={flashcards ?? []}
               onSelect={selectCard}
               selectedId={selectedFlashcardId}
+              loading={isLoading}
             />
           } />
           <Route path="create" element={
