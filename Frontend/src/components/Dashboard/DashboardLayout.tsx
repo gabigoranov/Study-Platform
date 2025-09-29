@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Header from "./Header";
-import { FaLaptopCode, FaCalculator, FaFlask } from "react-icons/fa";
+import { RiMindMap } from "react-icons/ri";
 import { keys } from "../../types/keys";
 import { useTranslation } from "react-i18next";
 import { Outlet } from "react-router";
@@ -46,6 +46,11 @@ export default function Layout() {
           title: t(keys.navFlashcards),
           url: "/flashcards",
           icon: PiNoteBlankFill,
+        },
+        {
+          title: t(keys.navMindmaps),
+          url: "/mindmaps",
+          icon: RiMindMap,
         },
       ]
     },

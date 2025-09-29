@@ -25,6 +25,7 @@ type AuthContextType = {
     email?: string;
   }) => Promise<void>;
   deleteAccount: () => Promise<void>;
+  avatarUrl: string | undefined;
 };
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -34,13 +35,31 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [token, setToken] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [avatarUrl, setAvatarUrl] = useState<string | undefined>(
+    () => localStorage.getItem("user_avatar_url") ?? undefined
+  );
 
   useEffect(() => {
     // Initial load
-    supabase.auth.getSession().then(({ data }) => {
+    supabase.auth.getSession().then(async ({ data }) => {
+      const currentUser = data.session?.user ?? null;
       setUser(data.session?.user ?? null);
       setToken(data.session?.access_token ?? null);
       setLoading(false);
+
+      // Fetch avatar only if we have a user and no cached avatar
+      if (currentUser?.id && !avatarUrl) {
+        const { data: profile, error } = await supabase
+          .from("profiles")
+          .select("avatar_url")
+          .eq("id", currentUser.id)
+          .single();
+
+        if (!error && profile?.avatar_url) {
+          setAvatarUrl(profile.avatar_url);
+          localStorage.setItem("user_avatar_url", profile.avatar_url);
+        }
+      }
     });
 
     // Listen for auth changes
@@ -55,7 +74,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   const signIn = async (email: string, password: string) => {
-    const { error } = await supabase.auth.signInWithPassword({ email, password });
+    const { error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
     if (error) throw error;
   };
 
@@ -76,7 +98,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       if (updates.avatar) {
         const filePath = `${user?.id}/avatar`;
 
-        const publicUrl = await storageService.uploadFile(filePath, updates.avatar, 'avatars');
+        const publicUrl = await storageService.uploadFile(
+          filePath,
+          updates.avatar,
+          "avatars"
+        );
 
         await supabase.from("profiles").upsert({
           id: user?.id,
@@ -84,21 +110,22 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
           avatar_url: publicUrl,
           updated_at: new Date(),
         });
-
       }
 
       if (updates.fullName || updates.email) {
-        const { data: { user: updatedUser }, error } = await supabase.auth.updateUser({
+        const {
+          data: { user: updatedUser },
+          error,
+        } = await supabase.auth.updateUser({
           email: updates.email,
-          data: { full_name: updates.fullName }
+          data: { full_name: updates.fullName },
         });
         if (error) throw error;
-        
+
         setUser(updatedUser);
-      
       }
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to update profile');
+      setError(err instanceof Error ? err.message : "Failed to update profile");
       throw err;
     }
   };
@@ -107,11 +134,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     setLoading(true);
     setError(null);
     try {
-      const { error } = await supabase.rpc('delete_user');
+      const { error } = await supabase.rpc("delete_user");
       if (error) throw error;
       await signOut();
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to delete account');
+      setError(err instanceof Error ? err.message : "Failed to delete account");
       throw err;
     } finally {
       setLoading(false);
@@ -123,17 +150,20 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   };
 
   return (
-    <AuthContext.Provider value={{ 
-      user, 
-      token, 
-      loading, 
-      error,
-      signIn, 
-      signInWithGoogle, 
-      signOut,
-      updateProfile,
-      deleteAccount
-    }}>
+    <AuthContext.Provider
+      value={{
+        user,
+        token,
+        loading,
+        error,
+        signIn,
+        signInWithGoogle,
+        signOut,
+        updateProfile,
+        deleteAccount,
+        avatarUrl,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );

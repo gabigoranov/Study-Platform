@@ -14,6 +14,7 @@ import ErrorPage from "./pages/ErrorPage";
 import { ThemeProvider } from "./hooks/useThemeProvider";
 import FlashcardsDashboard from "./pages/Flashcards/FlashcardsDashboard";
 import { VariableProvider } from "./context/VariableContext";
+import MindmapsDashboard from "./pages/Mindmaps/MindmapsDashboard";
 
 export function App() {
   return (
@@ -38,6 +39,7 @@ export function App() {
               >
                 <Route index element={<HomeDashboard />} />
                 <Route path="flashcards/*" element={<FlashcardsDashboard />} />
+                <Route path="mindmaps/*" element={<MindmapsDashboard />} />
               </Route>
 
               <Route path="settings" element={
