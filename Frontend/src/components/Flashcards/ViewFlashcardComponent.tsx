@@ -62,6 +62,7 @@ export default function ViewFlashcardComponent({
             {onEdit && (
               <Button
                 size="icon"
+                variant="secondary"
                 onClick={(e) => {
                   e.stopPropagation();
                   onEdit(flashcard);
@@ -73,6 +74,7 @@ export default function ViewFlashcardComponent({
             {onDelete && (
               <Button
                 size="icon"
+                variant="secondary"
                 onClick={(e) => {
                   e.stopPropagation();
                   onDelete(flashcard);
@@ -96,6 +98,7 @@ export default function ViewFlashcardComponent({
             {onEdit && (
               <Button
                 size="icon"
+                variant="secondary"
                 onClick={(e) => {
                   e.stopPropagation();
                   onEdit(flashcard);
@@ -107,6 +110,7 @@ export default function ViewFlashcardComponent({
             {onDelete && (
               <Button
                 size="icon"
+                variant="secondary"
                 onClick={(e) => {
                   e.stopPropagation();
                   onDelete(flashcard);
