@@ -1,239 +1,203 @@
-import React, { JSX, useCallback, useEffect, useMemo, useState } from "react";
-import {
-  ReactFlow,
-  applyNodeChanges,
-  applyEdgeChanges,
-  addEdge,
-  Node,
-  Edge,
-  NodeChange,
-  EdgeChange,
-  Connection,
-  Background,
-  MiniMap,
-  Controls,
-  BackgroundVariant,
-} from "@xyflow/react";
-import "@xyflow/react/dist/style.css";
-import { useTheme } from "@/hooks/useThemeProvider";
+import { useRef, useState } from "react";
+import FlashcardsDashboardList from "../../components/Flashcards/FlashcardsDashboardList";
+import { Flashcard } from "../../data/Flashcard";
+import { useTranslation } from "react-i18next";
+import { keys } from "../../types/keys";
+import { FlashcardDTO } from "@/data/DTOs/FlashcardDTO";
+import { useAuth } from "@/hooks/useAuth";
+import FlashcardsForm from "@/components/Flashcards/FlashcardsForm";
+import FlashcardsDashboardHeader from "@/components/Flashcards/FlashcardsDashboardHeader";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { useVariableContext } from "@/context/VariableContext";
+import { apiService } from "@/services/apiService";
+import ViewFlashcardComponent from "@/components/Flashcards/ViewFlashcardComponent";
+import ScrollToTopButton from "@/components/Common/ScrollToTopButton";
+import { Route, Routes, useNavigate } from "react-router";
+import Loading from "@/components/Common/Loading";
+import FlashcardsRevision from "../Flashcards/FlashcardsRevision";
+import MindmapsDashboardHeader from "@/components/Mindmaps/MindmapsDashboardHeader";
+import CreateMindmapsPage from "./CreateMindmapPage";
+import { mindmapPresets } from "@/lib/mindmapPresets";
+import CreateMindmapPage from "./CreateMindmapPage";
+import { Node, Edge, ReactFlowProvider, ReactFlow } from "@xyflow/react";
 
-/* --------------------------
-   Types and Preset Factory
---------------------------- */
+type View = "list" | "create" | "edit" | "view" | "revise";
+export const flashcardService = apiService<
+  Flashcard,
+  FlashcardDTO,
+  FlashcardDTO
+>("flashcards");
 
-type MindmapType = "unconnected" | "connected" | "diagram" | "scheme";
+export default function FlashcardsDashboard() {
+  const { t } = useTranslation();
+  const [view, setView] = useState<View>("list");
+  const { token } = useAuth();
+  const queryClient = useQueryClient();
+  const {
+    selectedFlashcardId,
+    setSelectedFlashcardId,
+    selectedGroupId,
+    selectedSubjectId,
+  } = useVariableContext();
+  const [isFlipped, setIsFlipped] = useState<boolean>(false);
+  const navigate = useNavigate();
 
-/**
- * Small helper to create nodes with consistent defaults.
- * keeps creation centralized for easier adjustments later.
- */
-const createNode = (id: string, x: number, y: number, label?: string): Node => ({
-  id,
-  position: { x, y },
-  data: { label: label ?? `Node ${id}` },
-  type: "default",
-});
+  const { nodes, edges } = mindmapPresets.connected;
 
-/**
- * Returns preset nodes and edges for each mindmap type.
- * Pure function so it's safe to call from effects or event handlers.
- */
-const getPreset = (type: MindmapType): { nodes: Node[]; edges: Edge[] } => {
-  switch (type) {
-    case "unconnected":
-      return {
-        nodes: [
-          createNode("n1", 0, 0, "Idea A"),
-          createNode("n2", 200, 0, "Idea B"),
-          createNode("n3", 0, 140, "Idea C"),
-          createNode("n4", 200, 140, "Idea D"),
-        ],
-        edges: [],
-      };
-
-    case "connected":
-      return {
-        nodes: [
-          createNode("n1", 0, 0, "Central"),
-          createNode("n2", 200, -60, "Branch 1"),
-          createNode("n3", 200, 60, "Branch 2"),
-          createNode("n4", 400, 0, "Leaf"),
-        ],
-        edges: [
-          { id: "e1", source: "n1", target: "n2" },
-          { id: "e2", source: "n1", target: "n3" },
-          { id: "e3", source: "n2", target: "n4" },
-        ],
-      };
-
-    case "diagram":
-      return {
-        nodes: [
-          createNode("start", 0, 0, "Start"),
-          createNode("process1", 200, 0, "Process"),
-          createNode("decision", 400, 0, "Decision"),
-          createNode("end", 600, 0, "End"),
-        ],
-        edges: [
-          { id: "e1", source: "start", target: "process1" },
-          { id: "e2", source: "process1", target: "decision" },
-          { id: "e3", source: "decision", target: "end" },
-        ],
-      };
-
-    case "scheme":
-      return {
-        nodes: [
-          createNode("s1", 0, 0, "Module A"),
-          createNode("s2", 180, -90, "Module B"),
-          createNode("s3", 180, 90, "Module C"),
-          createNode("s4", 360, 0, "Module D"),
-          createNode("s5", 540, 0, "Module E"),
-        ],
-        edges: [
-          { id: "s1-s2", source: "s1", target: "s2" },
-          { id: "s1-s3", source: "s1", target: "s3" },
-          { id: "s2-s4", source: "s2", target: "s4" },
-          { id: "s3-s4", source: "s3", target: "s4" },
-          { id: "s4-s5", source: "s4", target: "s5" },
-        ],
-      };
-
-    default:
-      return { nodes: [], edges: [] };
-  }
-};
-
-/* --------------------------
-   Component
---------------------------- */
-
-export default function MindmapsDashboard(): JSX.Element {
-  // Default preset
-  const [mindmapType, setMindmapType] = useState<MindmapType>("connected");
-
-  // Initialize nodes & edges from the default preset
-  const initial = useMemo(() => getPreset(mindmapType), []);
-  const [nodes, setNodes] = useState<Node[]>(initial.nodes);
-  const [edges, setEdges] = useState<Edge[]>(initial.edges);
-
-  // Theme for ReactFlow color mode (keeps dark mode responsive)
-  const { theme } = useTheme();
-
-  /* --------------------------
-     ReactFlow change handlers
-  --------------------------- */
-
-  const onNodesChange = useCallback(
-    (changes: NodeChange[]) => setNodes((nds) => applyNodeChanges(changes, nds)),
-    []
-  );
-
-  const onEdgesChange = useCallback(
-    (changes: EdgeChange[]) => setEdges((eds) => applyEdgeChanges(changes, eds)),
-    []
-  );
-
-  const onConnect = useCallback(
-    (connection: Connection) =>
-      setEdges((eds) =>
-        addEdge(
-          { ...connection, id: `${connection.source}-${connection.target}` },
-          eds
-        )
+  // --- Query: load all flashcards ---
+  const {
+    data: flashcards,
+    isLoading,
+    error,
+  } = useQuery({
+    queryKey: ["flashcards", selectedGroupId, selectedSubjectId],
+    queryFn: () =>
+      flashcardService.getAll(
+        token!,
+        selectedGroupId ? `group/${selectedGroupId}` : null,
+        selectedSubjectId ? { subjectId: selectedSubjectId } : undefined
       ),
-    []
-  );
+    staleTime: 1000 * 60 * 5,
+  });
 
-  /* --------------------------
-     Preset switching
-     - When user selects a new mindmap type we replace nodes & edges.
-     - We keep it explicit so the action is obvious and reversible by undo if ReactFlow supports it.
-  --------------------------- */
+  // --- Mutation: create ---
+  const createMutation = useMutation({
+    mutationFn: (dto: FlashcardDTO) => flashcardService.create(dto, token!),
+    onSuccess: (newFlashcard) => {
+      queryClient.setQueryData<Flashcard[]>(
+        ["flashcards", selectedGroupId],
+        (old) => (old ? [...old, newFlashcard] : [newFlashcard])
+      );
+      setView("list");
+    },
+  });
 
-  useEffect(() => {
-    // Apply preset whenever mindmapType changes
-    const preset = getPreset(mindmapType);
-    setNodes(preset.nodes);
-    setEdges(preset.edges);
-    // fitView will be handled by ReactFlow prop
-  }, [mindmapType]);
+  // --- Mutation: update ---
+  const updateMutation = useMutation({
+    mutationFn: ({ id, dto }: { id: number; dto: FlashcardDTO }) =>
+      flashcardService.update(id.toString(), dto, token!),
+    onSuccess: (updated) => {
+      queryClient.setQueryData<Flashcard[]>(
+        ["flashcards", selectedGroupId],
+        (old) =>
+          old ? old.map((fc) => (fc.id === updated.id ? updated : fc)) : []
+      );
+      setView("list");
+    },
+  });
 
-  /* --------------------------
-     UI Helpers
-  --------------------------- */
+  // --- Mutation: delete ---
+  const deleteMutation = useMutation({
+    mutationFn: (id: number) =>
+      flashcardService.delete(token!, {
+        ids: id,
+      }),
+    onSuccess: (_, id) => {
+      queryClient.setQueryData<Flashcard[]>(
+        ["flashcards", selectedGroupId],
+        (old) => (old ? old.filter((fc) => fc.id !== id) : [])
+      );
 
-  const handleTypeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    // cast safely from string to MindmapType
-    setMindmapType(e.target.value as MindmapType);
+      setSelectedFlashcardId(null); // reset selected flashcard after deletion
+    },
+  });
+
+  // --- Handlers ---
+  const handleCreate = (data: FlashcardDTO) => {
+    console.log("creating");
+    createMutation.mutate(data);
   };
 
-  /* --------------------------
-     Render
-  --------------------------- */
+  const handleUpdate = (data: FlashcardDTO) => {
+    if (!selectedFlashcardId) return;
+    updateMutation.mutate({ id: selectedFlashcardId, dto: data });
+  };
+
+  const handleDelete = (id: number) => {
+    if (window.confirm(t(keys.confirmDeleteMessage))) {
+      deleteMutation.mutate(id);
+    }
+  };
+
+  const selectCard = (id: number) => {
+    setSelectedFlashcardId(id);
+    console.log("Selected card:", id);
+  };
+
+  const handleFileUpload = (files: FileList) => {
+    if (!files) return;
+    console.log("Selected files for uploading:", files);
+  };
 
   return (
-    <div className="w-full h-full bg-[hsl(var(--background))] text-[hsl(var(--text))] p-4">
-      <div className="mx-auto h-full bg-[hsl(var(--card))] text-[hsl(var(--card-foreground))] rounded-xl shadow-lg overflow-hidden border border-[hsl(var(--border))] flex flex-col">
-        {/* Toolbar: responsive, accessible controls */}
-        <header className="flex items-center justify-between gap-4 p-3 border-b border-[hsl(var(--border))]">
-          <div className="flex items-center gap-3">
-            <h3 className="text-lg font-medium">Mindmaps</h3>
-            <p className="text-sm text-[hsl(var(--muted))]">Choose a layout</p>
-          </div>
-
-          <div className="flex items-center gap-3">
-            {/* Mindmap type selector */}
-            <label htmlFor="mindmap-type" className="sr-only">
-              Select mindmap type
-            </label>
-            <select
-              id="mindmap-type"
-              value={mindmapType}
-              onChange={handleTypeChange}
-              className="rounded-md px-2 py-1 bg-[hsl(var(--input))] text-[hsl(var(--input-foreground))] border border-[hsl(var(--border))] focus:outline-none focus:ring-2 focus:ring-[hsl(var(--ring))]"
-            >
-              <option value="unconnected">Unconnected Nodes</option>
-              <option value="connected">Connected Nodes</option>
-              <option value="diagram">Diagram (Flow)</option>
-              <option value="scheme">Scheme (Modules)</option>
-            </select>
-
-            {/* Quick actions (kept simple/responsive) */}
-            <button
-              type="button"
-              onClick={() => {
-                // simple example action: center and refit by toggling nodes state slightly to trigger fitView
-                setNodes((nds) => nds.map((n) => ({ ...n })));
-              }}
-              className="rounded-md px-3 py-1 bg-[hsl(var(--accent))] text-white text-sm hover:opacity-95"
-            >
-              Recenter
-            </button>
-          </div>
-        </header>
-
-        {/* Flow canvas: expands to fill available vertical space */}
-        <main className="flex-1 min-h-0">
-          <ReactFlow
-            colorMode={theme}
-            nodes={nodes}
-            edges={edges}
-            onNodesChange={onNodesChange}
-            onEdgesChange={onEdgesChange}
-            onConnect={onConnect}
-            fitView
-            proOptions={{ hideAttribution: true }}
-            style={{ width: "100%", height: "100%" }}
-          >
-            {/* Dotted background (keeps dark mode look because ReactFlow respects colorMode) */}
-            <Background variant={BackgroundVariant.Dots} gap={16} size={1} />
-
-            {/* Minimap and controls */}
-            <MiniMap />
-            <Controls />
-          </ReactFlow>
-        </main>
+    <div className="w-full flex flex-col gap-4 h-full">
+      <MindmapsDashboardHeader
+        setView={(view: View) => {
+          setView(view);
+          navigate(view === "list" ? "/mindmaps" : `/mindmaps/${view}`);
+        }}
+        handleDelete={handleDelete}
+        handleFileUpload={handleFileUpload}
+      />
+      <div className="flex items-center justify-center w-full h-full flex-1 relative">
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <FlashcardsDashboardList
+                flashcards={flashcards ?? []}
+                onSelect={selectCard}
+                selectedId={selectedFlashcardId}
+                loading={isLoading}
+              />
+            }
+          />
+          <Route
+            path="create"
+            element={
+              <ReactFlowProvider>
+                <CreateMindmapPage
+                  nodes={nodes}
+                  edges={edges}
+                  handleSave={() => {}}
+                />
+              </ReactFlowProvider>
+            }
+          />
+          <Route
+            path="edit"
+            element={
+              <FlashcardsForm
+                model={flashcards?.find((fc) => fc.id === selectedFlashcardId)}
+                submitLabel={t(keys.updateFlashcardButton)}
+                onSubmit={(data: FlashcardDTO) => {
+                  handleUpdate(data);
+                  setView("list");
+                  navigate("/flashcards");
+                }}
+              />
+            }
+          />
+          <Route
+            path="revise"
+            element={<FlashcardsRevision flashcards={flashcards} />}
+          />
+          <Route
+            path="view"
+            element={
+              <div className="w-full flex flex-wrap gap-3 py-4 self-center justify-center">
+                <ViewFlashcardComponent
+                  flashcard={flashcards?.find(
+                    (fc) => fc.id === selectedFlashcardId
+                  )}
+                  isFlipped={isFlipped}
+                  onToggleAnswer={() => setIsFlipped((prev) => !prev)}
+                />
+              </div>
+            }
+          />
+        </Routes>
+        <ScrollToTopButton />
       </div>
     </div>
   );
