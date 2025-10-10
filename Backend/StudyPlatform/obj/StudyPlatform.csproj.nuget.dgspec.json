@@ -68,6 +68,10 @@
               "target": "Package",
               "version": "[8.0.19, )"
             },
+            "Microsoft.Extensions.Configuration.Json": {
+              "target": "Package",
+              "version": "[8.0.1, )"
+            },
             "Microsoft.IdentityModel.JsonWebTokens": {
               "target": "Package",
               "version": "[8.14.0, )"
@@ -75,6 +79,10 @@
             "Microsoft.IdentityModel.Tokens": {
               "target": "Package",
               "version": "[8.14.0, )"
+            },
+            "Npgsql.EntityFrameworkCore.PostgreSQL": {
+              "target": "Package",
+              "version": "[8.0.11, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",

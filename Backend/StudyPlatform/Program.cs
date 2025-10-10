@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Http.Json;
 using StudyPlatform.Models.DTOs;
 using StudyPlatform.Data.Common;
 using System.Text.Json;
+using StudyPlatform.Services.Mindmaps;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,6 +23,10 @@ var connectionString = builder.Configuration.GetConnectionString("Default");
 
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(connectionString));
+
+
+builder.Services.AddDbContext<SupabaseDbContext>(options =>
+    options.UseNpgsql(builder.Configuration.GetConnectionString("SupabaseConnection")));
 
 var httpClient = new HttpClient();
 var jwksJson = await httpClient.GetStringAsync("https://ahbnjmwcittfgbhgpyex.supabase.co/auth/v1/.well-known/jwks.json");
@@ -78,6 +83,7 @@ builder.Services.AddScoped<IFlashcardsService, FlashcardsService>();
 builder.Services.AddScoped<ISubjectsService, SubjectsService>();
 builder.Services.AddScoped<IMaterialSubGroupsService, MaterialSubGroupsService>();
 builder.Services.AddScoped<IRepository, Repository>();
+builder.Services.AddScoped<IMindmapsService, MindmapsService>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

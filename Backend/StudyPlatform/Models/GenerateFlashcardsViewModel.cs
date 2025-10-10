@@ -6,5 +6,8 @@ namespace StudyPlatform.Models
     {
         [Required]
         public string FileDownloadUrl { get; set; }
+
+        [StringLength(200)]
+        public string CustomPrompt { get; set; }
     }
 }

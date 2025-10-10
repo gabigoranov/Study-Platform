@@ -296,3 +296,7 @@ D:\Projects\StudyPlatform\Backend\StudyPlatform\bin\Debug\net8.0\StudyPlatform.x
 D:\Projects\StudyPlatform\Backend\StudyPlatform\obj\Debug\net8.0\StudyPlatform.genruntimeconfig.cache
 D:\Projects\StudyPlatform\Backend\StudyPlatform\obj\Debug\net8.0\ref\StudyPlatform.dll
 D:\Projects\StudyPlatform\Backend\StudyPlatform\bin\Debug\net8.0\System.Formats.Asn1.dll
+D:\Projects\StudyPlatform\Backend\StudyPlatform\bin\Debug\net8.0\Npgsql.dll
+D:\Projects\StudyPlatform\Backend\StudyPlatform\bin\Debug\net8.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll
+D:\Projects\StudyPlatform\Backend\StudyPlatform\bin\Debug\net8.0\Microsoft.Extensions.Configuration.FileExtensions.dll
+D:\Projects\StudyPlatform\Backend\StudyPlatform\bin\Debug\net8.0\Microsoft.Extensions.Configuration.Json.dll

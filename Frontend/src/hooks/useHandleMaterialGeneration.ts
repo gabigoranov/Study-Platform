@@ -34,6 +34,10 @@ export function useHandleMaterialGeneration(closeForm: () => void) {
       id: "generateFlashcards",
       title: "Generate Flashcards",
     },
+    {
+      id: "generateMindmaps",
+      title: "Generate Mindmaps",
+    },
   ];
 
   const [selectedActionId, setSelectedActionId] = useState<string | undefined>(

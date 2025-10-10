@@ -110,6 +110,16 @@
             <param name="id">The subgroup ID.</param>
             <returns>No content if deleted.</returns>
         </member>
+        <member name="T:StudyPlatform.Controllers.MindmapsController">
+            <summary>
+            A controller responsible for handling all requests related to mindmaps.
+            </summary>
+        </member>
+        <member name="M:StudyPlatform.Controllers.MindmapsController.#ctor">
+            <summary>
+            Initializes the MindmapsController and injects dependencies.
+            </summary>
+        </member>
         <member name="T:StudyPlatform.Controllers.SubjectsController">
             <summary>
             API controller for managing subjects.
@@ -337,6 +347,99 @@
             </summary>
             <param name="entities">Enumerable collection of entities to be updated</param>
         </member>
+        <member name="T:StudyPlatform.Data.Common.SupabaseRepository">
+            <summary>
+            Implementation of repository access methods
+            for Relational Database Engine
+            </summary>
+            <typeparam name="T">Type of the data table to which 
+            current reposity is attached</typeparam>
+        </member>
+        <member name="P:StudyPlatform.Data.Common.SupabaseRepository.Context">
+            <summary>
+            Entity framework DB context holding connection information and properties
+            and tracking entity states 
+            </summary>
+        </member>
+        <member name="M:StudyPlatform.Data.Common.SupabaseRepository.DbSet``1">
+            <summary>
+            Representation of table in database
+            </summary>
+        </member>
+        <member name="M:StudyPlatform.Data.Common.SupabaseRepository.AddAsync``1(``0)">
+            <summary>
+            Adds entity to the database
+            </summary>
+            <param name="entity">Entity to add</param>
+        </member>
+        <member name="M:StudyPlatform.Data.Common.SupabaseRepository.AddRangeAsync``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            Ads collection of entities to the database
+            </summary>
+            <param name="entities">Enumerable list of entities</param>
+        </member>
+        <member name="M:StudyPlatform.Data.Common.SupabaseRepository.All``1">
+            <summary>
+            All records in a table
+            </summary>
+            <returns>Queryable expression tree</returns>
+        </member>
+        <member name="M:StudyPlatform.Data.Common.SupabaseRepository.AllReadonly``1">
+            <summary>
+            The result collection won't be tracked by the context
+            </summary>
+            <returns>Expression tree</returns>
+        </member>
+        <member name="M:StudyPlatform.Data.Common.SupabaseRepository.DeleteAsync``1(System.Object)">
+            <summary>
+            Deletes a record from database
+            </summary>
+            <param name="id">Identificator of record to be deleted</param>
+        </member>
+        <member name="M:StudyPlatform.Data.Common.SupabaseRepository.Delete``1(``0)">
+            <summary>
+            Deletes a record from database
+            </summary>
+            <param name="entity">Entity representing record to be deleted</param>
+        </member>
+        <member name="M:StudyPlatform.Data.Common.SupabaseRepository.Detach``1(``0)">
+            <summary>
+            Detaches given entity from the context
+            </summary>
+            <param name="entity">Entity to be detached</param>
+        </member>
+        <member name="M:StudyPlatform.Data.Common.SupabaseRepository.Dispose">
+            <summary>
+            Disposing the context when it is not neede
+            Don't have to call this method explicitely
+            Leave it to the IoC container
+            </summary>
+        </member>
+        <member name="M:StudyPlatform.Data.Common.SupabaseRepository.GetByIdAsync``1(System.Object)">
+            <summary>
+            Gets specific record from database by primary key
+            </summary>
+            <param name="id">record identificator</param>
+            <returns>Single record</returns>
+        </member>
+        <member name="M:StudyPlatform.Data.Common.SupabaseRepository.SaveChangesAsync">
+            <summary>
+            Saves all made changes in trasaction
+            </summary>
+            <returns>Error code</returns>
+        </member>
+        <member name="M:StudyPlatform.Data.Common.SupabaseRepository.Update``1(``0)">
+            <summary>
+            Updates a record in database
+            </summary>
+            <param name="entity">Entity for record to be updated</param>
+        </member>
+        <member name="M:StudyPlatform.Data.Common.SupabaseRepository.UpdateRange``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            Updates set of records in the database
+            </summary>
+            <param name="entities">Enumerable collection of entities to be updated</param>
+        </member>
         <member name="T:StudyPlatform.Data.Models.Difficulty">
             <summary>
             An enum class for material difficulty levels.
@@ -355,6 +458,11 @@
         <member name="T:StudyPlatform.Data.Models.Subject">
             <summary>
             A subject that groups material groups together.
+            </summary>
+        </member>
+        <member name="T:StudyPlatform.Data.Models.User">
+            <summary>
+            PostgreSQL supabase auth.users table representation.
             </summary>
         </member>
         <member name="T:StudyPlatform.Data.Types.MaterialGroupType">
@@ -574,6 +682,18 @@
             <inheritdoc />
         </member>
         <member name="M:StudyPlatform.Migrations.AddDifficultyEnumToMaterials.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:StudyPlatform.Migrations.SupabaseDb.InitSupabaseMindmaps">
+            <inheritdoc />
+        </member>
+        <member name="M:StudyPlatform.Migrations.SupabaseDb.InitSupabaseMindmaps.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:StudyPlatform.Migrations.SupabaseDb.InitSupabaseMindmaps.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:StudyPlatform.Migrations.SupabaseDb.InitSupabaseMindmaps.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
         </member>
         <member name="T:StudyPlatform.Models.Common.AutoMapper">

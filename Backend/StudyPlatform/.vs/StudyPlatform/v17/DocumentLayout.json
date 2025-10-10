@@ -3,71 +3,60 @@
   "WorkspaceRootPath": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|d:\\projects\\studyplatform\\backend\\studyplatform\\services\\flashcards\\flashcardsservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|solutionrelative:services\\flashcards\\flashcardsservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Migrations\\SupabaseDb\\20251010185343_InitSupabaseMindmaps.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Migrations\\SupabaseDb\\20251010185343_InitSupabaseMindmaps.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|d:\\projects\\studyplatform\\backend\\studyplatform\\controllers\\flashcardscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|solutionrelative:controllers\\flashcardscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|d:\\projects\\studyplatform\\backend\\studyplatform\\data\\supabasedbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|solutionrelative:data\\supabasedbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{3F8DA37D-D8FC-45C2-B38A-77737B9023C9}|..\\StudyPlatformTests\\StudyPlatformTests.csproj|d:\\projects\\studyplatform\\backend\\studyplatformtests\\flashcardsservicetests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Migrations\\SupabaseDb\\20251010185043_InitSupabaseMindmaps.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Migrations\\SupabaseDb\\20251010185043_InitSupabaseMindmaps.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|d:\\projects\\studyplatform\\backend\\studyplatform\\services\\flashcards\\iflashcardsservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|solutionrelative:services\\flashcards\\iflashcardsservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Migrations\\Supabase\\20251010184829_UpdateMindmapUserIdType.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Migrations\\Supabase\\20251010184829_UpdateMindmapUserIdType.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{3F8DA37D-D8FC-45C2-B38A-77737B9023C9}|..\\StudyPlatformTests\\StudyPlatformTests.csproj|d:\\projects\\studyplatform\\backend\\studyplatformtests\\materialsubgroupsservicetests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|d:\\projects\\studyplatform\\backend\\studyplatform\\data\\models\\mindmap.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|solutionrelative:data\\models\\mindmap.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|d:\\projects\\studyplatform\\backend\\studyplatform\\services\\materialsubgroups\\materialsubgroupsservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|solutionrelative:services\\materialsubgroups\\materialsubgroupsservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|d:\\projects\\studyplatform\\backend\\studyplatform\\data\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|solutionrelative:data\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{3F8DA37D-D8FC-45C2-B38A-77737B9023C9}|..\\StudyPlatformTests\\StudyPlatformTests.csproj|d:\\projects\\studyplatform\\backend\\studyplatformtests\\subjectsservicetests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|d:\\projects\\studyplatform\\backend\\studyplatform\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|d:\\projects\\studyplatform\\backend\\studyplatform\\services\\subjects\\subjectsservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|solutionrelative:services\\subjects\\subjectsservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|d:\\projects\\studyplatform\\backend\\studyplatform\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|d:\\projects\\studyplatform\\backend\\studyplatform\\middlewares\\exceptionhandlingmiddleware.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|solutionrelative:middlewares\\exceptionhandlingmiddleware.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Migrations\\Supabase\\20251010182454_InitialSupabaseMigration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Migrations\\Supabase\\20251010182454_InitialSupabaseMigration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|d:\\projects\\studyplatform\\backend\\studyplatform\\exceptions\\subjectcreationexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|solutionrelative:exceptions\\subjectcreationexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|d:\\projects\\studyplatform\\backend\\studyplatform\\controllers\\mindmapscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|solutionrelative:controllers\\mindmapscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|d:\\projects\\studyplatform\\backend\\studyplatform\\exceptions\\subjectfetchingexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|solutionrelative:exceptions\\subjectfetchingexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|d:\\projects\\studyplatform\\backend\\studyplatform\\services\\subjects\\isubjectsservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|solutionrelative:services\\subjects\\isubjectsservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|d:\\projects\\studyplatform\\backend\\studyplatform\\exceptions\\subgroupcreationexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|solutionrelative:exceptions\\subgroupcreationexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{3F8DA37D-D8FC-45C2-B38A-77737B9023C9}|..\\StudyPlatformTests\\StudyPlatformTests.csproj|d:\\projects\\studyplatform\\backend\\studyplatformtests\\testdata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{3F8DA37D-D8FC-45C2-B38A-77737B9023C9}|..\\StudyPlatformTests\\StudyPlatformTests.csproj|d:\\projects\\studyplatform\\backend\\studyplatformtests\\testasyncenumerable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|d:\\projects\\studyplatform\\backend\\studyplatform\\data\\common\\irepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|solutionrelative:data\\common\\irepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|d:\\projects\\studyplatform\\backend\\studyplatform\\data\\common\\supabaserepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|solutionrelative:data\\common\\supabaserepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|d:\\projects\\studyplatform\\backend\\studyplatform\\data\\common\\repository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|solutionrelative:data\\common\\repository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|d:\\projects\\studyplatform\\backend\\studyplatform\\data\\models\\material.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|solutionrelative:data\\models\\material.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|d:\\projects\\studyplatform\\backend\\studyplatform\\data\\common\\irepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|solutionrelative:data\\common\\irepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|d:\\projects\\studyplatform\\backend\\studyplatform\\services\\mindmaps\\mindmapsservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|solutionrelative:services\\mindmaps\\mindmapsservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -77,7 +66,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 135,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Bookmark",
@@ -85,227 +74,185 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "IFlashcardsService.cs",
-              "DocumentMoniker": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Services\\Flashcards\\IFlashcardsService.cs",
-              "RelativeDocumentMoniker": "Services\\Flashcards\\IFlashcardsService.cs",
-              "ToolTip": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Services\\Flashcards\\IFlashcardsService.cs",
-              "RelativeToolTip": "Services\\Flashcards\\IFlashcardsService.cs",
-              "ViewState": "AQIAADUAAAAAAAAAAAAswD4AAABtAAAA",
+              "DocumentIndex": 0,
+              "Title": "20251010185343_InitSupabaseMindmaps.cs",
+              "DocumentMoniker": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Migrations\\SupabaseDb\\20251010185343_InitSupabaseMindmaps.cs",
+              "RelativeDocumentMoniker": "Migrations\\SupabaseDb\\20251010185343_InitSupabaseMindmaps.cs",
+              "ToolTip": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Migrations\\SupabaseDb\\20251010185343_InitSupabaseMindmaps.cs",
+              "RelativeToolTip": "Migrations\\SupabaseDb\\20251010185343_InitSupabaseMindmaps.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-27T15:41:34.144Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "FlashcardsController.cs",
-              "DocumentMoniker": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Controllers\\FlashcardsController.cs",
-              "RelativeDocumentMoniker": "Controllers\\FlashcardsController.cs",
-              "ToolTip": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Controllers\\FlashcardsController.cs",
-              "RelativeToolTip": "Controllers\\FlashcardsController.cs",
-              "ViewState": "AQIAAFAAAAAAAAAAAADwv18AAABWAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-27T15:40:54.833Z",
+              "WhenOpened": "2025-10-10T18:53:43.955Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "SubjectsServiceTests.cs",
-              "DocumentMoniker": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatformTests\\SubjectsServiceTests.cs",
-              "RelativeDocumentMoniker": "..\\StudyPlatformTests\\SubjectsServiceTests.cs",
-              "ToolTip": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatformTests\\SubjectsServiceTests.cs",
-              "RelativeToolTip": "..\\StudyPlatformTests\\SubjectsServiceTests.cs",
-              "ViewState": "AQIAAMgAAAAAAAAAAAAqwOAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-27T08:27:02.697Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "MaterialSubGroupsServiceTests.cs",
-              "DocumentMoniker": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatformTests\\MaterialSubGroupsServiceTests.cs",
-              "RelativeDocumentMoniker": "..\\StudyPlatformTests\\MaterialSubGroupsServiceTests.cs",
-              "ToolTip": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatformTests\\MaterialSubGroupsServiceTests.cs",
-              "RelativeToolTip": "..\\StudyPlatformTests\\MaterialSubGroupsServiceTests.cs",
-              "ViewState": "AQIAAIoAAAAAAAAAAAAmwK8AAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-26T12:16:06.674Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "TestAsyncEnumerable.cs",
-              "DocumentMoniker": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatformTests\\TestAsyncEnumerable.cs",
-              "RelativeDocumentMoniker": "..\\StudyPlatformTests\\TestAsyncEnumerable.cs",
-              "ToolTip": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatformTests\\TestAsyncEnumerable.cs",
-              "RelativeToolTip": "..\\StudyPlatformTests\\TestAsyncEnumerable.cs",
-              "ViewState": "AQIAACkAAAAAAAAAAAAuwEAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-25T16:13:49.921Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "TestData.cs",
-              "DocumentMoniker": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatformTests\\TestData.cs",
-              "RelativeDocumentMoniker": "..\\StudyPlatformTests\\TestData.cs",
-              "ToolTip": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatformTests\\TestData.cs",
-              "RelativeToolTip": "..\\StudyPlatformTests\\TestData.cs",
-              "ViewState": "AQIAAAwAAAAAAAAAAAAmwCoAAAA4AAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-23T16:32:22.932Z"
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "FlashcardsServiceTests.cs",
-              "DocumentMoniker": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatformTests\\FlashcardsServiceTests.cs",
-              "RelativeDocumentMoniker": "..\\StudyPlatformTests\\FlashcardsServiceTests.cs",
-              "ToolTip": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatformTests\\FlashcardsServiceTests.cs",
-              "RelativeToolTip": "..\\StudyPlatformTests\\FlashcardsServiceTests.cs",
-              "ViewState": "AQIAAOgAAAAAAAAAAADwv/EAAABSAAAA",
+              "Title": "20251010185043_InitSupabaseMindmaps.cs",
+              "DocumentMoniker": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Migrations\\SupabaseDb\\20251010185043_InitSupabaseMindmaps.cs",
+              "RelativeDocumentMoniker": "Migrations\\SupabaseDb\\20251010185043_InitSupabaseMindmaps.cs",
+              "ToolTip": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Migrations\\SupabaseDb\\20251010185043_InitSupabaseMindmaps.cs",
+              "RelativeToolTip": "Migrations\\SupabaseDb\\20251010185043_InitSupabaseMindmaps.cs",
+              "ViewState": "AQIAABcAAAAAAAAAAAAgwEcAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-23T16:16:52.022Z"
+              "WhenOpened": "2025-10-10T18:50:43.832Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
-              "Title": "IRepository.cs",
-              "DocumentMoniker": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Data\\Common\\IRepository.cs",
-              "RelativeDocumentMoniker": "Data\\Common\\IRepository.cs",
-              "ToolTip": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Data\\Common\\IRepository.cs",
-              "RelativeToolTip": "Data\\Common\\IRepository.cs",
-              "ViewState": "AQIAAEIAAAAAAAAAAAAkwFAAAABSAAAA",
+              "DocumentIndex": 3,
+              "Title": "20251010184829_UpdateMindmapUserIdType.cs",
+              "DocumentMoniker": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Migrations\\Supabase\\20251010184829_UpdateMindmapUserIdType.cs",
+              "RelativeDocumentMoniker": "Migrations\\Supabase\\20251010184829_UpdateMindmapUserIdType.cs",
+              "ToolTip": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Migrations\\Supabase\\20251010184829_UpdateMindmapUserIdType.cs",
+              "RelativeToolTip": "Migrations\\Supabase\\20251010184829_UpdateMindmapUserIdType.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-24T11:43:46.111Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 16,
-              "Title": "Repository.cs",
-              "DocumentMoniker": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Data\\Common\\Repository.cs",
-              "RelativeDocumentMoniker": "Data\\Common\\Repository.cs",
-              "ToolTip": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Data\\Common\\Repository.cs",
-              "RelativeToolTip": "Data\\Common\\Repository.cs",
-              "ViewState": "AQIAAKIAAAAAAAAAAAAmwLYAAAAsAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-25T16:12:08.33Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 17,
-              "Title": "Material.cs",
-              "DocumentMoniker": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Data\\Models\\Material.cs",
-              "RelativeDocumentMoniker": "Data\\Models\\Material.cs",
-              "ToolTip": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Data\\Models\\Material.cs",
-              "RelativeToolTip": "Data\\Models\\Material.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-24T12:05:17.347Z"
-            }
-          ]
-        },
-        {
-          "DockedWidth": 133,
-          "SelectedChildIndex": 6,
-          "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "SubjectCreationException.cs",
-              "DocumentMoniker": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Exceptions\\SubjectCreationException.cs",
-              "RelativeDocumentMoniker": "Exceptions\\SubjectCreationException.cs",
-              "ToolTip": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Exceptions\\SubjectCreationException.cs",
-              "RelativeToolTip": "Exceptions\\SubjectCreationException.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAABJAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-27T09:06:44.088Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "ISubjectsService.cs",
-              "DocumentMoniker": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Services\\Subjects\\ISubjectsService.cs",
-              "RelativeDocumentMoniker": "Services\\Subjects\\ISubjectsService.cs",
-              "ToolTip": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Services\\Subjects\\ISubjectsService.cs",
-              "RelativeToolTip": "Services\\Subjects\\ISubjectsService.cs",
-              "ViewState": "AQIAAAYAAAAAAAAAAAAAABUAAAAWAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-27T08:49:36.708Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "SubjectFetchingException.cs",
-              "DocumentMoniker": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Exceptions\\SubjectFetchingException.cs",
-              "RelativeDocumentMoniker": "Exceptions\\SubjectFetchingException.cs",
-              "ToolTip": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Exceptions\\SubjectFetchingException.cs",
-              "RelativeToolTip": "Exceptions\\SubjectFetchingException.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAABbAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-27T08:42:07.153Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "SubjectsService.cs",
-              "DocumentMoniker": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Services\\Subjects\\SubjectsService.cs",
-              "RelativeDocumentMoniker": "Services\\Subjects\\SubjectsService.cs",
-              "ToolTip": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Services\\Subjects\\SubjectsService.cs",
-              "RelativeToolTip": "Services\\Subjects\\SubjectsService.cs",
-              "ViewState": "AQIAAHkAAAAAAAAAAAAAAJMAAAALAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-27T08:27:07.54Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "SubGroupCreationException.cs",
-              "DocumentMoniker": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Exceptions\\SubGroupCreationException.cs",
-              "RelativeDocumentMoniker": "Exceptions\\SubGroupCreationException.cs",
-              "ToolTip": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Exceptions\\SubGroupCreationException.cs",
-              "RelativeToolTip": "Exceptions\\SubGroupCreationException.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAABKAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-26T18:22:01.317Z"
+              "WhenOpened": "2025-10-10T18:48:29.362Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 5,
-              "Title": "MaterialSubGroupsService.cs",
-              "DocumentMoniker": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Services\\MaterialSubGroups\\MaterialSubGroupsService.cs",
-              "RelativeDocumentMoniker": "Services\\MaterialSubGroups\\MaterialSubGroupsService.cs",
-              "ToolTip": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Services\\MaterialSubGroups\\MaterialSubGroupsService.cs",
-              "RelativeToolTip": "Services\\MaterialSubGroups\\MaterialSubGroupsService.cs",
-              "ViewState": "AQIAAE4AAAAAAAAAAAAwwFkAAACFAAAA",
+              "Title": "User.cs",
+              "DocumentMoniker": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Data\\Models\\User.cs",
+              "RelativeDocumentMoniker": "Data\\Models\\User.cs",
+              "ToolTip": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Data\\Models\\User.cs",
+              "RelativeToolTip": "Data\\Models\\User.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAMAAAA8AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-26T12:22:25.693Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "FlashcardsService.cs",
-              "DocumentMoniker": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Services\\Flashcards\\FlashcardsService.cs",
-              "RelativeDocumentMoniker": "Services\\Flashcards\\FlashcardsService.cs",
-              "ToolTip": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Services\\Flashcards\\FlashcardsService.cs",
-              "RelativeToolTip": "Services\\Flashcards\\FlashcardsService.cs",
-              "ViewState": "AQIAAK4AAAAAAAAAAAAswLcAAAANAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-23T16:18:49.193Z",
+              "WhenOpened": "2025-10-10T18:40:27.855Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 8,
-              "Title": "ExceptionHandlingMiddleware.cs",
-              "DocumentMoniker": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Middlewares\\ExceptionHandlingMiddleware.cs",
-              "RelativeDocumentMoniker": "Middlewares\\ExceptionHandlingMiddleware.cs",
-              "ToolTip": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Middlewares\\ExceptionHandlingMiddleware.cs",
-              "RelativeToolTip": "Middlewares\\ExceptionHandlingMiddleware.cs",
-              "ViewState": "AQIAAIcAAAAAAAAAAAAswIkAAAAAAAAA",
+              "Title": "20251010182454_InitialSupabaseMigration.cs",
+              "DocumentMoniker": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Migrations\\Supabase\\20251010182454_InitialSupabaseMigration.cs",
+              "RelativeDocumentMoniker": "Migrations\\Supabase\\20251010182454_InitialSupabaseMigration.cs",
+              "ToolTip": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Migrations\\Supabase\\20251010182454_InitialSupabaseMigration.cs",
+              "RelativeToolTip": "Migrations\\Supabase\\20251010182454_InitialSupabaseMigration.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-24T13:35:06.078Z"
+              "WhenOpened": "2025-10-10T18:24:54.705Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "MindmapsController.cs",
+              "DocumentMoniker": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Controllers\\MindmapsController.cs",
+              "RelativeDocumentMoniker": "Controllers\\MindmapsController.cs",
+              "ToolTip": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Controllers\\MindmapsController.cs",
+              "RelativeToolTip": "Controllers\\MindmapsController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAAAZAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-10T18:24:20.239Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "SupabaseRepository.cs",
+              "DocumentMoniker": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Data\\Common\\SupabaseRepository.cs",
+              "RelativeDocumentMoniker": "Data\\Common\\SupabaseRepository.cs",
+              "ToolTip": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Data\\Common\\SupabaseRepository.cs",
+              "RelativeToolTip": "Data\\Common\\SupabaseRepository.cs",
+              "ViewState": "AQIAAJcAAAAAAAAAAAAmwLwAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-10T18:20:08.591Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "Repository.cs",
+              "DocumentMoniker": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Data\\Common\\Repository.cs",
+              "RelativeDocumentMoniker": "Data\\Common\\Repository.cs",
+              "ToolTip": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Data\\Common\\Repository.cs",
+              "RelativeToolTip": "Data\\Common\\Repository.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAAbAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-10T18:19:52.188Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "IRepository.cs",
+              "DocumentMoniker": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Data\\Common\\IRepository.cs",
+              "RelativeDocumentMoniker": "Data\\Common\\IRepository.cs",
+              "ToolTip": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Data\\Common\\IRepository.cs",
+              "RelativeToolTip": "Data\\Common\\IRepository.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-10T18:19:51.224Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "MindmapsService.cs",
+              "DocumentMoniker": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Services\\Mindmaps\\MindmapsService.cs",
+              "RelativeDocumentMoniker": "Services\\Mindmaps\\MindmapsService.cs",
+              "ToolTip": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Services\\Mindmaps\\MindmapsService.cs",
+              "RelativeToolTip": "Services\\Mindmaps\\MindmapsService.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAA0AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-10T18:19:07.819Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\appsettings.json",
+              "RelativeDocumentMoniker": "appsettings.json",
+              "ToolTip": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\appsettings.json",
+              "RelativeToolTip": "appsettings.json",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAMAAAAPAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-10-10T18:16:02.841Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AQIAABMAAAAAAAAAAAAAAB0AAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-10T18:15:47.262Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "SupabaseDbContext.cs",
+              "DocumentMoniker": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Data\\SupabaseDbContext.cs",
+              "RelativeDocumentMoniker": "Data\\SupabaseDbContext.cs",
+              "ToolTip": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Data\\SupabaseDbContext.cs",
+              "RelativeToolTip": "Data\\SupabaseDbContext.cs",
+              "ViewState": "AQIAAAIAAAAAAAAAAAAiwBQAAAAFAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-10T18:14:42.945Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Mindmap.cs",
+              "DocumentMoniker": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Data\\Models\\Mindmap.cs",
+              "RelativeDocumentMoniker": "Data\\Models\\Mindmap.cs",
+              "ToolTip": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Data\\Models\\Mindmap.cs",
+              "RelativeToolTip": "Data\\Models\\Mindmap.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAA2AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-10T18:13:17.982Z",
+              "EditorCaption": ""
             }
           ]
         }

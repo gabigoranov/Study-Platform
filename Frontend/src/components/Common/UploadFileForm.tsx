@@ -41,6 +41,8 @@ export default function UploadFileForm({
 }: UploadFileFormProps) {
   const [t] = useTranslation();
 
+  console.log(selectedActionId);
+
   // If an error occurs, show the error screen with buttons to retry or cancel
   if (error) {
     return (
@@ -85,15 +87,11 @@ export default function UploadFileForm({
           value={selectedActionId}
           onChange={(e) => setSelectedActionId(e.target.value)}
         >
-          {selectedActionId ? (
-            <option>{t(keys.selectActionPlaceholder)}</option>
-          ) : (
-            actions.map((action) => (
-              <option value={action.id} key={action.id}>
-                {action.title}
-              </option>
-            ))
-          )}
+          {actions.map((action) => (
+            <option value={action.id} key={action.id}>
+              {action.title}
+            </option>
+          ))}
         </select>
         {/* Custom prompt textarea */}
         <Textarea
