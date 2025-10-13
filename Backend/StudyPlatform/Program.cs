@@ -79,11 +79,14 @@ builder.Services.AddHttpClient<APIClient>(client =>
 
 builder.Services.AddControllers();
 
+builder.Services.AddScoped<IRepository, Repository>();
+builder.Services.AddScoped<SupabaseRepository>();
+
 builder.Services.AddScoped<IFlashcardsService, FlashcardsService>();
 builder.Services.AddScoped<ISubjectsService, SubjectsService>();
-builder.Services.AddScoped<IMaterialSubGroupsService, MaterialSubGroupsService>();
-builder.Services.AddScoped<IRepository, Repository>();
 builder.Services.AddScoped<IMindmapsService, MindmapsService>();
+builder.Services.AddScoped<IMaterialSubGroupsService, MaterialSubGroupsService>();
+
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

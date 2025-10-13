@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using StudyPlatform.Extensions;
 using StudyPlatform.Models;
+using StudyPlatform.Models.DTOs;
 using StudyPlatform.Services.Mindmaps;
 
 namespace StudyPlatform.Controllers
@@ -18,15 +20,22 @@ namespace StudyPlatform.Controllers
         /// <summary>
         /// Initializes the MindmapsController and injects dependencies.
         /// </summary>
-        public MindmapsController()
+        public MindmapsController(IMindmapsService mindmapsService)
         {
-
+            _mindmapsService = mindmapsService;
         }
 
         [HttpPost("generate")]
         public async Task<IActionResult> Generate([FromBody] GenerateMindmapsViewModel model)
         {
-            throw new NotImplementedException();
+            // Load userId from JWT token
+            Guid userId = User.GetUserId();
+
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+
+            GeneratedMindmapDTO res = await _mindmapsService.GenerateAsync(model, userId);
+
+            return Ok(res);
         }
     }
 }

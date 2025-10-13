@@ -3,8 +3,67 @@
   "WorkspaceRootPath": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Migrations\\SupabaseDb\\20251010185343_InitSupabaseMindmaps.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Migrations\\SupabaseDb\\20251010185343_InitSupabaseMindmaps.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|d:\\projects\\studyplatform\\backend\\studyplatform\\controllers\\mindmapscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|solutionrelative:controllers\\mindmapscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|d:\\projects\\studyplatform\\backend\\studyplatform\\services\\mindmaps\\imindmapsservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|solutionrelative:services\\mindmaps\\imindmapsservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|d:\\projects\\studyplatform\\backend\\studyplatform\\services\\mindmaps\\mindmapsservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|solutionrelative:services\\mindmaps\\mindmapsservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|d:\\projects\\studyplatform\\backend\\studyplatform\\data\\common\\appconstants.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|solutionrelative:data\\common\\appconstants.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|d:\\projects\\studyplatform\\backend\\studyplatform\\services\\flashcards\\flashcardsservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|solutionrelative:services\\flashcards\\flashcardsservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|d:\\projects\\studyplatform\\backend\\studyplatform\\controllers\\flashcardscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|solutionrelative:controllers\\flashcardscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|d:\\projects\\studyplatform\\backend\\studyplatform\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3F8DA37D-D8FC-45C2-B38A-77737B9023C9}|..\\StudyPlatformTests\\StudyPlatformTests.csproj|d:\\projects\\studyplatform\\backend\\studyplatformtests\\flashcardsservicetests.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|d:\\projects\\studyplatform\\backend\\studyplatform\\models\\dtos\\generatedmindmapdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|solutionrelative:models\\dtos\\generatedmindmapdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|d:\\projects\\studyplatform\\backend\\studyplatform\\models\\dtos\\mindmapedgedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|solutionrelative:models\\dtos\\mindmapedgedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|d:\\projects\\studyplatform\\backend\\studyplatform\\models\\dtos\\nodepositiondto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|solutionrelative:models\\dtos\\nodepositiondto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|d:\\projects\\studyplatform\\backend\\studyplatform\\models\\dtos\\nodedatadto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|solutionrelative:models\\dtos\\nodedatadto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|d:\\projects\\studyplatform\\backend\\studyplatform\\models\\dtos\\mindmapnodedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|solutionrelative:models\\dtos\\mindmapnodedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|d:\\projects\\studyplatform\\backend\\studyplatform\\models\\dtos\\generatedflashcarddto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|solutionrelative:models\\dtos\\generatedflashcarddto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|d:\\projects\\studyplatform\\backend\\studyplatform\\services\\flashcards\\iflashcardsservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|solutionrelative:services\\flashcards\\iflashcardsservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|d:\\projects\\studyplatform\\backend\\studyplatform\\migrations\\supabasedb\\20251010185343_initsupabasemindmaps.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|solutionrelative:migrations\\supabasedb\\20251010185343_initsupabasemindmaps.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|d:\\projects\\studyplatform\\backend\\studyplatform\\data\\supabasedbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -31,16 +90,8 @@
       "RelativeMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|d:\\projects\\studyplatform\\backend\\studyplatform\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Migrations\\Supabase\\20251010182454_InitialSupabaseMigration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Migrations\\Supabase\\20251010182454_InitialSupabaseMigration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|d:\\projects\\studyplatform\\backend\\studyplatform\\controllers\\mindmapscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|solutionrelative:controllers\\mindmapscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|d:\\projects\\studyplatform\\backend\\studyplatform\\data\\common\\supabaserepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -53,10 +104,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|d:\\projects\\studyplatform\\backend\\studyplatform\\data\\common\\irepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|solutionrelative:data\\common\\irepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|d:\\projects\\studyplatform\\backend\\studyplatform\\services\\mindmaps\\mindmapsservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|solutionrelative:services\\mindmaps\\mindmapsservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -66,28 +113,215 @@
       "DocumentGroups": [
         {
           "DockedWidth": 135,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 0,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "MindmapsController.cs",
+              "DocumentMoniker": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Controllers\\MindmapsController.cs",
+              "RelativeDocumentMoniker": "Controllers\\MindmapsController.cs",
+              "ToolTip": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Controllers\\MindmapsController.cs",
+              "RelativeToolTip": "Controllers\\MindmapsController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAACIAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-10T18:24:20.239Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "MindmapsService.cs",
+              "DocumentMoniker": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Services\\Mindmaps\\MindmapsService.cs",
+              "RelativeDocumentMoniker": "Services\\Mindmaps\\MindmapsService.cs",
+              "ToolTip": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Services\\Mindmaps\\MindmapsService.cs",
+              "RelativeToolTip": "Services\\Mindmaps\\MindmapsService.cs",
+              "ViewState": "AQIAABYAAAAAAAAAAADwvzcAAAArAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-10T18:19:07.819Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "IMindmapsService.cs",
+              "DocumentMoniker": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Services\\Mindmaps\\IMindmapsService.cs",
+              "RelativeDocumentMoniker": "Services\\Mindmaps\\IMindmapsService.cs",
+              "ToolTip": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Services\\Mindmaps\\IMindmapsService.cs",
+              "RelativeToolTip": "Services\\Mindmaps\\IMindmapsService.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABAAAAAUAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-13T05:20:58.73Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "IFlashcardsService.cs",
+              "DocumentMoniker": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Services\\Flashcards\\IFlashcardsService.cs",
+              "RelativeDocumentMoniker": "Services\\Flashcards\\IFlashcardsService.cs",
+              "ToolTip": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Services\\Flashcards\\IFlashcardsService.cs",
+              "RelativeToolTip": "Services\\Flashcards\\IFlashcardsService.cs",
+              "ViewState": "AQIAACoAAAAAAAAAAAAowE8AAAAFAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-13T05:21:17.213Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "FlashcardsService.cs",
+              "DocumentMoniker": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Services\\Flashcards\\FlashcardsService.cs",
+              "RelativeDocumentMoniker": "Services\\Flashcards\\FlashcardsService.cs",
+              "ToolTip": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Services\\Flashcards\\FlashcardsService.cs",
+              "RelativeToolTip": "Services\\Flashcards\\FlashcardsService.cs",
+              "ViewState": "AQIAAKgAAAAAAAAAAAAiwLwAAAAIAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-13T05:23:43.706Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 5,
+              "Title": "FlashcardsController.cs",
+              "DocumentMoniker": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Controllers\\FlashcardsController.cs",
+              "RelativeDocumentMoniker": "Controllers\\FlashcardsController.cs",
+              "ToolTip": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Controllers\\FlashcardsController.cs",
+              "RelativeToolTip": "Controllers\\FlashcardsController.cs",
+              "ViewState": "AQIAAFEAAAAAAAAAAAAUwGQAAAAIAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-13T06:00:58.36Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "FlashcardsServiceTests.cs",
+              "DocumentMoniker": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatformTests\\FlashcardsServiceTests.cs",
+              "RelativeDocumentMoniker": "..\\StudyPlatformTests\\FlashcardsServiceTests.cs",
+              "ToolTip": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatformTests\\FlashcardsServiceTests.cs",
+              "RelativeToolTip": "..\\StudyPlatformTests\\FlashcardsServiceTests.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-13T05:32:07.65Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "MindmapEdgeDTO.cs",
+              "DocumentMoniker": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Models\\DTOs\\MindmapEdgeDTO.cs",
+              "RelativeDocumentMoniker": "Models\\DTOs\\MindmapEdgeDTO.cs",
+              "ToolTip": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Models\\DTOs\\MindmapEdgeDTO.cs",
+              "RelativeToolTip": "Models\\DTOs\\MindmapEdgeDTO.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABUAAAApAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-13T05:30:45.841Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "NodePositionDTO.cs",
+              "DocumentMoniker": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Models\\DTOs\\NodePositionDTO.cs",
+              "RelativeDocumentMoniker": "Models\\DTOs\\NodePositionDTO.cs",
+              "ToolTip": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Models\\DTOs\\NodePositionDTO.cs",
+              "RelativeToolTip": "Models\\DTOs\\NodePositionDTO.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAAlAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-13T05:30:24.095Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "NodeDataDTO.cs",
+              "DocumentMoniker": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Models\\DTOs\\NodeDataDTO.cs",
+              "RelativeDocumentMoniker": "Models\\DTOs\\NodeDataDTO.cs",
+              "ToolTip": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Models\\DTOs\\NodeDataDTO.cs",
+              "RelativeToolTip": "Models\\DTOs\\NodeDataDTO.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAApAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-13T05:30:05.467Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "MindmapNodeDTO.cs",
+              "DocumentMoniker": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Models\\DTOs\\MindmapNodeDTO.cs",
+              "RelativeDocumentMoniker": "Models\\DTOs\\MindmapNodeDTO.cs",
+              "ToolTip": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Models\\DTOs\\MindmapNodeDTO.cs",
+              "RelativeToolTip": "Models\\DTOs\\MindmapNodeDTO.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABEAAAA1AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-13T05:29:42.331Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "GeneratedFlashcardDTO.cs",
+              "DocumentMoniker": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Models\\DTOs\\GeneratedFlashcardDTO.cs",
+              "RelativeDocumentMoniker": "Models\\DTOs\\GeneratedFlashcardDTO.cs",
+              "ToolTip": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Models\\DTOs\\GeneratedFlashcardDTO.cs",
+              "RelativeToolTip": "Models\\DTOs\\GeneratedFlashcardDTO.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAIAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-13T05:28:03.984Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "GeneratedMindmapDTO.cs",
+              "DocumentMoniker": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Models\\DTOs\\GeneratedMindmapDTO.cs",
+              "RelativeDocumentMoniker": "Models\\DTOs\\GeneratedMindmapDTO.cs",
+              "ToolTip": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Models\\DTOs\\GeneratedMindmapDTO.cs",
+              "RelativeToolTip": "Models\\DTOs\\GeneratedMindmapDTO.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAA3AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-13T05:27:56.692Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "AppConstants.cs",
+              "DocumentMoniker": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Data\\Common\\AppConstants.cs",
+              "RelativeDocumentMoniker": "Data\\Common\\AppConstants.cs",
+              "ToolTip": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Data\\Common\\AppConstants.cs",
+              "RelativeToolTip": "Data\\Common\\AppConstants.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAABcAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-13T05:24:40.934Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
               "Title": "20251010185343_InitSupabaseMindmaps.cs",
               "DocumentMoniker": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Migrations\\SupabaseDb\\20251010185343_InitSupabaseMindmaps.cs",
               "RelativeDocumentMoniker": "Migrations\\SupabaseDb\\20251010185343_InitSupabaseMindmaps.cs",
               "ToolTip": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Migrations\\SupabaseDb\\20251010185343_InitSupabaseMindmaps.cs",
               "RelativeToolTip": "Migrations\\SupabaseDb\\20251010185343_InitSupabaseMindmaps.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABwAAAATAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-10-10T18:53:43.955Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 17,
               "Title": "20251010185043_InitSupabaseMindmaps.cs",
               "DocumentMoniker": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Migrations\\SupabaseDb\\20251010185043_InitSupabaseMindmaps.cs",
               "RelativeDocumentMoniker": "Migrations\\SupabaseDb\\20251010185043_InitSupabaseMindmaps.cs",
@@ -95,12 +329,11 @@
               "RelativeToolTip": "Migrations\\SupabaseDb\\20251010185043_InitSupabaseMindmaps.cs",
               "ViewState": "AQIAABcAAAAAAAAAAAAgwEcAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-10T18:50:43.832Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-10T18:50:43.832Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 18,
               "Title": "20251010184829_UpdateMindmapUserIdType.cs",
               "DocumentMoniker": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Migrations\\Supabase\\20251010184829_UpdateMindmapUserIdType.cs",
               "RelativeDocumentMoniker": "Migrations\\Supabase\\20251010184829_UpdateMindmapUserIdType.cs",
@@ -108,12 +341,11 @@
               "RelativeToolTip": "Migrations\\Supabase\\20251010184829_UpdateMindmapUserIdType.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-10T18:48:29.362Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-10T18:48:29.362Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 20,
               "Title": "User.cs",
               "DocumentMoniker": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Data\\Models\\User.cs",
               "RelativeDocumentMoniker": "Data\\Models\\User.cs",
@@ -121,12 +353,11 @@
               "RelativeToolTip": "Data\\Models\\User.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAMAAAA8AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-10T18:40:27.855Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-10T18:40:27.855Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 22,
               "Title": "20251010182454_InitialSupabaseMigration.cs",
               "DocumentMoniker": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Migrations\\Supabase\\20251010182454_InitialSupabaseMigration.cs",
               "RelativeDocumentMoniker": "Migrations\\Supabase\\20251010182454_InitialSupabaseMigration.cs",
@@ -134,25 +365,11 @@
               "RelativeToolTip": "Migrations\\Supabase\\20251010182454_InitialSupabaseMigration.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-10T18:24:54.705Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-10T18:24:54.705Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "MindmapsController.cs",
-              "DocumentMoniker": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Controllers\\MindmapsController.cs",
-              "RelativeDocumentMoniker": "Controllers\\MindmapsController.cs",
-              "ToolTip": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Controllers\\MindmapsController.cs",
-              "RelativeToolTip": "Controllers\\MindmapsController.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAAAZAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-10T18:24:20.239Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 23,
               "Title": "SupabaseRepository.cs",
               "DocumentMoniker": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Data\\Common\\SupabaseRepository.cs",
               "RelativeDocumentMoniker": "Data\\Common\\SupabaseRepository.cs",
@@ -160,12 +377,11 @@
               "RelativeToolTip": "Data\\Common\\SupabaseRepository.cs",
               "ViewState": "AQIAAJcAAAAAAAAAAAAmwLwAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-10T18:20:08.591Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-10T18:20:08.591Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 24,
               "Title": "Repository.cs",
               "DocumentMoniker": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Data\\Common\\Repository.cs",
               "RelativeDocumentMoniker": "Data\\Common\\Repository.cs",
@@ -173,12 +389,11 @@
               "RelativeToolTip": "Data\\Common\\Repository.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAAbAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-10T18:19:52.188Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-10T18:19:52.188Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 25,
               "Title": "IRepository.cs",
               "DocumentMoniker": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Data\\Common\\IRepository.cs",
               "RelativeDocumentMoniker": "Data\\Common\\IRepository.cs",
@@ -186,25 +401,11 @@
               "RelativeToolTip": "Data\\Common\\IRepository.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-10T18:19:51.224Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-10T18:19:51.224Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "MindmapsService.cs",
-              "DocumentMoniker": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Services\\Mindmaps\\MindmapsService.cs",
-              "RelativeDocumentMoniker": "Services\\Mindmaps\\MindmapsService.cs",
-              "ToolTip": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Services\\Mindmaps\\MindmapsService.cs",
-              "RelativeToolTip": "Services\\Mindmaps\\MindmapsService.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAA0AAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-10T18:19:07.819Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 21,
               "Title": "appsettings.json",
               "DocumentMoniker": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\appsettings.json",
               "RelativeDocumentMoniker": "appsettings.json",
@@ -212,25 +413,24 @@
               "RelativeToolTip": "appsettings.json",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAMAAAAPAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-10-10T18:16:02.841Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-10T18:16:02.841Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 6,
               "Title": "Program.cs",
               "DocumentMoniker": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
               "ToolTip": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Program.cs",
               "RelativeToolTip": "Program.cs",
-              "ViewState": "AQIAABMAAAAAAAAAAAAAAB0AAAAAAAAA",
+              "ViewState": "AQIAADcAAAAAAAAAAAAAAFEAAAA2AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-10-10T18:15:47.262Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 16,
               "Title": "SupabaseDbContext.cs",
               "DocumentMoniker": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Data\\SupabaseDbContext.cs",
               "RelativeDocumentMoniker": "Data\\SupabaseDbContext.cs",
@@ -238,12 +438,11 @@
               "RelativeToolTip": "Data\\SupabaseDbContext.cs",
               "ViewState": "AQIAAAIAAAAAAAAAAAAiwBQAAAAFAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-10T18:14:42.945Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-10T18:14:42.945Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 19,
               "Title": "Mindmap.cs",
               "DocumentMoniker": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Data\\Models\\Mindmap.cs",
               "RelativeDocumentMoniker": "Data\\Models\\Mindmap.cs",
@@ -251,8 +450,7 @@
               "RelativeToolTip": "Data\\Models\\Mindmap.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAA2AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-10T18:13:17.982Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-10T18:13:17.982Z"
             }
           ]
         }

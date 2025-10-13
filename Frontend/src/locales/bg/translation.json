@@ -102,6 +102,7 @@
     "revisionDifficultyLabelHard": "Трудно",
     "revisionDifficultyLabelVeryHard": "Много Трудно",
     "mindmapsDashboardHeader": "Мисловни Карти",
-    "mindmapsDashboardText": "Генерирайте и преговарайте мисловни карти с помощта на ИИ"
+    "mindmapsDashboardText": "Генерирайте и преговарайте мисловни карти с помощта на ИИ",
+    "loadingMindmapLabel": "Мисловната карта се зарежда..."
 
 }

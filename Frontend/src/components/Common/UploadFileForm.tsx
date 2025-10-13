@@ -5,10 +5,11 @@ import { Textarea } from "../ui/textarea";
 import Loading from "./Loading";
 import { useEffect } from "react";
 import ErrorScreen from "./ErrorScreen";
-import { Action } from "@/hooks/useHandleMaterialGeneration";
+import { Action, SubmitAction } from "@/hooks/useHandleMaterialGeneration";
 import { useTranslation } from "react-i18next";
 import { keys } from "@/types/keys";
 import ViewFlashcardSkeleton from "../Flashcards/ViewFlashcardSkeleton";
+import ViewMindmapSkeleton from "../Mindmaps/ViewMindmapSekeleton";
 
 type UploadFileFormProps = {
   loading: boolean;
@@ -20,7 +21,7 @@ type UploadFileFormProps = {
   setSelectedActionId: (id: string | undefined) => void;
   setCustomPrompt: (text: string | undefined) => void;
   closeForm: () => void;
-  handleSubmit: (actionId: string, customPrompt: string) => void;
+  handleSubmitFromAction: Record<string, SubmitAction>;
   handleFileChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   customPrompt: string | undefined;
 };
@@ -35,19 +36,26 @@ export default function UploadFileForm({
   handleFileChange,
   setSelectedActionId,
   closeForm,
-  handleSubmit,
+  handleSubmitFromAction,
   customPrompt,
   setCustomPrompt,
 }: UploadFileFormProps) {
   const [t] = useTranslation();
 
-  console.log(selectedActionId);
+  useEffect(() => {
+    console.log("action " + selectedActionId);
+  });
 
   // If an error occurs, show the error screen with buttons to retry or cancel
   if (error) {
     return (
       <ErrorScreen
-        onRetry={() => handleSubmit(selectedActionId!, customPrompt!)}
+        onRetry={() =>
+          handleSubmitFromAction[selectedActionId!](
+            selectedActionId!,
+            customPrompt!
+          )
+        }
         onCancel={closeForm}
       />
     );
@@ -61,11 +69,20 @@ export default function UploadFileForm({
   }
 
   if (loading) {
-    return (
-      <div className="w-full flex flex-wrap gap-3 p-2 py-4 self-start justify-center overflow-x-hidden">
-        {renderSkeletons(9)}
-      </div>
-    );
+    switch (selectedActionId) {
+      case "generateFlashcards":
+        return (
+          <div className="w-full flex flex-wrap gap-3 p-2 py-4 self-start justify-center overflow-x-hidden">
+            {renderSkeletons(9)}
+          </div>
+        );
+      case "generateMindmaps":
+        return (
+          <div className="w-full flex flex-wrap gap-3 p-2 py-4 self-start justify-center overflow-x-hidden">
+            <ViewMindmapSkeleton />
+          </div>
+        )
+    }
   }
 
   return (
@@ -106,7 +123,12 @@ export default function UploadFileForm({
             {t(keys.closeButton)}
           </Button>
           <Button
-            onClick={() => handleSubmit(selectedActionId!, customPrompt!)}
+            onClick={() =>
+              handleSubmitFromAction[selectedActionId!](
+                selectedActionId!,
+                customPrompt!
+              )
+            }
             className="px-4 py-2 rounded-xl"
           >
             {t(keys.submitButton)}

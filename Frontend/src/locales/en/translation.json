@@ -102,5 +102,6 @@
   "revisionDifficultyLabelHard": "Hard",
   "revisionDifficultyLabelVeryHard": "Very Hard",
   "mindmapsDashboardHeader": "Mindmaps Dashboard",
-  "mindmapsDashboardText": "Generate and revise Mindmaps with AI"
+  "mindmapsDashboardText": "Generate and revise Mindmaps with AI",
+  "loadingMindmapLabel": "Loading Mindmap..."
 }

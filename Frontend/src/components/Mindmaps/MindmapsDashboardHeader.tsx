@@ -120,7 +120,7 @@ export default function MindmapsDashboardHeader({ setView, handleFileUpload, han
               <Button className="rounded-3xl" variant="ghost" onClick={() => setView("revise")}>
                   <TextSelection className="inline" /> {t(keys.reviseButtonLabel)}
               </Button>
-              <UploadFileButton />
+              <UploadFileButton defaultActionId="generateMindmaps" />
             </div>
         </div>
       </div>

@@ -8,11 +8,14 @@ import { Flashcard } from "@/data/Flashcard";
 import { BASE_URL } from "@/types/urls";
 import { useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
+import { GeneratedMindmapDTO } from "@/data/DTOs/GeneratedMindmapDTO";
 
 export interface Action {
   id: string;
   title: string;
 }
+
+export type SubmitAction = (actionId: string, customPrompt: string) => Promise<void>;
 
 export function useHandleMaterialGeneration(closeForm: () => void) {
   const { user, token } = useAuth();
@@ -26,6 +29,10 @@ export function useHandleMaterialGeneration(closeForm: () => void) {
   const [generatedFlashcards, setGeneratedFlashcards] = useState<
     GeneratedFlashcardDTO[]
   >([]);
+
+  const [generatedMindmap, setGeneratedMindmap] = useState<
+    GeneratedMindmapDTO
+  >();
 
   const [customPrompt, setCustomPrompt] = useState<string>();
 
@@ -44,16 +51,15 @@ export function useHandleMaterialGeneration(closeForm: () => void) {
     actions[0].id
   );
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (!e.target.files?.length) return;
-    setFile(e.target.files[0]);
-  };
-
-  const handleSubmit = async (actionId: string, customPrompt: string) => {
+  const handleSubmitFlashcards: SubmitAction = async (
+    actionId,
+    customPrompt
+  ) => {
     if (!file) return;
 
     setError(false);
     setLoading(true);
+
     try {
       const downloadUrl = await storageService.uploadFile(
         user?.id as string,
@@ -67,7 +73,7 @@ export function useHandleMaterialGeneration(closeForm: () => void) {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify({ fileDownloadUrl: downloadUrl }),
+        body: JSON.stringify({ fileDownloadUrl: downloadUrl, customPrompt: customPrompt }),
       });
 
       let json: GeneratedFlashcardDTO[] = await response.json();
@@ -85,6 +91,56 @@ export function useHandleMaterialGeneration(closeForm: () => void) {
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleSubmitMindmaps: SubmitAction = async (actionId, customPrompt) => {
+    if (!file) return;
+
+    setError(false);
+    setLoading(true);
+
+    try {
+      const downloadUrl = await storageService.uploadFile(
+        user?.id as string,
+        file,
+        "user-files"
+      );
+
+      const response = await fetch(`${BASE_URL}/mindmaps/generate`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ fileDownloadUrl: downloadUrl, customPrompt: customPrompt }),
+      });
+
+      console.log(response);
+
+      let json: GeneratedMindmapDTO = await response.json();
+        json.materialSubGroupId = selectedGroupId;
+
+      console.log(json);
+
+      setGeneratedMindmap(json);
+      setReviewing(true);
+    } catch (err) {
+      console.error("Upload error:", err);
+      setError(true);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Define multiple actions, each with its own behavior
+  const handleSubmitFromAction: Record<string, SubmitAction> = {
+    generateFlashcards: handleSubmitFlashcards,
+    generateMindmaps: handleSubmitMindmaps,
+  };
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!e.target.files?.length) return;
+    setFile(e.target.files[0]);
   };
 
   const handleApprove = async (flashcards: FlashcardDTO[]) => {
@@ -120,8 +176,9 @@ export function useHandleMaterialGeneration(closeForm: () => void) {
     customPrompt,
     setCustomPrompt,
     handleFileChange,
-    handleSubmit,
+    handleSubmitFromAction,
     handleApprove,
     actions,
+    generatedMindmap
   };
 }

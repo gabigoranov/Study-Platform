@@ -5,12 +5,21 @@ import UploadFileMenu from "./UploadFileMenu";
 import { keys } from "@/types/keys";
 import { useTranslation } from "react-i18next";
 import { AnimatePresence, motion } from "motion/react";
+import { useHandleMaterialGeneration } from "@/hooks/useHandleMaterialGeneration";
 
-export default function UploadFileButton() {
+type UploadFileButtonProps = {
+  defaultActionId: string
+}
+
+export default function UploadFileButton({defaultActionId} : UploadFileButtonProps) {
   const [isFormOpen, setIsFormOpen] = useState(false);
+  const {selectedActionId, setSelectedActionId} = useHandleMaterialGeneration(() => setIsFormOpen(false));
   const [t] = useTranslation();
 
-  const toggleForm = () => setIsFormOpen((prev) => !prev);
+  const toggleForm = () => {
+    setSelectedActionId(defaultActionId);
+    setIsFormOpen((prev) => !prev);
+  };
 
   return (
     <>
@@ -24,6 +33,7 @@ export default function UploadFileButton() {
           <UploadFileMenu
             closeForm={() => setIsFormOpen(false)}
             isFormOpen={isFormOpen}
+            selectedActionId={selectedActionId}
           />
         )}
       </AnimatePresence>

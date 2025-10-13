@@ -3,9 +3,13 @@ import { FlashcardDTO } from "@/data/DTOs/FlashcardDTO";
 import UploadFileForm from "./UploadFileForm";
 import { useHandleMaterialGeneration } from "@/hooks/useHandleMaterialGeneration";
 import { AnimatePresence, motion } from "motion/react";
+import ReviewGeneratedMindmap from "../Mindmaps/ReviewGeneratedMindmap";
+import { MindmapDTO } from "@/data/DTOs/MindmapDTO";
+import { ReactFlowProvider } from "@xyflow/react";
 
 type UploadFileMenuProps = {
   isFormOpen: boolean;
+  selectedActionId: string | undefined;
   label?: string;
   closeForm: () => void;
 };
@@ -13,6 +17,7 @@ type UploadFileMenuProps = {
 export default function UploadFileMenu({
   isFormOpen,
   closeForm,
+  selectedActionId,
 }: UploadFileMenuProps) {
   const {
     file,
@@ -20,14 +25,14 @@ export default function UploadFileMenu({
     error,
     reviewing,
     generatedFlashcards,
-    selectedActionId,
     setSelectedActionId,
     customPrompt,
     setCustomPrompt,
     handleFileChange,
-    handleSubmit,
+    handleSubmitFromAction,
     handleApprove,
     actions,
+    generatedMindmap,
   } = useHandleMaterialGeneration(closeForm);
 
   return (
@@ -48,7 +53,7 @@ export default function UploadFileMenu({
           onClick={(e) => e.stopPropagation()}
         >
           {reviewing ? (
-            selectedActionId == "generateFlashcards" && (
+            selectedActionId == "generateFlashcards" ? (
               <ReviewGeneratedFlashcards
                 flashcards={generatedFlashcards as FlashcardDTO[]}
                 onCancel={closeForm}
@@ -56,11 +61,21 @@ export default function UploadFileMenu({
                 loading={loading}
                 error={error}
               />
-            )
+            ) : selectedActionId == "generateMindmaps" ? (
+              <ReactFlowProvider>
+                <ReviewGeneratedMindmap
+                  mindmap={generatedMindmap as MindmapDTO}
+                  onApprove={(m) => console.log("Approved mindmap:", m)}
+                  onCancel={() => console.log("Cancelled")}
+                  loading={false}
+                  error={false}
+                />
+              </ReactFlowProvider>
+            ) : null
           ) : (
             <UploadFileForm
               handleFileChange={handleFileChange}
-              handleSubmit={handleSubmit}
+              handleSubmitFromAction={handleSubmitFromAction}
               loading={loading}
               error={error}
               resetForm={closeForm}

@@ -15,7 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("StudyPlatform")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0d6a3c86857bcdb7b76b5c0b94b13c5cde0cb487")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b6948494f9a77f2be9542dcd2007dd6a3515c6c6")]
 [assembly: System.Reflection.AssemblyProductAttribute("StudyPlatform")]
 [assembly: System.Reflection.AssemblyTitleAttribute("StudyPlatform")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

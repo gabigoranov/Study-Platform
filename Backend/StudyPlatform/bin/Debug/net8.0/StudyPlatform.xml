@@ -115,7 +115,7 @@
             A controller responsible for handling all requests related to mindmaps.
             </summary>
         </member>
-        <member name="M:StudyPlatform.Controllers.MindmapsController.#ctor">
+        <member name="M:StudyPlatform.Controllers.MindmapsController.#ctor(StudyPlatform.Services.Mindmaps.IMindmapsService)">
             <summary>
             Initializes the MindmapsController and injects dependencies.
             </summary>
@@ -980,6 +980,30 @@
         </member>
         <member name="M:StudyPlatform.Services.MaterialSubGroups.MaterialSubGroupsService.DeleteSubGroupAsync(System.Int32,System.Guid)">
             <inheritdoc />
+        </member>
+        <member name="T:StudyPlatform.Services.Mindmaps.IMindmapsService">
+            <summary>
+            An interface defining operations related to mindmaps.
+            </summary>
+        </member>
+        <member name="M:StudyPlatform.Services.Mindmaps.IMindmapsService.GenerateAsync(StudyPlatform.Models.GenerateMindmapsViewModel,System.Guid)">
+            <summary>
+            Generates a set of mindmaps from the provided model.
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:StudyPlatform.Services.Mindmaps.MindmapsService.#ctor(StudyPlatform.Data.Common.SupabaseRepository,Microsoft.Extensions.Logging.ILogger{StudyPlatform.Services.Mindmaps.MindmapsService},AutoMapper.IMapper,System.Net.Http.HttpClient)">
+            <summary>
+            Initializes the service and injects dependencies.
+            </summary>
+            <param name="repo"></param>
+            <param name="logger"></param>
+            <param name="mapper"></param>
+            <param name="client"></param>
+        </member>
+        <member name="M:StudyPlatform.Services.Mindmaps.MindmapsService.GenerateAsync(StudyPlatform.Models.GenerateMindmapsViewModel,System.Guid)">
+            <inheritdoc/>
         </member>
         <member name="T:StudyPlatform.Services.Subjects.ISubjectsService">
             <summary>

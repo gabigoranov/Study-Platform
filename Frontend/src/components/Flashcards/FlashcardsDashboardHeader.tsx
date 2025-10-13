@@ -120,7 +120,7 @@ export default function FlashcardsDashboardHeader({ setView, handleFileUpload, h
               <Button className="rounded-3xl" variant="ghost" onClick={() => setView("revise")}>
                   <TextSelection className="inline" /> {t(keys.reviseButtonLabel)}
               </Button>
-              <UploadFileButton />
+              <UploadFileButton defaultActionId="generateFlashcards"/>
             </div>
         </div>
       </div>
