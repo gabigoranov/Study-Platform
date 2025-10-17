@@ -103,5 +103,6 @@ export const keys = {
   revisionDifficultyLabelVeryHard: "revisionDifficultyLabelVeryHard",
   mindmapsDashboardHeader: "mindmapsDashboardHeader",
   mindmapsDashboardText: "mindmapsDashboardText",
-  loadingMindmapLabel: "loadingMindmapLabel"
+  loadingMindmapLabel: "loadingMindmapLabel",
+  noMindmaps: "noMindmaps"
 };

@@ -1,13 +1,10 @@
-﻿using System;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json;
-using Microsoft.EntityFrameworkCore;
-using System.ComponentModel.DataAnnotations.Schema;
 
-namespace StudyPlatform.Data.Models
+namespace StudyPlatform.Models.DTOs
 {
-    [Index(nameof(UserId))] // Optional: creates an index on UserId
-    public class Mindmap
+    public class MindmapDTO
     {
         [Key]
         public Guid Id { get; set; }

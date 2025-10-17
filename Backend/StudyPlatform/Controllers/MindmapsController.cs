@@ -25,6 +25,33 @@ namespace StudyPlatform.Controllers
             _mindmapsService = mindmapsService;
         }
 
+        [HttpPost]
+        public async Task<IActionResult> Create([FromBody] CreateMindmapViewModel model)
+        {
+            // Load userId from JWT token
+            Guid userId = User.GetUserId();
+
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+
+            MindmapDTO res = await _mindmapsService.CreateAsync(model, userId);
+
+            return Ok();
+        }
+
+        /// <summary>
+        /// Endpoint for getting all mindmaps that the user owns in a certain group.
+        /// </summary>
+        /// <returns>A list of mindmaps if successful.</returns>
+        [HttpGet("group/{subGroupId}")]
+        public async Task<IActionResult> GetAllFromGroup([FromRoute] int subGroupId, [FromQuery] int subjectId)
+        {
+            // Load userId from JWT token
+            Guid userId = User.GetUserId();
+
+            IEnumerable<MindmapDTO> res = await _mindmapsService.GetAllAsync(userId, subGroupId, subjectId);
+            return Ok(res);
+        }
+
         [HttpPost("generate")]
         public async Task<IActionResult> Generate([FromBody] GenerateMindmapsViewModel model)
         {

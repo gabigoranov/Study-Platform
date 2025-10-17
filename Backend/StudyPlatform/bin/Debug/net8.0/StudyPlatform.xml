@@ -120,6 +120,12 @@
             Initializes the MindmapsController and injects dependencies.
             </summary>
         </member>
+        <member name="M:StudyPlatform.Controllers.MindmapsController.GetAllFromGroup(System.Int32,System.Int32)">
+            <summary>
+            Endpoint for getting all mindmaps that the user owns in a certain group.
+            </summary>
+            <returns>A list of mindmaps if successful.</returns>
+        </member>
         <member name="T:StudyPlatform.Controllers.SubjectsController">
             <summary>
             API controller for managing subjects.
@@ -696,6 +702,30 @@
         <member name="M:StudyPlatform.Migrations.SupabaseDb.InitSupabaseMindmaps.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
         </member>
+        <member name="T:StudyPlatform.Migrations.SupabaseDb.RenameMindmmapFields">
+            <inheritdoc />
+        </member>
+        <member name="M:StudyPlatform.Migrations.SupabaseDb.RenameMindmmapFields.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:StudyPlatform.Migrations.SupabaseDb.RenameMindmmapFields.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:StudyPlatform.Migrations.SupabaseDb.RenameMindmmapFields.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:StudyPlatform.Migrations.SupabaseDb.AddTitleAndDescriptionToMindmap">
+            <inheritdoc />
+        </member>
+        <member name="M:StudyPlatform.Migrations.SupabaseDb.AddTitleAndDescriptionToMindmap.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:StudyPlatform.Migrations.SupabaseDb.AddTitleAndDescriptionToMindmap.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:StudyPlatform.Migrations.SupabaseDb.AddTitleAndDescriptionToMindmap.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
         <member name="T:StudyPlatform.Models.Common.AutoMapper">
             <summary>
             Defines the AutoMapper initialization and maps.
@@ -986,11 +1016,29 @@
             An interface defining operations related to mindmaps.
             </summary>
         </member>
+        <member name="M:StudyPlatform.Services.Mindmaps.IMindmapsService.CreateAsync(StudyPlatform.Models.CreateMindmapViewModel,System.Guid)">
+            <summary>
+            Generates a set of mindmaps from the provided model.
+            </summary>
+            <param name="model"></param>
+            <param name="userId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:StudyPlatform.Services.Mindmaps.IMindmapsService.GetAllAsync(System.Guid,System.Nullable{System.Int32},System.Nullable{System.Int32})">
+            <summary>
+            Generates a set of mindmaps from the provided model.
+            </summary>
+            <param name="userId"></param>
+            <param name="subGroupId"></param>
+            <param name="subjectId"></param>
+            <returns></returns>
+        </member>
         <member name="M:StudyPlatform.Services.Mindmaps.IMindmapsService.GenerateAsync(StudyPlatform.Models.GenerateMindmapsViewModel,System.Guid)">
             <summary>
             Generates a set of mindmaps from the provided model.
             </summary>
             <param name="model"></param>
+            <param name="userId"></param>
             <returns></returns>
         </member>
         <member name="M:StudyPlatform.Services.Mindmaps.MindmapsService.#ctor(StudyPlatform.Data.Common.SupabaseRepository,Microsoft.Extensions.Logging.ILogger{StudyPlatform.Services.Mindmaps.MindmapsService},AutoMapper.IMapper,System.Net.Http.HttpClient)">
@@ -1002,7 +1050,13 @@
             <param name="mapper"></param>
             <param name="client"></param>
         </member>
+        <member name="M:StudyPlatform.Services.Mindmaps.MindmapsService.CreateAsync(StudyPlatform.Models.CreateMindmapViewModel,System.Guid)">
+            <inheritdoc/>
+        </member>
         <member name="M:StudyPlatform.Services.Mindmaps.MindmapsService.GenerateAsync(StudyPlatform.Models.GenerateMindmapsViewModel,System.Guid)">
+            <inheritdoc/>
+        </member>
+        <member name="M:StudyPlatform.Services.Mindmaps.MindmapsService.GetAllAsync(System.Guid,System.Nullable{System.Int32},System.Nullable{System.Int32})">
             <inheritdoc/>
         </member>
         <member name="T:StudyPlatform.Services.Subjects.ISubjectsService">

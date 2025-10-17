@@ -5,55 +5,57 @@ import { Textarea } from "../ui/textarea";
 import Loading from "./Loading";
 import { useEffect } from "react";
 import ErrorScreen from "./ErrorScreen";
-import { Action, SubmitAction } from "@/hooks/useHandleMaterialGeneration";
 import { useTranslation } from "react-i18next";
 import { keys } from "@/types/keys";
 import ViewFlashcardSkeleton from "../Flashcards/ViewFlashcardSkeleton";
 import ViewMindmapSkeleton from "../Mindmaps/ViewMindmapSekeleton";
+import {
+  SubmitAction,
+  useGenerationActions,
+} from "@/hooks/useGenerationActions";
+import { useVariableContext } from "@/context/VariableContext";
+import MindmapSkeleton from "../Mindmaps/MindmapSkeleton";
+import { GenerationActionHandler } from "./UploadFileMenu";
 
 type UploadFileFormProps = {
+  resetForm: () => void;
+  closeForm: () => void;
+  selectedActionHandler: GenerationActionHandler;
+  selectedActionId: string | undefined;
+  setSelectedActionId: (e: string) => void;
+  file: File | undefined;
   loading: boolean;
   error: boolean;
-  resetForm: () => void;
-  file: File | undefined;
-  actions: Action[];
-  selectedActionId: string | undefined;
-  setSelectedActionId: (id: string | undefined) => void;
-  setCustomPrompt: (text: string | undefined) => void;
-  closeForm: () => void;
-  handleSubmitFromAction: Record<string, SubmitAction>;
-  handleFileChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   customPrompt: string | undefined;
+  setCustomPrompt: (value: string) => void;
+  handleFileChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
 export default function UploadFileForm({
+  closeForm,
+  selectedActionHandler,
+  file,
   loading,
   error,
-  resetForm,
-  file,
-  actions,
-  selectedActionId,
-  handleFileChange,
-  setSelectedActionId,
-  closeForm,
-  handleSubmitFromAction,
   customPrompt,
   setCustomPrompt,
+  handleFileChange,
+  selectedActionId,
+  setSelectedActionId
 }: UploadFileFormProps) {
   const [t] = useTranslation();
 
-  useEffect(() => {
-    console.log("action " + selectedActionId);
-  });
+  const { actions } = useGenerationActions();
 
   // If an error occurs, show the error screen with buttons to retry or cancel
   if (error) {
     return (
       <ErrorScreen
         onRetry={() =>
-          handleSubmitFromAction[selectedActionId!](
-            selectedActionId!,
-            customPrompt!
+          selectedActionHandler.handleSubmitGeneration(
+            selectedActionId ?? "generateFlashcards",
+            customPrompt ?? "",
+            file
           )
         }
         onCancel={closeForm}
@@ -79,9 +81,9 @@ export default function UploadFileForm({
       case "generateMindmaps":
         return (
           <div className="w-full flex flex-wrap gap-3 p-2 py-4 self-start justify-center overflow-x-hidden">
-            <ViewMindmapSkeleton />
+            <MindmapSkeleton />
           </div>
-        )
+        );
     }
   }
 
@@ -123,12 +125,17 @@ export default function UploadFileForm({
             {t(keys.closeButton)}
           </Button>
           <Button
-            onClick={() =>
-              handleSubmitFromAction[selectedActionId!](
-                selectedActionId!,
-                customPrompt!
-              )
-            }
+            onClick={() => {
+              console.log("Clicked submit button!");
+              console.log(selectedActionId);
+              console.log(customPrompt);
+              console.log(file);
+              selectedActionHandler.handleSubmitGeneration(
+                selectedActionId ?? "generateFlashcards",
+                customPrompt ?? "",
+                file
+              );
+            }}
             className="px-4 py-2 rounded-xl"
           >
             {t(keys.submitButton)}

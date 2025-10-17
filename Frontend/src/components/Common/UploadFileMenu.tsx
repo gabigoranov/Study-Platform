@@ -1,39 +1,101 @@
 import ReviewGeneratedFlashcards from "../Flashcards/ReviewGeneratedFlashcards";
 import { FlashcardDTO } from "@/data/DTOs/FlashcardDTO";
 import UploadFileForm from "./UploadFileForm";
-import { useHandleMaterialGeneration } from "@/hooks/useHandleMaterialGeneration";
 import { AnimatePresence, motion } from "motion/react";
 import ReviewGeneratedMindmap from "../Mindmaps/ReviewGeneratedMindmap";
 import { MindmapDTO } from "@/data/DTOs/MindmapDTO";
 import { ReactFlowProvider } from "@xyflow/react";
+import { GeneratedMindmapDTO } from "@/data/DTOs/GeneratedMindmapDTO";
+import { SubmitAction, useGenerationActions } from "@/hooks/useGenerationActions";
+import { useState } from "react";
+import { useFlashcardsGeneration } from "@/hooks/useFlashcardsGeneration";
+import { useMindmapsGeneration } from "@/hooks/useMindmapsGeneration";
+import { GeneratedFlashcardDTO } from "@/data/DTOs/GeneratedFlashcardDTO";
+import { Flashcard } from "@/data/Flashcard";
 
 type UploadFileMenuProps = {
   isFormOpen: boolean;
-  selectedActionId: string | undefined;
-  label?: string;
   closeForm: () => void;
+
+  selectedActionId: string | undefined;
+  setSelectedActionId: (id: string) => void;
+
+  // Generation variables from parent
+  file?: File;
+  loading: boolean;
+  error: boolean;
+  reviewing: boolean;
+  customPrompt?: string;
+  setCustomPrompt: (value: string | undefined) => void;
+  handleFileChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+
+  // Setters for generation state
+  setLoading: (value: boolean) => void;
+  setReviewing: (value: boolean) => void;
+  setError: (value: boolean) => void;
+};
+
+export type GenerationActionHandler = {
+  id: string;
+  title: string;
+  handleSubmitGeneration: SubmitAction;
+  handleApproveGeneration: (data: any) => Promise<void>;
 };
 
 export default function UploadFileMenu({
   isFormOpen,
   closeForm,
   selectedActionId,
+  setSelectedActionId,
+  file,
+  loading,
+  error,
+  reviewing,
+  customPrompt,
+  setCustomPrompt,
+  handleFileChange,
+  setLoading,
+  setReviewing,
+  setError,
 }: UploadFileMenuProps) {
   const {
-    file,
-    loading,
-    error,
-    reviewing,
     generatedFlashcards,
-    setSelectedActionId,
-    customPrompt,
-    setCustomPrompt,
-    handleFileChange,
-    handleSubmitFromAction,
-    handleApprove,
-    actions,
+    handleApproveGeneration: handleApproveFlashcardsGeneration,
+    handleSubmitGeneration: handleSubmitFlashcardsGeneration,
+  } = useFlashcardsGeneration({
+    setLoading,
+    setReviewing,
+    setError,
+    closeForm,
+  });
+
+  const {
     generatedMindmap,
-  } = useHandleMaterialGeneration(closeForm);
+    handleApproveGeneration: handleApproveMindmapsGeneration,
+    handleSubmitGeneration: handleSubmitMindmapsGeneration,
+  } = useMindmapsGeneration({
+    setLoading,
+    setReviewing,
+    setError,
+    closeForm,
+  });
+
+  const generationActionHandlerMap: Record<string, GenerationActionHandler> = {
+    generateFlashcards: {
+      id: "generateFlashcards",
+      title: "Generate Flashcards",
+      handleSubmitGeneration: handleSubmitFlashcardsGeneration,
+      handleApproveGeneration: handleApproveFlashcardsGeneration,
+    },
+    generateMindmaps: {
+      id: "generateMindmaps",
+      title: "Generate Mindmaps",
+      handleSubmitGeneration: handleSubmitMindmapsGeneration,
+      handleApproveGeneration: handleApproveMindmapsGeneration,
+    },
+  };
+
+  const [selectedActionHandler, setSelectedActionHandler] = useState<GenerationActionHandler>(generationActionHandlerMap[selectedActionId ?? "generateFlashcards"]);
 
   return (
     <div
@@ -57,16 +119,16 @@ export default function UploadFileMenu({
               <ReviewGeneratedFlashcards
                 flashcards={generatedFlashcards as FlashcardDTO[]}
                 onCancel={closeForm}
-                onApprove={handleApprove}
+                onApprove={selectedActionHandler.handleApproveGeneration}
                 loading={loading}
                 error={error}
               />
             ) : selectedActionId == "generateMindmaps" ? (
               <ReactFlowProvider>
                 <ReviewGeneratedMindmap
-                  mindmap={generatedMindmap as MindmapDTO}
-                  onApprove={(m) => console.log("Approved mindmap:", m)}
-                  onCancel={() => console.log("Cancelled")}
+                  mindmap={generatedMindmap as GeneratedMindmapDTO}
+                  onApprove={selectedActionHandler.handleApproveGeneration}
+                  onCancel={closeForm}
                   loading={false}
                   error={false}
                 />
@@ -74,18 +136,17 @@ export default function UploadFileMenu({
             ) : null
           ) : (
             <UploadFileForm
-              handleFileChange={handleFileChange}
-              handleSubmitFromAction={handleSubmitFromAction}
+              selectedActionId={selectedActionId}
+              setSelectedActionId={(e) => setSelectedActionId}
+              resetForm={closeForm}
+              closeForm={closeForm}
+              selectedActionHandler={selectedActionHandler}
+              file={file}
               loading={loading}
               error={error}
-              resetForm={closeForm}
-              file={file}
-              actions={actions}
-              selectedActionId={selectedActionId}
-              setSelectedActionId={setSelectedActionId}
-              closeForm={closeForm}
-              setCustomPrompt={setCustomPrompt}
               customPrompt={customPrompt}
+              setCustomPrompt={setCustomPrompt}
+              handleFileChange={handleFileChange}
             />
           )}
         </motion.div>

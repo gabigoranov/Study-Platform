@@ -27,6 +27,8 @@ namespace StudyPlatform.Models.Common
             CreateMap<CreateMaterialSubGroupViewModel, MaterialSubGroup>();
 
             CreateMap<MaterialSubGroup, MaterialSubGroupDTO>().ReverseMap();
+            CreateMap<Mindmap, CreateMindmapViewModel>().ReverseMap();
+            CreateMap<Mindmap, MindmapDTO>().ReverseMap();
         }
     }
 }

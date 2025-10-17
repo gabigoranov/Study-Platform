@@ -103,6 +103,7 @@
     "revisionDifficultyLabelVeryHard": "Много Трудно",
     "mindmapsDashboardHeader": "Мисловни Карти",
     "mindmapsDashboardText": "Генерирайте и преговарайте мисловни карти с помощта на ИИ",
-    "loadingMindmapLabel": "Мисловната карта се зарежда..."
+    "loadingMindmapLabel": "Мисловната карта се зарежда...",
+    "noMindmaps": "Не бяха намерени мисловни карти..."
 
 }

@@ -42,11 +42,14 @@ export function App() {
                 <Route path="mindmaps/*" element={<MindmapsDashboard />} />
               </Route>
 
-              <Route path="settings" element={
-                <ProtectedRoute>
-                  <SettingsLayout />
-                </ProtectedRoute>
-              }>
+              <Route
+                path="settings"
+                element={
+                  <ProtectedRoute>
+                    <SettingsLayout />
+                  </ProtectedRoute>
+                }
+              >
                 <Route index element={<GeneralSettings />} />
                 <Route path="account" element={<AccountSettings />} />
                 <Route path="theme" element={<ThemeSettings />} />

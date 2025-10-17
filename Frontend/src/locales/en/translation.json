@@ -103,5 +103,6 @@
   "revisionDifficultyLabelVeryHard": "Very Hard",
   "mindmapsDashboardHeader": "Mindmaps Dashboard",
   "mindmapsDashboardText": "Generate and revise Mindmaps with AI",
-  "loadingMindmapLabel": "Loading Mindmap..."
+  "loadingMindmapLabel": "Loading Mindmap...",
+  "noMindmaps": "No mindmaps were found..."
 }

@@ -9,11 +9,11 @@ import { MindmapDTO } from "@/data/DTOs/MindmapDTO";
 import { Node, Edge } from "@xyflow/react";
 import { t } from "i18next";
 import { keys } from "@/types/keys";
-import { MindmapEdgeDTO, MindmapNodeDTO } from "@/data/DTOs/GeneratedMindmapDTO";
+import { GeneratedMindmapDTO, MindmapEdgeDTO, MindmapNodeDTO } from "@/data/DTOs/GeneratedMindmapDTO";
 
 type ReviewGeneratedMindmapProps = {
-  mindmap: MindmapDTO;
-  onApprove: (mindmap: MindmapDTO) => void;
+  mindmap: GeneratedMindmapDTO;
+  onApprove: (mindmap: GeneratedMindmapDTO) => void;
   onCancel: () => void;
   loading?: boolean;
   error?: boolean;
@@ -26,7 +26,7 @@ export default function ReviewGeneratedMindmap({
   loading = false,
   error = false,
 }: ReviewGeneratedMindmapProps) {
-  const [data, setData] = useState<MindmapDTO>(mindmap);
+  const [data, setData] = useState<GeneratedMindmapDTO>(mindmap);
   const [isEditing, setIsEditing] = useState(false);
 
   // ----------------------------
@@ -59,7 +59,7 @@ export default function ReviewGeneratedMindmap({
   // ----------------------------
   const handleSave = (updatedNodes: Node[], updatedEdges: Edge[]) => {
     // Convert back to DTO format
-    const updatedMindmap: MindmapDTO = {
+    const updatedMindmap: GeneratedMindmapDTO = {
       ...data,
       nodes: updatedNodes.map((n) => ({
         id: n.id,

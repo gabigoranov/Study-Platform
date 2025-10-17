@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("StudyPlatformTests")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0d6a3c86857bcdb7b76b5c0b94b13c5cde0cb487")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6171447414094855592e3404ecd7f3a66f053fbc")]
 [assembly: System.Reflection.AssemblyProductAttribute("StudyPlatformTests")]
 [assembly: System.Reflection.AssemblyTitleAttribute("StudyPlatformTests")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

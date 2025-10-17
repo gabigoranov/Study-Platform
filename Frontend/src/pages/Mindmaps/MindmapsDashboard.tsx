@@ -20,6 +20,8 @@ import CreateMindmapsPage from "./CreateMindmapPage";
 import { mindmapPresets } from "@/lib/mindmapPresets";
 import CreateMindmapPage from "./CreateMindmapPage";
 import { Node, Edge, ReactFlowProvider, ReactFlow } from "@xyflow/react";
+import { mindmapsService } from "@/services/mindmapsService";
+import MindmapsDashboardList from "@/components/Mindmaps/MindmapsDashboardList";
 
 type View = "list" | "create" | "edit" | "view" | "revise";
 export const flashcardService = apiService<
@@ -46,13 +48,13 @@ export default function FlashcardsDashboard() {
 
   // --- Query: load all flashcards ---
   const {
-    data: flashcards,
+    data: mindmaps,
     isLoading,
     error,
   } = useQuery({
-    queryKey: ["flashcards", selectedGroupId, selectedSubjectId],
+    queryKey: ["mindmaps", selectedGroupId, selectedSubjectId],
     queryFn: () =>
-      flashcardService.getAll(
+      mindmapsService.getAll(
         token!,
         selectedGroupId ? `group/${selectedGroupId}` : null,
         selectedSubjectId ? { subjectId: selectedSubjectId } : undefined
@@ -144,15 +146,17 @@ export default function FlashcardsDashboard() {
           <Route
             path="/"
             element={
-              <FlashcardsDashboardList
-                flashcards={flashcards ?? []}
-                onSelect={selectCard}
-                selectedId={selectedFlashcardId}
+              <MindmapsDashboardList
+                mindmaps={mindmaps ?? []}
+                onSelect={function (id: string): void {
+                  throw new Error("Function not implemented.");
+                }}
+                selectedId={null}
                 loading={isLoading}
               />
             }
           />
-          <Route
+          {/* <Route
             path="create"
             element={
               <ReactFlowProvider>
@@ -168,7 +172,7 @@ export default function FlashcardsDashboard() {
             path="edit"
             element={
               <FlashcardsForm
-                model={flashcards?.find((fc) => fc.id === selectedFlashcardId)}
+                model={[flashcards]?.find((fc) => fc.id === selectedFlashcardId)}
                 submitLabel={t(keys.updateFlashcardButton)}
                 onSubmit={(data: FlashcardDTO) => {
                   handleUpdate(data);
@@ -195,7 +199,7 @@ export default function FlashcardsDashboard() {
                 />
               </div>
             }
-          />
+          /> */}
         </Routes>
         <ScrollToTopButton />
       </div>
