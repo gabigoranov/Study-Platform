@@ -117,9 +117,6 @@ export default function MindmapsDashboardHeader({ setView, handleFileUpload, han
             </div>
 
             <div className="sm:ml-auto flex gap-4">
-              <Button className="rounded-3xl" variant="ghost" onClick={() => setView("revise")}>
-                  <TextSelection className="inline" /> {t(keys.reviseButtonLabel)}
-              </Button>
               <UploadFileButton defaultActionId="generateMindmaps" />
             </div>
         </div>

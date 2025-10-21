@@ -22,6 +22,8 @@ import CreateMindmapPage from "./CreateMindmapPage";
 import { Node, Edge, ReactFlowProvider, ReactFlow } from "@xyflow/react";
 import { mindmapsService } from "@/services/mindmapsService";
 import MindmapsDashboardList from "@/components/Mindmaps/MindmapsDashboardList";
+import ViewMindmapPage from "./ViewMindmapPage";
+import { MindmapDTO } from "@/data/DTOs/MindmapDTO";
 
 type View = "list" | "create" | "edit" | "view" | "revise";
 export const flashcardService = apiService<
@@ -36,17 +38,14 @@ export default function FlashcardsDashboard() {
   const { token } = useAuth();
   const queryClient = useQueryClient();
   const {
-    selectedFlashcardId,
-    setSelectedFlashcardId,
+    selectedMindmapId,
+    setSelectedMindmapId,
     selectedGroupId,
     selectedSubjectId,
   } = useVariableContext();
-  const [isFlipped, setIsFlipped] = useState<boolean>(false);
   const navigate = useNavigate();
 
-  const { nodes, edges } = mindmapPresets.connected;
-
-  // --- Query: load all flashcards ---
+  // --- Query: load all mindmaps ---
   const {
     data: mindmaps,
     isLoading,
@@ -76,7 +75,7 @@ export default function FlashcardsDashboard() {
 
   // --- Mutation: update ---
   const updateMutation = useMutation({
-    mutationFn: ({ id, dto }: { id: number; dto: FlashcardDTO }) =>
+    mutationFn: ({ id, dto }: { id: string; dto: FlashcardDTO }) =>
       flashcardService.update(id.toString(), dto, token!),
     onSuccess: (updated) => {
       queryClient.setQueryData<Flashcard[]>(
@@ -100,7 +99,7 @@ export default function FlashcardsDashboard() {
         (old) => (old ? old.filter((fc) => fc.id !== id) : [])
       );
 
-      setSelectedFlashcardId(null); // reset selected flashcard after deletion
+      setSelectedMindmapId(null); // reset selected flashcard after deletion
     },
   });
 
@@ -111,8 +110,8 @@ export default function FlashcardsDashboard() {
   };
 
   const handleUpdate = (data: FlashcardDTO) => {
-    if (!selectedFlashcardId) return;
-    updateMutation.mutate({ id: selectedFlashcardId, dto: data });
+    if (!selectedMindmapId) return;
+    updateMutation.mutate({ id: selectedMindmapId, dto: data });
   };
 
   const handleDelete = (id: number) => {
@@ -121,9 +120,9 @@ export default function FlashcardsDashboard() {
     }
   };
 
-  const selectCard = (id: number) => {
-    setSelectedFlashcardId(id);
-    console.log("Selected card:", id);
+  const selectCard = (id: string) => {
+    setSelectedMindmapId(id);
+    console.log("Selected mindmap:", id);
   };
 
   const handleFileUpload = (files: FileList) => {
@@ -148,10 +147,8 @@ export default function FlashcardsDashboard() {
             element={
               <MindmapsDashboardList
                 mindmaps={mindmaps ?? []}
-                onSelect={function (id: string): void {
-                  throw new Error("Function not implemented.");
-                }}
-                selectedId={null}
+                onSelect={setSelectedMindmapId}
+                selectedId={selectedMindmapId}
                 loading={isLoading}
               />
             }
@@ -185,21 +182,22 @@ export default function FlashcardsDashboard() {
           <Route
             path="revise"
             element={<FlashcardsRevision flashcards={flashcards} />}
-          />
+          /> */}
           <Route
             path="view"
             element={
-              <div className="w-full flex flex-wrap gap-3 py-4 self-center justify-center">
-                <ViewFlashcardComponent
-                  flashcard={flashcards?.find(
-                    (fc) => fc.id === selectedFlashcardId
-                  )}
-                  isFlipped={isFlipped}
-                  onToggleAnswer={() => setIsFlipped((prev) => !prev)}
-                />
+              <div className="w-full h-full flex flex-wrap gap-3 self-center justify-center">
+                <ReactFlowProvider>
+                  <ViewMindmapPage
+                    mindmap={mindmaps?.find((x) => x.id === selectedMindmapId)!}
+                    handleSave={function (updatedMindmap: MindmapDTO): void {
+                      throw new Error("Function not implemented.");
+                    }}
+                  />
+                </ReactFlowProvider>
               </div>
             }
-          /> */}
+          />
         </Routes>
         <ScrollToTopButton />
       </div>

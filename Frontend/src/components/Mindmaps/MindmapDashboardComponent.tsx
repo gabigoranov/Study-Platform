@@ -1,5 +1,7 @@
 import { MindmapDTO } from "@/data/DTOs/MindmapDTO";
+import { Difficulty } from "@/data/Difficulty";
 import React from "react";
+import DifficultyTag from "../Common/DifficultyTag";
 
 interface MindmapDashboardComponentProps {
   mindmap: MindmapDTO;
@@ -12,17 +14,47 @@ export default function MindmapDashboardComponent({
   onSelect,
   isSelected,
 }: MindmapDashboardComponentProps) {
+  const nodeCount = mindmap.data?.nodes?.length || 0;
+  
   return (
     <div
       onClick={() => onSelect(mindmap.id)}
-      className={`cursor-pointer w-64 p-4 rounded-2xl shadow-sm border transition-all 
-        ${isSelected ? "border-blue-500 bg-blue-50" : "border-gray-200 bg-white"} 
-        hover:shadow-md`}
+      className={`cursor-pointer w-full max-w-sm p-8 rounded-3xl transition-all duration-200 bg-white border border-border
+        ${isSelected 
+          ? "ring-1 ring-primary-dark" 
+          : "hover:border-gray-300"
+        }`}
     >
-      <h3 className="text-lg font-semibold truncate">{mindmap.title}</h3>
-      <p className="text-sm text-gray-600 line-clamp-3">{mindmap.description}</p>
-      <div className="mt-2 text-xs text-gray-400">
-        {new Date(mindmap.dateCreated).toLocaleDateString()}
+      {/* Header with title and optional difficulty tag */}
+      <div className="flex items-start justify-between gap-4 mb-6">
+        <h3 className="text-xl font-semibold text-gray-900 leading-tight">
+          {mindmap.title}
+        </h3>
+        {/* Future difficulty tag support */}
+        {true && (
+          <DifficultyTag difficulty={Difficulty.Easy} />
+        )}
+      </div>
+
+      {/* Description with ample spacing */}
+      {mindmap.description && (
+        <p className="text-sm text-gray-600 leading-relaxed line-clamp-2 mb-8">
+          {mindmap.description}
+        </p>
+      )}
+
+      {/* Footer metadata */}
+      <div className="flex items-center justify-between text-xs text-gray-400 pt-4 border-t border-border">
+        <span className="font-medium">
+          {nodeCount} {nodeCount === 1 ? 'node' : 'nodes'}
+        </span>
+        <time dateTime={mindmap.dateCreated}>
+          {new Date(mindmap.dateCreated).toLocaleDateString('en-US', {
+            month: 'short',
+            day: 'numeric',
+            year: 'numeric'
+          })}
+        </time>
       </div>
     </div>
   );

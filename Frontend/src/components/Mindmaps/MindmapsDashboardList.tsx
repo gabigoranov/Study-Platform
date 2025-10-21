@@ -50,7 +50,7 @@ export default function MindmapsDashboardList({
   );
 
   return (
-    <div className="w-full flex flex-wrap gap-3 p-2 py-4 self-start justify-center overflow-x-hidden">
+    <div className="w-full flex flex-wrap gap-3 p-2 py-4 self-start justify-start overflow-x-hidden">
       {orderedMindmaps.map((mindmap) => (
         <MindmapDashboardComponent
           key={mindmap.id}

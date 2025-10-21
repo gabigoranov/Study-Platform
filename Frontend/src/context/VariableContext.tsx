@@ -1,4 +1,10 @@
-import { createContext, useContext, useState, useEffect, ReactNode } from "react";
+import {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  ReactNode,
+} from "react";
 
 type VariableState = {
   selectedSubjectId: number | null;
@@ -9,6 +15,9 @@ type VariableState = {
 
   selectedFlashcardId: number | null;
   setSelectedFlashcardId: (id: number | null) => void;
+
+  selectedMindmapId: string | null;
+  setSelectedMindmapId: (id: string | null) => void;
 };
 
 const VariableContext = createContext<VariableState | undefined>(undefined);
@@ -28,22 +37,31 @@ function usePersistedState<T>(key: string, defaultValue: T) {
 }
 
 export const VariableProvider = ({ children }: { children: ReactNode }) => {
-  const [selectedSubjectId, setSelectedSubjectId] = usePersistedState<number | null>(
-    "selectedSubjectId",
-    null
-  );
-  const [selectedGroupId, setSelectedGroupId] = usePersistedState<number | null>(
-    "selectedGroupId",
-    null
-  );
-  const [selectedFlashcardId, setSelectedFlashcardId] = usePersistedState<number | null>(
-    "selectedFlashcardId",
-    null
-  );
+  const [selectedSubjectId, setSelectedSubjectId] = usePersistedState<
+    number | null
+  >("selectedSubjectId", null);
+  const [selectedGroupId, setSelectedGroupId] = usePersistedState<
+    number | null
+  >("selectedGroupId", null);
+  const [selectedFlashcardId, setSelectedFlashcardId] = usePersistedState<
+    number | null
+  >("selectedFlashcardId", null);
+  const [selectedMindmapId, setSelectedMindmapId] = usePersistedState<
+    string | null
+  >("selectedMindmapId", null);
 
   return (
     <VariableContext.Provider
-      value={{ selectedSubjectId, setSelectedSubjectId, selectedGroupId, setSelectedGroupId, selectedFlashcardId, setSelectedFlashcardId }}
+      value={{
+        selectedSubjectId,
+        setSelectedSubjectId,
+        selectedGroupId,
+        setSelectedGroupId,
+        selectedFlashcardId,
+        setSelectedFlashcardId,
+        selectedMindmapId,
+        setSelectedMindmapId,
+      }}
     >
       {children}
     </VariableContext.Provider>
@@ -52,6 +70,7 @@ export const VariableProvider = ({ children }: { children: ReactNode }) => {
 
 export const useVariableContext = () => {
   const ctx = useContext(VariableContext);
-  if (!ctx) throw new Error("useVariableContext must be inside VariableProvider");
+  if (!ctx)
+    throw new Error("useVariableContext must be inside VariableProvider");
   return ctx;
 };
