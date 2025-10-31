@@ -25,10 +25,14 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import dagre from "dagre";
 import { MindmapDTO } from "@/data/DTOs/MindmapDTO";
-import { MindmapNodeDTO, MindmapEdgeDTO } from "@/data/DTOs/GeneratedMindmapDTO";
+import {
+  MindmapNodeDTO,
+  MindmapEdgeDTO,
+} from "@/data/DTOs/GeneratedMindmapDTO";
+import ErrorScreen from "@/components/Common/ErrorScreen";
 
 interface ViewMindmapPageProps {
-  mindmap: MindmapDTO;
+  mindmap: MindmapDTO | undefined;
   handleSave: (updatedMindmap: MindmapDTO) => void;
 }
 
@@ -36,6 +40,12 @@ export default function ViewMindmapPage({
   mindmap,
   handleSave,
 }: ViewMindmapPageProps): JSX.Element {
+  if (mindmap === undefined) {
+    return (
+      <ErrorScreen label="Please select a mindmap before opening this page." />
+    );
+  }
+
   const { theme } = useTheme();
 
   // Convert MindmapDTO to ReactFlow format
@@ -58,10 +68,7 @@ export default function ViewMindmapPage({
   };
 
   // Convert ReactFlow format back to DTO format
-  const convertToMindmapDTO = (
-    nodes: Node[],
-    edges: Edge[]
-  ): MindmapDTO => {
+  const convertToMindmapDTO = (nodes: Node[], edges: Edge[]): MindmapDTO => {
     return {
       ...mindmap,
       data: {
@@ -179,7 +186,7 @@ export default function ViewMindmapPage({
   const nodeHeight = 60;
 
   const handleAutoLayout = () => {
-    dagreGraph.setGraph({ rankdir: "TB", marginx: 50, marginy: 50 });
+    dagreGraph.setGraph({ rankdir: "TB", marginx: 0, marginy: 0 });
 
     nodes.forEach((node) => {
       dagreGraph.setNode(node.id, { width: nodeWidth, height: nodeHeight });
@@ -203,7 +210,11 @@ export default function ViewMindmapPage({
     });
 
     setNodes(layoutedNodes);
-    setHasUnsavedChanges(true);
+
+    // Automatically save after aligning
+    const updatedMindmap = convertToMindmapDTO(layoutedNodes, edges);
+    handleSave(updatedMindmap);
+    setHasUnsavedChanges(false);
   };
 
   /* --------------------------

@@ -72,7 +72,7 @@ export default function Login() {
           <Button
             type="submit"
             variant="outline"
-            className="rounded-full hover:bg-blue-600 transition-colors"
+            className="rounded-full hover:bg-primary transition-colors"
           >
             {t(keys.signInButton)}
           </Button>
@@ -87,13 +87,13 @@ export default function Login() {
         <Button
           onClick={handleGoogle}
           variant="ghost"
-          className="flex items-center justify-center w-full px-4 py-2 rounded-2xl hover:bg-neutral-200 hover:text-text transition-colors"
+          className="flex items-center justify-center w-full px-4 py-2 rounded-2xl transition-colors"
         >
           <FcGoogle className="w-5 h-5 mr-2" />
           {t(keys.signInWithGoogle)}
         </Button>
 
-        <p className="mt-6 text-sm text-gray-600">
+        <p className="mt-4 text-sm text-gray-600">
           {t(keys.noAccountText)}{" "}
           <Link to="/signup" className="text-blue-500 hover:underline">
             {t(keys.signUpLink)}

@@ -13,4 +13,5 @@ export interface MindmapDTO {
     edges: MindmapEdgeDTO[];
   };
   dateCreated: string; // ISO date string (from DateTime)
+  difficulty: Difficulty;
 }

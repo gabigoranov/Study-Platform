@@ -28,7 +28,7 @@ export default function MindmapsDashboardList({
   // Render skeletons while loading
   if (loading) {
     return (
-      <div className="w-full flex flex-wrap gap-3 p-2 py-4 self-start justify-center overflow-x-hidden">
+      <div className="w-full flex flex-wrap gap-3 p-2 py-4 self-start justify-start overflow-x-hidden">
         {renderSkeletons(9)}
       </div>
     );

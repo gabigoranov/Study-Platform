@@ -15,14 +15,14 @@ import UploadFileButton from "../Common/UploadFileButton";
 
 type MindmapsDashboardHeaderProps = {
     setView: (view: "list" | "create" | "edit" | "view" | "revise") => void;
-    handleDelete: (id: number) => void;
+    handleDelete: (id: string) => void;
     handleFileUpload: (files: FileList) => void;
 }
 
 export default function MindmapsDashboardHeader({ setView, handleFileUpload, handleDelete } : MindmapsDashboardHeaderProps) {
     const { t } = useTranslation();
     const { token } = useAuth();
-    const { selectedSubjectId, selectedFlashcardId } = useVariableContext();
+    const { selectedSubjectId, selectedMindmapId } = useVariableContext();
     const { selectedGroupId, setSelectedGroupId } = useVariableContext();
 
     // --- Query: load all groups with their flashcards ---
@@ -95,15 +95,15 @@ export default function MindmapsDashboardHeader({ setView, handleFileUpload, han
                 <Plus className="inline" /> {t(keys.createNewButton)}
             </Button>
 
-            <Button className="rounded-3xl" variant="ghost" onClick={() => setView("edit")} disabled={selectedFlashcardId === null}>
+            <Button className="rounded-3xl" variant="ghost" onClick={() => setView("edit")} disabled={selectedMindmapId === null}>
                 <Edit className="inline" /> {t(keys.edit)}
             </Button>
 
-            <Button className="rounded-3xl" variant="ghost" onClick={() => setView("view")} disabled={selectedFlashcardId === null}>
+            <Button className="rounded-3xl" variant="ghost" onClick={() => setView("view")} disabled={selectedMindmapId === null}>
                 <Eye className="inline" /> {t(keys.viewButton)}
             </Button>
 
-            <Button className="rounded-3xl" variant="ghost" onClick={() => handleDelete(selectedFlashcardId!)} disabled={selectedFlashcardId === null}>
+            <Button className="rounded-3xl" variant="ghost" onClick={() => handleDelete(selectedMindmapId!)} disabled={selectedMindmapId === null}>
                 <Trash2 className="inline" />
             </Button>
 

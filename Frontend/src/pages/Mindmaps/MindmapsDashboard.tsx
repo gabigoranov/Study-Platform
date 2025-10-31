@@ -45,6 +45,7 @@ export default function FlashcardsDashboard() {
   } = useVariableContext();
   const navigate = useNavigate();
 
+
   // --- Query: load all mindmaps ---
   const {
     data: mindmaps,
@@ -63,11 +64,11 @@ export default function FlashcardsDashboard() {
 
   // --- Mutation: create ---
   const createMutation = useMutation({
-    mutationFn: (dto: FlashcardDTO) => flashcardService.create(dto, token!),
-    onSuccess: (newFlashcard) => {
-      queryClient.setQueryData<Flashcard[]>(
-        ["flashcards", selectedGroupId],
-        (old) => (old ? [...old, newFlashcard] : [newFlashcard])
+    mutationFn: (dto: MindmapDTO) => mindmapsService.create(dto, token!),
+    onSuccess: (newMindmap) => {
+      queryClient.setQueryData<MindmapDTO[]>(
+        ["mindmaps", selectedGroupId, selectedSubjectId],
+        (old) => (old ? [...old, newMindmap] : [newMindmap])
       );
       setView("list");
     },
@@ -89,13 +90,13 @@ export default function FlashcardsDashboard() {
 
   // --- Mutation: delete ---
   const deleteMutation = useMutation({
-    mutationFn: (id: number) =>
-      flashcardService.delete(token!, {
+    mutationFn: (id: string) =>
+      mindmapsService.delete(token!, {
         ids: id,
       }),
     onSuccess: (_, id) => {
-      queryClient.setQueryData<Flashcard[]>(
-        ["flashcards", selectedGroupId],
+      queryClient.setQueryData<MindmapDTO[]>(
+        ["mindmaps", selectedGroupId, selectedSubjectId],
         (old) => (old ? old.filter((fc) => fc.id !== id) : [])
       );
 
@@ -104,7 +105,7 @@ export default function FlashcardsDashboard() {
   });
 
   // --- Handlers ---
-  const handleCreate = (data: FlashcardDTO) => {
+  const handleCreate = (data: MindmapDTO) => {
     console.log("creating");
     createMutation.mutate(data);
   };
@@ -114,7 +115,7 @@ export default function FlashcardsDashboard() {
     updateMutation.mutate({ id: selectedMindmapId, dto: data });
   };
 
-  const handleDelete = (id: number) => {
+  const handleDelete = (id: string) => {
     if (window.confirm(t(keys.confirmDeleteMessage))) {
       deleteMutation.mutate(id);
     }
@@ -147,7 +148,7 @@ export default function FlashcardsDashboard() {
             element={
               <MindmapsDashboardList
                 mindmaps={mindmaps ?? []}
-                onSelect={setSelectedMindmapId}
+                onSelect={selectCard}
                 selectedId={selectedMindmapId}
                 loading={isLoading}
               />
@@ -190,8 +191,8 @@ export default function FlashcardsDashboard() {
                 <ReactFlowProvider>
                   <ViewMindmapPage
                     mindmap={mindmaps?.find((x) => x.id === selectedMindmapId)!}
-                    handleSave={function (updatedMindmap: MindmapDTO): void {
-                      throw new Error("Function not implemented.");
+                    handleSave={() => {
+                      console.log("saved");
                     }}
                   />
                 </ReactFlowProvider>

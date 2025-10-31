@@ -67,6 +67,34 @@ namespace StudyPlatform.Services.Mindmaps
         }
 
         /// <inheritdoc/>
+        public async Task DeleteAsync(Guid[] ids, Guid userId)
+        {
+            if (ids == null || ids.Length == 0)
+            {
+                _logger.LogInformation("DeleteAsync called with empty or null IDs for user {UserId}", userId);
+                throw new KeyNotFoundException("No mindmap IDs provided for deletion.");
+            }
+            if (userId == Guid.Empty) throw new ArgumentNullException("UserId can not be null or empty.");
+
+            try
+            {
+                await _repo.ExecuteDeleteAsync<Mindmap>(f => ids.Contains(f.Id) && f.UserId == userId);
+
+                _logger.LogInformation("Mindmaps deleted for user {UserId}", userId);
+            }
+            catch (DbUpdateException ex)
+            {
+                _logger.LogError("Could not save changes for deleted Mindmaps for user {UserId}", userId);
+                throw new DbUpdateException("Failed to execute the deletion of the material from the database.", ex);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("Could not delete Mindmaps for user {UserId}", userId);
+                throw new MaterialDeletionException("Something went wrong while deleting the material. Please try again!", ex);
+            }
+        }
+
+        /// <inheritdoc/>
         public async Task<GeneratedMindmapDTO> GenerateAsync(GenerateMindmapsViewModel model, Guid userId)
         {
             using var content = new MultipartFormDataContent();
@@ -119,6 +147,43 @@ namespace StudyPlatform.Services.Mindmaps
             {
                 _logger.LogError("Could not fetch Flashcards for user {UserId}", userId);
                 throw new MaterialFetchingException("Something went wrong while fetching the material. Please try again!", ex);
+            }
+        }
+
+        public async Task<MindmapDTO> UpdateAsync(CreateMindmapViewModel model, Guid userId, Guid id)
+        {
+            if (model == null) throw new ArgumentNullException("The mindmap model can not be null or empty.");
+            if (userId == Guid.Empty) throw new ArgumentNullException("UserId can not be null or empty.");
+
+            try
+            {
+                _logger.LogInformation("Editing mindmap {MindmapId} for user {UserId}", id, userId);
+
+                var mindmap = await _repo.All<Mindmap>().FirstOrDefaultAsync(f => f.Id == id && f.UserId == userId);
+
+                if (mindmap == null)
+                {
+                    _logger.LogWarning("Mindmap {MindmapId} not found for user {UserId}", id, userId);
+                    throw new KeyNotFoundException("Could not find the requested mindmap.");
+                }
+
+                _mapper.Map(model, mindmap); // maps updated fields from ViewModel to entity
+
+                await _repo.SaveChangesAsync();
+
+                _logger.LogInformation("Mindmap {MindmapId} edited successfully for user {UserId}", mindmap.Id, userId);
+
+                return _mapper.Map<MindmapDTO>(mindmap);
+            }
+            catch (DbUpdateException ex)
+            {
+                _logger.LogError("Could not update Mindmap for user {UserId}", userId);
+                throw new DbUpdateException("Failed to save the new material to the database.", ex);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("Could not update Mindmap for user {UserId}", userId);
+                throw new MaterialUpdateException("Something went wrong while updating the new material. Please try again!", ex);
             }
         }
     }

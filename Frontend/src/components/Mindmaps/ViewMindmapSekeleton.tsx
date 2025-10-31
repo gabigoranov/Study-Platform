@@ -7,7 +7,7 @@ export default function ViewMindmapSkeleton() {
       initial={{ opacity: 0.5 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.6, repeat: Infinity, repeatType: "reverse" }}
-      className="w-full max-w-sm p-8 rounded-3xl bg-surface border border-border"
+      className="w-full max-w-sm p-8 rounded-3xl bg-surface border border-border "
     >
       {/* Header - title and optional tag space */}
       <div className="flex items-start justify-between gap-4 mb-6">

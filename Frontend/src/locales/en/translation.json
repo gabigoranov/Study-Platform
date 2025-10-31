@@ -49,7 +49,7 @@
   "actions": "Actions",
   "edit": "Edit",
   "delete": "Delete",
-  "confirmDeleteMessage": "Are you sure you want to delete this flashcard?",
+  "confirmDeleteMessage": "Are you sure you want to delete this material?",
   "requiredFieldError": "This field is required",
   "createNewButton": "Add",
   "flashcardNotFound": "Flashcard not found",

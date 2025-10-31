@@ -49,7 +49,7 @@
     "actions": "Действия",
     "edit": "Редактирай",
     "delete": "Изтрий",
-    "confirmDeleteMessage": "Сигурни ли сте, че искате да изтриете тази флашкарта?",
+    "confirmDeleteMessage": "Сигурни ли сте, че искате да изтриете този материал?",
     "requiredFieldError": "Това поле е задължително",
     "createNewButton": "Добави",
     "flashcardNotFound": "Флашкартата не е намерена",

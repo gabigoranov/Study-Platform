@@ -120,6 +120,27 @@
             Initializes the MindmapsController and injects dependencies.
             </summary>
         </member>
+        <member name="M:StudyPlatform.Controllers.MindmapsController.GetAllFromGroup(System.Int32,System.Int32)">
+            <summary>
+            Endpoint for getting all mindmaps that the user owns in a certain group.
+            </summary>
+            <returns>A list of mindmaps if successful.</returns>
+        </member>
+        <member name="M:StudyPlatform.Controllers.MindmapsController.Update(StudyPlatform.Models.CreateMindmapViewModel,System.Int32)">
+            <summary>
+            Endpoint for updating a specific mindmap that the user owns.
+            </summary>
+            <param name="model">The model for updating the mindmap.</param>
+            <param name="id">The id of the mindmap.</param>
+            <returns>An edited mindmap if successful.</returns>
+        </member>
+        <member name="M:StudyPlatform.Controllers.MindmapsController.Delete(System.Int32[])">
+            <summary>
+            Endpoint for deleting an array of mindmaps by their IDs.
+            </summary>
+            <param name="ids">The array of mindmap ids.</param>
+            <returns>Nothing.</returns>
+        </member>
         <member name="T:StudyPlatform.Controllers.SubjectsController">
             <summary>
             API controller for managing subjects.
@@ -720,6 +741,30 @@
         <member name="M:StudyPlatform.Migrations.SupabaseDb.AddTitleAndDescriptionToMindmap.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
         </member>
+        <member name="T:StudyPlatform.Migrations.SupabaseDb.UpdateMindmapProps">
+            <inheritdoc />
+        </member>
+        <member name="M:StudyPlatform.Migrations.SupabaseDb.UpdateMindmapProps.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:StudyPlatform.Migrations.SupabaseDb.UpdateMindmapProps.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:StudyPlatform.Migrations.SupabaseDb.UpdateMindmapProps.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:StudyPlatform.Migrations.SupabaseDb.UpdateMindmapIdToInt">
+            <inheritdoc />
+        </member>
+        <member name="M:StudyPlatform.Migrations.SupabaseDb.UpdateMindmapIdToInt.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:StudyPlatform.Migrations.SupabaseDb.UpdateMindmapIdToInt.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:StudyPlatform.Migrations.SupabaseDb.UpdateMindmapIdToInt.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
         <member name="T:StudyPlatform.Models.Common.AutoMapper">
             <summary>
             Defines the AutoMapper initialization and maps.
@@ -1010,12 +1055,47 @@
             An interface defining operations related to mindmaps.
             </summary>
         </member>
+        <member name="M:StudyPlatform.Services.Mindmaps.IMindmapsService.CreateAsync(StudyPlatform.Models.CreateMindmapViewModel,System.Guid)">
+            <summary>
+            Generates a set of mindmaps from the provided model.
+            </summary>
+            <param name="model"></param>
+            <param name="userId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:StudyPlatform.Services.Mindmaps.IMindmapsService.GetAllAsync(System.Guid,System.Nullable{System.Int32},System.Nullable{System.Int32})">
+            <summary>
+            Generates a set of mindmaps from the provided model.
+            </summary>
+            <param name="userId"></param>
+            <param name="subGroupId"></param>
+            <param name="subjectId"></param>
+            <returns></returns>
+        </member>
         <member name="M:StudyPlatform.Services.Mindmaps.IMindmapsService.GenerateAsync(StudyPlatform.Models.GenerateMindmapsViewModel,System.Guid)">
             <summary>
             Generates a set of mindmaps from the provided model.
             </summary>
             <param name="model"></param>
+            <param name="userId"></param>
             <returns></returns>
+        </member>
+        <member name="M:StudyPlatform.Services.Mindmaps.IMindmapsService.DeleteAsync(System.Int32[],System.Guid)">
+            <summary>
+            Deletes mindmaps by their IDs for the specified user.
+            </summary>
+            <param name="ids">An array of mindmaps IDs to delete.</param>
+            <param name="userId">The ID of the user who owns the mindmaps.</param>
+            <returns>A <see cref="T:System.Threading.Tasks.Task"/> representing the asynchronous delete operation.</returns>
+        </member>
+        <member name="M:StudyPlatform.Services.Mindmaps.IMindmapsService.UpdateAsync(StudyPlatform.Models.CreateMindmapViewModel,System.Guid,System.Int32)">
+            <summary>
+            Update a mindmap for the specified user.
+            </summary>
+            <param name="id">The mindmap id.</param>
+            <param name="userId">The ID of the user who owns the mindmaps.</param>
+            <param name="model">The model by which to update the mindmap.</param>
+            <returns>An updated MindmapDTO.</returns>
         </member>
         <member name="M:StudyPlatform.Services.Mindmaps.MindmapsService.#ctor(StudyPlatform.Data.Common.SupabaseRepository,Microsoft.Extensions.Logging.ILogger{StudyPlatform.Services.Mindmaps.MindmapsService},AutoMapper.IMapper,System.Net.Http.HttpClient)">
             <summary>
@@ -1026,7 +1106,16 @@
             <param name="mapper"></param>
             <param name="client"></param>
         </member>
+        <member name="M:StudyPlatform.Services.Mindmaps.MindmapsService.CreateAsync(StudyPlatform.Models.CreateMindmapViewModel,System.Guid)">
+            <inheritdoc/>
+        </member>
+        <member name="M:StudyPlatform.Services.Mindmaps.MindmapsService.DeleteAsync(System.Int32[],System.Guid)">
+            <inheritdoc/>
+        </member>
         <member name="M:StudyPlatform.Services.Mindmaps.MindmapsService.GenerateAsync(StudyPlatform.Models.GenerateMindmapsViewModel,System.Guid)">
+            <inheritdoc/>
+        </member>
+        <member name="M:StudyPlatform.Services.Mindmaps.MindmapsService.GetAllAsync(System.Guid,System.Nullable{System.Int32},System.Nullable{System.Int32})">
             <inheritdoc/>
         </member>
         <member name="T:StudyPlatform.Services.Subjects.ISubjectsService">

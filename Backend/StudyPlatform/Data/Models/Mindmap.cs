@@ -36,5 +36,6 @@ namespace StudyPlatform.Data.Models
         public JsonDocument Data { get; set; }
 
         public DateTime DateCreated { get; set; } = DateTime.UtcNow;
+        public Difficulty Difficulty { get; set; } = Difficulty.Easy;
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json;
+using StudyPlatform.Data.Models;
 
 namespace StudyPlatform.Models
 {
@@ -24,5 +25,6 @@ namespace StudyPlatform.Models
         [Column(TypeName = "jsonb")]
         public JsonDocument Data { get; set; }
 
+        public Difficulty Difficulty { get; set; } = Difficulty.Easy;
     }
 }

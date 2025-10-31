@@ -19,15 +19,15 @@ export default function MindmapDashboardComponent({
   return (
     <div
       onClick={() => onSelect(mindmap.id)}
-      className={`cursor-pointer w-full max-w-sm p-8 rounded-3xl transition-all duration-200 bg-white border border-border
+      className={`cursor-pointer w-full max-w-sm p-8 rounded-3xl transition-all duration-200 bg-surface border border-border
         ${isSelected 
           ? "ring-1 ring-primary-dark" 
-          : "hover:border-gray-300"
+          : "hover:border-primary/10"
         }`}
     >
       {/* Header with title and optional difficulty tag */}
       <div className="flex items-start justify-between gap-4 mb-6">
-        <h3 className="text-xl font-semibold text-gray-900 leading-tight">
+        <h3 className="text-xl font-semibold text-text leading-tight">
           {mindmap.title}
         </h3>
         {/* Future difficulty tag support */}
@@ -38,13 +38,13 @@ export default function MindmapDashboardComponent({
 
       {/* Description with ample spacing */}
       {mindmap.description && (
-        <p className="text-sm text-gray-600 leading-relaxed line-clamp-2 mb-8">
+        <p className="text-sm text-text leading-relaxed line-clamp-2 mb-8">
           {mindmap.description}
         </p>
       )}
 
       {/* Footer metadata */}
-      <div className="flex items-center justify-between text-xs text-gray-400 pt-4 border-t border-border">
+      <div className="flex items-center justify-between text-xs text-text-muted pt-4 border-t border-border">
         <span className="font-medium">
           {nodeCount} {nodeCount === 1 ? 'node' : 'nodes'}
         </span>

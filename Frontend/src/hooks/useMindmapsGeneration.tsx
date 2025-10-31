@@ -33,7 +33,7 @@ export function useMindmapsGeneration({
   const [generatedMindmap, setGeneratedMindmap] =
     useState<GeneratedMindmapDTO>();
 
-  const { selectedGroupId } = useVariableContext();
+  const { selectedGroupId, selectedSubjectId } = useVariableContext();
 
   const handleSubmitGeneration: SubmitAction = async (
     actionId,
@@ -118,10 +118,11 @@ export function useMindmapsGeneration({
       });
 
       const result = await mindmapsService.create(model, token);
-      queryClient.setQueryData<MindmapDTO[]>(
-        ["mindmaps", selectedGroupId],
-        (old) => (old ? [...old, result] : [result])
-      );
+
+      // Use invalidateQueries instead of setQueryData
+      await queryClient.invalidateQueries({
+        queryKey: ["mindmaps", selectedGroupId, selectedSubjectId],
+      });
     } catch (err) {
       setError(true);
       return;

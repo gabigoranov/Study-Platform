@@ -29,12 +29,14 @@ interface CreateMindmapsPageProps {
   nodes: Node[];
   edges: Edge[];
   handleSave: (nodes: Node[], edges: Edge[]) => void;
+  isInitialLayout: boolean | undefined;
 }
 
 export default function CreateMindmapPage({
   nodes: initialNodes,
   edges: initialEdges,
   handleSave,
+  isInitialLayout,
 }: CreateMindmapsPageProps): JSX.Element {
   const { theme } = useTheme();
 
@@ -44,8 +46,24 @@ export default function CreateMindmapPage({
   const [showLabelModal, setShowLabelModal] = useState(false);
   const [newNodeLabel, setNewNodeLabel] = useState("");
   const [isPlacing, setIsPlacing] = useState(false);
+  const [isInitialAlignment, setIsInitialAlignment] = useState<boolean>(
+    isInitialLayout ?? false
+  );
 
   const reactFlowInstance = useReactFlow();
+
+  // Auto-align nodes on initial load
+  React.useEffect(() => {
+    if (isInitialAlignment && nodes.length > 0) {
+      // Small delay to ensure ReactFlow is ready
+      const timer = setTimeout(() => {
+        handleAutoLayout();
+        setIsInitialAlignment(false); // ← Add this line!
+      }, 100);
+
+      return () => clearTimeout(timer);
+    }
+  }, [isInitialAlignment, nodes.length]);
 
   /* --------------------------
       ReactFlow handlers
@@ -168,13 +186,19 @@ export default function CreateMindmapPage({
       {/* Toolbar */}
       <div className="absolute top-4 left-4 z-30 flex gap-2">
         <Button onClick={() => setShowLabelModal(true)}>+ Add Node</Button>
-        {isPlacing && <Button variant="outline" onClick={cancelPlacement}>Cancel</Button>}
+        {isPlacing && (
+          <Button variant="outline" onClick={cancelPlacement}>
+            Cancel
+          </Button>
+        )}
         {hasUnsavedChanges && (
           <Button onClick={handleSaveClick} variant="secondary">
             <LucideSave /> Save
           </Button>
         )}
-        <Button variant="outline" onClick={handleAutoLayout}>Align Nodes</Button>
+        <Button variant="outline" onClick={handleAutoLayout}>
+          Align Nodes
+        </Button>
       </div>
 
       {/* Instruction ribbon */}
@@ -186,7 +210,9 @@ export default function CreateMindmapPage({
       )}
 
       {/* ReactFlow canvas */}
-      <div className={`h-full rounded-xl border border-border overflow-hidden shadow-md bg-background ${isPlacing ? "cursor-crosshair" : "cursor-default"}`}>
+      <div
+        className={`h-full rounded-xl border border-border overflow-hidden shadow-md bg-background ${isPlacing ? "cursor-crosshair" : "cursor-default"}`}
+      >
         <ReactFlow
           colorMode={theme}
           nodes={nodes}
@@ -220,10 +246,17 @@ export default function CreateMindmapPage({
                 required
               />
               <p className="text-xs text-text-muted mt-1">
-                After you submit, click anywhere on the canvas to place the node.
+                After you submit, click anywhere on the canvas to place the
+                node.
               </p>
               <div className="flex justify-end gap-2 mt-4">
-                <Button type="button" variant="secondary" onClick={() => setShowLabelModal(false)}>Cancel</Button>
+                <Button
+                  type="button"
+                  variant="secondary"
+                  onClick={() => setShowLabelModal(false)}
+                >
+                  Cancel
+                </Button>
                 <Button type="submit">Place</Button>
               </div>
             </form>

@@ -14,8 +14,8 @@
     
     /* BACKGROUNDS */
     --background: 0 0% 98%;
-    --background-muted: 0 0% 95%;
-    --surface: 0 0% 97%;
+    --background-muted: 0 0% 97%;
+    --surface: 0 0% 99%;
     --surface-muted: 0 0% 92%;
     
     /* TEXT */
@@ -67,7 +67,7 @@
     
     --background: 0 0% 4%;
     --background-muted: 0 0% 7%;
-    --surface: 0 0% 9%;
+    --surface: 0 0% 7%;
     --surface-muted: 0 0% 12%;
     
     --text: 0 0% 95%;

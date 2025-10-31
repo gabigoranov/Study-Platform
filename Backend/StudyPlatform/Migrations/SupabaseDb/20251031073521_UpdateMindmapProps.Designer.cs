@@ -3,6 +3,7 @@ using System;
 using System.Text.Json;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using StudyPlatform.Data;
@@ -12,9 +13,11 @@ using StudyPlatform.Data;
 namespace StudyPlatform.Migrations.SupabaseDb
 {
     [DbContext(typeof(SupabaseDbContext))]
-    partial class SupabaseDbContextModelSnapshot : ModelSnapshot
+    [Migration("20251031073521_UpdateMindmapProps")]
+    partial class UpdateMindmapProps
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -62,7 +65,7 @@ namespace StudyPlatform.Migrations.SupabaseDb
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Mindmaps", (string)null);
+                    b.ToTable("Mindmaps");
                 });
 #pragma warning restore 612, 618
         }
