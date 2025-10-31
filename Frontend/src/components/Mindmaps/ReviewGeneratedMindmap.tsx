@@ -5,11 +5,15 @@ import { Button } from "../ui/button";
 import Loading from "../Common/Loading";
 import ErrorScreen from "../Common/ErrorScreen";
 import CreateMindmapPage from "@/pages/Mindmaps/CreateMindmapPage";
-import { MindmapDTO } from "@/data/DTOs/MindmapDTO";
 import { Node, Edge } from "@xyflow/react";
 import { t } from "i18next";
 import { keys } from "@/types/keys";
-import { GeneratedMindmapDTO, MindmapEdgeDTO, MindmapNodeDTO } from "@/data/DTOs/GeneratedMindmapDTO";
+import {
+  GeneratedMindmapDTO,
+  MindmapEdgeDTO,
+  MindmapNodeDTO,
+} from "@/data/DTOs/GeneratedMindmapDTO";
+import DifficultyTag from "../Common/DifficultyTag";
 
 type ReviewGeneratedMindmapProps = {
   mindmap: GeneratedMindmapDTO;
@@ -29,14 +33,11 @@ export default function ReviewGeneratedMindmap({
   const [data, setData] = useState<GeneratedMindmapDTO>(mindmap);
   const [isEditing, setIsEditing] = useState(false);
 
-  // ----------------------------
-  // Map DTOs to ReactFlow Nodes/Edges
-  // ----------------------------
   const nodes: Node[] = useMemo(
     () =>
       data.nodes.map((n: MindmapNodeDTO) => ({
         id: n.id,
-        data: { label: n.data.label as string }, // cast to string
+        data: { label: n.data.label as string },
         position: n.position,
         type: "default",
       })),
@@ -54,16 +55,12 @@ export default function ReviewGeneratedMindmap({
     [data.edges]
   );
 
-  // ----------------------------
-  // Handle saving changes from editor
-  // ----------------------------
   const handleSave = (updatedNodes: Node[], updatedEdges: Edge[]) => {
-    // Convert back to DTO format
     const updatedMindmap: GeneratedMindmapDTO = {
       ...data,
       nodes: updatedNodes.map((n) => ({
         id: n.id,
-        data: { label: n.data.label as string }, // cast to string
+        data: { label: n.data.label as string },
         position: n.position,
       })),
       edges: updatedEdges.map((e) => ({
@@ -77,9 +74,6 @@ export default function ReviewGeneratedMindmap({
     setIsEditing(false);
   };
 
-  // ----------------------------
-  // Render
-  // ----------------------------
   if (error) {
     return <ErrorScreen onRetry={() => onApprove(data)} onCancel={onCancel} />;
   }
@@ -94,9 +88,20 @@ export default function ReviewGeneratedMindmap({
   }
 
   return (
-    <div className="relative w-full h-[calc(100vh-6rem)] p-4">
-      <div className="flex justify-between items-center mb-4">
-        <div className="flex gap-2">
+    <div className="relative w-full h-full flex flex-col">
+      {/* Header Section */}
+      <div className="flex justify-between items-end mb-4 shrink-0">
+        {/* Title, Description, Difficulty */}
+        <div>
+          <div className="flex gap-2 items-center">
+            <h1 className="text-2xl font-bold">{data.title}</h1>
+            <DifficultyTag difficulty={data.difficulty} />
+          </div>
+          <p className="text-gray-700 mt-1">{data.description}</p>
+        </div>
+
+        {/* Buttons */}
+        <div className="flex gap-2 items-start">
           {!isEditing ? (
             <>
               <Button variant="outline" onClick={onCancel}>
@@ -116,7 +121,7 @@ export default function ReviewGeneratedMindmap({
       </div>
 
       {/* Mindmap Editor / Viewer */}
-      <div className="h-[calc(100%-4rem)]">
+      <div className="flex-1 min-h-0">
         <CreateMindmapPage
           nodes={nodes}
           edges={edges}

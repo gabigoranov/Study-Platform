@@ -10,4 +10,5 @@ export interface CreateMindmapDTO {
     nodes: MindmapNodeDTO[];
     edges: MindmapEdgeDTO[];
   };
+  difficulty: Difficulty;
 }

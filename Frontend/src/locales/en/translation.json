@@ -104,5 +104,6 @@
   "mindmapsDashboardHeader": "Mindmaps Dashboard",
   "mindmapsDashboardText": "Generate and revise Mindmaps with AI",
   "loadingMindmapLabel": "Loading Mindmap...",
-  "noMindmaps": "No mindmaps were found..."
+  "noMindmaps": "No mindmaps were found...",
+  "updateMindmapButton": "Update the Mindmap"
 }

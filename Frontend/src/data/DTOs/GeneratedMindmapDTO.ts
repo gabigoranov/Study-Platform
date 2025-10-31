@@ -1,7 +1,12 @@
+import { Difficulty } from "../Difficulty";
+
 export interface GeneratedMindmapDTO {
   nodes: MindmapNodeDTO[];
   edges: MindmapEdgeDTO[];
   materialSubGroupId?: number | null;
+  title: string;
+  description: string;
+  difficulty: Difficulty;
 }
 
 export interface MindmapNodeDTO {

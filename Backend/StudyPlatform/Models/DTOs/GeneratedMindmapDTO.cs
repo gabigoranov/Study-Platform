@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using StudyPlatform.Data.Models;
+using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
 namespace StudyPlatform.Models.DTOs
@@ -12,5 +13,17 @@ namespace StudyPlatform.Models.DTOs
         [JsonPropertyName("edges")]
         [Required]
         public List<MindmapEdgeDTO> Edges { get; set; }
+
+        [JsonPropertyName("title")]
+        [Required]
+        public string Title { get; set; }
+
+        [JsonPropertyName("description")]
+        [Required]
+        public string Description { get; set; }
+
+        [JsonPropertyName("difficulty")]
+        [Required]
+        public Difficulty Difficulty { get; set; }
     }
 }

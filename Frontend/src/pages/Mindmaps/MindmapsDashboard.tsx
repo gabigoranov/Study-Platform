@@ -25,6 +25,7 @@ import MindmapsDashboardList from "@/components/Mindmaps/MindmapsDashboardList";
 import ViewMindmapPage from "./ViewMindmapPage";
 import { MindmapDTO } from "@/data/DTOs/MindmapDTO";
 import { Mindmap } from "@/data/Mindmap";
+import MindmapsForm from "@/components/Mindmaps/MindmapsForm";
 
 type View = "list" | "create" | "edit" | "view" | "revise";
 
@@ -108,6 +109,7 @@ export default function MindmapsDashboard() {
 
   const handleUpdate = (data: MindmapDTO) => {
     if (!selectedMindmapId) return;
+    console.log(data);
     updateMutation.mutate({ id: selectedMindmapId, dto: data });
   };
 
@@ -161,25 +163,21 @@ export default function MindmapsDashboard() {
                 />
               </ReactFlowProvider>
             }
-          />
+          /> */}
           <Route
             path="edit"
             element={
-              <FlashcardsForm
-                model={[flashcards]?.find((fc) => fc.id === selectedFlashcardId)}
-                submitLabel={t(keys.updateFlashcardButton)}
-                onSubmit={(data: FlashcardDTO) => {
+              <MindmapsForm
+                model={mindmaps?.find(x => x.id === selectedMindmapId) as MindmapDTO}
+                submitLabel={t(keys.updateMindmapButton)}
+                onSubmit={(data: MindmapDTO) => {
                   handleUpdate(data);
                   setView("list");
-                  navigate("/flashcards");
+                  navigate("/mindmaps");
                 }}
               />
             }
           />
-          <Route
-            path="revise"
-            element={<FlashcardsRevision flashcards={flashcards} />}
-          /> */}
           <Route
             path="view"
             element={
@@ -187,9 +185,7 @@ export default function MindmapsDashboard() {
                 <ReactFlowProvider>
                   <ViewMindmapPage
                     mindmap={mindmaps?.find((x) => x.id === selectedMindmapId)!}
-                    handleSave={() => {
-                      console.log("saved");
-                    }}
+                    handleSave={handleUpdate}
                   />
                 </ReactFlowProvider>
               </div>

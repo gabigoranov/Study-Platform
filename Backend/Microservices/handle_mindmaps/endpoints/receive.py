@@ -31,9 +31,11 @@ def generate_mindmap_endpoint(req: MindmapRequest):
     prompt = f"""
     You are a mindmap generator for a study tool.
 
-    Analyze the text below and produce a JSON object containing a "nodes" array and an "edges" array,
-    formatted for use with ReactFlow. Each node represents a concept or topic; edges represent relationships
-    or connections between them.
+    Analyze the text below and output a single **valid JSON object** that defines a conceptual mindmap.
+    The mindmap must include a "nodes" array and an "edges" array, formatted for use with ReactFlow.
+
+    Each node represents a distinct concept or idea.
+    Each edge represents a logical relationship or connection between two nodes.
 
     Follow this structure exactly:
 
@@ -51,18 +53,26 @@ def generate_mindmap_endpoint(req: MindmapRequest):
         }}
       ],
       "edges": [
-        {{ "id": "e1-2", "source": "1", "target": "2", "label": "related to" }}
-      ]
+        {{ "id": "e1-2", "source": "1", "target": "2", "label": "related" }}
+      ],
+      "difficulty": 0,
+      "description": "A concise summary of the overall mindmap.",
+      "title": "A short title for the topic"
     }}
 
-    Requirements:
-    - Use concise labels (3–6 words max).
-    - The first node must represent the **main idea** of the text.
-    - Subtopics and related ideas should be connected logically to their parent concepts.
-    - Use unique node IDs and edge IDs.
-    - Space node positions logically (you may estimate positions in a tree or radial layout).
-    - Output must be **valid JSON** only (no markdown, no explanations).
-    - Do not include headings, examples, or unrelated metadata.
+    ### Requirements:
+    - Output **valid JSON only** (no markdown, no comments, no text outside the JSON).
+    - The first node must represent the **main idea**.
+    - Use concise node labels (2–5 words max).
+    - Use concise edge labels (1–3 words max, like “leads to”, “causes”, “includes”, etc.).
+    - Avoid having any node with more than **3 direct children** — prefer deeper branching instead.
+    - Place nodes in a logical, spaced layout (tree or radial structure).
+    - Use unique node and edge IDs.
+    - Include a reasonable estimate of positions for clarity.
+    - “difficulty” must be an integer: 0 = Easy, 1 = Medium, 2 = Hard.
+    - Do **not** output difficulty as text (“Easy”, “Hard”, etc.).
+    - “description” should briefly explain the mindmap (max 2 sentences).
+    - “title” should summarize the main topic in a few words.
 
     Text:
     {text}

@@ -17,13 +17,8 @@ import { useVariableContext } from "@/context/VariableContext";
 import { useEffect } from "react";
 import { t } from "i18next";
 import { Difficulty } from "@/data/Difficulty";
-import {
-  Select,
-  SelectTrigger,
-  SelectValue,
-  SelectContent,
-  SelectItem,
-} from "@radix-ui/react-select";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
+
 
 interface MindmapFormProps {
   model?: MindmapDTO | undefined;
@@ -71,7 +66,6 @@ export default function MindmapsForm({
       ...values,
       materialSubGroupId: model?.materialSubGroupId ?? selectedGroupId!,
       data: model?.data ?? { nodes: [], edges: [] },
-      difficulty: model?.difficulty ?? Difficulty.Easy,
       subjectId: model?.subjectId ?? 0,
     });
   }

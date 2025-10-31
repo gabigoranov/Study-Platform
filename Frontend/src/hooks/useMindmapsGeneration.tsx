@@ -101,6 +101,7 @@ export function useMindmapsGeneration({
         nodes: generated.nodes,
         edges: generated.edges,
       },
+      difficulty: generated.difficulty,
     };
   };
 
@@ -114,9 +115,9 @@ export function useMindmapsGeneration({
 
     try {
       const model = convertToCreateMindmapDTO(mindmap, {
-        title: "Photosynthesis Overview",
-        description: "A mindmap about the process of photosynthesis",
-        subjectId: 1,
+        title: mindmap.title,
+        description: mindmap.description,
+        subjectId: selectedSubjectId!,
       });
 
       const result = await mindmapsService.create(model, token);

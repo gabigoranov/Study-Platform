@@ -104,6 +104,7 @@
     "mindmapsDashboardHeader": "Мисловни Карти",
     "mindmapsDashboardText": "Генерирайте и преговарайте мисловни карти с помощта на ИИ",
     "loadingMindmapLabel": "Мисловната карта се зарежда...",
-    "noMindmaps": "Не бяха намерени мисловни карти..."
+    "noMindmaps": "Не бяха намерени мисловни карти...",
+    "updateMindmapButton": "Актуализирай мисловната карта"
 
 }

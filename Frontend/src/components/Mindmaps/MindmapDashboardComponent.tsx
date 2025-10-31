@@ -31,10 +31,7 @@ export default function MindmapDashboardComponent({
         <h3 className="text-xl font-semibold text-text leading-tight">
           {mindmap.title}
         </h3>
-        {/* Future difficulty tag support */}
-        {true && (
-          <DifficultyTag difficulty={Difficulty.Easy} />
-        )}
+        <DifficultyTag difficulty={mindmap.difficulty} />
       </div>
 
       {/* Description with ample spacing */}

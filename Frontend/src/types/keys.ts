@@ -104,5 +104,6 @@ export const keys = {
   mindmapsDashboardHeader: "mindmapsDashboardHeader",
   mindmapsDashboardText: "mindmapsDashboardText",
   loadingMindmapLabel: "loadingMindmapLabel",
-  noMindmaps: "noMindmaps"
+  noMindmaps: "noMindmaps",
+  updateMindmapButton: "updateMindmapButton"
 };
