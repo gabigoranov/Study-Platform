@@ -121,6 +121,7 @@ export default function ReviewGeneratedMindmap({
           nodes={nodes}
           edges={edges}
           handleSave={isEditing ? handleSave : () => {}}
+          isInitialLayout={true}
         />
       </div>
     </div>

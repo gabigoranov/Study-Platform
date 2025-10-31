@@ -13,6 +13,7 @@ import { MindmapDTO } from "@/data/DTOs/MindmapDTO";
 import { CreateMindmapDTO } from "@/data/DTOs/CreateMindmapDTO";
 import { mindmapsService } from "@/services/mindmapsService";
 import { SubmitAction, useGenerationActions } from "./useGenerationActions";
+import { Mindmap } from "@/data/Mindmap";
 
 type MindmapGenerationProps = {
   setLoading: (value: boolean) => void;
@@ -104,6 +105,7 @@ export function useMindmapsGeneration({
   };
 
   const handleApproveGeneration = async (mindmap: GeneratedMindmapDTO) => {
+    console.log("approving");
     if (!token) return alert("You must be logged in to approve flashcards");
 
     setError(false);
@@ -119,18 +121,21 @@ export function useMindmapsGeneration({
 
       const result = await mindmapsService.create(model, token);
 
-      // Use invalidateQueries instead of setQueryData
-      await queryClient.invalidateQueries({
-        queryKey: ["mindmaps", selectedGroupId, selectedSubjectId],
-      });
+      console.log("updating query data");
+      queryClient.setQueryData<Mindmap[]>(
+        ["mindmaps", selectedGroupId, selectedSubjectId],
+        (old) => (old ? [...old, result] : [result])
+      );
     } catch (err) {
+      console.log("an error: " + err);
       setError(true);
       return;
     } finally {
+      console.log("done");
       setLoading(false);
       closeForm();
     }
-  };
+  }; 
 
   return {
     generatedMindmap,

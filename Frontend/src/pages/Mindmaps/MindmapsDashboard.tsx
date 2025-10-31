@@ -24,15 +24,11 @@ import { mindmapsService } from "@/services/mindmapsService";
 import MindmapsDashboardList from "@/components/Mindmaps/MindmapsDashboardList";
 import ViewMindmapPage from "./ViewMindmapPage";
 import { MindmapDTO } from "@/data/DTOs/MindmapDTO";
+import { Mindmap } from "@/data/Mindmap";
 
 type View = "list" | "create" | "edit" | "view" | "revise";
-export const flashcardService = apiService<
-  Flashcard,
-  FlashcardDTO,
-  FlashcardDTO
->("flashcards");
 
-export default function FlashcardsDashboard() {
+export default function MindmapsDashboard() {
   const { t } = useTranslation();
   const [view, setView] = useState<View>("list");
   const { token } = useAuth();
@@ -66,7 +62,7 @@ export default function FlashcardsDashboard() {
   const createMutation = useMutation({
     mutationFn: (dto: MindmapDTO) => mindmapsService.create(dto, token!),
     onSuccess: (newMindmap) => {
-      queryClient.setQueryData<MindmapDTO[]>(
+      queryClient.setQueryData<Mindmap[]>(
         ["mindmaps", selectedGroupId, selectedSubjectId],
         (old) => (old ? [...old, newMindmap] : [newMindmap])
       );
@@ -76,11 +72,11 @@ export default function FlashcardsDashboard() {
 
   // --- Mutation: update ---
   const updateMutation = useMutation({
-    mutationFn: ({ id, dto }: { id: string; dto: FlashcardDTO }) =>
-      flashcardService.update(id.toString(), dto, token!),
+    mutationFn: ({ id, dto }: { id: string; dto: MindmapDTO }) =>
+      mindmapsService.update(id.toString(), dto, token!),
     onSuccess: (updated) => {
-      queryClient.setQueryData<Flashcard[]>(
-        ["flashcards", selectedGroupId],
+      queryClient.setQueryData<Mindmap[]>(
+        ["mindmaps", selectedGroupId, selectedSubjectId],
         (old) =>
           old ? old.map((fc) => (fc.id === updated.id ? updated : fc)) : []
       );
@@ -95,7 +91,7 @@ export default function FlashcardsDashboard() {
         ids: id,
       }),
     onSuccess: (_, id) => {
-      queryClient.setQueryData<MindmapDTO[]>(
+      queryClient.setQueryData<Mindmap[]>(
         ["mindmaps", selectedGroupId, selectedSubjectId],
         (old) => (old ? old.filter((fc) => fc.id !== id) : [])
       );
@@ -110,7 +106,7 @@ export default function FlashcardsDashboard() {
     createMutation.mutate(data);
   };
 
-  const handleUpdate = (data: FlashcardDTO) => {
+  const handleUpdate = (data: MindmapDTO) => {
     if (!selectedMindmapId) return;
     updateMutation.mutate({ id: selectedMindmapId, dto: data });
   };

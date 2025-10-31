@@ -2,9 +2,10 @@ import { MindmapDTO } from "@/data/DTOs/MindmapDTO";
 import { Difficulty } from "@/data/Difficulty";
 import React from "react";
 import DifficultyTag from "../Common/DifficultyTag";
+import { Mindmap } from "@/data/Mindmap";
 
 interface MindmapDashboardComponentProps {
-  mindmap: MindmapDTO;
+  mindmap: Mindmap;
   onSelect: (id: string) => void;
   isSelected: boolean;
 }

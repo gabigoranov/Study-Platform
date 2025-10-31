@@ -35,7 +35,7 @@ namespace StudyPlatform.Controllers
 
             MindmapDTO res = await _mindmapsService.CreateAsync(model, userId);
 
-            return Ok();
+            return Ok(res);
         }
 
         /// <summary>

@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json;
+using StudyPlatform.Data.Models;
 
 namespace StudyPlatform.Models.DTOs
 {
@@ -33,5 +34,7 @@ namespace StudyPlatform.Models.DTOs
         public JsonDocument Data { get; set; }
 
         public DateTime DateCreated { get; set; } = DateTime.UtcNow;
+
+        public Difficulty Difficulty { get; set; }
     }
 }
