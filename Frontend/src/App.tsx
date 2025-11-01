@@ -15,6 +15,7 @@ import { ThemeProvider } from "./hooks/useThemeProvider";
 import FlashcardsDashboard from "./pages/Flashcards/FlashcardsDashboard";
 import { VariableProvider } from "./context/VariableContext";
 import MindmapsDashboard from "./pages/Mindmaps/MindmapsDashboard";
+import LandingPage from "./pages/Landing/LandingPage";
 
 export function App() {
   return (
@@ -24,6 +25,7 @@ export function App() {
           <BrowserRouter>
             <Routes>
               {/* Public routes */}
+              <Route path="/landing" element={<LandingPage />} />
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<SignUp />} />
 

@@ -152,18 +152,19 @@ export default function MindmapsDashboard() {
               />
             }
           />
-          {/* <Route
+          <Route
             path="create"
             element={
               <ReactFlowProvider>
                 <CreateMindmapPage
-                  nodes={nodes}
-                  edges={edges}
-                  handleSave={() => {}}
+                  nodes={[]}
+                  edges={[]}
+                  handleSave={() => { } } 
+                  isInitialLayout={undefined}                
                 />
               </ReactFlowProvider>
             }
-          /> */}
+          />
           <Route
             path="edit"
             element={

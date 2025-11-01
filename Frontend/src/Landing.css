@@ -1,0 +1,22 @@
+#root {
+  margin: 0 auto;
+  text-align: center;
+}
+
+.section-container {
+  max-width: 1440px;
+  padding: 2rem;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
