@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Brain, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "../Common/ThemeToggle";
+import AppLogo from "../Common/AppLogo";
 
 const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -18,12 +19,7 @@ const Navigation = () => {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <a href="#" className="flex items-center gap-2 group">
-            <div className="w-10 h-10 rounded-lg bg-primary flex items-center justify-center">
-              <Brain className="w-6 h-6 text-primary-foreground" />
-            </div>
-            <span className="text-xl font-bold text-text">AI Learning</span>
-          </a>
+          <AppLogo />
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
@@ -40,7 +36,6 @@ const Navigation = () => {
 
           {/* CTA Buttons - Desktop */}
           <div className="hidden md:flex items-center gap-4">
-            <ThemeToggle />
             <Button variant="ghost" className="text-text-muted hover:text-text">
               Sign In
             </Button>

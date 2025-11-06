@@ -158,8 +158,7 @@
               "ViewState": "AQIAADwAAAAAAAAAAAAvwFAAAAAMAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-10-10T18:24:20.239Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Document",
@@ -169,7 +168,7 @@
               "RelativeDocumentMoniker": "Services\\Mindmaps\\MindmapsService.cs",
               "ToolTip": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Services\\Mindmaps\\MindmapsService.cs",
               "RelativeToolTip": "Services\\Mindmaps\\MindmapsService.cs",
-              "ViewState": "AQIAAFAAAAAAAAAAAAAwwGYAAAAMAAAA",
+              "ViewState": "AQIAAFAAAAAAAAAAAAAwwFcAAABFAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-10-10T18:19:07.819Z",
               "IsPinned": true,
@@ -186,8 +185,7 @@
               "ViewState": "AQIAACMAAAAAAAAAAAAwwAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-10-13T05:20:58.73Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Document",
@@ -213,8 +211,7 @@
               "ViewState": "AQIAAFYAAAAAAAAAAAAswHgAAAANAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-10-13T05:23:43.706Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Bookmark",
@@ -230,8 +227,7 @@
               "RelativeToolTip": "Data\\Models\\Mindmap.cs",
               "ViewState": "AQIAAAMAAAAAAAAAAAAuwB0AAAAzAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-10T18:13:17.982Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-10T18:13:17.982Z"
             },
             {
               "$type": "Document",
@@ -243,8 +239,7 @@
               "RelativeToolTip": "Models\\DTOs\\MindmapDTO.cs",
               "ViewState": "AQIAAAEAAAAAAAAAAAAqwCEAAAAuAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-16T06:24:40.125Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-16T06:24:40.125Z"
             },
             {
               "$type": "Document",
@@ -256,8 +251,7 @@
               "RelativeToolTip": "Models\\DTOs\\GeneratedFlashcardDTO.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAIAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-13T05:28:03.984Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-13T05:28:03.984Z"
             },
             {
               "$type": "Document",
@@ -269,8 +263,7 @@
               "RelativeToolTip": "Models\\DTOs\\GeneratedMindmapDTO.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAABUAAAASAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-13T05:27:56.692Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-13T05:27:56.692Z"
             },
             {
               "$type": "Document",
@@ -282,8 +275,7 @@
               "RelativeToolTip": "Migrations\\SupabaseDb\\20251031075425_UpdateMindmapIdToInt.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAABcAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-31T07:54:25.503Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-31T07:54:25.503Z"
             },
             {
               "$type": "Document",
@@ -295,8 +287,7 @@
               "RelativeToolTip": "Migrations\\SupabaseDb\\20251031075318_asas.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-31T07:53:18.259Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-31T07:53:18.259Z"
             },
             {
               "$type": "Document",
@@ -308,8 +299,7 @@
               "RelativeToolTip": "Models\\GenerateMindmapsViewModel.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-31T07:51:28.162Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-31T07:51:28.162Z"
             },
             {
               "$type": "Document",
@@ -321,8 +311,7 @@
               "RelativeToolTip": "Migrations\\SupabaseDb\\20251031073521_UpdateMindmapProps.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-31T07:35:21.412Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-31T07:35:21.412Z"
             },
             {
               "$type": "Document",
@@ -334,8 +323,7 @@
               "RelativeToolTip": "Models\\CreateMindmapViewModel.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAABsAAABFAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-16T06:16:50.47Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-16T06:16:50.47Z"
             },
             {
               "$type": "Document",
@@ -347,8 +335,7 @@
               "RelativeToolTip": "Models\\Common\\AutoMapper.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-16T06:16:57.345Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-16T06:16:57.345Z"
             },
             {
               "$type": "Document",
@@ -360,8 +347,7 @@
               "RelativeToolTip": "Exceptions\\MaterialFetchingException.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-31T07:27:11.375Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-31T07:27:11.375Z"
             },
             {
               "$type": "Document",
@@ -373,8 +359,7 @@
               "RelativeToolTip": "Controllers\\FlashcardsController.cs",
               "ViewState": "AQIAAFcAAAAAAAAAAIAwwHsAAAAbAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-13T06:00:58.36Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-13T06:00:58.36Z"
             },
             {
               "$type": "Document",

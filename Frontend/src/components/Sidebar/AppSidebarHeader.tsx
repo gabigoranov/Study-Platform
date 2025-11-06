@@ -6,6 +6,7 @@ import { ChevronDown } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { keys } from "../../types/keys";
 import { Subject } from "@/data/Subject";
+import AppLogo from "../Common/AppLogo";
 
 type AppSidebarHeaderProps = {
   items: Subject[];
@@ -14,12 +15,8 @@ type AppSidebarHeaderProps = {
 export default function AppSidebarHeader({items} : AppSidebarHeaderProps) {
   const { t } = useTranslation();
     return (
-      <SidebarHeader>
-        <Link to="/">
-          <h2 className="text-4xl font-bold">
-            Study<br />Mate
-          </h2>
-        </Link>
+      <SidebarHeader className="py-4">
+        <AppLogo />
         {items.length > 0 && <AppSidebarMenu 
           dropdownTitle={t(keys.selectSubject)}
           dropdownTitleIcon={ChevronDown}

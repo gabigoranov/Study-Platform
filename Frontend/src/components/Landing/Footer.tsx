@@ -1,12 +1,13 @@
 import { Brain, Mail, Twitter, Github, Linkedin } from "lucide-react";
+import { ThemeToggle } from "../Common/ThemeToggle";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
     <footer className="bg-surface border-t border-border">
-      <div className="section-container container mx-auto py-12 text-left">
-        <div className="grid md:grid-cols-4 gap-8 mb-8">
+      <div className="section-container container mx-auto py-12 text-right">
+        <div className="grid md:grid-cols-4 gap-8 mb-8 text-left">
           {/* Brand */}
           <div className="md:col-span-1">
             <div className="flex items-center gap-2 mb-4">
@@ -15,13 +16,14 @@ const Footer = () => {
               </div>
               <span className="text-xl font-bold text-text">AI Learning</span>
             </div>
-            <p className="text-text-muted text-sm leading-relaxed text-left">
+            <p className="text-text-muted text-sm leading-relaxed text-left mb-6">
               Transform your learning experience with AI-powered study materials and compete with friends.
             </p>
+            <ThemeToggle />
           </div>
 
           {/* Product */}
-          <div>
+          <div className="text-right">
             <h3 className="font-semibold text-text mb-4">Product</h3>
             <ul className="space-y-2">
               <li>
@@ -48,7 +50,7 @@ const Footer = () => {
           </div>
 
           {/* Company */}
-          <div>
+          <div className="text-right">
             <h3 className="font-semibold text-text mb-4">Company</h3>
             <ul className="space-y-2">
               <li>
@@ -75,7 +77,7 @@ const Footer = () => {
           </div>
 
           {/* Legal */}
-          <div>
+          <div className="text-right">
             <h3 className="font-semibold text-text mb-4">Legal</h3>
             <ul className="space-y-2">
               <li>
@@ -117,7 +119,7 @@ const Footer = () => {
               <Twitter className="w-5 h-5 text-text-muted group-hover:text-primary transition-colors" />
             </a>
             <a
-              href="https://github.com"
+              href="https://github.com/gabigoranov/Study-Platform"
               target="_blank"
               rel="noopener noreferrer"
               className="w-10 h-10 rounded-full bg-surface-muted hover:bg-primary/10 flex items-center justify-center transition-colors group"
