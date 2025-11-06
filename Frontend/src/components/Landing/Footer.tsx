@@ -1,7 +1,11 @@
 import { Brain, Mail, Twitter, Github, Linkedin } from "lucide-react";
+import { useTranslation } from "react-i18next";
+import { keys } from "@/types/keys";
 import { ThemeToggle } from "../Common/ThemeToggle";
+import LanguageToggle from "../Common/LanguageToggle";
 
 const Footer = () => {
+  const { t } = useTranslation();
   const currentYear = new Date().getFullYear();
 
   return (
@@ -14,36 +18,53 @@ const Footer = () => {
               <div className="w-10 h-10 rounded-lg bg-gradient-primary flex items-center justify-center">
                 <Brain className="w-6 h-6 text-primary-foreground" />
               </div>
-              <span className="text-xl font-bold text-text">AI Learning</span>
+              <span className="text-xl font-bold text-text">
+                {t(keys.aiLearningPlatform)}
+              </span>
             </div>
             <p className="text-text-muted text-sm leading-relaxed text-left mb-6">
-              Transform your learning experience with AI-powered study materials and compete with friends.
+              {t(keys.transformYourLearning)}
             </p>
-            <ThemeToggle />
+            <div className="flex">
+              <ThemeToggle />
+              <LanguageToggle />
+            </div>
           </div>
 
           {/* Product */}
           <div className="text-right">
-            <h3 className="font-semibold text-text mb-4">Product</h3>
+            <h3 className="font-semibold text-text mb-4">{t(keys.product)}</h3>
             <ul className="space-y-2">
               <li>
-                <a href="#features" className="text-text-muted hover:text-primary transition-colors text-sm">
-                  Features
+                <a
+                  href="#features"
+                  className="text-text-muted hover:text-primary transition-colors text-sm"
+                >
+                  {t(keys.featuresText)}
                 </a>
               </li>
               <li>
-                <a href="#how-it-works" className="text-text-muted hover:text-primary transition-colors text-sm">
-                  How It Works
+                <a
+                  href="#how-it-works"
+                  className="text-text-muted hover:text-primary transition-colors text-sm"
+                >
+                  {t(keys.howItWorksText)}
                 </a>
               </li>
               <li>
-                <a href="#pricing" className="text-text-muted hover:text-primary transition-colors text-sm">
-                  Pricing
+                <a
+                  href="#pricing"
+                  className="text-text-muted hover:text-primary transition-colors text-sm"
+                >
+                  {t(keys.pricing)}
                 </a>
               </li>
               <li>
-                <a href="#demo" className="text-text-muted hover:text-primary transition-colors text-sm">
-                  Demo
+                <a
+                  href="#demo"
+                  className="text-text-muted hover:text-primary transition-colors text-sm"
+                >
+                  {t(keys.demoText)}
                 </a>
               </li>
             </ul>
@@ -51,26 +72,38 @@ const Footer = () => {
 
           {/* Company */}
           <div className="text-right">
-            <h3 className="font-semibold text-text mb-4">Company</h3>
+            <h3 className="font-semibold text-text mb-4">{t(keys.company)}</h3>
             <ul className="space-y-2">
               <li>
-                <a href="#about" className="text-text-muted hover:text-primary transition-colors text-sm">
-                  About Us
+                <a
+                  href="#about"
+                  className="text-text-muted hover:text-primary transition-colors text-sm"
+                >
+                  {t(keys.aboutUs)}
                 </a>
               </li>
               <li>
-                <a href="#contact" className="text-text-muted hover:text-primary transition-colors text-sm">
-                  Contact
+                <a
+                  href="#contact"
+                  className="text-text-muted hover:text-primary transition-colors text-sm"
+                >
+                  {t(keys.contact)}
                 </a>
               </li>
               <li>
-                <a href="#careers" className="text-text-muted hover:text-primary transition-colors text-sm">
-                  Careers
+                <a
+                  href="#careers"
+                  className="text-text-muted hover:text-primary transition-colors text-sm"
+                >
+                  {t(keys.careers)}
                 </a>
               </li>
               <li>
-                <a href="#blog" className="text-text-muted hover:text-primary transition-colors text-sm">
-                  Blog
+                <a
+                  href="#blog"
+                  className="text-text-muted hover:text-primary transition-colors text-sm"
+                >
+                  {t(keys.blog)}
                 </a>
               </li>
             </ul>
@@ -78,26 +111,38 @@ const Footer = () => {
 
           {/* Legal */}
           <div className="text-right">
-            <h3 className="font-semibold text-text mb-4">Legal</h3>
+            <h3 className="font-semibold text-text mb-4">{t(keys.legal)}</h3>
             <ul className="space-y-2">
               <li>
-                <a href="#privacy" className="text-text-muted hover:text-primary transition-colors text-sm">
-                  Privacy Policy
+                <a
+                  href="#privacy"
+                  className="text-text-muted hover:text-primary transition-colors text-sm"
+                >
+                  {t(keys.privacyPolicy)}
                 </a>
               </li>
               <li>
-                <a href="#terms" className="text-text-muted hover:text-primary transition-colors text-sm">
-                  Terms of Service
+                <a
+                  href="#terms"
+                  className="text-text-muted hover:text-primary transition-colors text-sm"
+                >
+                  {t(keys.termsOfService)}
                 </a>
               </li>
               <li>
-                <a href="#cookies" className="text-text-muted hover:text-primary transition-colors text-sm">
-                  Cookie Policy
+                <a
+                  href="#cookies"
+                  className="text-text-muted hover:text-primary transition-colors text-sm"
+                >
+                  {t(keys.cookiePolicy)}
                 </a>
               </li>
               <li>
-                <a href="#security" className="text-text-muted hover:text-primary transition-colors text-sm">
-                  Security
+                <a
+                  href="#security"
+                  className="text-text-muted hover:text-primary transition-colors text-sm"
+                >
+                  {t(keys.security)}
                 </a>
               </li>
             </ul>
@@ -109,45 +154,45 @@ const Footer = () => {
           <div className="flex flex-col md:flex-row justify-center items-center gap-6 mb-4">
             {/* Social links */}
             <div className="flex gap-4">
-            <a
-              href="https://twitter.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-10 h-10 rounded-full bg-surface-muted hover:bg-primary/10 flex items-center justify-center transition-colors group"
-              aria-label="Twitter"
-            >
-              <Twitter className="w-5 h-5 text-text-muted group-hover:text-primary transition-colors" />
-            </a>
-            <a
-              href="https://github.com/gabigoranov/Study-Platform"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-10 h-10 rounded-full bg-surface-muted hover:bg-primary/10 flex items-center justify-center transition-colors group"
-              aria-label="GitHub"
-            >
-              <Github className="w-5 h-5 text-text-muted group-hover:text-primary transition-colors" />
-            </a>
-            <a
-              href="https://linkedin.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-10 h-10 rounded-full bg-surface-muted hover:bg-primary/10 flex items-center justify-center transition-colors group"
-              aria-label="LinkedIn"
-            >
-              <Linkedin className="w-5 h-5 text-text-muted group-hover:text-primary transition-colors" />
-            </a>
-            <a
-              href="mailto:contact@ailearning.com"
-              className="w-10 h-10 rounded-full bg-surface-muted hover:bg-primary/10 flex items-center justify-center transition-colors group"
-              aria-label="Email"
-            >
-              <Mail className="w-5 h-5 text-text-muted group-hover:text-primary transition-colors" />
-            </a>
+              <a
+                href="https://twitter.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 rounded-full bg-surface-muted hover:bg-primary/10 flex items-center justify-center transition-colors group"
+                aria-label={t(keys.twitter)}
+              >
+                <Twitter className="w-5 h-5 text-text-muted group-hover:text-primary transition-colors" />
+              </a>
+              <a
+                href="https://github.com/gabigoranov/Study-Platform"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 rounded-full bg-surface-muted hover:bg-primary/10 flex items-center justify-center transition-colors group"
+                aria-label={t(keys.github)}
+              >
+                <Github className="w-5 h-5 text-text-muted group-hover:text-primary transition-colors" />
+              </a>
+              <a
+                href="https://linkedin.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 rounded-full bg-surface-muted hover:bg-primary/10 flex items-center justify-center transition-colors group"
+                aria-label={t(keys.linkedin)}
+              >
+                <Linkedin className="w-5 h-5 text-text-muted group-hover:text-primary transition-colors" />
+              </a>
+              <a
+                href="mailto:contact@ailearning.com"
+                className="w-10 h-10 rounded-full bg-surface-muted hover:bg-primary/10 flex items-center justify-center transition-colors group"
+                aria-label={t(keys.email)}
+              >
+                <Mail className="w-5 h-5 text-text-muted group-hover:text-primary transition-colors" />
+              </a>
+            </div>
           </div>
-          </div>
-          
+
           <p className="text-text-muted text-sm text-center mt-4">
-            © {currentYear} AI Learning Platform. All rights reserved.
+            © {currentYear} {t(keys.copyright)}
           </p>
         </div>
       </div>

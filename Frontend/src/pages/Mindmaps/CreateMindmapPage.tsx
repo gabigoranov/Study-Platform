@@ -24,6 +24,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import dagre from "dagre";
+import { useTranslation } from "react-i18next";
+import { keys } from "@/types/keys";
 
 interface CreateMindmapsPageProps {
   nodes: Node[];
@@ -39,6 +41,7 @@ export default function CreateMindmapPage({
   isInitialLayout,
 }: CreateMindmapsPageProps): JSX.Element {
   const { theme } = useTheme();
+  const { t } = useTranslation();
 
   const [nodes, setNodes] = useState<Node[]>(initialNodes);
   const [edges, setEdges] = useState<Edge[]>(initialEdges);
@@ -116,7 +119,7 @@ export default function CreateMindmapPage({
 
       const newNode: Node = {
         id,
-        data: { label: newNodeLabel || "New Node" },
+        data: { label: newNodeLabel || t("New Node") },
         position,
         type: "default",
       };
@@ -185,26 +188,26 @@ export default function CreateMindmapPage({
     <div className="w-full h-full relative">
       {/* Toolbar */}
       <div className="absolute top-4 left-4 z-30 flex gap-2">
-        <Button onClick={() => setShowLabelModal(true)}>+ Add Node</Button>
+        <Button onClick={() => setShowLabelModal(true)}>+ {t(keys.addNode)}</Button>
         {isPlacing && (
           <Button variant="outline" onClick={cancelPlacement}>
-            Cancel
+            {t("Cancel")}
           </Button>
         )}
         {hasUnsavedChanges && (
           <Button onClick={handleSaveClick} variant="secondary">
-            <LucideSave /> Save
+            <LucideSave /> {t("Save")}
           </Button>
         )}
         <Button variant="outline" onClick={handleAutoLayout}>
-          Align Nodes
+          {t("Align Nodes")}
         </Button>
       </div>
 
       {/* Instruction ribbon */}
       {isPlacing && (
         <div className="absolute top-4 right-4 z-40 px-3 py-2 rounded-md text-sm bg-card text-card-foreground border border-border shadow-md max-w-xs">
-          Click anywhere on the canvas to place the node —{" "}
+          {t("Click anywhere on the canvas to place the node —")}{" "}
           <strong className="whitespace-nowrap">{newNodeLabel}</strong>
         </div>
       )}
@@ -235,19 +238,18 @@ export default function CreateMindmapPage({
       {showLabelModal && (
         <div className="absolute inset-0 z-50 flex items-center justify-center bg-black/40">
           <div className="w-80 p-5 rounded-xl bg-card text-card-foreground border border-border shadow-lg">
-            <h3 className="text-lg font-medium mb-3">Add Node</h3>
+            <h3 className="text-lg font-medium mb-3">{t(keys.addNode)}</h3>
             <form onSubmit={handleStartPlacing} className="flex flex-col gap-3">
-              <Label className="text-sm">Label</Label>
+              <Label className="text-sm">{t(keys.label)}</Label>
               <Input
                 autoFocus
                 value={newNodeLabel}
                 onChange={(e) => setNewNodeLabel(e.target.value)}
-                placeholder="Enter node label"
+                placeholder={t("Enter node label")}
                 required
               />
               <p className="text-xs text-text-muted mt-1">
-                After you submit, click anywhere on the canvas to place the
-                node.
+                {t("After you submit, click anywhere on the canvas to place the node.")}
               </p>
               <div className="flex justify-end gap-2 mt-4">
                 <Button
@@ -255,9 +257,9 @@ export default function CreateMindmapPage({
                   variant="secondary"
                   onClick={() => setShowLabelModal(false)}
                 >
-                  Cancel
+                  {t("Cancel")}
                 </Button>
-                <Button type="submit">Place</Button>
+                <Button type="submit">{t(keys.place)}</Button>
               </div>
             </form>
           </div>

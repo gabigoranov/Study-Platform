@@ -1,17 +1,21 @@
 import { Play, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useTranslation } from "react-i18next";
+import { keys } from "@/types/keys";
 
 const VideoDemo = () => {
+  const { t } = useTranslation();
+
   return (
     <section className="py-20 px-4 bg-background">
       <div className="section-container container mx-auto">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-12 animate-fade-in">
             <h2 className="text-4xl md:text-5xl font-bold mb-4 text-text">
-              See It in Action
+              {t(keys.seeItInAction)}
             </h2>
             <p className="text-xl text-text-muted max-w-2xl mx-auto">
-              Watch how AI transforms your study materials in seconds
+              {t(keys.watchHowAIDataTransforms)}
             </p>
           </div>
 
@@ -41,14 +45,14 @@ const VideoDemo = () => {
                 <div className="absolute top-8 left-8 bg-surface/90 backdrop-blur-sm px-4 py-2 rounded-lg border border-border shadow-soft animate-slide-up">
                   <div className="flex items-center gap-2">
                     <Sparkles className="w-4 h-4 text-warning" />
-                    <span className="text-sm font-medium text-text">Flashcards Generated</span>
+                    <span className="text-sm font-medium text-text">{t(keys.flashcardsGenerated)}</span>
                   </div>
                 </div>
 
                 <div className="absolute bottom-8 right-8 bg-surface/90 backdrop-blur-sm px-4 py-2 rounded-lg border border-border shadow-soft animate-slide-up" style={{ animationDelay: "200ms" }}>
                   <div className="flex items-center gap-2">
                     <Sparkles className="w-4 h-4 text-success" />
-                    <span className="text-sm font-medium text-text">Quiz Created</span>
+                    <span className="text-sm font-medium text-text">{t(keys.quizCreated)}</span>
                   </div>
                 </div>
               </div>
@@ -57,15 +61,15 @@ const VideoDemo = () => {
               <div className="grid md:grid-cols-3 gap-6 p-8 bg-surface">
                 <div className="text-center">
                   <div className="text-2xl font-bold text-primary mb-1">30 sec</div>
-                  <div className="text-sm text-text-muted">Processing Time</div>
+                  <div className="text-sm text-text-muted">{t(keys.processingTime)}</div>
                 </div>
                 <div className="text-center">
                   <div className="text-2xl font-bold text-accent mb-1">50+</div>
-                  <div className="text-sm text-text-muted">Materials Created</div>
+                  <div className="text-sm text-text-muted">{t(keys.materialsCreated)}</div>
                 </div>
                 <div className="text-center">
                   <div className="text-2xl font-bold text-success mb-1">100%</div>
-                  <div className="text-sm text-text-muted">Customized</div>
+                  <div className="text-sm text-text-muted">{t(keys.customized)}</div>
                 </div>
               </div>
             </div>

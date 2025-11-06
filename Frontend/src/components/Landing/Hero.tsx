@@ -1,7 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Trophy, Zap, Brain } from "lucide-react";
+import { useTranslation } from "react-i18next";
+import { keys } from "@/types/keys";
 
 const Hero = () => {
+  const { t } = useTranslation();
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-hero pt-16">
       {/* Animated background elements */}
@@ -15,31 +19,30 @@ const Hero = () => {
         <div className="max-w-5xl mx-auto text-center animate-fade-in">
           {/* Main Heading */}
           <h1 className="text-5xl md:text-7xl font-bold mb-6 text-text leading-tight">
-            Master Your Studies with{" "}
+            {t(keys.masterYourStudies)}{" "}
             <span className="bg-gradient-primary bg-clip-text text-transparent">
-              AI-Powered Materials
+              {t(keys.aiPoweredMaterials)}
             </span>
           </h1>
           
           {/* Subheading */}
           <p className="text-xl md:text-2xl text-text-muted mb-8 max-w-3xl mx-auto">
-            Upload your lectures, get personalized study materials, and race for points with friends. 
-            Transform learning into an engaging competition.
+            {t(keys.uploadLectures)}
           </p>
           
           {/* Feature highlights */}
           <div className="flex flex-wrap justify-center gap-6 mb-10 text-text-muted">
             <div className="flex items-center gap-2">
               <Zap className="w-5 h-5 text-warning" />
-              <span>AI-Generated Content</span>
+              <span>{t(keys.aiPoweredContent)}</span>
             </div>
             <div className="flex items-center gap-2">
               <Trophy className="w-5 h-5 text-success" />
-              <span>Compete with Friends</span>
+              <span>{t(keys.competeWithFriends)}</span>
             </div>
             <div className="flex items-center gap-2">
               <Brain className="w-5 h-5 text-info" />
-              <span>Personalized Learning</span>
+              <span>{t(keys.personalizedLearning)}</span>
             </div>
           </div>
           
@@ -49,7 +52,7 @@ const Hero = () => {
               size="lg" 
               className="bg-gradient-primary hover:opacity-90 transition-opacity text-lg px-8 py-6 rounded-full shadow-glow text-text-inverted"
             >
-              Start Learning Free
+              {t(keys.startLearningFree)}
               <ArrowRight className="ml-2 w-5 h-5" />
             </Button>
             <Button 
@@ -57,7 +60,7 @@ const Hero = () => {
               variant="outline" 
               className="text-lg px-8 py-6 rounded-full border-2 border-border hover:bg-surface-muted text-text"
             >
-              Watch Demo
+              {t(keys.watchDemo)}
             </Button>
           </div>
 

@@ -15,7 +15,8 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { useVariableContext } from "@/context/VariableContext";
 import { useEffect } from "react";
-import { t } from "i18next";
+import { useTranslation } from "react-i18next";
+import { keys } from "@/types/keys";
 import { Difficulty } from "@/data/Difficulty";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
 
@@ -40,6 +41,7 @@ export default function MindmapsForm({
   onCancel,
 }: MindmapFormProps) {
   const { selectedGroupId } = useVariableContext();
+  const { t } = useTranslation();
 
   const form = useForm<z.infer<typeof mindmapSchema>>({
     resolver: zodResolver(mindmapSchema),
@@ -81,9 +83,9 @@ export default function MindmapsForm({
           name="title"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>{t("Title")}</FormLabel>
+              <FormLabel>{t(keys.title)}</FormLabel>
               <FormControl>
-                <Input placeholder="Enter mindmap title..." {...field} />
+                <Input placeholder={t("Enter mindmap title...")} {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -98,7 +100,7 @@ export default function MindmapsForm({
               <FormLabel>{t("Description")}</FormLabel>
               <FormControl>
                 <Textarea
-                  placeholder="Enter a short description..."
+                  placeholder={t("Enter a short description...")}
                   {...field}
                   rows={4}
                 />
@@ -116,24 +118,24 @@ export default function MindmapsForm({
 
             return (
               <FormItem>
-                <FormLabel>Difficulty</FormLabel>
+                <FormLabel>{t(keys.difficulty)}</FormLabel>
                 <FormControl>
                   <Select
                     value={stringValue}
                     onValueChange={(val) => field.onChange(Number(val))} // convert back to number
                   >
                     <SelectTrigger>
-                      <SelectValue placeholder="Select difficulty" />
+                      <SelectValue placeholder={t("Select difficulty")} />
                     </SelectTrigger>
                     <SelectContent>
                       <SelectItem value={Difficulty.Easy.toString()}>
-                        Easy
+                        {t("Easy")}
                       </SelectItem>
                       <SelectItem value={Difficulty.Medium.toString()}>
-                        Medium
+                        {t("Medium")}
                       </SelectItem>
                       <SelectItem value={Difficulty.Hard.toString()}>
-                        Hard
+                        {t("Hard")}
                       </SelectItem>
                     </SelectContent>
                   </Select>

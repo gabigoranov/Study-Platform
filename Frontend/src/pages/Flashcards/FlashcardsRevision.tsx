@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Flashcard } from "@/data/Flashcard";
 import { RevisionDifficulty } from "@/data/RevisionDifficulty";
 import { keys } from "@/types/keys";
-import { t } from "i18next";
+import { useTranslation } from "react-i18next";
 import { CheckCircle, RotateCcw } from "lucide-react";
 import { useMemo, useState } from "react";
 import { Link } from "react-router";
@@ -16,6 +16,8 @@ type FlashcardsRevisionProps = {
 export default function FlashcardsRevision({
   flashcards,
 }: FlashcardsRevisionProps) {
+  const { t } = useTranslation();
+  
   if (flashcards === undefined || flashcards.length <= 0) {
     return <p className="text-center">{t(keys.noRevisionAvailableLabel)}</p>;
   }
@@ -73,19 +75,19 @@ export default function FlashcardsRevision({
 
   return isRevisionFinished ? (
     <div className="self-center bg-surface p-6 px-10 rounded-xl flex flex-col gap-4">
-      <h2 className="text-3xl font-semibold">Congratulations!</h2>
+      <h2 className="text-3xl font-semibold">{t(keys.congratulations)}</h2>
       <p className="text-xl">
-        You successfully revised {currentCardIndex+1} flashcards.
+        {t("You successfully revised {{count}} flashcards.", { count: currentCardIndex+1 })}
       </p>
 
       <div className="flex gap-4 self-end mt-10">
         <Button variant="ghost" className="text-lg" onClick={handleRetry}>
-          <RotateCcw /> Retry
+          <RotateCcw /> {t("Retry")}
         </Button>
 
         <Link to="/flashcards">
           <Button variant="outline" className="rounded-xl text-lg">
-            Close
+            {t("Close")}
           </Button>
         </Link>
       </div>
@@ -102,7 +104,7 @@ export default function FlashcardsRevision({
           className="h-4 w-fit p-4 rounded-full flex items-center"
           onClick={handleFinishRevision}
         >
-          <CheckCircle /> Finish
+          <CheckCircle /> {t("Finish")}
         </Button>
       </div>
 

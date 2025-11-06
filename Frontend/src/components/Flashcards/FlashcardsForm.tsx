@@ -23,7 +23,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../ui/select";
-import { t } from "i18next";
+import { useTranslation } from "react-i18next";
 import { keys } from "@/types/keys";
 
 interface FlashcardsFormProps {
@@ -47,6 +47,7 @@ export default function FlashcardsForm({
   onCancel,
 }: FlashcardsFormProps) {
   const { selectedGroupId } = useVariableContext();
+  const { t } = useTranslation();
 
   const form = useForm<z.infer<typeof flashcardSchema>>({
     resolver: zodResolver(flashcardSchema),
@@ -88,9 +89,9 @@ export default function FlashcardsForm({
           name="title"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Title</FormLabel>
+              <FormLabel>{t(keys.title)}</FormLabel>
               <FormControl>
-                <Input placeholder="Enter title" {...field} />
+                <Input placeholder={t("Enter title")} {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -101,9 +102,9 @@ export default function FlashcardsForm({
           name="front"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Front</FormLabel>
+              <FormLabel>{t(keys.frontLabel)}</FormLabel>
               <FormControl>
-                <Input placeholder="Enter question here..." {...field} />
+                <Input placeholder={t("Enter question here...")} {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -114,10 +115,10 @@ export default function FlashcardsForm({
           name="back"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Back</FormLabel>
+              <FormLabel>{t(keys.backLabel)}</FormLabel>
               <FormControl>
                 <Textarea
-                  placeholder="Enter answer here..."
+                  placeholder={t("Enter answer here...")}
                   {...field}
                   rows={4}
                 />
@@ -135,24 +136,24 @@ export default function FlashcardsForm({
 
             return (
               <FormItem>
-                <FormLabel>Difficulty</FormLabel>
+                <FormLabel>{t(keys.difficulty)}</FormLabel>
                 <FormControl>
                   <Select
                     value={stringValue}
                     onValueChange={(val) => field.onChange(Number(val))} // convert back to number
                   >
                     <SelectTrigger>
-                      <SelectValue placeholder="Select difficulty" />
+                      <SelectValue placeholder={t("Select difficulty")} />
                     </SelectTrigger>
                     <SelectContent>
                       <SelectItem value={Difficulty.Easy.toString()}>
-                        Easy
+                        {t("Easy")}
                       </SelectItem>
                       <SelectItem value={Difficulty.Medium.toString()}>
-                        Medium
+                        {t("Medium")}
                       </SelectItem>
                       <SelectItem value={Difficulty.Hard.toString()}>
-                        Hard
+                        {t("Hard")}
                       </SelectItem>
                     </SelectContent>
                   </Select>
@@ -171,7 +172,7 @@ export default function FlashcardsForm({
               onClick={onCancel}
               className="rounded-xl"
             >
-              Cancel
+              {t("Cancel")}
             </Button>
           )}
           <Button type="submit" className="rounded-xl">

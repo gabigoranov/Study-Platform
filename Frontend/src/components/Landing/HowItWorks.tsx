@@ -1,49 +1,53 @@
 import { UserPlus, Upload, Sparkles, ArrowRight } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
-
-const steps = [
-  {
-    icon: UserPlus,
-    title: "Create Your Account",
-    description: "Sign up in seconds and set up your personalized learning profile with your subjects and goals.",
-    step: "01",
-    gradient: "from-violet-500/20 via-purple-500/10 to-transparent",
-    iconBg: "bg-gradient-to-br from-violet-100 to-purple-50 dark:from-violet-900/30 dark:to-purple-900/20",
-    iconColor: "text-violet-600 dark:text-violet-400"
-  },
-  {
-    icon: Upload,
-    title: "Upload Your Materials",
-    description: "Drop your lecture slides, notes, or documents. Support for PDFs, PowerPoints, and more.",
-    step: "02",
-    gradient: "from-blue-500/20 via-cyan-500/10 to-transparent",
-    iconBg: "bg-gradient-to-br from-blue-100 to-cyan-50 dark:from-blue-900/30 dark:to-cyan-900/20",
-    iconColor: "text-blue-600 dark:text-blue-400"
-  },
-  {
-    icon: Sparkles,
-    title: "AI Creates Everything",
-    description: "Our AI instantly generates flashcards, quizzes, mindmaps, and podcasts tailored to your content.",
-    step: "03",
-    gradient: "from-amber-500/20 via-orange-500/10 to-transparent",
-    iconBg: "bg-gradient-to-br from-amber-100 to-orange-50 dark:from-amber-900/30 dark:to-orange-900/20",
-    iconColor: "text-amber-600 dark:text-amber-400"
-  },
-];
+import { useTranslation } from "react-i18next";
+import { keys } from "@/types/keys";
 
 const HowItWorks = () => {
+  const { t } = useTranslation();
+  
+  const steps = [
+    {
+      icon: UserPlus,
+      title: t(keys.createAccount),
+      description: t(keys.aiLearningDescription),
+      step: "01",
+      gradient: "from-violet-500/20 via-purple-500/10 to-transparent",
+      iconBg: "bg-gradient-to-br from-violet-100 to-purple-50 dark:from-violet-900/30 dark:to-purple-900/20",
+      iconColor: "text-violet-600 dark:text-violet-400"
+    },
+    {
+      icon: Upload,
+      title: t(keys.uploadMaterials),
+      description: t(keys.aiUploadDescription),
+      step: "02",
+      gradient: "from-blue-500/20 via-cyan-500/10 to-transparent",
+      iconBg: "bg-gradient-to-br from-blue-100 to-cyan-50 dark:from-blue-900/30 dark:to-cyan-900/20",
+      iconColor: "text-blue-600 dark:text-blue-400"
+    },
+    {
+      icon: Sparkles,
+      title: t(keys.aiCreatesEverything),
+      description: t(keys.aiCreationDescription),
+      step: "03",
+      gradient: "from-amber-500/20 via-orange-500/10 to-transparent",
+      iconBg: "bg-gradient-to-br from-amber-100 to-orange-50 dark:from-amber-900/30 dark:to-orange-900/20",
+      iconColor: "text-amber-600 dark:text-amber-400"
+    },
+  ];
+
   return (
     <section className="py-24 px-4 bg-gradient-to-b from-surface to-background">
       <div className="container mx-auto max-w-7xl">
         <div className="text-center mb-20">
           <div className="inline-block mb-4 px-4 py-2 bg-gradient-to-r from-primary/10 to-primary/5 rounded-full border border-primary/20">
-            <span className="text-sm font-semibold text-primary">Simple Process</span>
+            <span className="text-sm font-semibold text-primary">{t(keys.simpleProcess)}</span>
           </div>
           <h2 className="text-5xl md:text-6xl font-bold mb-6 text-text">
-            How It Works
+            {t(keys.howItWorksSection)}
           </h2>
           <p className="text-xl text-text-muted max-w-2xl mx-auto">
-            From upload to mastery in three simple steps
+            {t(keys.fromUploadToMastery)}
           </p>
         </div>
 
@@ -105,7 +109,7 @@ const HowItWorks = () => {
         {/* Call to action */}
         <div className="text-center mt-20">
           <button className="group px-8 py-4 bg-gradient-primary hover:opacity-90 text-primary-foreground rounded-full font-semibold text-lg shadow-glow hover:shadow-xl transition-all duration-300 transform hover:scale-105">
-            Get Started Now
+            {t(keys.getStartedNow)}
             <ArrowRight className="inline-block ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
           </button>
         </div>
