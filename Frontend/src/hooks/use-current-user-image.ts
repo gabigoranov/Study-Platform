@@ -5,15 +5,27 @@ export const useCurrentUserImage = () => {
   const [image, setImage] = useState<string | null>(null)
 
   useEffect(() => {
-    const fetchUserImage = async () => {
-      const { data, error } = await supabase.auth.getSession()
-      if (error) {
-        console.error(error)
-      }
+    const loadImage = async () => {
+      const { data: { session } } = await supabase.auth.getSession()
+      const url = session?.user?.user_metadata?.avatar_url ?? null
+      setImage(url)
 
-      setImage(data.session?.user.user_metadata.avatar_url ?? null)
+      console.log("loaded avatar");
     }
-    fetchUserImage()
+
+    loadImage()
+
+    // 🔄 Subscribe to auth changes (e.g. when session restores)
+    const { data: subscription } = supabase.auth.onAuthStateChange(
+      async (_event, session) => {
+        const url = session?.user?.user_metadata?.avatar_url ?? null
+        setImage(url)
+      }
+    )
+
+    return () => {
+      subscription.subscription.unsubscribe()
+    }
   }, [])
 
   return image

@@ -1,12 +1,19 @@
 'use client'
 
+import { useEffect, useState } from 'react'
 import { useCurrentUserImage } from '@/hooks/use-current-user-image'
 import { useCurrentUserName } from '@/hooks/use-current-user-name'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 
-export const CurrentUserAvatar = () => {
-  const profileImage = useCurrentUserImage()
+export default function CurrentUserAvatar() {
+  const currentImage = useCurrentUserImage()
+  const [profile, setProfile] = useState<string | null>(null)
   const name = useCurrentUserName()
+
+  useEffect(() => {
+    setProfile(currentImage);
+  }, [currentImage]) // ← runs whenever the image changes
+
   const initials = name
     ?.split(' ')
     ?.map((word) => word[0])
@@ -15,7 +22,7 @@ export const CurrentUserAvatar = () => {
 
   return (
     <Avatar>
-      {profileImage && <AvatarImage src={profileImage} alt={initials} />}
+      <AvatarImage src={profile ?? undefined} alt={initials} />
       <AvatarFallback>{initials}</AvatarFallback>
     </Avatar>
   )
