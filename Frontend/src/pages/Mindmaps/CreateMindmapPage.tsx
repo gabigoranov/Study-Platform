@@ -23,25 +23,31 @@ import { LucideSave } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import dagre from "dagre";
 import { useTranslation } from "react-i18next";
 import { keys } from "@/types/keys";
+import { MindmapDTO } from "@/data/DTOs/MindmapDTO";
+import { Difficulty } from "@/data/Difficulty";
+import { MindmapEdgeDTO, MindmapNodeDTO } from "@/data/DTOs/GeneratedMindmapDTO";
+import { useVariableContext } from "@/context/VariableContext";
 
 interface CreateMindmapsPageProps {
   nodes: Node[];
   edges: Edge[];
-  handleSave: (nodes: Node[], edges: Edge[]) => void;
+  handleCreate: (data: MindmapDTO) => void;
   isInitialLayout: boolean | undefined;
 }
 
 export default function CreateMindmapPage({
   nodes: initialNodes,
   edges: initialEdges,
-  handleSave,
+  handleCreate,
   isInitialLayout,
 }: CreateMindmapsPageProps): JSX.Element {
   const { theme } = useTheme();
   const { t } = useTranslation();
+  const { selectedSubjectId, selectedGroupId } = useVariableContext();
 
   const [nodes, setNodes] = useState<Node[]>(initialNodes);
   const [edges, setEdges] = useState<Edge[]>(initialEdges);
@@ -52,6 +58,12 @@ export default function CreateMindmapPage({
   const [isInitialAlignment, setIsInitialAlignment] = useState<boolean>(
     isInitialLayout ?? false
   );
+  
+  // State for mindmap creation modal
+  const [showMindmapModal, setShowMindmapModal] = useState(false);
+  const [mindmapTitle, setMindmapTitle] = useState("");
+  const [mindmapDescription, setMindmapDescription] = useState("");
+  const [difficulty, setDifficulty] = useState<Difficulty>(Difficulty.Medium);
 
   const reactFlowInstance = useReactFlow();
 
@@ -138,7 +150,46 @@ export default function CreateMindmapPage({
   };
 
   const handleSaveClick = () => {
-    handleSave(nodes, edges);
+    // Show the modal to collect mindmap information
+    setShowMindmapModal(true);
+  };
+
+  // Handle the mindmap creation form submission
+  const handleMindmapSubmit = (e: FormEvent) => {
+    e.preventDefault();
+    
+    // Create MindmapDTO object with the collected information
+    const mindmapData: MindmapDTO = {
+      title: mindmapTitle,
+      description: mindmapDescription,
+      subjectId: selectedSubjectId || "", // Use selectedSubjectId from VariableContext
+      materialSubGroupId: selectedGroupId || "", // Use selectedGroupId from VariableContext
+      data: {
+        nodes: nodes.map(node => ({
+          id: node.id,
+          data: { label: node.data.label },
+          position: { x: node.position.x, y: node.position.y }
+        })) as MindmapNodeDTO[],
+        edges: edges.map(edge => ({
+          id: edge.id || `${edge.source}-${edge.target}`,
+          source: edge.source,
+          target: edge.target,
+          label: edge.data?.label || ""
+        }))  as MindmapEdgeDTO[]
+      },
+      difficulty: difficulty
+    };
+    
+    // Call the handleCreate function passed as prop
+    handleCreate(mindmapData);
+    
+    // Reset form and close modal
+    setMindmapTitle("");
+    setMindmapDescription("");
+    setDifficulty(Difficulty.Medium);
+    setShowMindmapModal(false);
+    
+    // Reset unsaved changes
     setHasUnsavedChanges(false);
   };
 
@@ -260,6 +311,66 @@ export default function CreateMindmapPage({
                   {t("Cancel")}
                 </Button>
                 <Button type="submit">{t(keys.place)}</Button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* Mindmap creation modal */}
+      {showMindmapModal && (
+        <div className="absolute inset-0 z-50 flex items-center justify-center bg-black/40">
+          <div className="w-96 p-5 rounded-xl bg-card text-card-foreground border border-border shadow-lg">
+            <h3 className="text-lg font-medium mb-3">{t("Create New Mindmap")}</h3>
+            <form onSubmit={handleMindmapSubmit} className="flex flex-col gap-3">
+              <div>
+                <Label className="text-sm">{t("Title")}</Label>
+                <Input
+                  value={mindmapTitle}
+                  onChange={(e) => setMindmapTitle(e.target.value)}
+                  placeholder={t("Enter mindmap title")}
+                  required
+                  autoFocus
+                />
+              </div>
+              <div>
+                <Label className="text-sm">{t("Description")}</Label>
+                <Input
+                  value={mindmapDescription}
+                  onChange={(e) => setMindmapDescription(e.target.value)}
+                  placeholder={t("Enter mindmap description")}
+                  required
+                />
+              </div>
+              <div>
+                <Label className="text-sm">{t("Difficulty")}</Label>
+                <Select 
+                  value={difficulty.toString()} 
+                  onValueChange={(value) => setDifficulty(Number(value) as Difficulty)}
+                >
+                  <SelectTrigger>
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value={Difficulty.Easy.toString()}>{t("Easy")}</SelectItem>
+                    <SelectItem value={Difficulty.Medium.toString()}>{t("Medium")}</SelectItem>
+                    <SelectItem value={Difficulty.Hard.toString()}>{t("Hard")}</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              <div className="flex justify-end gap-2 mt-4">
+                <Button
+                  type="button"
+                  variant="secondary"
+                  onClick={() => {
+                    setShowMindmapModal(false);
+                    setMindmapTitle("");
+                    setMindmapDescription("");
+                  }}
+                >
+                  {t("Cancel")}
+                </Button>
+                <Button type="submit">{t("Create Mindmap")}</Button>
               </div>
             </form>
           </div>

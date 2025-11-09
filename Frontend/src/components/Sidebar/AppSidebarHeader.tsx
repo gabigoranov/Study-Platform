@@ -16,7 +16,9 @@ export default function AppSidebarHeader({ items }: AppSidebarHeaderProps) {
   const { t } = useTranslation();
   return (
     <SidebarHeader className="py-4">
-      <AppLogo />
+      <Link to="/">
+        <AppLogo />
+      </Link>
       {items.length > 0 && (
         <AppSidebarMenu
           dropdownTitle={t(keys.selectSubject)}

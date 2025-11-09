@@ -92,7 +92,6 @@ export default function MindmapsDashboard() {
 
   // --- Handlers ---
   const handleCreate = (data: MindmapDTO) => {
-    console.log("creating");
     createMutation.mutate(data);
   };
 
@@ -148,7 +147,7 @@ export default function MindmapsDashboard() {
                 <CreateMindmapPage
                   nodes={[]}
                   edges={[]}
-                  handleSave={() => { } } 
+                  handleCreate={handleCreate} 
                   isInitialLayout={undefined}                
                 />
               </ReactFlowProvider>

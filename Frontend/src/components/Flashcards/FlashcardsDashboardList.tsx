@@ -38,14 +38,14 @@ export default function FlashcardsDashboardList({
 
   if (flashcards.length === 0) {
     return (
-      <div className="h-full flex justify-center items-center">
+      <div className="h-full flex justify-center items-left">
         <p className="p-8 text-center text-gray-500">{t(keys.noFlashcards)}</p>
       </div>
     );
   }
 
   return (
-    <div className="w-full flex flex-wrap gap-3 p-2 py-4 self-start justify-center overflow-x-hidden">
+    <div className="w-full flex flex-wrap gap-3 p-2 py-4 self-start justify-start overflow-x-hidden">
       {flashcards.map((element, idx) => (
         <FlashcardDashboardComponent
           onSelect={onSelect}

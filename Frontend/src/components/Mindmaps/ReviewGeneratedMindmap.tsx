@@ -14,6 +14,8 @@ import {
   MindmapNodeDTO,
 } from "@/data/DTOs/GeneratedMindmapDTO";
 import DifficultyTag from "../Common/DifficultyTag";
+import ViewMindmapPage from "@/pages/Mindmaps/ViewMindmapPage";
+import { MindmapDTO } from "@/data/DTOs/MindmapDTO";
 
 type ReviewGeneratedMindmapProps = {
   mindmap: GeneratedMindmapDTO;
@@ -55,15 +57,15 @@ export default function ReviewGeneratedMindmap({
     [data.edges]
   );
 
-  const handleSave = (updatedNodes: Node[], updatedEdges: Edge[]) => {
+  const handleSave = (mindmap: MindmapDTO) => {
     const updatedMindmap: GeneratedMindmapDTO = {
       ...data,
-      nodes: updatedNodes.map((n) => ({
+      nodes: mindmap.data.nodes.map((n) => ({
         id: n.id,
         data: { label: n.data.label as string },
         position: n.position,
       })),
-      edges: updatedEdges.map((e) => ({
+      edges: mindmap.data.edges.map((e) => ({
         id: e.id,
         source: e.source,
         target: e.target,
@@ -97,7 +99,7 @@ export default function ReviewGeneratedMindmap({
             <h1 className="text-2xl font-bold">{data.title}</h1>
             <DifficultyTag difficulty={data.difficulty} />
           </div>
-          <p className="text-gray-700 mt-1">{data.description}</p>
+          <p className="text-text-muted mt-1">{data.description}</p>
         </div>
 
         {/* Buttons */}
@@ -122,10 +124,10 @@ export default function ReviewGeneratedMindmap({
 
       {/* Mindmap Editor / Viewer */}
       <div className="flex-1 min-h-0">
-        <CreateMindmapPage
+        <ViewMindmapPage
           nodes={nodes}
           edges={edges}
-          handleSave={isEditing ? handleSave : () => {}}
+          handleSave={handleSave}
           isInitialLayout={true}
         />
       </div>

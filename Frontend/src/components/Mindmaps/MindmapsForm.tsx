@@ -68,7 +68,7 @@ export default function MindmapsForm({
       ...values,
       materialSubGroupId: model?.materialSubGroupId ?? selectedGroupId!,
       data: model?.data ?? { nodes: [], edges: [] },
-      subjectId: model?.subjectId ?? 0,
+      subjectId: model?.subjectId ?? '',
     });
   }
 

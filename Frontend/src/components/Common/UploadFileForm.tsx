@@ -80,7 +80,7 @@ export default function UploadFileForm({
         );
       case "generateMindmaps":
         return (
-          <div className="w-full flex flex-wrap gap-3 p-2 py-4 self-start justify-center overflow-x-hidden">
+          <div className="w-full flex flex-wrap gap-3 self-start justify-center overflow-x-hidden">
             <MindmapSkeleton />
           </div>
         );

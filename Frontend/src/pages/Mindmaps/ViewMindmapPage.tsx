@@ -34,19 +34,29 @@ import { useTranslation } from "react-i18next";
 import { keys } from "@/types/keys";
 
 interface ViewMindmapPageProps {
-  mindmap: MindmapDTO | undefined;
+  mindmap?: MindmapDTO;
+  nodes?: Node[];
+  edges?: Edge[];
   handleSave: (updatedMindmap: MindmapDTO) => void;
+  isInitialLayout?: boolean;
 }
 
 export default function ViewMindmapPage({
   mindmap,
+  nodes: initialNodes,
+  edges: initialEdges,
   handleSave,
+  isInitialLayout = false,
 }: ViewMindmapPageProps): JSX.Element {
   const { t } = useTranslation();
   
-  if (mindmap === undefined) {
+  // Determine if we have a mindmap object or separate nodes/edges
+  const hasMindmapObject = mindmap !== undefined;
+  
+  // If no mindmap is provided and no initial nodes/edges are provided, show error
+  if (!hasMindmapObject && (!initialNodes || !initialEdges)) {
     return (
-      <ErrorScreen label={t("Please select a mindmap before opening this page.")} />
+      <ErrorScreen label={t("Please provide either a mindmap object or initial nodes and edges.")} />
     );
   }
 
@@ -73,36 +83,73 @@ export default function ViewMindmapPage({
 
   // Convert ReactFlow format back to DTO format
   const convertToMindmapDTO = (nodes: Node[], edges: Edge[]): MindmapDTO => {
-    return {
-      ...mindmap,
-      data: {
-        nodes: nodes.map((node) => ({
-          id: node.id,
-          data: { label: node.data.label as string },
-          position: { x: node.position.x, y: node.position.y },
-        })),
-        edges: edges.map((edge) => ({
-          id: edge.id,
-          source: edge.source,
-          target: edge.target,
-          label: (edge.label as string) || "",
-        })),
-      },
-    };
+    if (hasMindmapObject && mindmap) {
+      // If we have a mindmap object, preserve its metadata
+      return {
+        ...mindmap,
+        data: {
+          nodes: nodes.map((node) => ({
+            id: node.id,
+            data: { label: node.data.label as string },
+            position: { x: node.position.x, y: node.position.y },
+          })),
+          edges: edges.map((edge) => ({
+            id: edge.id,
+            source: edge.source,
+            target: edge.target,
+            label: (edge.label as string) || "",
+          })),
+        },
+      };
+    } else {
+      // If we don't have a mindmap object, create a basic one with default values
+      return {
+        title: "Untitled Mindmap",
+        description: "Generated mindmap",
+        subjectId: "",
+        materialSubGroupId: "",
+        data: {
+          nodes: nodes.map((node) => ({
+            id: node.id,
+            data: { label: node.data.label as string },
+            position: { x: node.position.x, y: node.position.y },
+          })),
+          edges: edges.map((edge) => ({
+            id: edge.id,
+            source: edge.source,
+            target: edge.target,
+            label: (edge.label as string) || "",
+          })),
+        },
+        difficulty: 1, // Default to Medium difficulty
+      };
+    }
   };
 
+  // Initialize nodes and edges based on the input type
   const [nodes, setNodes] = useState<Node[]>(
-    convertToReactFlowNodes(mindmap.data.nodes)
+    hasMindmapObject && mindmap
+      ? convertToReactFlowNodes(mindmap.data.nodes)
+      : initialNodes || []
   );
+  
   const [edges, setEdges] = useState<Edge[]>(
-    convertToReactFlowEdges(mindmap.data.edges)
+    hasMindmapObject && mindmap
+      ? convertToReactFlowEdges(mindmap.data.edges)
+      : initialEdges || []
   );
+  
   const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
   const [showLabelModal, setShowLabelModal] = useState(false);
   const [newNodeLabel, setNewNodeLabel] = useState("");
   const [isPlacing, setIsPlacing] = useState(false);
+  const [isInitialAlignment, setIsInitialAlignment] = useState<boolean>(
+    isInitialLayout
+  );
 
   const reactFlowInstance = useReactFlow();
+
+  
 
   /* --------------------------
       ReactFlow handlers
@@ -221,6 +268,19 @@ export default function ViewMindmapPage({
     setHasUnsavedChanges(false);
   };
 
+  // Auto-align nodes on initial load when isInitialLayout is true
+  React.useEffect(() => {
+    if (isInitialAlignment && nodes.length > 0) {
+      // Small delay to ensure ReactFlow is ready
+      const timer = setTimeout(() => {
+        handleAutoLayout();
+        setIsInitialAlignment(false);
+      }, 100);
+
+      return () => clearTimeout(timer);
+    }
+  }, [isInitialAlignment, nodes.length, handleAutoLayout]);
+
   /* --------------------------
       Render
   --------------------------- */
@@ -230,7 +290,7 @@ export default function ViewMindmapPage({
       {/* Header with mindmap title */}
       <div className="absolute top-4 left-1/2 -translate-x-1/2 z-30 px-4 py-2 bg-card border border-border rounded-lg shadow-sm">
         <h1 className="text-lg font-semibold text-card-foreground">
-          {mindmap.title}
+          {hasMindmapObject && mindmap ? mindmap.title : "Mindmap Review"}
         </h1>
       </div>
 
