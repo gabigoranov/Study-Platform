@@ -37,7 +37,7 @@ const HowItWorks = () => {
   ];
 
   return (
-    <section className="py-24 px-4 bg-gradient-to-b from-surface to-background">
+    <section className="py-24 px-4 bg-gradient-to-b from-surface to-background" id="how-it-works">
       <div className="container mx-auto max-w-7xl">
         <div className="text-center mb-20">
           <div className="inline-block mb-4 px-4 py-2 bg-gradient-to-r from-primary/10 to-primary/5 rounded-full border border-primary/20">

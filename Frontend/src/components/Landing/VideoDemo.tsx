@@ -7,7 +7,7 @@ const VideoDemo = () => {
   const { t } = useTranslation();
 
   return (
-    <section className="py-20 px-4 bg-background">
+    <section className="py-20 px-4 bg-background" id="demo">
       <div className="section-container container mx-auto">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-12 animate-fade-in">

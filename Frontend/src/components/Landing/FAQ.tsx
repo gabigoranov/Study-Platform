@@ -46,7 +46,7 @@ const FAQ = () => {
   ];
 
   return (
-    <section className="py-20 px-4 bg-gradient-hero">
+    <section className="py-20 px-4 bg-gradient-hero" id="faq">
       <div className="section-container container mx-auto">
         <div className="max-w-3xl mx-auto">
           <div className="text-center mb-12 animate-fade-in">

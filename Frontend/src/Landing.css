@@ -2,6 +2,10 @@
   margin: 0 auto;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 .section-container {
   max-width: 1440px;
   padding: 2rem;

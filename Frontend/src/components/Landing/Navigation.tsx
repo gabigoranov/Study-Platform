@@ -5,6 +5,7 @@ import { ThemeToggle } from "../Common/ThemeToggle";
 import AppLogo from "../Common/AppLogo";
 import { useTranslation } from "react-i18next";
 import { keys } from "@/types/keys";
+import { Link } from "react-router-dom";
 
 const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -39,12 +40,19 @@ const Navigation = () => {
 
           {/* CTA Buttons - Desktop */}
           <div className="hidden md:flex items-center gap-4">
-            <Button variant="ghost" className="text-text-muted hover:text-text">
-              {t(keys.signIn)}
-            </Button>
-            <Button className="bg-primary text-primary-foreground hover:bg-primary/90">
-              {t(keys.getStarted)}
-            </Button>
+            <Link to="/login">
+              <Button
+                variant="ghost"
+                className="text-text-muted hover:text-text"
+              >
+                {t(keys.signIn)}
+              </Button>
+            </Link>
+            <Link to="/signup">
+              <Button className="bg-primary text-primary-foreground hover:bg-primary/90">
+                {t(keys.getStarted)}
+              </Button>
+            </Link>
           </div>
 
           {/* Mobile Menu Button */}
@@ -53,7 +61,11 @@ const Navigation = () => {
             className="md:hidden p-2 text-text-muted hover:text-text transition-colors"
             aria-label={t(keys.toggleMenu)}
           >
-            {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            {isMenuOpen ? (
+              <X className="w-6 h-6" />
+            ) : (
+              <Menu className="w-6 h-6" />
+            )}
           </button>
         </div>
 
@@ -72,12 +84,19 @@ const Navigation = () => {
                 </a>
               ))}
               <div className="flex flex-col gap-2 pt-4 border-t border-border">
-                <Button variant="ghost" className="text-text-muted hover:text-text w-full">
-                  {t(keys.signIn)}
-                </Button>
-                <Button className="bg-primary text-primary-foreground hover:bg-primary/90 w-full">
-                  {t(keys.getStarted)}
-                </Button>
+                <Link to="/login">
+                  <Button
+                    variant="ghost"
+                    className="text-text-muted hover:text-text w-full"
+                  >
+                    {t(keys.signIn)}
+                  </Button>
+                </Link>
+                <Link to="/signup">
+                  <Button className="bg-primary text-primary-foreground hover:bg-primary/90 w-full">
+                    {t(keys.getStarted)}
+                  </Button>
+                </Link>
               </div>
             </div>
           </div>
