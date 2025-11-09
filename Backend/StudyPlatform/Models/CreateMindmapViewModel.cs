@@ -16,10 +16,10 @@ namespace StudyPlatform.Models
         public string Description { get; set; }
 
         [Required]
-        public int SubjectId { get; set; }
+        public Guid SubjectId { get; set; }
 
         [Required]
-        public int MaterialSubGroupId { get; set; }
+        public Guid MaterialSubGroupId { get; set; }
 
         // JSONB column mapping
         [Column(TypeName = "jsonb")]

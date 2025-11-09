@@ -12,7 +12,10 @@ namespace StudyPlatform.Models.Common
         public AutoMapper() {
             // Include sub categories so AutoMapper maps their unique values.
             CreateMap<Material, MaterialDTO>()
-                .Include<Flashcard, FlashcardDTO>();
+            .Include<Flashcard, FlashcardDTO>()
+            .Include<Mindmap, MindmapDTO>()
+            .ForMember(dest => dest.SubjectId, opt => opt.MapFrom(x => x.MaterialSubGroup.SubjectId));
+
 
             //Flashcard mappings
             CreateMap<CreateFlashcardViewModel, Flashcard>().ReverseMap();
@@ -29,6 +32,7 @@ namespace StudyPlatform.Models.Common
             CreateMap<MaterialSubGroup, MaterialSubGroupDTO>().ReverseMap();
             CreateMap<Mindmap, CreateMindmapViewModel>().ReverseMap();
             CreateMap<Mindmap, MindmapDTO>().ReverseMap();
+
         }
     }
 }

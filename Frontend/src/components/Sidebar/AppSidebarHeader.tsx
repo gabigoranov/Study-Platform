@@ -10,17 +10,20 @@ import AppLogo from "../Common/AppLogo";
 
 type AppSidebarHeaderProps = {
   items: Subject[];
-}
+};
 
-export default function AppSidebarHeader({items} : AppSidebarHeaderProps) {
+export default function AppSidebarHeader({ items }: AppSidebarHeaderProps) {
   const { t } = useTranslation();
-    return (
-      <SidebarHeader className="py-4">
-        <AppLogo />
-        {items.length > 0 && <AppSidebarMenu 
+  return (
+    <SidebarHeader className="py-4">
+      <AppLogo />
+      {items.length > 0 && (
+        <AppSidebarMenu
           dropdownTitle={t(keys.selectSubject)}
           dropdownTitleIcon={ChevronDown}
-          items={items} />}
-      </SidebarHeader>  
-    )
+          items={items}
+        />
+      )}
+    </SidebarHeader>
+  );
 }

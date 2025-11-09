@@ -9,5 +9,6 @@
         /// A type for flashcards.
         /// </summary>
         Flashcards = 1,
+        Mindmaps = 2,
     }
 }

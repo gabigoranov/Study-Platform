@@ -1,9 +1,10 @@
 ﻿using System;
+using System.Text.Json;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace StudyPlatform.Migrations
+namespace StudyPlatform.Migrations.SupabaseDb
 {
     /// <inheritdoc />
     public partial class Init : Migration
@@ -15,11 +16,10 @@ namespace StudyPlatform.Migrations
                 name: "Subjects",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Title = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
-                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    DateCreated = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false)
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    Title = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: false),
+                    UserId = table.Column<Guid>(type: "uuid", nullable: false),
+                    DateCreated = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -30,12 +30,11 @@ namespace StudyPlatform.Migrations
                 name: "MaterialSubGroups",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Title = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
-                    MaterialGroupType = table.Column<int>(type: "int", nullable: false),
-                    SubjectId = table.Column<int>(type: "int", nullable: false),
-                    DateCreated = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false)
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    Title = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: false),
+                    MaterialGroupType = table.Column<int>(type: "integer", nullable: false),
+                    SubjectId = table.Column<Guid>(type: "uuid", nullable: false),
+                    DateCreated = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -52,14 +51,17 @@ namespace StudyPlatform.Migrations
                 name: "Materials",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Title = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
-                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    MaterialSubGroupId = table.Column<int>(type: "int", nullable: false),
-                    MaterialType = table.Column<string>(type: "nvarchar(13)", maxLength: 13, nullable: false),
-                    Front = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Back = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    Title = table.Column<string>(type: "character varying(30)", maxLength: 30, nullable: false),
+                    UserId = table.Column<Guid>(type: "uuid", nullable: false),
+                    DateCreated = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
+                    MaterialSubGroupId = table.Column<Guid>(type: "uuid", nullable: false),
+                    Difficulty = table.Column<int>(type: "integer", nullable: false),
+                    MaterialType = table.Column<string>(type: "character varying(13)", maxLength: 13, nullable: false),
+                    Front = table.Column<string>(type: "text", nullable: true),
+                    Back = table.Column<string>(type: "text", nullable: true),
+                    Description = table.Column<string>(type: "character varying(400)", maxLength: 400, nullable: true),
+                    Data = table.Column<JsonDocument>(type: "jsonb", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -76,6 +78,11 @@ namespace StudyPlatform.Migrations
                 name: "IX_Materials_MaterialSubGroupId",
                 table: "Materials",
                 column: "MaterialSubGroupId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Materials_UserId",
+                table: "Materials",
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_MaterialSubGroups_SubjectId",

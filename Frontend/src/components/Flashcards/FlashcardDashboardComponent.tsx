@@ -7,7 +7,7 @@ import { motion } from "motion/react";
 
 type FlashcardDashboardProps = {
   flashcard: Flashcard;
-  onSelect: (id: number) => void;
+  onSelect: (id: string) => void;
   isSelected: boolean;
 };
 

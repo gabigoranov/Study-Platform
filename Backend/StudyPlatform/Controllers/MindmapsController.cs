@@ -43,7 +43,7 @@ namespace StudyPlatform.Controllers
         /// </summary>
         /// <returns>A list of mindmaps if successful.</returns>
         [HttpGet("group/{subGroupId}")]
-        public async Task<IActionResult> GetAllFromGroup([FromRoute] int subGroupId, [FromQuery] int subjectId)
+        public async Task<IActionResult> GetAllFromGroup([FromRoute] Guid subGroupId, [FromQuery] Guid subjectId)
         {
             // Load userId from JWT token
             Guid userId = User.GetUserId();

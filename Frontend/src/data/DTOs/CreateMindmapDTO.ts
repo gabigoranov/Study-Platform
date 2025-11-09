@@ -4,8 +4,8 @@ import { MindmapEdgeDTO, MindmapNodeDTO } from "./GeneratedMindmapDTO";
 export interface CreateMindmapDTO {
   title: string;
   description: string;
-  subjectId: number;
-  materialSubGroupId: number;
+  subjectId: string;
+  materialSubGroupId: string;
   data: {
     nodes: MindmapNodeDTO[];
     edges: MindmapEdgeDTO[];

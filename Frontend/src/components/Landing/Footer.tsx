@@ -32,7 +32,7 @@ const Footer = () => {
           </div>
 
           {/* Product */}
-          <div className="text-right">
+          <div className="md:text-right">
             <h3 className="font-semibold text-text mb-4">{t(keys.product)}</h3>
             <ul className="space-y-2">
               <li>
@@ -71,7 +71,7 @@ const Footer = () => {
           </div>
 
           {/* Company */}
-          <div className="text-right">
+          <div className="md:text-right">
             <h3 className="font-semibold text-text mb-4">{t(keys.company)}</h3>
             <ul className="space-y-2">
               <li>
@@ -110,7 +110,7 @@ const Footer = () => {
           </div>
 
           {/* Legal */}
-          <div className="text-right">
+          <div className="md:text-right">
             <h3 className="font-semibold text-text mb-4">{t(keys.legal)}</h3>
             <ul className="space-y-2">
               <li>

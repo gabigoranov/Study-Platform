@@ -47,10 +47,10 @@ namespace StudyPlatform.Controllers
         /// </summary>
         /// <param name="id">The subject ID.</param>
         /// <returns>The subject if found.</returns>
-        [HttpGet("{id:int}")]
+        [HttpGet("{id}")]
         [ProducesResponseType(typeof(SubjectDto), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> GetSubject(int id)
+        public async Task<IActionResult> GetSubject(Guid id)
         {
             // Load userId from JWT token
             Guid userId = User.GetUserId();
@@ -83,10 +83,10 @@ namespace StudyPlatform.Controllers
         /// </summary>
         /// <param name="id">The subject ID.</param>
         /// <returns>No content if deleted.</returns>
-        [HttpDelete("{id:int}")]
+        [HttpDelete("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> DeleteSubject(int id)
+        public async Task<IActionResult> DeleteSubject(Guid id)
         {
             // Load userId from JWT token
             Guid userId = User.GetUserId();

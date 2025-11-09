@@ -19,13 +19,13 @@ namespace StudyPlatform.Tests.Helpers
         {
             new Subject
             {
-                Id = 1,
+                Id = Guid.NewGuid(),
                 Title = "Math",
                 UserId = Guid.NewGuid()
             },
             new Subject
             {
-                Id = 2,
+                Id = Guid.NewGuid(),
                 Title = "History",
                 UserId = Guid.NewGuid()
             }
@@ -36,19 +36,19 @@ namespace StudyPlatform.Tests.Helpers
         {
             new MaterialSubGroup
             {
-                Id = 1,
+                Id = Guid.NewGuid(),
                 Title = "Algebra",
                 MaterialGroupType = Data.Types.MaterialGroupType.Flashcards,
-                SubjectId = 1,
-                Subject = Subjects.First(s => s.Id == 1)
+                SubjectId = Subjects.First().Id,
+                Subject = Subjects.First(),
             },
             new MaterialSubGroup
             {
-                Id = 2,
+                Id = Guid.NewGuid(),
                 Title = "World War II",
                 MaterialGroupType = Data.Types.MaterialGroupType.Flashcards,
-                SubjectId = 2,
-                Subject = Subjects.First(s => s.Id == 2)
+                SubjectId = Subjects[1].Id,
+                Subject = Subjects[1]
             }
         };
 
@@ -71,24 +71,24 @@ namespace StudyPlatform.Tests.Helpers
         {
             new Flashcard
             {
-                Id = 1,
+                Id = Guid.NewGuid(),
                 Title = "Quadratic Formula",
                 Front = "What is the quadratic formula?",
                 Back = "x = (-b ± √(b²-4ac))/(2a)",
                 UserId = Guid.NewGuid(),
-                MaterialSubGroupId = 1,
-                MaterialSubGroup = SubGroups.First(sg => sg.Id == 1),
+                MaterialSubGroupId = SubGroups[0].Id,
+                MaterialSubGroup = SubGroups[0],
                 Difficulty = Difficulty.Medium
             },
             new Flashcard
             {
-                Id = 2,
+                Id = Guid.NewGuid(),
                 Title = "WWII Start",
                 Front = "When did World War II start?",
                 Back = "1939",
                 UserId = Guid.NewGuid(),
-                MaterialSubGroupId = 2,
-                MaterialSubGroup = SubGroups.First(sg => sg.Id == 2),
+                MaterialSubGroupId = SubGroups[1].Id,
+                MaterialSubGroup = SubGroups[1],
                 Difficulty = Difficulty.Easy
             }
         };

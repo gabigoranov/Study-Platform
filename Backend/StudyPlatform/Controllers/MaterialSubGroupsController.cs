@@ -31,9 +31,9 @@ namespace StudyPlatform.Controllers
         /// <param name="subjectId">The subject ID.</param>
         /// <param name="includeMaterials">Whether or not to include the materials in each group.</param>
         /// <returns>A list of subgroups.</returns>
-        [HttpGet("subject/{subjectId:int}")]
+        [HttpGet("subject/{subjectId}")]
         [ProducesResponseType(typeof(IEnumerable<MaterialSubGroupDTO>), StatusCodes.Status200OK)]
-        public async Task<IActionResult> GetBySubject(int subjectId, [FromQuery] bool includeMaterials = false)
+        public async Task<IActionResult> GetBySubject(Guid subjectId, [FromQuery] bool includeMaterials = false)
         {
             Guid userId = User.GetUserId();
             var subGroups = await _service.GetSubGroupsBySubjectAsync(subjectId, userId, includeMaterials);
@@ -45,10 +45,10 @@ namespace StudyPlatform.Controllers
         /// </summary>
         /// <param name="id">The subgroup ID.</param>
         /// <returns>The subgroup if found.</returns>
-        [HttpGet("{id:int}")]
+        [HttpGet("{id}")]
         [ProducesResponseType(typeof(MaterialSubGroupDTO), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> Get(int id)
+        public async Task<IActionResult> Get(Guid id)
         {
             Guid userId = User.GetUserId();
             var subGroup = await _service.GetSubGroupByIdAsync(id, userId);
@@ -75,10 +75,10 @@ namespace StudyPlatform.Controllers
         /// </summary>
         /// <param name="id">The subgroup ID.</param>
         /// <returns>No content if deleted.</returns>
-        [HttpDelete("{id:int}")]
+        [HttpDelete("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> Delete(Guid id)
         {
             Guid userId = User.GetUserId();
             var deleted = await _service.DeleteSubGroupAsync(id, userId);

@@ -53,7 +53,7 @@ namespace StudyPlatformTests
                 Front = "Q: What is 2+2?",
                 Back = "A: 4",
                 UserId = userId,
-                MaterialSubGroupId = 1,
+                MaterialSubGroupId = TestData.SubGroups[0].Id,
                 Difficulty = Difficulty.Easy
             };
 
@@ -98,7 +98,7 @@ namespace StudyPlatformTests
                 Front = "Q: What is 2+2?",
                 Back = "A: 4",
                 UserId = userId,
-                MaterialSubGroupId = 1,
+                MaterialSubGroupId = TestData.SubGroups[0].Id,
                 Difficulty = Difficulty.Easy
             };
 
@@ -109,7 +109,7 @@ namespace StudyPlatformTests
             _repoMock.Setup(r => r.SaveChangesAsync()).ReturnsAsync(1);
 
             // Act
-            FlashcardDTO result = await _service.UpdateAsync(createViewModel, userId, 1);
+            FlashcardDTO result = await _service.UpdateAsync(createViewModel, userId, id);
 
             // Assert
             Assert.NotNull(result);
@@ -123,7 +123,7 @@ namespace StudyPlatformTests
         public async Task UpdateAsync_WithNullModel_ThrowsException()
         {
             // Act & Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(() => _service.UpdateAsync(null, Guid.NewGuid(), 1));
+            await Assert.ThrowsAsync<ArgumentNullException>(() => _service.UpdateAsync(null, Guid.NewGuid(), Guid.NewGuid()));
 
             _repoMock.Verify(r => r.AddAsync(It.IsAny<Flashcard>()), Times.Never);
             _repoMock.Verify(r => r.SaveChangesAsync(), Times.Never);
@@ -152,7 +152,7 @@ namespace StudyPlatformTests
         public async Task GetAsync_WithInvalidData_ThrowsAnException()
         {
             //Arrange
-            var id = 999; // Non-existent ID
+            var id = Guid.NewGuid(); // Non-existent ID
             var userId = Guid.NewGuid(); // Non-existent UserId
             
             // Act & Assert
@@ -165,7 +165,7 @@ namespace StudyPlatformTests
         public async Task DeleteAsync_WithValidData_Completes()
         {
             // Arrange
-            int[] ids = [TestData.Flashcards.First().Id];
+            Guid[] ids = [TestData.Flashcards.First().Id];
             var userId = TestData.Flashcards.First().UserId;
 
             _repoMock.Setup(r => r.ExecuteDeleteAsync<Flashcard>(It.IsAny<Expression<Func<Flashcard, bool>>>()))
@@ -189,7 +189,7 @@ namespace StudyPlatformTests
 
             // Act
             await Assert.ThrowsAsync<KeyNotFoundException>(() => _service.DeleteAsync(null, userId));
-            await Assert.ThrowsAsync<ArgumentNullException>(() => _service.DeleteAsync([1], Guid.Empty));
+            await Assert.ThrowsAsync<ArgumentNullException>(() => _service.DeleteAsync([Guid.Empty], Guid.Empty));
 
             // Assert
             _repoMock.Verify(r => r.All<Flashcard>(), Times.Never);
@@ -255,7 +255,7 @@ namespace StudyPlatformTests
             var userId = TestData.Flashcards.First().UserId;
 
             // Act & Assert
-            await Assert.ThrowsAsync<ArgumentOutOfRangeException>(() => _service.GetAllAsync(userId, -1));
+            await Assert.ThrowsAsync<ArgumentOutOfRangeException>(() => _service.GetAllAsync(userId, Guid.Empty));
             await Assert.ThrowsAsync<ArgumentNullException>(() => _service.GetAllAsync(Guid.Empty));
 
             _repoMock.Verify(r => r.AllReadonly<Flashcard>(), Times.Never);
@@ -274,7 +274,7 @@ namespace StudyPlatformTests
                     Title = "Test Card",
                     Front = "Q: What is 2+2?",
                     Back = "A: 4",
-                    MaterialSubGroupId = 1,
+                    MaterialSubGroupId = TestData.Subjects[0].Id,
                     Difficulty = Difficulty.Easy,
                     UserId = userId
                 }

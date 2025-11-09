@@ -1,7 +1,7 @@
 import { MaterialSubGroup } from "./MaterialSubGroup";
 
 export type Subject = {
-    id: number;
+    id: string;
     title: string;
     userId: string;
     dateCreated: Date;

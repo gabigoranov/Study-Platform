@@ -66,9 +66,9 @@ namespace StudyPlatform.Services.Subjects
 
 
         /// <inheritdoc />
-        public async Task<SubjectDto> GetSubjectByIdAsync(int id, Guid userId)
+        public async Task<SubjectDto> GetSubjectByIdAsync(Guid id, Guid userId)
         {
-            if (id < 0) throw new ArgumentException("SubjectId can not be less than zero.");
+            if (id == Guid.Empty) throw new ArgumentException("SubjectId can not be less than zero.");
             if (userId == Guid.Empty) throw new ArgumentNullException("UserId can not be null or empty.");
 
             try
@@ -136,9 +136,9 @@ namespace StudyPlatform.Services.Subjects
         }
 
         /// <inheritdoc />
-        public async Task<bool> DeleteSubjectAsync(int id, Guid userId)
+        public async Task<bool> DeleteSubjectAsync(Guid id, Guid userId)
         {
-            if (id < 0) throw new ArgumentException("SubjectId can not be less than zero.");
+            if (id == Guid.Empty) throw new ArgumentException("SubjectId can not be less than zero.");
             if (userId == Guid.Empty) throw new ArgumentNullException("UserId can not be null or empty.");
 
             try

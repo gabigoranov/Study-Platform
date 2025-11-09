@@ -8,8 +8,8 @@ import ViewFlashcardSkeleton from "./ViewFlashcardSkeleton";
 
 interface FlashcardsDashboardListProps {
   flashcards: Flashcard[];
-  onSelect: (id: number) => void;
-  selectedId: number | null;
+  onSelect: (id: string) => void;
+  selectedId: string | null;
   loading?: boolean;
 }
 

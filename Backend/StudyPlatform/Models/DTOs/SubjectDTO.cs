@@ -8,7 +8,7 @@
         /// <summary>
         /// The unique identifier of the subject.
         /// </summary>
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         /// <summary>
         /// The title of the subject.

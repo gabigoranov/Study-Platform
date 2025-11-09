@@ -21,8 +21,8 @@ export default function AppSidebarMenu({dropdownTitle, dropdownTitleIcon: Dropdo
       <SidebarMenu>
         <SidebarMenuItem>
           <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <SidebarMenuButton>
+            <DropdownMenuTrigger asChild className="bg-background-muted">
+              <SidebarMenuButton >
                 {selectedSubjectId
                   ? items.find((item) => item.id == selectedSubjectId)?.title
                   : dropdownTitle}

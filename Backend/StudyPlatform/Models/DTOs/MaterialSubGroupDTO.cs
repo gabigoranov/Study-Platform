@@ -10,7 +10,7 @@ namespace StudyPlatform.Models.DTOs
         /// <summary>
         /// The unique identifier of the material subgroup.
         /// </summary>
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         /// <summary>
         /// The title of the subgroup.
@@ -25,7 +25,7 @@ namespace StudyPlatform.Models.DTOs
         /// <summary>
         /// The ID of the subject this subgroup belongs to.
         /// </summary>
-        public int SubjectId { get; set; }
+        public Guid SubjectId { get; set; }
 
         /// <summary>
         /// The UTC date when this subgroup was created.

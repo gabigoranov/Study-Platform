@@ -5,8 +5,8 @@ export interface Mindmap {
   id: string; // Guid
   title: string;
   description: string;
-  subjectId: number;
-  materialSubGroupId: number;
+  subjectId: string;
+  materialSubGroupId: string;
   userId: string; // UUID from Supabase auth
   data: {
     nodes: MindmapNodeDTO[];

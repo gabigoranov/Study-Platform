@@ -10,7 +10,7 @@ namespace StudyPlatform.Data.Models
     public class MaterialSubGroup
     {
         [Key]
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         [Required]
         [MaxLength(20)]
@@ -21,7 +21,7 @@ namespace StudyPlatform.Data.Models
 
         [Required]
         [ForeignKey(nameof(Models.Subject))]
-        public int SubjectId { get; set; }
+        public Guid SubjectId { get; set; }
 
         public virtual Subject Subject { get; set; }
 

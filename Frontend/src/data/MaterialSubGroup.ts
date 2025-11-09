@@ -1,9 +1,9 @@
 import { Material } from "./Material";
 
 export type MaterialSubGroup = {
-    id: number;
+    id: string;
     title: string;
-    subjectId: number;
+    subjectId: string;
     materialGroupType: string;
     dateCreated: Date;
     materials: Material[];

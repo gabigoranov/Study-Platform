@@ -24,7 +24,7 @@ namespace StudyPlatform.Services.Mindmaps
         /// <param name="subGroupId"></param>
         /// <param name="subjectId"></param>
         /// <returns></returns>
-        public Task<IEnumerable<MindmapDTO>> GetAllAsync(Guid userId, int? subGroupId, int? subjectId);
+        public Task<IEnumerable<MindmapDTO>> GetAllAsync(Guid userId, Guid? subGroupId, Guid? subjectId);
 
         /// <summary>
         /// Generates a set of mindmaps from the provided model.

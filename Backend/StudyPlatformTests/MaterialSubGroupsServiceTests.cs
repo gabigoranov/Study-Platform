@@ -45,7 +45,7 @@ namespace StudyPlatformTests
         public async Task GetSubGroupsBySubjectAsync_WithValidData_ReturnsMaterialSubGroupDTOs()
         {
             // Arrange
-            var subjectId = 1;
+            var subjectId = TestData.Subjects[0].Id;
             var userId = TestData.Subjects.First(s => s.Id == subjectId).UserId;
             var includeMaterials = false;
 
@@ -66,7 +66,7 @@ namespace StudyPlatformTests
         public async Task GetSubGroupsBySubjectAsync_WithIncludedMaterials_ReturnsMaterialSubGroupDTOs()
         {
             // Arrange
-            var subjectId = 1;
+            var subjectId = TestData.Subjects[0].Id;
             var userId = TestData.Subjects.First(s => s.Id == subjectId).UserId;
             var includeMaterials = true;
 
@@ -86,8 +86,8 @@ namespace StudyPlatformTests
         public async Task GetSubGroupsBySubjectAsync_WithInvalidProps_ThrowsException()
         {
             // Act & Assert
-            await Assert.ThrowsAsync<ArgumentException>(() => _service.GetSubGroupsBySubjectAsync(-1, Guid.Empty));
-            await Assert.ThrowsAsync<ArgumentNullException>(() => _service.GetSubGroupsBySubjectAsync(1, Guid.Empty));
+            await Assert.ThrowsAsync<ArgumentException>(() => _service.GetSubGroupsBySubjectAsync(Guid.Empty, Guid.Empty));
+            await Assert.ThrowsAsync<ArgumentNullException>(() => _service.GetSubGroupsBySubjectAsync(Guid.Empty, Guid.Empty));
 
             _repoMock.Verify(r => r.AllReadonly<MaterialSubGroup>(), Times.Never);
         }
@@ -116,8 +116,8 @@ namespace StudyPlatformTests
         public async Task GetSubGroupById_WithInvalidProps_ThrowsException()
         {
             // Act & Assert
-            await Assert.ThrowsAsync<ArgumentException>(() => _service.GetSubGroupByIdAsync(-1, Guid.Empty));
-            await Assert.ThrowsAsync<ArgumentNullException>(() => _service.GetSubGroupByIdAsync(1, Guid.Empty));
+            await Assert.ThrowsAsync<ArgumentException>(() => _service.GetSubGroupByIdAsync(Guid.Empty, Guid.Empty));
+            await Assert.ThrowsAsync<ArgumentNullException>(() => _service.GetSubGroupByIdAsync(Guid.Empty, Guid.Empty));
 
             _repoMock.Verify(r => r.AllReadonly<MaterialSubGroup>(), Times.Never);
         }
@@ -185,7 +185,7 @@ namespace StudyPlatformTests
         public async Task DeleteSubGroupAsync_ValidData_ReturnsTrue()
         {
             // Arrange
-            int id = TestData.SubGroups.First().Id;
+            var id = TestData.SubGroups.First().Id;
             var userId = TestData.SubGroups.First().Subject.UserId;
 
             // Act & Assert
@@ -200,8 +200,8 @@ namespace StudyPlatformTests
         public async Task DeleteSubGroupsAsync_WithInvalidProps_ThrowsException()
         {
            // Act & Assert
-            await Assert.ThrowsAsync<ArgumentException>(() => _service.DeleteSubGroupAsync(-1, Guid.Empty));
-            await Assert.ThrowsAsync<ArgumentNullException>(() => _service.DeleteSubGroupAsync(1, Guid.Empty));
+            await Assert.ThrowsAsync<ArgumentException>(() => _service.DeleteSubGroupAsync(Guid.Empty, Guid.Empty));
+            await Assert.ThrowsAsync<ArgumentNullException>(() => _service.DeleteSubGroupAsync(Guid.Empty, Guid.Empty));
 
             _repoMock.Verify(r => r.AllReadonly<MaterialSubGroup>(), Times.Never);
             _repoMock.Verify(r => r.DeleteAsync<MaterialSubGroup>(It.IsAny<MaterialSubGroup>()), Times.Never);
@@ -213,7 +213,7 @@ namespace StudyPlatformTests
         {
 
             // Arrange
-            int id = TestData.SubGroups.First().Id;
+            var id = TestData.SubGroups.First().Id;
             var userId = Guid.NewGuid(); // Different user ( Unauthorized )
 
             // Act & Assert

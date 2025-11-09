@@ -21,10 +21,6 @@ builder.Services.AddAutoMapper(typeof(Program));
 
 var connectionString = builder.Configuration.GetConnectionString("Default");
 
-builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlServer(connectionString));
-
-
 builder.Services.AddDbContext<SupabaseDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("SupabaseConnection")));
 
@@ -79,8 +75,7 @@ builder.Services.AddHttpClient<APIClient>(client =>
 
 builder.Services.AddControllers();
 
-builder.Services.AddScoped<IRepository, Repository>();
-builder.Services.AddScoped<SupabaseRepository>();
+builder.Services.AddScoped<IRepository, SupabaseRepository>();
 
 builder.Services.AddScoped<IFlashcardsService, FlashcardsService>();
 builder.Services.AddScoped<ISubjectsService, SubjectsService>();

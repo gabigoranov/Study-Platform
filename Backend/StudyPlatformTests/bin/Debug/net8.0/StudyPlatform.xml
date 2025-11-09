@@ -29,7 +29,7 @@
             <param name="model">The model for the flashcard created by the user.</param>
             <returns>A new flashcard if successful.</returns>
         </member>
-        <member name="M:StudyPlatform.Controllers.FlashcardsController.Get(System.Int32)">
+        <member name="M:StudyPlatform.Controllers.FlashcardsController.Get(System.Guid)">
             <summary>
             Endpoint for getting a flashcard by it's ID.
             </summary>
@@ -42,13 +42,13 @@
             </summary>
             <returns>A list of flashcards if successful.</returns>
         </member>
-        <member name="M:StudyPlatform.Controllers.FlashcardsController.GetAllFromGroup(System.Int32,System.Int32)">
+        <member name="M:StudyPlatform.Controllers.FlashcardsController.GetAllFromGroup(System.Guid,System.Guid)">
             <summary>
             Endpoint for getting all flashcards that the user owns in a certain group.
             </summary>
             <returns>A list of flashcards if successful.</returns>
         </member>
-        <member name="M:StudyPlatform.Controllers.FlashcardsController.Update(StudyPlatform.Models.CreateFlashcardViewModel,System.Int32)">
+        <member name="M:StudyPlatform.Controllers.FlashcardsController.Update(StudyPlatform.Models.CreateFlashcardViewModel,System.Guid)">
             <summary>
             Endpoint for updating a specific flashcard that the user owns.
             </summary>
@@ -56,7 +56,7 @@
             <param name="id">The id of the flashcard.</param>
             <returns>An edited flashcard if successful.</returns>
         </member>
-        <member name="M:StudyPlatform.Controllers.FlashcardsController.Delete(System.Int32[])">
+        <member name="M:StudyPlatform.Controllers.FlashcardsController.Delete(System.Guid[])">
             <summary>
             Endpoint for deleting an array of flashcards by their IDs.
             </summary>
@@ -81,7 +81,7 @@
             </summary>
             <param name="service">The service DI.</param>
         </member>
-        <member name="M:StudyPlatform.Controllers.MaterialSubGroupsController.GetBySubject(System.Int32,System.Boolean)">
+        <member name="M:StudyPlatform.Controllers.MaterialSubGroupsController.GetBySubject(System.Guid,System.Boolean)">
             <summary>
             Gets all material subgroups for a subject.
             </summary>
@@ -89,7 +89,7 @@
             <param name="includeMaterials">Whether or not to include the materials in each group.</param>
             <returns>A list of subgroups.</returns>
         </member>
-        <member name="M:StudyPlatform.Controllers.MaterialSubGroupsController.Get(System.Int32)">
+        <member name="M:StudyPlatform.Controllers.MaterialSubGroupsController.Get(System.Guid)">
             <summary>
             Gets a single material subgroup by ID.
             </summary>
@@ -103,7 +103,7 @@
             <param name="model">The subgroup creation model.</param>
             <returns>The created subgroup.</returns>
         </member>
-        <member name="M:StudyPlatform.Controllers.MaterialSubGroupsController.Delete(System.Int32)">
+        <member name="M:StudyPlatform.Controllers.MaterialSubGroupsController.Delete(System.Guid)">
             <summary>
             Deletes a material subgroup by ID.
             </summary>
@@ -120,13 +120,13 @@
             Initializes the MindmapsController and injects dependencies.
             </summary>
         </member>
-        <member name="M:StudyPlatform.Controllers.MindmapsController.GetAllFromGroup(System.Int32,System.Int32)">
+        <member name="M:StudyPlatform.Controllers.MindmapsController.GetAllFromGroup(System.Guid,System.Guid)">
             <summary>
             Endpoint for getting all mindmaps that the user owns in a certain group.
             </summary>
             <returns>A list of mindmaps if successful.</returns>
         </member>
-        <member name="M:StudyPlatform.Controllers.MindmapsController.Update(StudyPlatform.Models.CreateMindmapViewModel,System.Int32)">
+        <member name="M:StudyPlatform.Controllers.MindmapsController.Update(StudyPlatform.Models.CreateMindmapViewModel,System.Guid)">
             <summary>
             Endpoint for updating a specific mindmap that the user owns.
             </summary>
@@ -134,7 +134,7 @@
             <param name="id">The id of the mindmap.</param>
             <returns>An edited mindmap if successful.</returns>
         </member>
-        <member name="M:StudyPlatform.Controllers.MindmapsController.Delete(System.Int32[])">
+        <member name="M:StudyPlatform.Controllers.MindmapsController.Delete(System.Guid[])">
             <summary>
             Endpoint for deleting an array of mindmaps by their IDs.
             </summary>
@@ -160,7 +160,7 @@
             <param name="includeGroupsSummary">Whether or not to include material sub groups without their materials.</param>
             <returns>A list of subjects.</returns>
         </member>
-        <member name="M:StudyPlatform.Controllers.SubjectsController.GetSubject(System.Int32)">
+        <member name="M:StudyPlatform.Controllers.SubjectsController.GetSubject(System.Guid)">
             <summary>
             Gets a single subject by ID.
             </summary>
@@ -174,7 +174,7 @@
             <param name="model">The subject creation model.</param>
             <returns>The created subject.</returns>
         </member>
-        <member name="M:StudyPlatform.Controllers.SubjectsController.DeleteSubject(System.Int32)">
+        <member name="M:StudyPlatform.Controllers.SubjectsController.DeleteSubject(System.Guid)">
             <summary>
             Deletes a subject by ID.
             </summary>
@@ -274,99 +274,6 @@
             Saves all made changes in trasaction
             </summary>
             <returns>Error code</returns>
-        </member>
-        <member name="T:StudyPlatform.Data.Common.Repository">
-            <summary>
-            Implementation of repository access methods
-            for Relational Database Engine
-            </summary>
-            <typeparam name="T">Type of the data table to which 
-            current reposity is attached</typeparam>
-        </member>
-        <member name="P:StudyPlatform.Data.Common.Repository.Context">
-            <summary>
-            Entity framework DB context holding connection information and properties
-            and tracking entity states 
-            </summary>
-        </member>
-        <member name="M:StudyPlatform.Data.Common.Repository.DbSet``1">
-            <summary>
-            Representation of table in database
-            </summary>
-        </member>
-        <member name="M:StudyPlatform.Data.Common.Repository.AddAsync``1(``0)">
-            <summary>
-            Adds entity to the database
-            </summary>
-            <param name="entity">Entity to add</param>
-        </member>
-        <member name="M:StudyPlatform.Data.Common.Repository.AddRangeAsync``1(System.Collections.Generic.IEnumerable{``0})">
-            <summary>
-            Ads collection of entities to the database
-            </summary>
-            <param name="entities">Enumerable list of entities</param>
-        </member>
-        <member name="M:StudyPlatform.Data.Common.Repository.All``1">
-            <summary>
-            All records in a table
-            </summary>
-            <returns>Queryable expression tree</returns>
-        </member>
-        <member name="M:StudyPlatform.Data.Common.Repository.AllReadonly``1">
-            <summary>
-            The result collection won't be tracked by the context
-            </summary>
-            <returns>Expression tree</returns>
-        </member>
-        <member name="M:StudyPlatform.Data.Common.Repository.DeleteAsync``1(System.Object)">
-            <summary>
-            Deletes a record from database
-            </summary>
-            <param name="id">Identificator of record to be deleted</param>
-        </member>
-        <member name="M:StudyPlatform.Data.Common.Repository.Delete``1(``0)">
-            <summary>
-            Deletes a record from database
-            </summary>
-            <param name="entity">Entity representing record to be deleted</param>
-        </member>
-        <member name="M:StudyPlatform.Data.Common.Repository.Detach``1(``0)">
-            <summary>
-            Detaches given entity from the context
-            </summary>
-            <param name="entity">Entity to be detached</param>
-        </member>
-        <member name="M:StudyPlatform.Data.Common.Repository.Dispose">
-            <summary>
-            Disposing the context when it is not neede
-            Don't have to call this method explicitely
-            Leave it to the IoC container
-            </summary>
-        </member>
-        <member name="M:StudyPlatform.Data.Common.Repository.GetByIdAsync``1(System.Object)">
-            <summary>
-            Gets specific record from database by primary key
-            </summary>
-            <param name="id">record identificator</param>
-            <returns>Single record</returns>
-        </member>
-        <member name="M:StudyPlatform.Data.Common.Repository.SaveChangesAsync">
-            <summary>
-            Saves all made changes in trasaction
-            </summary>
-            <returns>Error code</returns>
-        </member>
-        <member name="M:StudyPlatform.Data.Common.Repository.Update``1(``0)">
-            <summary>
-            Updates a record in database
-            </summary>
-            <param name="entity">Entity for record to be updated</param>
-        </member>
-        <member name="M:StudyPlatform.Data.Common.Repository.UpdateRange``1(System.Collections.Generic.IEnumerable{``0})">
-            <summary>
-            Updates set of records in the database
-            </summary>
-            <param name="entities">Enumerable collection of entities to be updated</param>
         </member>
         <member name="T:StudyPlatform.Data.Common.SupabaseRepository">
             <summary>
@@ -645,124 +552,40 @@
             <param name="context">The current <see cref="T:Microsoft.AspNetCore.Http.HttpContext"/>.</param>
             <param name="ex">The exception that was thrown.</param>
         </member>
-        <member name="T:StudyPlatform.Migrations.Init">
+        <member name="T:StudyPlatform.Migrations.SupabaseDb.Init">
             <inheritdoc />
         </member>
-        <member name="M:StudyPlatform.Migrations.Init.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+        <member name="M:StudyPlatform.Migrations.SupabaseDb.Init.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
             <inheritdoc />
         </member>
-        <member name="M:StudyPlatform.Migrations.Init.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+        <member name="M:StudyPlatform.Migrations.SupabaseDb.Init.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
             <inheritdoc />
         </member>
-        <member name="M:StudyPlatform.Migrations.Init.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+        <member name="M:StudyPlatform.Migrations.SupabaseDb.Init.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
         </member>
-        <member name="T:StudyPlatform.Migrations.DropOldFlashcardsTable">
+        <member name="T:StudyPlatform.Migrations.SupabaseDb.SeperateMaterialsTables">
             <inheritdoc />
         </member>
-        <member name="M:StudyPlatform.Migrations.DropOldFlashcardsTable.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+        <member name="M:StudyPlatform.Migrations.SupabaseDb.SeperateMaterialsTables.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
             <inheritdoc />
         </member>
-        <member name="M:StudyPlatform.Migrations.DropOldFlashcardsTable.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+        <member name="M:StudyPlatform.Migrations.SupabaseDb.SeperateMaterialsTables.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
             <inheritdoc />
         </member>
-        <member name="M:StudyPlatform.Migrations.DropOldFlashcardsTable.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+        <member name="M:StudyPlatform.Migrations.SupabaseDb.SeperateMaterialsTables.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
         </member>
-        <member name="T:StudyPlatform.Migrations.AddDateCreatedToMaterial">
+        <member name="T:StudyPlatform.Migrations.SupabaseDb.ExtendMaterialTitleMaxLength">
             <inheritdoc />
         </member>
-        <member name="M:StudyPlatform.Migrations.AddDateCreatedToMaterial.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+        <member name="M:StudyPlatform.Migrations.SupabaseDb.ExtendMaterialTitleMaxLength.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
             <inheritdoc />
         </member>
-        <member name="M:StudyPlatform.Migrations.AddDateCreatedToMaterial.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+        <member name="M:StudyPlatform.Migrations.SupabaseDb.ExtendMaterialTitleMaxLength.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
             <inheritdoc />
         </member>
-        <member name="M:StudyPlatform.Migrations.AddDateCreatedToMaterial.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="T:StudyPlatform.Migrations.UnrestrictMaterialTitleLength">
-            <inheritdoc />
-        </member>
-        <member name="M:StudyPlatform.Migrations.UnrestrictMaterialTitleLength.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:StudyPlatform.Migrations.UnrestrictMaterialTitleLength.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:StudyPlatform.Migrations.UnrestrictMaterialTitleLength.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="T:StudyPlatform.Migrations.AddDifficultyEnumToMaterials">
-            <inheritdoc />
-        </member>
-        <member name="M:StudyPlatform.Migrations.AddDifficultyEnumToMaterials.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:StudyPlatform.Migrations.AddDifficultyEnumToMaterials.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:StudyPlatform.Migrations.AddDifficultyEnumToMaterials.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="T:StudyPlatform.Migrations.SupabaseDb.InitSupabaseMindmaps">
-            <inheritdoc />
-        </member>
-        <member name="M:StudyPlatform.Migrations.SupabaseDb.InitSupabaseMindmaps.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:StudyPlatform.Migrations.SupabaseDb.InitSupabaseMindmaps.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:StudyPlatform.Migrations.SupabaseDb.InitSupabaseMindmaps.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="T:StudyPlatform.Migrations.SupabaseDb.RenameMindmmapFields">
-            <inheritdoc />
-        </member>
-        <member name="M:StudyPlatform.Migrations.SupabaseDb.RenameMindmmapFields.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:StudyPlatform.Migrations.SupabaseDb.RenameMindmmapFields.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:StudyPlatform.Migrations.SupabaseDb.RenameMindmmapFields.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="T:StudyPlatform.Migrations.SupabaseDb.AddTitleAndDescriptionToMindmap">
-            <inheritdoc />
-        </member>
-        <member name="M:StudyPlatform.Migrations.SupabaseDb.AddTitleAndDescriptionToMindmap.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:StudyPlatform.Migrations.SupabaseDb.AddTitleAndDescriptionToMindmap.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:StudyPlatform.Migrations.SupabaseDb.AddTitleAndDescriptionToMindmap.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="T:StudyPlatform.Migrations.SupabaseDb.UpdateMindmapProps">
-            <inheritdoc />
-        </member>
-        <member name="M:StudyPlatform.Migrations.SupabaseDb.UpdateMindmapProps.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:StudyPlatform.Migrations.SupabaseDb.UpdateMindmapProps.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:StudyPlatform.Migrations.SupabaseDb.UpdateMindmapProps.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="T:StudyPlatform.Migrations.SupabaseDb.UpdateMindmapIdToInt">
-            <inheritdoc />
-        </member>
-        <member name="M:StudyPlatform.Migrations.SupabaseDb.UpdateMindmapIdToInt.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:StudyPlatform.Migrations.SupabaseDb.UpdateMindmapIdToInt.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
-            <inheritdoc />
-        </member>
-        <member name="M:StudyPlatform.Migrations.SupabaseDb.UpdateMindmapIdToInt.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+        <member name="M:StudyPlatform.Migrations.SupabaseDb.ExtendMaterialTitleMaxLength.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
         </member>
         <member name="T:StudyPlatform.Models.Common.AutoMapper">
@@ -882,7 +705,7 @@
             <param name="userId">The ID of the user who owns the flashcard.</param>
             <returns>The created <see cref="T:StudyPlatform.Data.Models.Flashcard"/>.</returns>
         </member>
-        <member name="M:StudyPlatform.Services.Flashcards.FlashcardsService.UpdateAsync(StudyPlatform.Models.CreateFlashcardViewModel,System.Guid,System.Int32)">
+        <member name="M:StudyPlatform.Services.Flashcards.FlashcardsService.UpdateAsync(StudyPlatform.Models.CreateFlashcardViewModel,System.Guid,System.Guid)">
             <summary>
             Edits an existing flashcard for a specific user.
             </summary>
@@ -891,7 +714,7 @@
             <param name="id">The ID of the flashcard.</param>
             <returns>The updated <see cref="T:StudyPlatform.Data.Models.Flashcard"/>.</returns>
         </member>
-        <member name="M:StudyPlatform.Services.Flashcards.FlashcardsService.GetAsync(System.Guid,System.Int32)">
+        <member name="M:StudyPlatform.Services.Flashcards.FlashcardsService.GetAsync(System.Guid,System.Guid)">
             <summary>
             Retrieves multiple flashcards by their IDs for a specific user.
             </summary>
@@ -899,7 +722,7 @@
             <param name="id">The ID of the flashcard.</param>
             <returns>A collection of <see cref="T:StudyPlatform.Data.Models.Flashcard"/> objects.</returns>
         </member>
-        <member name="M:StudyPlatform.Services.Flashcards.FlashcardsService.DeleteAsync(System.Int32[],System.Guid)">
+        <member name="M:StudyPlatform.Services.Flashcards.FlashcardsService.DeleteAsync(System.Guid[],System.Guid)">
             <summary>
             Deletes multiple flashcards by their IDs for a specific user.
             </summary>
@@ -907,7 +730,7 @@
             <param name="userId">The ID of the user who owns the flashcards.</param>
             <returns>A task representing the asynchronous delete operation.</returns>
         </member>
-        <member name="M:StudyPlatform.Services.Flashcards.FlashcardsService.GetAllAsync(System.Guid,System.Nullable{System.Int32},System.Nullable{System.Int32})">
+        <member name="M:StudyPlatform.Services.Flashcards.FlashcardsService.GetAllAsync(System.Guid,System.Nullable{System.Guid},System.Nullable{System.Guid})">
             <inheritdoc />
         </member>
         <member name="M:StudyPlatform.Services.Flashcards.FlashcardsService.GenerateAsync(System.Guid,StudyPlatform.Models.GenerateFlashcardsViewModel)">
@@ -943,18 +766,19 @@
             The task result contains the created <see cref="T:StudyPlatform.Models.DTOs.FlashcardDTO"/>.
             </returns>
         </member>
-        <member name="M:StudyPlatform.Services.Flashcards.IFlashcardsService.UpdateAsync(StudyPlatform.Models.CreateFlashcardViewModel,System.Guid,System.Int32)">
+        <member name="M:StudyPlatform.Services.Flashcards.IFlashcardsService.UpdateAsync(StudyPlatform.Models.CreateFlashcardViewModel,System.Guid,System.Guid)">
             <summary>
             Edits an existing flashcard for the specified user.
             </summary>
             <param name="model">The updated flashcard data.</param>
             <param name="userId">The ID of the user who owns the flashcard.</param>
+            <param name="id">The ID of the flashcard.</param>
             <returns>
             A <see cref="T:System.Threading.Tasks.Task`1"/> representing the asynchronous operation.
             The task result contains the updated <see cref="T:StudyPlatform.Data.Models.Flashcard"/>.
             </returns>
         </member>
-        <member name="M:StudyPlatform.Services.Flashcards.IFlashcardsService.GetAsync(System.Guid,System.Int32)">
+        <member name="M:StudyPlatform.Services.Flashcards.IFlashcardsService.GetAsync(System.Guid,System.Guid)">
             <summary>
             Retrieves a flashcard by it's ID for the specified user.
             </summary>
@@ -965,7 +789,7 @@
             The task result contains a of <see cref="T:StudyPlatform.Models.DTOs.FlashcardDTO"/> object.
             </returns>
         </member>
-        <member name="M:StudyPlatform.Services.Flashcards.IFlashcardsService.GetAllAsync(System.Guid,System.Nullable{System.Int32},System.Nullable{System.Int32})">
+        <member name="M:StudyPlatform.Services.Flashcards.IFlashcardsService.GetAllAsync(System.Guid,System.Nullable{System.Guid},System.Nullable{System.Guid})">
             <summary>
             Retrieves all flashcards for the specified user.
             </summary>
@@ -974,7 +798,7 @@
             <param name="groupId">Specifies the group from which to select flashcards. If left unspecified will return all flashcards..</param>
             <returns>A collection of flashcards if successful.</returns>
         </member>
-        <member name="M:StudyPlatform.Services.Flashcards.IFlashcardsService.DeleteAsync(System.Int32[],System.Guid)">
+        <member name="M:StudyPlatform.Services.Flashcards.IFlashcardsService.DeleteAsync(System.Guid[],System.Guid)">
             <summary>
             Deletes flashcards by their IDs for the specified user.
             </summary>
@@ -995,7 +819,7 @@
             Defines methods for managing material subgroups.
             </summary>
         </member>
-        <member name="M:StudyPlatform.Services.MaterialSubGroups.IMaterialSubGroupsService.GetSubGroupsBySubjectAsync(System.Int32,System.Guid,System.Boolean)">
+        <member name="M:StudyPlatform.Services.MaterialSubGroups.IMaterialSubGroupsService.GetSubGroupsBySubjectAsync(System.Guid,System.Guid,System.Boolean)">
             <summary>
             Retrieves all material subgroups for a given subject.
             </summary>
@@ -1004,7 +828,7 @@
             <param name="includeMaterials">Whether or not to include the materials in each group.</param>
             <returns>A collection of subgroups.</returns>
         </member>
-        <member name="M:StudyPlatform.Services.MaterialSubGroups.IMaterialSubGroupsService.GetSubGroupByIdAsync(System.Int32,System.Guid)">
+        <member name="M:StudyPlatform.Services.MaterialSubGroups.IMaterialSubGroupsService.GetSubGroupByIdAsync(System.Guid,System.Guid)">
             <summary>
             Retrieves a material subgroup by its ID.
             </summary>
@@ -1020,7 +844,7 @@
             <param name="userId">The ID of the authenticated user.</param>
             <returns>The created subgroup DTO.</returns>
         </member>
-        <member name="M:StudyPlatform.Services.MaterialSubGroups.IMaterialSubGroupsService.DeleteSubGroupAsync(System.Int32,System.Guid)">
+        <member name="M:StudyPlatform.Services.MaterialSubGroups.IMaterialSubGroupsService.DeleteSubGroupAsync(System.Guid,System.Guid)">
             <summary>
             Deletes a material subgroup by ID.
             </summary>
@@ -1038,16 +862,16 @@
             Initializes a new instance of the <see cref="T:StudyPlatform.Services.MaterialSubGroups.MaterialSubGroupsService"/> class.
             </summary>
         </member>
-        <member name="M:StudyPlatform.Services.MaterialSubGroups.MaterialSubGroupsService.GetSubGroupsBySubjectAsync(System.Int32,System.Guid,System.Boolean)">
+        <member name="M:StudyPlatform.Services.MaterialSubGroups.MaterialSubGroupsService.GetSubGroupsBySubjectAsync(System.Guid,System.Guid,System.Boolean)">
             <inheritdoc />
         </member>
-        <member name="M:StudyPlatform.Services.MaterialSubGroups.MaterialSubGroupsService.GetSubGroupByIdAsync(System.Int32,System.Guid)">
+        <member name="M:StudyPlatform.Services.MaterialSubGroups.MaterialSubGroupsService.GetSubGroupByIdAsync(System.Guid,System.Guid)">
             <inheritdoc />
         </member>
         <member name="M:StudyPlatform.Services.MaterialSubGroups.MaterialSubGroupsService.CreateSubGroupAsync(StudyPlatform.Models.CreateMaterialSubGroupViewModel,System.Guid)">
             <inheritdoc />
         </member>
-        <member name="M:StudyPlatform.Services.MaterialSubGroups.MaterialSubGroupsService.DeleteSubGroupAsync(System.Int32,System.Guid)">
+        <member name="M:StudyPlatform.Services.MaterialSubGroups.MaterialSubGroupsService.DeleteSubGroupAsync(System.Guid,System.Guid)">
             <inheritdoc />
         </member>
         <member name="T:StudyPlatform.Services.Mindmaps.IMindmapsService">
@@ -1063,7 +887,7 @@
             <param name="userId"></param>
             <returns></returns>
         </member>
-        <member name="M:StudyPlatform.Services.Mindmaps.IMindmapsService.GetAllAsync(System.Guid,System.Nullable{System.Int32},System.Nullable{System.Int32})">
+        <member name="M:StudyPlatform.Services.Mindmaps.IMindmapsService.GetAllAsync(System.Guid,System.Nullable{System.Guid},System.Nullable{System.Guid})">
             <summary>
             Generates a set of mindmaps from the provided model.
             </summary>
@@ -1080,7 +904,7 @@
             <param name="userId"></param>
             <returns></returns>
         </member>
-        <member name="M:StudyPlatform.Services.Mindmaps.IMindmapsService.DeleteAsync(System.Int32[],System.Guid)">
+        <member name="M:StudyPlatform.Services.Mindmaps.IMindmapsService.DeleteAsync(System.Guid[],System.Guid)">
             <summary>
             Deletes mindmaps by their IDs for the specified user.
             </summary>
@@ -1088,7 +912,7 @@
             <param name="userId">The ID of the user who owns the mindmaps.</param>
             <returns>A <see cref="T:System.Threading.Tasks.Task"/> representing the asynchronous delete operation.</returns>
         </member>
-        <member name="M:StudyPlatform.Services.Mindmaps.IMindmapsService.UpdateAsync(StudyPlatform.Models.CreateMindmapViewModel,System.Guid,System.Int32)">
+        <member name="M:StudyPlatform.Services.Mindmaps.IMindmapsService.UpdateAsync(StudyPlatform.Models.CreateMindmapViewModel,System.Guid,System.Guid)">
             <summary>
             Update a mindmap for the specified user.
             </summary>
@@ -1097,7 +921,7 @@
             <param name="model">The model by which to update the mindmap.</param>
             <returns>An updated MindmapDTO.</returns>
         </member>
-        <member name="M:StudyPlatform.Services.Mindmaps.MindmapsService.#ctor(StudyPlatform.Data.Common.SupabaseRepository,Microsoft.Extensions.Logging.ILogger{StudyPlatform.Services.Mindmaps.MindmapsService},AutoMapper.IMapper,System.Net.Http.HttpClient)">
+        <member name="M:StudyPlatform.Services.Mindmaps.MindmapsService.#ctor(StudyPlatform.Data.Common.IRepository,Microsoft.Extensions.Logging.ILogger{StudyPlatform.Services.Mindmaps.MindmapsService},AutoMapper.IMapper,System.Net.Http.HttpClient)">
             <summary>
             Initializes the service and injects dependencies.
             </summary>
@@ -1109,13 +933,13 @@
         <member name="M:StudyPlatform.Services.Mindmaps.MindmapsService.CreateAsync(StudyPlatform.Models.CreateMindmapViewModel,System.Guid)">
             <inheritdoc/>
         </member>
-        <member name="M:StudyPlatform.Services.Mindmaps.MindmapsService.DeleteAsync(System.Int32[],System.Guid)">
+        <member name="M:StudyPlatform.Services.Mindmaps.MindmapsService.DeleteAsync(System.Guid[],System.Guid)">
             <inheritdoc/>
         </member>
         <member name="M:StudyPlatform.Services.Mindmaps.MindmapsService.GenerateAsync(StudyPlatform.Models.GenerateMindmapsViewModel,System.Guid)">
             <inheritdoc/>
         </member>
-        <member name="M:StudyPlatform.Services.Mindmaps.MindmapsService.GetAllAsync(System.Guid,System.Nullable{System.Int32},System.Nullable{System.Int32})">
+        <member name="M:StudyPlatform.Services.Mindmaps.MindmapsService.GetAllAsync(System.Guid,System.Nullable{System.Guid},System.Nullable{System.Guid})">
             <inheritdoc/>
         </member>
         <member name="T:StudyPlatform.Services.Subjects.ISubjectsService">
@@ -1132,7 +956,7 @@
             <param name="includeGroupsSummary">Query parameter for whether or not to include MaterialSubGroups summary ( without materials )</param>
             <returns>A collection of subjects.</returns>
         </member>
-        <member name="M:StudyPlatform.Services.Subjects.ISubjectsService.GetSubjectByIdAsync(System.Int32,System.Guid)">
+        <member name="M:StudyPlatform.Services.Subjects.ISubjectsService.GetSubjectByIdAsync(System.Guid,System.Guid)">
             <summary>
             Retrieves a single subject by ID.
             </summary>
@@ -1148,7 +972,7 @@
             <param name="userId">The user ID.</param>
             <returns>The created subject DTO.</returns>
         </member>
-        <member name="M:StudyPlatform.Services.Subjects.ISubjectsService.DeleteSubjectAsync(System.Int32,System.Guid)">
+        <member name="M:StudyPlatform.Services.Subjects.ISubjectsService.DeleteSubjectAsync(System.Guid,System.Guid)">
             <summary>
             Deletes a subject by ID.
             </summary>
@@ -1169,13 +993,13 @@
         <member name="M:StudyPlatform.Services.Subjects.SubjectsService.GetSubjectsByUserAsync(System.Guid,System.Boolean,System.Boolean)">
             <inheritdoc />
         </member>
-        <member name="M:StudyPlatform.Services.Subjects.SubjectsService.GetSubjectByIdAsync(System.Int32,System.Guid)">
+        <member name="M:StudyPlatform.Services.Subjects.SubjectsService.GetSubjectByIdAsync(System.Guid,System.Guid)">
             <inheritdoc />
         </member>
         <member name="M:StudyPlatform.Services.Subjects.SubjectsService.CreateSubjectAsync(StudyPlatform.Models.CreateSubjectViewModel,System.Guid)">
             <inheritdoc />
         </member>
-        <member name="M:StudyPlatform.Services.Subjects.SubjectsService.DeleteSubjectAsync(System.Int32,System.Guid)">
+        <member name="M:StudyPlatform.Services.Subjects.SubjectsService.DeleteSubjectAsync(System.Guid,System.Guid)">
             <inheritdoc />
         </member>
     </members>

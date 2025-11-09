@@ -5,6 +5,6 @@ export type GeneratedFlashcardDTO = {
   front: string;
   back: string;
   title: string;
-  materialSubGroupId?: number | null;
+  materialSubGroupId?: string | null;
   difficulty: Difficulty;
 }

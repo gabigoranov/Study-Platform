@@ -39,7 +39,7 @@ export default function FlashcardsDashboard() {
   const createMutation = useMutation({
     mutationFn: (dto: FlashcardDTO) => flashcardService.create(dto, token!),
     onSuccess: (newFlashcard) => {
-      queryClient.setQueryData<Flashcard[]>(["flashcards", selectedGroupId], (old) =>
+      queryClient.setQueryData<Flashcard[]>(["flashcards", selectedGroupId, selectedSubjectId], (old) =>
         old ? [...old, newFlashcard] : [newFlashcard]
       );
       setView("list");
@@ -48,10 +48,10 @@ export default function FlashcardsDashboard() {
 
   // --- Mutation: update ---
   const updateMutation = useMutation({
-    mutationFn: ({ id, dto }: { id: number; dto: FlashcardDTO }) =>
+    mutationFn: ({ id, dto }: { id: string; dto: FlashcardDTO }) =>
       flashcardService.update(id.toString(), dto, token!),
     onSuccess: (updated) => {
-      queryClient.setQueryData<Flashcard[]>(["flashcards", selectedGroupId], (old) =>
+      queryClient.setQueryData<Flashcard[]>(["flashcards", selectedGroupId, selectedSubjectId], (old) =>
         old ? old.map((fc) => (fc.id === updated.id ? updated : fc)) : []
       );
       setView("list");
@@ -60,11 +60,11 @@ export default function FlashcardsDashboard() {
 
   // --- Mutation: delete ---
   const deleteMutation = useMutation({
-    mutationFn: (id: number) => flashcardService.delete(token!, {
+    mutationFn: (id: string) => flashcardService.delete(token!, {
       ids: id
     }),
     onSuccess: (_, id) => {
-      queryClient.setQueryData<Flashcard[]>(["flashcards", selectedGroupId], (old) =>
+      queryClient.setQueryData<Flashcard[]>(["flashcards", selectedGroupId, selectedSubjectId], (old) =>
         old ? old.filter((fc) => fc.id !== id) : []
       );
 
@@ -83,13 +83,14 @@ export default function FlashcardsDashboard() {
     updateMutation.mutate({ id: selectedFlashcardId, dto: data });
   };
 
-  const handleDelete = (id: number) => {
+  const handleDelete = (id: string) => {
     if (window.confirm(t(keys.confirmDeleteMessage))) {
       deleteMutation.mutate(id);
+      console.log("deleted");
     }
   };
 
-  const selectCard = (id: number) => {
+  const selectCard = (id: string) => {
     setSelectedFlashcardId(id);
     console.log("Selected card:", id);
   }

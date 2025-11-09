@@ -58,7 +58,6 @@ D:\Projects\StudyPlatform\Backend\StudyPlatformTests\bin\Debug\net8.0\Swashbuckl
 D:\Projects\StudyPlatform\Backend\StudyPlatformTests\bin\Debug\net8.0\System.ClientModel.dll
 D:\Projects\StudyPlatform\Backend\StudyPlatformTests\bin\Debug\net8.0\System.Configuration.ConfigurationManager.dll
 D:\Projects\StudyPlatform\Backend\StudyPlatformTests\bin\Debug\net8.0\System.Drawing.Common.dll
-D:\Projects\StudyPlatform\Backend\StudyPlatformTests\bin\Debug\net8.0\System.Formats.Asn1.dll
 D:\Projects\StudyPlatform\Backend\StudyPlatformTests\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll
 D:\Projects\StudyPlatform\Backend\StudyPlatformTests\bin\Debug\net8.0\System.Memory.Data.dll
 D:\Projects\StudyPlatform\Backend\StudyPlatformTests\bin\Debug\net8.0\System.Runtime.Caching.dll
@@ -167,3 +166,4 @@ D:\Projects\StudyPlatform\Backend\StudyPlatformTests\bin\Debug\net8.0\Npgsql.dll
 D:\Projects\StudyPlatform\Backend\StudyPlatformTests\bin\Debug\net8.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll
 D:\Projects\StudyPlatform\Backend\StudyPlatformTests\bin\Debug\net8.0\Microsoft.Extensions.Configuration.FileExtensions.dll
 D:\Projects\StudyPlatform\Backend\StudyPlatformTests\bin\Debug\net8.0\Microsoft.Extensions.Configuration.Json.dll
+D:\Projects\StudyPlatform\Backend\StudyPlatformTests\bin\Debug\net8.0\StudyPlatform.staticwebassets.endpoints.json

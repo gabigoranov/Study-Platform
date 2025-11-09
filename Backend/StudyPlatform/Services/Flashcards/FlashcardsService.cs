@@ -84,10 +84,11 @@ namespace StudyPlatform.Services.Flashcards
         /// <param name="userId">The ID of the user who owns the flashcard.</param>
         /// <param name="id">The ID of the flashcard.</param>
         /// <returns>The updated <see cref="Flashcard"/>.</returns>
-        public async Task<FlashcardDTO> UpdateAsync(CreateFlashcardViewModel model, Guid userId, int id)
+        public async Task<FlashcardDTO> UpdateAsync(CreateFlashcardViewModel model, Guid userId, Guid id)
         {
             if (model == null) throw new ArgumentNullException("The flashcard model can not be null or empty.");
             if (userId == Guid.Empty) throw new ArgumentNullException("UserId can not be null or empty.");
+            if (id == Guid.Empty) throw new ArgumentNullException("Id can not be null or empty.");
 
             try
             {
@@ -128,7 +129,7 @@ namespace StudyPlatform.Services.Flashcards
         /// <param name="userId">The ID of the user who owns the flashcards.</param>
         /// <param name="id">The ID of the flashcard.</param>
         /// <returns>A collection of <see cref="Flashcard"/> objects.</returns>
-        public async Task<FlashcardDTO> GetAsync(Guid userId, int id)
+        public async Task<FlashcardDTO> GetAsync(Guid userId, Guid id)
         {
             if (userId == Guid.Empty) throw new ArgumentNullException("UserId can not be null or empty.");
 
@@ -157,7 +158,7 @@ namespace StudyPlatform.Services.Flashcards
         /// <param name="ids">Array of flashcard IDs to delete.</param>
         /// <param name="userId">The ID of the user who owns the flashcards.</param>
         /// <returns>A task representing the asynchronous delete operation.</returns>
-        public async Task DeleteAsync(int[] ids, Guid userId)
+        public async Task DeleteAsync(Guid[] ids, Guid userId)
         {
             if (ids == null || ids.Length == 0)
             {
@@ -168,7 +169,12 @@ namespace StudyPlatform.Services.Flashcards
 
             try
             {
-                await _repo.ExecuteDeleteAsync<Flashcard>(f => ids.Contains(f.Id) && f.UserId == userId);
+                var flashcards = await _repo.All<Flashcard>()
+                .Where(f => ids.Contains(f.Id) && f.UserId == userId)
+                .ToListAsync();
+
+                _repo.DeleteRange<Flashcard>(flashcards);
+                await _repo.SaveChangesAsync();
 
                 _logger.LogInformation("Flashcards deleted for user {UserId}", userId);
             }
@@ -185,11 +191,11 @@ namespace StudyPlatform.Services.Flashcards
         }
 
         /// <inheritdoc />
-        public async Task<IEnumerable<FlashcardDTO>> GetAllAsync(Guid userId, int? groupId = null, int? subjectId = null)
+        public async Task<IEnumerable<FlashcardDTO>> GetAllAsync(Guid userId, Guid? groupId = null, Guid? subjectId = null)
         {
             if (userId == Guid.Empty) throw new ArgumentNullException("UserId can not be null or empty.");
-            if (groupId != null && groupId < 0) throw new ArgumentOutOfRangeException("GroupId must be greater than or equal to zero.");
-            if (groupId != null && groupId < 0) throw new ArgumentOutOfRangeException("SubjectId must be greater than or equal to zero.");
+            if (groupId == Guid.Empty) throw new ArgumentOutOfRangeException("GroupId can not be null or empty.");
+            if (subjectId == Guid.Empty) throw new ArgumentOutOfRangeException("SubjectId can not be null or empty.");
 
             try
             {

@@ -14,7 +14,7 @@ namespace StudyPlatform.Services.Mindmaps
 {
     public class MindmapsService : IMindmapsService
     {
-        private readonly SupabaseRepository _repo;
+        private readonly IRepository _repo;
         private readonly ILogger<MindmapsService> _logger;
         private readonly IMapper _mapper;
         private readonly HttpClient _client;
@@ -26,7 +26,7 @@ namespace StudyPlatform.Services.Mindmaps
         /// <param name="logger"></param>
         /// <param name="mapper"></param>
         /// <param name="client"></param>
-        public MindmapsService(SupabaseRepository repo, ILogger<MindmapsService> logger, IMapper mapper, HttpClient client)
+        public MindmapsService(IRepository repo, ILogger<MindmapsService> logger, IMapper mapper, HttpClient client)
         {
             _repo = repo;
             _logger = logger;
@@ -122,11 +122,11 @@ namespace StudyPlatform.Services.Mindmaps
         }
 
         /// <inheritdoc/>
-        public async Task<IEnumerable<MindmapDTO>> GetAllAsync(Guid userId, int? subGroupId, int? subjectId)
+        public async Task<IEnumerable<MindmapDTO>> GetAllAsync(Guid userId, Guid? subGroupId, Guid? subjectId)
         {
             if (userId == Guid.Empty) throw new ArgumentNullException("UserId can not be null or empty.");
-            if (subGroupId != null && subGroupId < 0) throw new ArgumentOutOfRangeException("GroupId must be greater than or equal to zero.");
-            if (subjectId != null && subjectId < 0) throw new ArgumentOutOfRangeException("SubjectId must be greater than or equal to zero.");
+            if (subGroupId == Guid.Empty) throw new ArgumentOutOfRangeException("GroupId can not be null or empty.");
+            if (subjectId == Guid.Empty) throw new ArgumentOutOfRangeException("SubjectId can not be null or empty.");
 
             try
             {
@@ -137,7 +137,7 @@ namespace StudyPlatform.Services.Mindmaps
                     query = query.Where(x => x.MaterialSubGroupId == subGroupId);
 
                 if (subjectId != null)
-                    query = query.Where(x => x.SubjectId == subjectId);
+                    query = query.Where(x => x.MaterialSubGroup.SubjectId == subjectId);
 
                 var entities = await query.ToListAsync();
 

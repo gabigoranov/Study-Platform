@@ -7,14 +7,14 @@ import {
 } from "react";
 
 type VariableState = {
-  selectedSubjectId: number | null;
-  setSelectedSubjectId: (id: number | null) => void;
+  selectedSubjectId: string | null;
+  setSelectedSubjectId: (id: string | null) => void;
 
-  selectedGroupId: number | null;
-  setSelectedGroupId: (id: number | null) => void;
+  selectedGroupId: string | null;
+  setSelectedGroupId: (id: string | null) => void;
 
-  selectedFlashcardId: number | null;
-  setSelectedFlashcardId: (id: number | null) => void;
+  selectedFlashcardId: string | null;
+  setSelectedFlashcardId: (id: string | null) => void;
 
   selectedMindmapId: string | null;
   setSelectedMindmapId: (id: string | null) => void;
@@ -38,13 +38,13 @@ function usePersistedState<T>(key: string, defaultValue: T) {
 
 export const VariableProvider = ({ children }: { children: ReactNode }) => {
   const [selectedSubjectId, setSelectedSubjectId] = usePersistedState<
-    number | null
+    string | null
   >("selectedSubjectId", null);
   const [selectedGroupId, setSelectedGroupId] = usePersistedState<
-    number | null
+    string | null
   >("selectedGroupId", null);
   const [selectedFlashcardId, setSelectedFlashcardId] = usePersistedState<
-    number | null
+    string | null
   >("selectedFlashcardId", null);
   const [selectedMindmapId, setSelectedMindmapId] = usePersistedState<
     string | null

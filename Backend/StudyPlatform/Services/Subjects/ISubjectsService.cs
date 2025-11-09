@@ -23,7 +23,7 @@ namespace StudyPlatform.Services.Subjects
         /// <param name="id">The subject ID.</param>
         /// <param name="userId">The user ID.</param>
         /// <returns>The subject DTO if found, otherwise null.</returns>
-        Task<SubjectDto> GetSubjectByIdAsync(int id, Guid userId);
+        Task<SubjectDto> GetSubjectByIdAsync(Guid id, Guid userId);
 
         /// <summary>
         /// Creates a new subject.
@@ -39,6 +39,6 @@ namespace StudyPlatform.Services.Subjects
         /// <param name="id">The subject ID.</param>
         /// <param name="userId">The user ID.</param>
         /// <returns>True if deleted, false otherwise.</returns>
-        Task<bool> DeleteSubjectAsync(int id, Guid userId);
+        Task<bool> DeleteSubjectAsync(Guid id, Guid userId);
     }
 }

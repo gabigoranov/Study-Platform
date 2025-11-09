@@ -141,14 +141,14 @@ namespace StudyPlatformTests
         public async Task GetSubjectByIdAsync_WithInvalidId_ThrowsException()
         {
             // Arrange
-            var subjectId = -1;
+            var subjectId = Guid.Empty;
             var userId = Guid.Empty;
 
             // Act
             await Assert.ThrowsAsync<ArgumentException>(() => _service.GetSubjectByIdAsync(subjectId, userId));
-            await Assert.ThrowsAsync<ArgumentNullException>(() => _service.GetSubjectByIdAsync(1, userId));
+            await Assert.ThrowsAsync<ArgumentNullException>(() => _service.GetSubjectByIdAsync(Guid.NewGuid(), userId));
 
-            await Assert.ThrowsAsync<KeyNotFoundException>(() => _service.GetSubjectByIdAsync(999, Guid.NewGuid())); // will search for the non-existing subject once
+            await Assert.ThrowsAsync<KeyNotFoundException>(() => _service.GetSubjectByIdAsync(Guid.NewGuid(), Guid.NewGuid())); // will search for the non-existing subject once
 
             // Assert
             _repoMock.Verify(r => r.AllReadonly<Subject>(), Times.Once);
@@ -230,8 +230,8 @@ namespace StudyPlatformTests
         public async Task DeleteSubjectAsync_WithInvalidData_ThrowsException()
         {
             // Act & Assert
-            await Assert.ThrowsAsync<ArgumentException>(() => _service.DeleteSubjectAsync(-1, Guid.NewGuid()));
-            await Assert.ThrowsAsync<ArgumentNullException>(() => _service.DeleteSubjectAsync(1, Guid.Empty));
+            await Assert.ThrowsAsync<ArgumentException>(() => _service.DeleteSubjectAsync(Guid.Empty, Guid.NewGuid()));
+            await Assert.ThrowsAsync<ArgumentNullException>(() => _service.DeleteSubjectAsync(Guid.Empty, Guid.Empty));
 
             _repoMock.Verify(r => r.AllReadonly<Subject>(), Times.Never);
             _repoMock.Verify(r => r.DeleteAsync<Subject>(It.IsAny<Subject>()), Times.Never);
@@ -241,7 +241,7 @@ namespace StudyPlatformTests
         [Fact]
         public async Task DeleteSubjectAsync_WithNonExistentId_ReturnsFalse()
         {
-            bool res = await _service.DeleteSubjectAsync(999, Guid.NewGuid());
+            bool res = await _service.DeleteSubjectAsync(Guid.NewGuid(), Guid.NewGuid());
 
             res.Should().BeFalse();
 

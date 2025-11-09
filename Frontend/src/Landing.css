@@ -23,3 +23,13 @@ html {
 .read-the-docs {
   color: #888;
 }
+
+@media (max-width: 425px) {
+  .section-container {
+    padding: 0; 
+  }
+
+  footer .section-container {
+    padding: 1rem;
+  }
+}

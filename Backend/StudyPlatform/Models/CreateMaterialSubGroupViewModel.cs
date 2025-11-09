@@ -25,6 +25,6 @@ namespace StudyPlatform.Models
         /// The ID of the subject this subgroup belongs to.
         /// </summary>
         [Required]
-        public int SubjectId { get; set; }
+        public Guid SubjectId { get; set; }
     }
 }

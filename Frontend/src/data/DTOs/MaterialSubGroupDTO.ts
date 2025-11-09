@@ -1,5 +1,5 @@
 export type MaterialSubGroupDTO = {
     title: string;
-    subjectId: number;
+    subjectId: string;
     materialGroupType: string;
 }

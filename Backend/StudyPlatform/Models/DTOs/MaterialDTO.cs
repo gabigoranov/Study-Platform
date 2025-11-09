@@ -6,10 +6,11 @@ using System.Text.Json.Serialization;
 namespace StudyPlatform.Models.DTOs
 {
     [JsonDerivedType(typeof(FlashcardDTO), "Flashcard")]
+    [JsonDerivedType(typeof(MindmapDTO), "Mindmap")]
     public class MaterialDTO
     {
         [Key]
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         [Required]
         public Guid UserId { get; set; }
@@ -19,9 +20,13 @@ namespace StudyPlatform.Models.DTOs
 
         [Required]
         [ForeignKey(nameof(MaterialSubGroup))]
-        public int MaterialSubGroupId { get; set; }
+        public Guid MaterialSubGroupId { get; set; }
+
+        [Required]
+        public Guid SubjectId { get; set; }
 
         [Required]
         public Difficulty Difficulty { get; set; } = Difficulty.Medium;
+        public DateTimeOffset DateCreated { get; set; } = DateTimeOffset.UtcNow;
     }
 }

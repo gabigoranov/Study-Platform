@@ -69,7 +69,7 @@ namespace StudyPlatform.Controllers
         /// <param name="id">The card id..</param>
         /// <returns>A flashcard if successful.</returns>
         [HttpGet("{id}")]
-        public async Task<IActionResult> Get([FromRoute] int id)
+        public async Task<IActionResult> Get([FromRoute] Guid id)
         {
             // Load userId from JWT token
             Guid userId = User.GetUserId();
@@ -97,7 +97,7 @@ namespace StudyPlatform.Controllers
         /// </summary>
         /// <returns>A list of flashcards if successful.</returns>
         [HttpGet("group/{id}")]
-        public async Task<IActionResult> GetAllFromGroup([FromRoute] int id, [FromQuery] int subjectId)
+        public async Task<IActionResult> GetAllFromGroup([FromRoute] Guid id, [FromQuery] Guid subjectId)
         {
             // Load userId from JWT token
             Guid userId = User.GetUserId();
@@ -113,7 +113,7 @@ namespace StudyPlatform.Controllers
         /// <param name="id">The id of the flashcard.</param>
         /// <returns>An edited flashcard if successful.</returns>
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update([FromBody] CreateFlashcardViewModel model, [FromRoute] int id)
+        public async Task<IActionResult> Update([FromBody] CreateFlashcardViewModel model, [FromRoute] Guid id)
         {
             // Load userId from JWT token
             Guid userId = User.GetUserId();
@@ -130,13 +130,13 @@ namespace StudyPlatform.Controllers
         /// <param name="ids">The array of flashcard ids.</param>
         /// <returns>Nothing.</returns>
         [HttpDelete]
-        public async Task<IActionResult> Delete([FromQuery] int[] ids)
+        public async Task<IActionResult> Delete([FromQuery] Guid[] ids)
         {
             // Load userId from JWT tokens
             Guid userId = User.GetUserId();
 
             await _flashcardsService.DeleteAsync(ids, userId);
-            return NoContent();
+            return Ok();
         }
 
         /// <summary>

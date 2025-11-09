@@ -15,7 +15,7 @@ namespace StudyPlatform.Services.MaterialSubGroups
         /// <param name="userId">The ID of the authenticated user.</param>
         /// <param name="includeMaterials">Whether or not to include the materials in each group.</param>
         /// <returns>A collection of subgroups.</returns>
-        Task<IEnumerable<MaterialSubGroupDTO>> GetSubGroupsBySubjectAsync(int subjectId, Guid userId, bool includeMaterials = false);
+        Task<IEnumerable<MaterialSubGroupDTO>> GetSubGroupsBySubjectAsync(Guid subjectId, Guid userId, bool includeMaterials = false);
 
         /// <summary>
         /// Retrieves a material subgroup by its ID.
@@ -23,7 +23,7 @@ namespace StudyPlatform.Services.MaterialSubGroups
         /// <param name="id">The subgroup ID.</param>
         /// <param name="userId">The ID of the authenticated user.</param>
         /// <returns>The subgroup if found, otherwise null.</returns>
-        Task<MaterialSubGroupDTO?> GetSubGroupByIdAsync(int id, Guid userId);
+        Task<MaterialSubGroupDTO?> GetSubGroupByIdAsync(Guid id, Guid userId);
 
         /// <summary>
         /// Creates a new material subgroup.
@@ -39,6 +39,6 @@ namespace StudyPlatform.Services.MaterialSubGroups
         /// <param name="id">The subgroup ID.</param>
         /// <param name="userId">The ID of the authenticated user.</param>
         /// <returns>True if deleted, false otherwise.</returns>
-        Task<bool> DeleteSubGroupAsync(int id, Guid userId);
+        Task<bool> DeleteSubGroupAsync(Guid id, Guid userId);
     }
 }
