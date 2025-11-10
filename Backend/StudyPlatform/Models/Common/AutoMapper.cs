@@ -22,7 +22,8 @@ namespace StudyPlatform.Models.Common
             CreateMap<Flashcard, FlashcardDTO>().ReverseMap();
 
             // Subject mappings
-            CreateMap<Subject, SubjectDto>();
+            CreateMap<Subject, SubjectDTO>()
+                .ForMember(dest => dest.MaterialSubGroupsLength, opt => opt.MapFrom(x => x.MaterialSubGroups.Count()));
             CreateMap<CreateSubjectViewModel, Subject>();
 
             // MaterialSubGroup mappings

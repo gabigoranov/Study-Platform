@@ -36,7 +36,7 @@ namespace StudyPlatform.Controllers
         public async Task<IActionResult> GetBySubject(Guid subjectId, [FromQuery] bool includeMaterials = false)
         {
             Guid userId = User.GetUserId();
-            var subGroups = await _service.GetSubGroupsBySubjectAsync(subjectId, userId, includeMaterials);
+            var subGroups = await _service.GetSubjectAsync(subjectId, userId, includeMaterials);
             return Ok(subGroups);
         }
 
@@ -51,7 +51,7 @@ namespace StudyPlatform.Controllers
         public async Task<IActionResult> Get(Guid id)
         {
             Guid userId = User.GetUserId();
-            var subGroup = await _service.GetSubGroupByIdAsync(id, userId);
+            var subGroup = await _service.GetByIdAsync(id, userId);
             if (subGroup == null) return NotFound();
             return Ok(subGroup);
         }
@@ -66,22 +66,20 @@ namespace StudyPlatform.Controllers
         public async Task<IActionResult> Create([FromBody] CreateMaterialSubGroupViewModel model)
         {
             Guid userId = User.GetUserId();
-            var created = await _service.CreateSubGroupAsync(model, userId);
+            var created = await _service.CreateAsync(model, userId);
             return CreatedAtAction(nameof(Get), new { id = created.Id }, created);
         }
 
         /// <summary>
         /// Deletes a material subgroup by ID.
         /// </summary>
-        /// <param name="id">The subgroup ID.</param>
+        /// <param name="ids">The subgroup IDs.</param>
         /// <returns>No content if deleted.</returns>
-        [HttpDelete("{id}")]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> Delete(Guid id)
+        [HttpDelete]
+        public async Task<IActionResult> Delete([FromQuery] Guid[] ids)
         {
             Guid userId = User.GetUserId();
-            var deleted = await _service.DeleteSubGroupAsync(id, userId);
+            var deleted = await _service.DeleteAsync(ids, userId);
             if (!deleted) return NotFound();
             return NoContent();
         }

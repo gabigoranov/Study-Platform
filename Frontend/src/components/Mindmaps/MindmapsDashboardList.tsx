@@ -5,9 +5,10 @@ import MindmapSkeleton from "./MindmapSkeleton";
 import MindmapDashboardComponent from "./MindmapDashboardComponent";
 import { MindmapDTO } from "@/data/DTOs/MindmapDTO";
 import ViewMindmapSkeleton from "./ViewMindmapSekeleton";
+import { Mindmap } from "@/data/Mindmap";
 
 interface MindmapsDashboardListProps {
-  mindmaps: MindmapDTO[];
+  mindmaps: Mindmap[];
   onSelect: (id: string) => void;
   selectedId: string | null;
   loading?: boolean;
@@ -37,21 +38,17 @@ export default function MindmapsDashboardList({
   if (mindmaps.length === 0) {
     return (
       <div className="h-full flex justify-center items-center">
-        <p className="p-8 text-center text-gray-500">
+        <p className="p-8 text-center text-text-muted">
           {t(keys.noMindmaps) ?? "No mindmaps found"}
         </p>
       </div>
     );
   }
 
-  // Sort by creation date (newest first)
-  const orderedMindmaps = [...mindmaps].sort(
-    (a, b) => new Date(b.dateCreated).getTime() - new Date(a.dateCreated).getTime()
-  );
 
   return (
     <div className="w-full flex flex-wrap gap-3 p-2 py-4 self-start justify-start overflow-x-hidden">
-      {orderedMindmaps.map((mindmap) => (
+      {mindmaps.map((mindmap) => (
         <MindmapDashboardComponent
           key={mindmap.id}
           mindmap={mindmap}

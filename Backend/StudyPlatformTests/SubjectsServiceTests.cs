@@ -49,10 +49,10 @@ namespace StudyPlatformTests
             bool includeGroupsSummary = false;
 
             IEnumerable<Subject> subjects = TestData.Subjects.Where(x => x.UserId == userId);
-            var expected = _mapper.Map<IEnumerable<SubjectDto>>(subjects);
+            var expected = _mapper.Map<IEnumerable<SubjectDTO>>(subjects);
 
             // Act
-            var result = await _service.GetSubjectsByUserAsync(userId, includeGroups, includeGroupsSummary);
+            var result = await _service.GetByUserAsync(userId, includeGroups, includeGroupsSummary);
 
             // Assert
             result.Should().NotBeNull();
@@ -68,7 +68,7 @@ namespace StudyPlatformTests
             Guid userId = Guid.Empty;
 
             // Act
-            await Assert.ThrowsAsync<ArgumentNullException>(() => _service.GetSubjectsByUserAsync(userId));
+            await Assert.ThrowsAsync<ArgumentNullException>(() => _service.GetByUserAsync(userId));
 
             // Assert
             _repoMock.Verify(r => r.AllReadonly<Subject>(), Times.Never);
@@ -83,10 +83,10 @@ namespace StudyPlatformTests
             bool includeGroupsSummary = true;
 
             IEnumerable<Subject> subjects = TestData.Subjects.Where(x => x.UserId == userId);
-            var expected = _mapper.Map<IEnumerable<SubjectDto>>(subjects);
+            var expected = _mapper.Map<IEnumerable<SubjectDTO>>(subjects);
 
             // Act
-            IEnumerable<SubjectDto> result = await _service.GetSubjectsByUserAsync(userId, includeGroups, includeGroupsSummary);
+            IEnumerable<SubjectDTO> result = await _service.GetByUserAsync(userId, includeGroups, includeGroupsSummary);
 
             // Assert
             result.Should().NotBeNull();
@@ -104,10 +104,10 @@ namespace StudyPlatformTests
             bool includeGroups = true;
 
             IEnumerable<Subject> subjects = TestData.Subjects.Where(x => x.UserId == userId);
-            var expected = _mapper.Map<IEnumerable<SubjectDto>>(subjects);
+            var expected = _mapper.Map<IEnumerable<SubjectDTO>>(subjects);
 
             // Act
-            IEnumerable<SubjectDto> result = await _service.GetSubjectsByUserAsync(userId, includeGroups);
+            IEnumerable<SubjectDTO> result = await _service.GetByUserAsync(userId, includeGroups);
 
             // Assert
             result.Should().NotBeNull();
@@ -122,13 +122,13 @@ namespace StudyPlatformTests
         {
             // Arrange
             var subject = TestData.Subjects.First();
-            var expected = _mapper.Map<SubjectDto>(subject);
+            var expected = _mapper.Map<SubjectDTO>(subject);
 
             var subjectId = subject.Id;
             var userId = subject.UserId;
 
             // Act
-            var result = await _service.GetSubjectByIdAsync(subjectId, userId);
+            var result = await _service.GetByIdAsync(subjectId, userId);
 
             // Assert
             result.Should().NotBeNull();
@@ -145,10 +145,10 @@ namespace StudyPlatformTests
             var userId = Guid.Empty;
 
             // Act
-            await Assert.ThrowsAsync<ArgumentException>(() => _service.GetSubjectByIdAsync(subjectId, userId));
-            await Assert.ThrowsAsync<ArgumentNullException>(() => _service.GetSubjectByIdAsync(Guid.NewGuid(), userId));
+            await Assert.ThrowsAsync<ArgumentException>(() => _service.GetByIdAsync(subjectId, userId));
+            await Assert.ThrowsAsync<ArgumentNullException>(() => _service.GetByIdAsync(Guid.NewGuid(), userId));
 
-            await Assert.ThrowsAsync<KeyNotFoundException>(() => _service.GetSubjectByIdAsync(Guid.NewGuid(), Guid.NewGuid())); // will search for the non-existing subject once
+            await Assert.ThrowsAsync<KeyNotFoundException>(() => _service.GetByIdAsync(Guid.NewGuid(), Guid.NewGuid())); // will search for the non-existing subject once
 
             // Assert
             _repoMock.Verify(r => r.AllReadonly<Subject>(), Times.Once);
@@ -159,13 +159,13 @@ namespace StudyPlatformTests
         {
             // Arrange
             var subject = TestData.Subjects.First();
-            var expected = _mapper.Map<SubjectDto>(subject);
+            var expected = _mapper.Map<SubjectDTO>(subject);
 
             var subjectId = subject.Id;
             var userId = Guid.NewGuid(); // not the owner
 
             // Act
-            await Assert.ThrowsAsync<UnauthorizedAccessException>(() => _service.GetSubjectByIdAsync(subjectId, userId));
+            await Assert.ThrowsAsync<UnauthorizedAccessException>(() => _service.GetByIdAsync(subjectId, userId));
 
             // Assert
             _repoMock.Verify(r => r.AllReadonly<Subject>(), Times.Once);
@@ -182,7 +182,7 @@ namespace StudyPlatformTests
             };
 
             // Act
-            var result = await _service.CreateSubjectAsync(model, userId);
+            var result = await _service.CreateAsync(model, userId);
             
             // Assert
             result.Should().NotBeNull();
@@ -204,8 +204,8 @@ namespace StudyPlatformTests
             };
 
             // Act & Assert
-            await Assert.ThrowsAsync<ArgumentException>(() => _service.CreateSubjectAsync(null, userId));
-            await Assert.ThrowsAsync<ArgumentNullException>(() => _service.CreateSubjectAsync(model, Guid.Empty));
+            await Assert.ThrowsAsync<ArgumentException>(() => _service.CreateAsync(null, userId));
+            await Assert.ThrowsAsync<ArgumentNullException>(() => _service.CreateAsync(model, Guid.Empty));
             
             _repoMock.Verify(r => r.AddAsync<Subject>(It.IsAny<Subject>()), Times.Never);
             _repoMock.Verify(r => r.SaveChangesAsync(), Times.Never);
@@ -216,7 +216,7 @@ namespace StudyPlatformTests
         {
             Subject subject = TestData.Subjects.First();
 
-            bool res = await _service.DeleteSubjectAsync(subject.Id, subject.UserId);
+            bool res = await _service.DeleteAsync(subject.Id, subject.UserId);
 
             res.Should().BeTrue();
 
@@ -230,8 +230,8 @@ namespace StudyPlatformTests
         public async Task DeleteSubjectAsync_WithInvalidData_ThrowsException()
         {
             // Act & Assert
-            await Assert.ThrowsAsync<ArgumentException>(() => _service.DeleteSubjectAsync(Guid.Empty, Guid.NewGuid()));
-            await Assert.ThrowsAsync<ArgumentNullException>(() => _service.DeleteSubjectAsync(Guid.Empty, Guid.Empty));
+            await Assert.ThrowsAsync<ArgumentException>(() => _service.DeleteAsync(Guid.Empty, Guid.NewGuid()));
+            await Assert.ThrowsAsync<ArgumentNullException>(() => _service.DeleteAsync(Guid.Empty, Guid.Empty));
 
             _repoMock.Verify(r => r.AllReadonly<Subject>(), Times.Never);
             _repoMock.Verify(r => r.DeleteAsync<Subject>(It.IsAny<Subject>()), Times.Never);
@@ -241,7 +241,7 @@ namespace StudyPlatformTests
         [Fact]
         public async Task DeleteSubjectAsync_WithNonExistentId_ReturnsFalse()
         {
-            bool res = await _service.DeleteSubjectAsync(Guid.NewGuid(), Guid.NewGuid());
+            bool res = await _service.DeleteAsync(Guid.NewGuid(), Guid.NewGuid());
 
             res.Should().BeFalse();
 

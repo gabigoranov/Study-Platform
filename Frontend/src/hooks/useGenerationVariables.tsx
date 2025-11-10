@@ -7,10 +7,6 @@ export function useGenerationVariables() {
   const [error, setError] = useState(false);
   const [reviewing, setReviewing] = useState(false);
 
-  useEffect(() => {
-    console.log("file updated", file);
-  }, [file]);
-
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files?.length) return;
     setFile(e.target.files[0]);

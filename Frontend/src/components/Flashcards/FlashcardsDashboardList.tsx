@@ -38,8 +38,8 @@ export default function FlashcardsDashboardList({
 
   if (flashcards.length === 0) {
     return (
-      <div className="h-full flex justify-center items-left">
-        <p className="p-8 text-center text-gray-500">{t(keys.noFlashcards)}</p>
+      <div className="h-full flex justify-center items-center">
+        <p className="text-text-muted">{t(keys.noFlashcards)}</p>
       </div>
     );
   }

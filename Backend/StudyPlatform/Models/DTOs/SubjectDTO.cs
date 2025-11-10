@@ -3,7 +3,7 @@
     /// <summary>
     /// Data transfer object returned when working with subjects.
     /// </summary>
-    public class SubjectDto
+    public class SubjectDTO
     {
         /// <summary>
         /// The unique identifier of the subject.
@@ -24,5 +24,7 @@
         /// The UTC date when the subject was created.
         /// </summary>
         public DateTimeOffset DateCreated { get; set; }
+
+        public int MaterialSubGroupsLength { get; set; }
     }
 }

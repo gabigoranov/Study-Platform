@@ -6,4 +6,5 @@ export type Subject = {
     userId: string;
     dateCreated: Date;
     materialSubGroups: MaterialSubGroup[];
+    materialSubGroupsLength: number;
 }

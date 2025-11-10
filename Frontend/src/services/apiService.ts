@@ -107,5 +107,17 @@ export const apiService = <T, TCreate = Partial<T>, TUpdate = Partial<T>>(resour
           }
         });
     },
+
+    deletesSingle: async (token: string, id:string): Promise<void> => {
+        let url = `${BASE_URL}/${resource}/${id}`;
+        
+        await fetch(url, {
+          method: "DELETE",
+          headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+          }
+        });
+    },
   }
 };

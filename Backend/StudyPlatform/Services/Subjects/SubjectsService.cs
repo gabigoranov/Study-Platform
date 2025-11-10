@@ -31,7 +31,7 @@ namespace StudyPlatform.Services.Subjects
         }
 
         /// <inheritdoc />
-        public async Task<IEnumerable<SubjectDto>> GetSubjectsByUserAsync(Guid userId, bool includeGroups = false, bool includeGroupsSummary = false)
+        public async Task<IEnumerable<SubjectDTO>> GetByUserAsync(Guid userId, bool includeGroups = false, bool includeGroupsSummary = false)
         {
             if (userId == Guid.Empty) throw new ArgumentNullException("UserId can not be null or empty.");
 
@@ -55,7 +55,7 @@ namespace StudyPlatform.Services.Subjects
                     _logger.LogWarning("No subjects found for user {UserId}", userId);
 
 
-                return _mapper.Map<IEnumerable<SubjectDto>>(entities);
+                return _mapper.Map<IEnumerable<SubjectDTO>>(entities);
             }
             catch (Exception ex)
             {
@@ -66,7 +66,7 @@ namespace StudyPlatform.Services.Subjects
 
 
         /// <inheritdoc />
-        public async Task<SubjectDto> GetSubjectByIdAsync(Guid id, Guid userId)
+        public async Task<SubjectDTO> GetByIdAsync(Guid id, Guid userId)
         {
             if (id == Guid.Empty) throw new ArgumentException("SubjectId can not be less than zero.");
             if (userId == Guid.Empty) throw new ArgumentNullException("UserId can not be null or empty.");
@@ -91,7 +91,7 @@ namespace StudyPlatform.Services.Subjects
                     throw new UnauthorizedAccessException("You do not have permission to access this subject");
                 }
 
-                return _mapper.Map<SubjectDto>(res);
+                return _mapper.Map<SubjectDTO>(res);
             }
             catch (Exception ex) when (ex is not KeyNotFoundException && ex is not UnauthorizedAccessException)
             {
@@ -101,7 +101,7 @@ namespace StudyPlatform.Services.Subjects
         }
 
         /// <inheritdoc />
-        public async Task<SubjectDto> CreateSubjectAsync(CreateSubjectViewModel model, Guid userId)
+        public async Task<SubjectDTO> CreateAsync(CreateSubjectViewModel model, Guid userId)
         {
             if (model == null) throw new ArgumentException("CreateSubject model can not be null or empty.");
             if (userId == Guid.Empty) throw new ArgumentNullException("UserId can not be null or empty.");
@@ -119,7 +119,7 @@ namespace StudyPlatform.Services.Subjects
 
                 _logger.LogInformation("Subject {SubjectId} created successfully for user {UserId}", subject.Id, userId);
 
-                return _mapper.Map<SubjectDto>(subject);
+                return _mapper.Map<SubjectDTO>(subject);
             }
             catch (DbUpdateException ex)
             {
@@ -135,8 +135,10 @@ namespace StudyPlatform.Services.Subjects
             
         }
 
+
+
         /// <inheritdoc />
-        public async Task<bool> DeleteSubjectAsync(Guid id, Guid userId)
+        public async Task<bool> DeleteAsync(Guid id, Guid userId)
         {
             if (id == Guid.Empty) throw new ArgumentException("SubjectId can not be less than zero.");
             if (userId == Guid.Empty) throw new ArgumentNullException("UserId can not be null or empty.");
@@ -145,7 +147,7 @@ namespace StudyPlatform.Services.Subjects
             {
                 _logger.LogInformation("Deleting subject {SubjectId} for user {UserId}", id, userId);
 
-                var subject = await _repo.AllReadonly<Subject>().FirstOrDefaultAsync(s => s.Id == id && s.UserId == userId);
+                var subject = await _repo.All<Subject>().FirstOrDefaultAsync(s => s.Id == id && s.UserId == userId);
                 if (subject == null)
                 {
                     _logger.LogWarning("Subject {SubjectId} not found for user {UserId}", id, userId);
@@ -170,6 +172,45 @@ namespace StudyPlatform.Services.Subjects
                 throw new SubjectCreationException("Something went wrong while deleting the subject. Please try again!", ex);
             }
 
+        }
+
+        /// <inheritdoc />
+        public async Task<SubjectDTO> UpdateAsync(CreateSubjectViewModel model, Guid userId, Guid id)
+        {
+            if (model == null) throw new ArgumentNullException("The subject model can not be null or empty.");
+            if (userId == Guid.Empty) throw new ArgumentNullException("UserId can not be null or empty.");
+            if (id == Guid.Empty) throw new ArgumentNullException("Id can not be null or empty.");
+
+            try
+            {
+                _logger.LogInformation("Editing subject {SubjectId} for user {UserId}", id, userId);
+
+                var subject = await _repo.All<Subject>().FirstOrDefaultAsync(f => f.Id == id && f.UserId == userId);
+
+                if (subject == null)
+                {
+                    _logger.LogWarning("Subject {SubjectId} not found for user {UserId}", id, userId);
+                    throw new KeyNotFoundException("Could not find the requested subject.");
+                }
+
+                _mapper.Map(model, subject); // maps updated fields from ViewModel to entity
+
+                await _repo.SaveChangesAsync();
+
+                _logger.LogInformation("Subject {SubjectId} edited successfully for user {UserId}", subject.Id, userId);
+
+                return _mapper.Map<SubjectDTO>(subject);
+            }
+            catch (DbUpdateException ex)
+            {
+                _logger.LogError("Could not update Subject for user {UserId}", userId);
+                throw new DbUpdateException("Failed to save the new material to the database.", ex);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("Could not update Subject for user {UserId}", userId);
+                throw new MaterialUpdateException("Something went wrong while updating the new material. Please try again!", ex);
+            }
         }
     }
 }

@@ -53,7 +53,7 @@ namespace StudyPlatformTests
             var expected = _mapper.Map<IEnumerable<MaterialSubGroupDTO>>(groups);
 
             // Act
-            var result = await _service.GetSubGroupsBySubjectAsync(subjectId, userId, includeMaterials);
+            var result = await _service.GetSubjectAsync(subjectId, userId, includeMaterials);
 
             // Assert
             result.Should().NotBeNull();
@@ -73,7 +73,7 @@ namespace StudyPlatformTests
             var groups = TestData.SubGroups.Where(s => s.SubjectId == subjectId);
 
             // Act
-            var result = await _service.GetSubGroupsBySubjectAsync(subjectId, userId, includeMaterials);
+            var result = await _service.GetSubjectAsync(subjectId, userId, includeMaterials);
 
             // Assert
             result.Should().NotBeNull();
@@ -86,8 +86,8 @@ namespace StudyPlatformTests
         public async Task GetSubGroupsBySubjectAsync_WithInvalidProps_ThrowsException()
         {
             // Act & Assert
-            await Assert.ThrowsAsync<ArgumentException>(() => _service.GetSubGroupsBySubjectAsync(Guid.Empty, Guid.Empty));
-            await Assert.ThrowsAsync<ArgumentNullException>(() => _service.GetSubGroupsBySubjectAsync(Guid.Empty, Guid.Empty));
+            await Assert.ThrowsAsync<ArgumentException>(() => _service.GetSubjectAsync(Guid.Empty, Guid.Empty));
+            await Assert.ThrowsAsync<ArgumentNullException>(() => _service.GetSubjectAsync(Guid.Empty, Guid.Empty));
 
             _repoMock.Verify(r => r.AllReadonly<MaterialSubGroup>(), Times.Never);
         }
@@ -103,7 +103,7 @@ namespace StudyPlatformTests
             var userId = group.Subject.UserId;
 
             // Act
-            var result = await _service.GetSubGroupByIdAsync(subGroupId, userId);
+            var result = await _service.GetByIdAsync(subGroupId, userId);
 
             // Assert
             result.Should().NotBeNull();
@@ -116,8 +116,8 @@ namespace StudyPlatformTests
         public async Task GetSubGroupById_WithInvalidProps_ThrowsException()
         {
             // Act & Assert
-            await Assert.ThrowsAsync<ArgumentException>(() => _service.GetSubGroupByIdAsync(Guid.Empty, Guid.Empty));
-            await Assert.ThrowsAsync<ArgumentNullException>(() => _service.GetSubGroupByIdAsync(Guid.Empty, Guid.Empty));
+            await Assert.ThrowsAsync<ArgumentException>(() => _service.GetByIdAsync(Guid.Empty, Guid.Empty));
+            await Assert.ThrowsAsync<ArgumentNullException>(() => _service.GetByIdAsync(Guid.Empty, Guid.Empty));
 
             _repoMock.Verify(r => r.AllReadonly<MaterialSubGroup>(), Times.Never);
         }
@@ -137,7 +137,7 @@ namespace StudyPlatformTests
             };
 
             // Act
-            var result = await _service.CreateSubGroupAsync(model, userId);
+            var result = await _service.CreateAsync(model, userId);
 
             // Assert
             result.Should().NotBeNull();
@@ -153,8 +153,8 @@ namespace StudyPlatformTests
         public async Task CreateSubGroupAsync_WithInvalidProps_ThrowsException()
         {
             // Act & Assert
-            await Assert.ThrowsAsync<ArgumentNullException>(() => _service.CreateSubGroupAsync(null, Guid.Empty));
-            await Assert.ThrowsAsync<UnauthorizedAccessException>(() => _service.CreateSubGroupAsync(new CreateMaterialSubGroupViewModel(), Guid.NewGuid()));
+            await Assert.ThrowsAsync<ArgumentNullException>(() => _service.CreateAsync(null, Guid.Empty));
+            await Assert.ThrowsAsync<UnauthorizedAccessException>(() => _service.CreateAsync(new CreateMaterialSubGroupViewModel(), Guid.NewGuid()));
 
             _repoMock.Verify(r => r.AddAsync(It.IsAny<MaterialSubGroup>()), Times.Never);
             _repoMock.Verify(r => r.SaveChangesAsync(), Times.Never);
@@ -175,7 +175,7 @@ namespace StudyPlatformTests
             };
 
             // Act & Assert
-            await Assert.ThrowsAsync<UnauthorizedAccessException>(() => _service.CreateSubGroupAsync(model, userId));
+            await Assert.ThrowsAsync<UnauthorizedAccessException>(() => _service.CreateAsync(model, userId));
 
             _repoMock.Verify(r => r.AddAsync(It.IsAny<MaterialSubGroup>()), Times.Never);
             _repoMock.Verify(r => r.SaveChangesAsync(), Times.Never);
@@ -189,7 +189,7 @@ namespace StudyPlatformTests
             var userId = TestData.SubGroups.First().Subject.UserId;
 
             // Act & Assert
-            Assert.True(await _service.DeleteSubGroupAsync(id, userId));
+            Assert.True(await _service.DeleteAsync(id, userId));
 
             _repoMock.Verify(r => r.AllReadonly<MaterialSubGroup>(), Times.Once);
             _repoMock.Verify(r => r.DeleteAsync<MaterialSubGroup>(It.IsAny<MaterialSubGroup>()), Times.Once);
@@ -200,8 +200,8 @@ namespace StudyPlatformTests
         public async Task DeleteSubGroupsAsync_WithInvalidProps_ThrowsException()
         {
            // Act & Assert
-            await Assert.ThrowsAsync<ArgumentException>(() => _service.DeleteSubGroupAsync(Guid.Empty, Guid.Empty));
-            await Assert.ThrowsAsync<ArgumentNullException>(() => _service.DeleteSubGroupAsync(Guid.Empty, Guid.Empty));
+            await Assert.ThrowsAsync<ArgumentException>(() => _service.DeleteAsync(Guid.Empty, Guid.Empty));
+            await Assert.ThrowsAsync<ArgumentNullException>(() => _service.DeleteAsync(Guid.Empty, Guid.Empty));
 
             _repoMock.Verify(r => r.AllReadonly<MaterialSubGroup>(), Times.Never);
             _repoMock.Verify(r => r.DeleteAsync<MaterialSubGroup>(It.IsAny<MaterialSubGroup>()), Times.Never);
@@ -217,7 +217,7 @@ namespace StudyPlatformTests
             var userId = Guid.NewGuid(); // Different user ( Unauthorized )
 
             // Act & Assert
-            Assert.False(await _service.DeleteSubGroupAsync(id, userId));
+            Assert.False(await _service.DeleteAsync(id, userId));
 
             _repoMock.Verify(r => r.AllReadonly<MaterialSubGroup>(), Times.Once);
             _repoMock.Verify(r => r.DeleteAsync<MaterialSubGroup>(It.IsAny<MaterialSubGroup>()), Times.Never);

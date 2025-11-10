@@ -15,7 +15,7 @@ type AppSidebarHeaderProps = {
 export default function AppSidebarHeader({ items }: AppSidebarHeaderProps) {
   const { t } = useTranslation();
   return (
-    <SidebarHeader className="py-4">
+    <SidebarHeader className="py-4 flex flex-col gap-4">
       <Link to="/">
         <AppLogo />
       </Link>

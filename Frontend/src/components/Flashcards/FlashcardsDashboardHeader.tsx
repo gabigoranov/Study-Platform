@@ -27,7 +27,7 @@ export default function FlashcardsDashboardHeader({ setView, handleFileUpload, h
 
     // --- Query: load all groups with their flashcards ---
     const { data: groups, isLoading, error } = useQuery({
-        queryKey: ["materialSubGroups"],
+        queryKey: ["materialSubGroups", selectedSubjectId],
         queryFn: () => materialSubGroupsService.getAll(token!, `subject/${selectedSubjectId}`, {
             includeMaterials: true
         }),

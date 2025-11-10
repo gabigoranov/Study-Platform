@@ -31,7 +31,7 @@ namespace StudyPlatform.Services.MaterialSubGroups
         }
 
         /// <inheritdoc />
-        public async Task<IEnumerable<MaterialSubGroupDTO>> GetSubGroupsBySubjectAsync(Guid subjectId, Guid userId, bool includeMaterials = false)
+        public async Task<IEnumerable<MaterialSubGroupDTO>> GetSubjectAsync(Guid subjectId, Guid userId, bool includeMaterials = false)
         {
             if (subjectId == Guid.Empty) throw new ArgumentException("SubjectId can not be less than zero.");
             if (userId == Guid.Empty) throw new ArgumentNullException("UserId can not be null or empty.");
@@ -57,7 +57,7 @@ namespace StudyPlatform.Services.MaterialSubGroups
         }
 
         /// <inheritdoc />
-        public async Task<MaterialSubGroupDTO?> GetSubGroupByIdAsync(Guid id, Guid userId)
+        public async Task<MaterialSubGroupDTO?> GetByIdAsync(Guid id, Guid userId)
         {
             if (id == Guid.Empty) throw new ArgumentException("MaterialSubGroupId can not be less than zero.");
             if (userId == Guid.Empty) throw new ArgumentNullException("UserId can not be null or empty.");
@@ -78,7 +78,7 @@ namespace StudyPlatform.Services.MaterialSubGroups
         }
 
         /// <inheritdoc />
-        public async Task<MaterialSubGroupDTO> CreateSubGroupAsync(CreateMaterialSubGroupViewModel model, Guid userId)
+        public async Task<MaterialSubGroupDTO> CreateAsync(CreateMaterialSubGroupViewModel model, Guid userId)
         {
             if (model == null) throw new ArgumentNullException("The sub group model can not be null or empty.");
             if (userId == Guid.Empty) throw new ArgumentNullException("UserId can not be null or empty.");
@@ -121,29 +121,29 @@ namespace StudyPlatform.Services.MaterialSubGroups
         }
 
         /// <inheritdoc />
-        public async Task<bool> DeleteSubGroupAsync(Guid id, Guid userId)
+        public async Task<bool> DeleteAsync(Guid[] ids, Guid userId)
         {
-            if (id == Guid.Empty) throw new ArgumentException("MaterialSubGroupId can not be less than zero.");
+            if (ids.Length <= 0) throw new ArgumentException("MaterialSubGroupId can not be less than zero.");
             if (userId == Guid.Empty) throw new ArgumentNullException("UserId can not be null or empty.");
 
             try
             {
-                _logger.LogInformation("Deleting subgroup {SubGroupId} for user {UserId}", id, userId);
+                _logger.LogInformation("Deleting subgroups {SubGroupId} for user {UserId}", ids, userId);
 
-                var subGroup = await _repo.AllReadonly<MaterialSubGroup>()
-                    .Include(sg => sg.Subject)
-                    .FirstOrDefaultAsync(sg => sg.Id == id && sg.Subject.UserId == userId);
+                var groups = await _repo.All<MaterialSubGroup>()
+                .Where(f => ids.Contains(f.Id) && f.Subject.UserId == userId)
+                .ToListAsync();
 
-                if (subGroup == null)
+                if (groups == null)
                 {
-                    _logger.LogWarning("Subgroup {SubGroupId} not found or unauthorized for user {UserId}", id, userId);
+                    _logger.LogWarning("Subgroup {SubGroupId} not found or unauthorized for user {UserId}", ids, userId);
                     return false;
                 }
 
-                await _repo.DeleteAsync<MaterialSubGroup>(subGroup);
+                _repo.DeleteRange<MaterialSubGroup>(groups);
                 await _repo.SaveChangesAsync();
 
-                _logger.LogInformation("Subgroup {SubGroupId} deleted successfully for user {UserId}", id, userId);
+                _logger.LogInformation("Subgroup {SubGroupId} deleted successfully for user {UserId}", ids, userId);
 
                 return true;
             }

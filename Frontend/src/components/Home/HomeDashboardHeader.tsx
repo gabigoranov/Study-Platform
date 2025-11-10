@@ -11,22 +11,13 @@ import { subjectService } from "@/services/subjectService";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "../ui/dropdown-menu";
 
 type HomeDashboardHeaderProps = {
-    setView: (view: "list" | "create" | "edit" | "view") => void;
+    setView: (view: "list" | "create" | "edit" | "view" | "createMaterialGroup") => void;
     handleDelete: (id: string) => void;
     selectedId: string | null;
 }
 
 export default function HomeDashboardHeader({ setView, handleDelete, selectedId }: HomeDashboardHeaderProps) {
     const { t } = useTranslation();
-    const { token } = useAuth();
-    const { selectedSubjectId, setSelectedSubjectId } = useVariableContext();
-
-    // Query: load all subjects
-    const { data: subjects, isLoading, error } = useQuery({
-        queryKey: ["subjects"],
-        queryFn: () => subjectService.getAll(token!),
-        staleTime: 1000 * 60 * 5,
-    });
 
     return (
         <div className="flex flex-col gap-1">
@@ -61,8 +52,8 @@ export default function HomeDashboardHeader({ setView, handleDelete, selectedId 
                         <Edit className="inline" /> {t(keys.edit)}
                     </Button>
 
-                    <Button className="rounded-3xl" variant="ghost" onClick={() => setView("view")} disabled={selectedId === null}>
-                        <Eye className="inline" /> {t(keys.viewButton)}
+                    <Button className="rounded-3xl" variant="ghost" onClick={() => setView("createMaterialGroup")} disabled={selectedId === null}>
+                        <Plus className="inline" /> Add Group
                     </Button>
 
                     <Button className="rounded-3xl" variant="ghost" onClick={() => handleDelete(selectedId!)} disabled={selectedId === null}>
