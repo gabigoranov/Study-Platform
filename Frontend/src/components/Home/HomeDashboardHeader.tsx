@@ -11,7 +11,7 @@ import { subjectService } from "@/services/subjectService";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "../ui/dropdown-menu";
 
 type HomeDashboardHeaderProps = {
-    setView: (view: "list" | "create" | "edit" | "view" | "createMaterialGroup") => void;
+    setView: (view: "list" | "create" | "edit" | "view" | "createMaterialGroup" | "editMaterialGroup") => void;
     handleDelete: (id: string) => void;
     selectedId: string | null;
 }

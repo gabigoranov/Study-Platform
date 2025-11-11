@@ -26,7 +26,7 @@ import {
   GitBranch
 } from "lucide-react";
 
-type View = "list" | "create" | "edit" | "view" | "createMaterialGroup";
+type View = "list" | "create" | "edit" | "view" | "createMaterialGroup" | "editMaterialGroup";
 type SubjectView = "subjects" | "materialGroups";
 
 export const subjectService = apiService<Subject, SubjectDTO, SubjectDTO>("subjects");
@@ -36,6 +36,7 @@ export default function HomeDashboard() {
     const [view, setView] = useState<View>("list");
     const [subjectView, setSubjectView] = useState<SubjectView>("subjects"); // Whether to show subjects or material groups
     const [editingId, setEditingId] = useState<string | null>(null);
+    const [editingMaterialSubGroupId, setEditingMaterialSubGroupId] = useState<string | null>(null);
     const { token } = useAuth();
     const queryClient = useQueryClient();
     const { selectedSubjectId, setSelectedSubjectId } = useVariableContext();
@@ -107,6 +108,17 @@ export default function HomeDashboard() {
         },
     });
 
+    // Mutation: update material sub group
+    const updateMaterialSubGroupMutation = useMutation({
+        mutationFn: ({ id, dto }: { id: string; dto: MaterialSubGroupDTO }) =>
+            materialSubGroupsService.update(id, dto, token!),
+        onSuccess: (updated) => {
+            queryClient.invalidateQueries({ queryKey: ["materialSubGroups", selectedSubjectId] });
+            setView("list");
+            setEditingMaterialSubGroupId(null);
+        },
+    });
+
     // Mutation: delete material sub group
     const deleteMaterialSubGroupMutation = useMutation({
         mutationFn: (id: string) => materialSubGroupsService.delete(token!, { ids: id }),
@@ -141,6 +153,16 @@ export default function HomeDashboard() {
         }
     };
 
+    const handleUpdateMaterialSubGroup = (data: MaterialSubGroupDTO) => {
+        if (!editingMaterialSubGroupId) return;
+        updateMaterialSubGroupMutation.mutate({ id: editingMaterialSubGroupId, dto: data });
+    };
+
+    const startEditMaterialSubGroup = (id: string) => {
+        setEditingMaterialSubGroupId(id);
+        setView("editMaterialGroup");
+    };
+
     const selectSubject = (id: string) => {
         setSelectedSubjectId(id);
         setSubjectView("materialGroups"); // Show material groups for selected subject
@@ -159,7 +181,7 @@ export default function HomeDashboard() {
                 if (error) return <p>Error loading subjects</p>;
                 
                 // Show getting started screen if there are no subjects
-                if (true) {
+                if (subjects && subjects.length === 0) {
                     return (
                         <div className="w-full max-w-4xl ">
                             <div className="bg-gradient-to-br from-primary/5 to-secondary/5 rounded-3xl p-8 md:p-12 border border-border">
@@ -308,7 +330,17 @@ export default function HomeDashboard() {
                                                             </Badge>
                                                         </div>
                                                     </CardHeader>
-                                                    <CardContent className="flex justify-end">
+                                                    <CardContent className="flex justify-end gap-2">
+                                                        <Button 
+                                                            variant="outline" 
+                                                            size="sm"
+                                                            onClick={(e) => {
+                                                                e.stopPropagation();
+                                                                startEditMaterialSubGroup(group.id);
+                                                            }}
+                                                        >
+                                                            Edit
+                                                        </Button>
                                                         <Button 
                                                             variant="outline" 
                                                             size="sm"
@@ -451,6 +483,35 @@ export default function HomeDashboard() {
                                     onSubmit={handleCreateMaterialSubGroup}
                                     submitLabel="Create Material Group"
                                     subjectId={selectedSubjectId!}
+                                />
+                            </CardContent>
+                        </Card>
+                    </div>
+                );
+
+            case "editMaterialGroup":
+                if (!editingMaterialSubGroupId || !materialSubGroups) {
+                    return <p>Material sub group not found</p>;
+                }
+                
+                const materialSubGroupToEdit = materialSubGroups.find(m => m.id === editingMaterialSubGroupId);
+                if (!materialSubGroupToEdit) {
+                    return <p>Material sub group not found</p>;
+                }
+                
+                return (
+                    <div className="max-w-md mx-auto w-full">
+                        <div className="mb-6">
+                            <h2 className="text-2xl font-bold">Edit Material Sub Group</h2>
+                            <p className="text-text-muted">Update your material sub group details</p>
+                        </div>
+                        <Card>
+                            <CardContent className="pt-6">
+                                <MaterialSubGroupForm
+                                    onSubmit={handleUpdateMaterialSubGroup}
+                                    submitLabel="Update Material Group"
+                                    model={materialSubGroupToEdit}
+                                    subjectId={materialSubGroupToEdit.subjectId}
                                 />
                             </CardContent>
                         </Card>

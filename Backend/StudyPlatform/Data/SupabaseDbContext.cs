@@ -13,6 +13,9 @@ namespace StudyPlatform.Data
         public DbSet<MaterialSubGroup> MaterialSubGroups { get; set; }
         public DbSet<Material> Materials { get; set; }
         public DbSet<Flashcard> Flashcards { get; set; } = null!;
+        public DbSet<Quiz> Quizzes { get; set; } = null!;
+        public DbSet<QuizQuestion> QuizQuestions { get; set; } = null!;
+        public DbSet<QuizQuestionAnswer> QuizQuestionAnswers { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -31,6 +34,21 @@ namespace StudyPlatform.Data
             // TPT: separate tables for derived types
             modelBuilder.Entity<Flashcard>().ToTable("Flashcards");
             modelBuilder.Entity<Mindmap>().ToTable("Mindmaps");
+            modelBuilder.Entity<Quiz>().ToTable("Quizzes");
+
+            // One-to-many: QuizQuestion → Answers
+            modelBuilder.Entity<QuizQuestion>()
+                .HasMany(q => q.Answers)
+                .WithOne(a => a.QuizQuestion)
+                .HasForeignKey(a => a.QuizQuestionId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            // One-to-one: QuizQuestion → CorrectAnswer
+            modelBuilder.Entity<QuizQuestion>()
+                .HasOne(q => q.CorrectQuizQuestionAnswer)
+                .WithOne()
+                .HasForeignKey<QuizQuestion>(q => q.CorrectQuizQuestionAnswerId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

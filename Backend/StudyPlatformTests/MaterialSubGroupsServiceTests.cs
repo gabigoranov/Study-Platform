@@ -185,11 +185,11 @@ namespace StudyPlatformTests
         public async Task DeleteSubGroupAsync_ValidData_ReturnsTrue()
         {
             // Arrange
-            var id = TestData.SubGroups.First().Id;
+            var ids = new Guid[1] { TestData.SubGroups.First().Id };
             var userId = TestData.SubGroups.First().Subject.UserId;
 
             // Act & Assert
-            Assert.True(await _service.DeleteAsync(id, userId));
+            Assert.True(await _service.DeleteAsync(ids, userId));
 
             _repoMock.Verify(r => r.AllReadonly<MaterialSubGroup>(), Times.Once);
             _repoMock.Verify(r => r.DeleteAsync<MaterialSubGroup>(It.IsAny<MaterialSubGroup>()), Times.Once);
@@ -200,8 +200,8 @@ namespace StudyPlatformTests
         public async Task DeleteSubGroupsAsync_WithInvalidProps_ThrowsException()
         {
            // Act & Assert
-            await Assert.ThrowsAsync<ArgumentException>(() => _service.DeleteAsync(Guid.Empty, Guid.Empty));
-            await Assert.ThrowsAsync<ArgumentNullException>(() => _service.DeleteAsync(Guid.Empty, Guid.Empty));
+            await Assert.ThrowsAsync<ArgumentException>(() => _service.DeleteAsync([], Guid.Empty));
+            await Assert.ThrowsAsync<ArgumentNullException>(() => _service.DeleteAsync([], Guid.Empty));
 
             _repoMock.Verify(r => r.AllReadonly<MaterialSubGroup>(), Times.Never);
             _repoMock.Verify(r => r.DeleteAsync<MaterialSubGroup>(It.IsAny<MaterialSubGroup>()), Times.Never);
@@ -213,11 +213,11 @@ namespace StudyPlatformTests
         {
 
             // Arrange
-            var id = TestData.SubGroups.First().Id;
+            var ids = new Guid[1] { TestData.SubGroups.First().Id };
             var userId = Guid.NewGuid(); // Different user ( Unauthorized )
 
             // Act & Assert
-            Assert.False(await _service.DeleteAsync(id, userId));
+            Assert.False(await _service.DeleteAsync(ids, userId));
 
             _repoMock.Verify(r => r.AllReadonly<MaterialSubGroup>(), Times.Once);
             _repoMock.Verify(r => r.DeleteAsync<MaterialSubGroup>(It.IsAny<MaterialSubGroup>()), Times.Never);
