@@ -14,6 +14,7 @@ namespace StudyPlatform.Models.Common
             CreateMap<Material, MaterialDTO>()
             .Include<Flashcard, FlashcardDTO>()
             .Include<Mindmap, MindmapDTO>()
+            .Include<Quiz, QuizDTO>()
             .ForMember(dest => dest.SubjectId, opt => opt.MapFrom(x => x.MaterialSubGroup.SubjectId));
 
 
@@ -33,6 +34,14 @@ namespace StudyPlatform.Models.Common
             CreateMap<MaterialSubGroup, MaterialSubGroupDTO>().ReverseMap();
             CreateMap<Mindmap, CreateMindmapViewModel>().ReverseMap();
             CreateMap<Mindmap, MindmapDTO>().ReverseMap();
+            
+            // Quiz mappings
+            CreateMap<Quiz, QuizDTO>().ReverseMap();
+            CreateMap<CreateQuizViewModel, Quiz>();
+            CreateMap<QuizQuestion, QuizQuestionDTO>().ReverseMap();
+            CreateMap<CreateQuizQuestionViewModel, QuizQuestion>();
+            CreateMap<QuizQuestionAnswer, QuizQuestionAnswerDTO>().ReverseMap();
+            CreateMap<CreateQuizQuestionAnswerViewModel, QuizQuestionAnswer>();
 
         }
     }

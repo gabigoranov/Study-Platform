@@ -14,6 +14,7 @@ using StudyPlatform.Models.DTOs;
 using StudyPlatform.Data.Common;
 using System.Text.Json;
 using StudyPlatform.Services.Mindmaps;
+using StudyPlatform.Services.Quiz;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -81,6 +82,7 @@ builder.Services.AddScoped<IFlashcardsService, FlashcardsService>();
 builder.Services.AddScoped<ISubjectsService, SubjectsService>();
 builder.Services.AddScoped<IMindmapsService, MindmapsService>();
 builder.Services.AddScoped<IMaterialSubGroupsService, MaterialSubGroupsService>();
+builder.Services.AddScoped<IQuizService, QuizService>();
 
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
