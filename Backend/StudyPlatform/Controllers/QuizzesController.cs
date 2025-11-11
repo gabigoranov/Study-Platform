@@ -97,7 +97,7 @@ namespace StudyPlatform.Controllers
         /// </summary>
         /// <returns>A list of quizzes if successful.</returns>
         [HttpGet("group/{id}")]
-        public async Task<IActionResult> GetAllFromGroup([FromRoute] Guid id, [FromQuery] Guid subjectId)
+        public async Task<IActionResult> GetAllFromGroup([FromRoute] Guid id, [FromQuery] Guid? subjectId)
         {
             // Load userId from JWT token
             Guid userId = User.GetUserId();

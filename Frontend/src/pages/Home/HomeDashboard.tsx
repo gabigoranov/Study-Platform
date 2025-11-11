@@ -63,7 +63,7 @@ export default function HomeDashboard() {
     const createMutation = useMutation({
         mutationFn: (dto: SubjectDTO) => subjectService.create(dto, token!),
         onSuccess: (newSubject) => {
-            queryClient.setQueryData<Subject[]>(["subjects"], (old) =>
+            queryClient.setQueryData<Subject[]>(["subjects", selectedSubjectId], (old) =>
                 old ? [...old, newSubject] : [newSubject]
             );
             setSelectedSubjectId(newSubject.id); // Select the newly created subject
@@ -78,6 +78,7 @@ export default function HomeDashboard() {
         onSuccess: (newMaterialSubGroup) => {
             queryClient.invalidateQueries({ queryKey: ["materialSubGroups", selectedSubjectId] });
             setView("list");
+            queryClient.invalidateQueries({ queryKey: ["subjects", selectedSubjectId] });
         },
     });
 
@@ -86,7 +87,7 @@ export default function HomeDashboard() {
         mutationFn: ({ id, dto }: { id: string; dto: SubjectDTO }) =>
             subjectService.update(id, dto, token!),
         onSuccess: (updated) => {
-            queryClient.setQueryData<Subject[]>(["subjects"], (old) =>
+            queryClient.setQueryData<Subject[]>(["subjects", selectedSubjectId], (old) =>
                 old ? old.map((s) => (s.id === updated.id ? updated : s)) : []
             );
             setEditingId(null);
@@ -96,9 +97,9 @@ export default function HomeDashboard() {
 
     // Mutation: delete
     const deleteMutation = useMutation({
-        mutationFn: (id: string) => subjectService.deletesSingle(token!, id),
+        mutationFn: (id: string) => subjectService.deleteSingle(token!, id),
         onSuccess: (_, id) => {
-            queryClient.setQueryData<Subject[]>(["subjects"], (old) =>
+            queryClient.setQueryData<Subject[]>(["subjects", selectedSubjectId], (old) =>
                 old ? old.filter((s) => s.id !== id) : []
             );
             // If the deleted subject was the selected one, reset selection
@@ -124,6 +125,7 @@ export default function HomeDashboard() {
         mutationFn: (id: string) => materialSubGroupsService.delete(token!, { ids: id }),
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ["materialSubGroups", selectedSubjectId] });
+            queryClient.invalidateQueries({ queryKey: ["subjects", selectedSubjectId] });
         },
     });
 
@@ -325,9 +327,6 @@ export default function HomeDashboard() {
                                                     <CardHeader>
                                                         <div className="flex items-center justify-between">
                                                             <CardTitle className="text-lg">{group.title}</CardTitle>
-                                                            <Badge variant="secondary" className="text-xs">
-                                                                {group.materialGroupType}
-                                                            </Badge>
                                                         </div>
                                                     </CardHeader>
                                                     <CardContent className="flex justify-end gap-2">

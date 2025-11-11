@@ -1,5 +1,6 @@
-﻿using StudyPlatform.Models.DTOs;
+﻿using StudyPlatform.Data.Models;
 using StudyPlatform.Models;
+using StudyPlatform.Models.DTOs;
 
 namespace StudyPlatform.Services.MaterialSubGroups
 {
@@ -15,7 +16,7 @@ namespace StudyPlatform.Services.MaterialSubGroups
         /// <param name="userId">The ID of the authenticated user.</param>
         /// <param name="includeMaterials">Whether or not to include the materials in each group.</param>
         /// <returns>A collection of subgroups.</returns>
-        Task<IEnumerable<MaterialSubGroupDTO>> GetSubjectAsync(Guid subjectId, Guid userId, bool includeMaterials = false);
+        Task<IEnumerable<MaterialSubGroupDTO>> GetAsync(Guid subjectId, Guid userId, bool includeMaterials = false);
 
         /// <summary>
         /// Retrieves a material subgroup by its ID.
@@ -40,5 +41,17 @@ namespace StudyPlatform.Services.MaterialSubGroups
         /// <param name="userId">The ID of the authenticated user.</param>
         /// <returns>True if deleted, false otherwise.</returns>
         Task<bool> DeleteAsync(Guid[] ids, Guid userId);
+
+        /// <summary>
+        /// Edits an existing sub group for the specified user.
+        /// </summary>
+        /// <param name="model">The updated sub group data.</param>
+        /// <param name="userId">The ID of the user who owns the sub group.</param>
+        /// <param name="id">The ID of the sub group.</param>
+        /// <returns>
+        /// A <see cref="Task{MaterialSubGroupDTO}"/> representing the asynchronous operation.
+        /// The task result contains the updated <see cref="MaterialSubGroupDTO"/>.
+        /// </returns>
+        Task<MaterialSubGroupDTO> UpdateAsync(CreateMaterialSubGroupViewModel model, Guid userId, Guid id);
     }
 }

@@ -31,7 +31,6 @@ type MaterialSubGroupFormProps = {
 
 const materialSubGroupSchema = z.object({
   title: z.string().min(1, "A title is required"),
-  materialGroupType: z.string().min(1, "A group type is required"),
 });
 
 export default function MaterialSubGroupForm({ 
@@ -46,7 +45,6 @@ export default function MaterialSubGroupForm({
     resolver: zodResolver(materialSubGroupSchema),
     defaultValues: {
       title: model?.title ?? "",
-      materialGroupType: model?.materialGroupType ?? "",
     },
   });
 
@@ -72,34 +70,6 @@ export default function MaterialSubGroupForm({
               <FormControl>
                 <Input placeholder={t("Enter title")} {...field} />
               </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        <FormField
-          control={form.control}
-          name="materialGroupType"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Group Type</FormLabel>
-              <Select 
-                value={field.value} 
-                onValueChange={field.onChange}
-              >
-                <FormControl>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select group type" />
-                  </SelectTrigger>
-                </FormControl>
-                <SelectContent>
-                  <SelectItem value="lecture">Lecture</SelectItem>
-                  <SelectItem value="reading">Reading</SelectItem>
-                  <SelectItem value="assignment">Assignment</SelectItem>
-                  <SelectItem value="exam">Exam</SelectItem>
-                  <SelectItem value="other">Other</SelectItem>
-                </SelectContent>
-              </Select>
               <FormMessage />
             </FormItem>
           )}

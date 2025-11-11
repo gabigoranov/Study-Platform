@@ -34,7 +34,7 @@ export function useFlashcardsGeneration({
     GeneratedFlashcardDTO[]
   >([]);
 
-  const { selectedGroupId } = useVariableContext();
+  const { selectedGroupId, selectedSubjectId } = useVariableContext();
 
   const handleSubmitGeneration: SubmitAction = async (
     actionId,
@@ -98,7 +98,7 @@ export function useFlashcardsGeneration({
     try {
       const result = await flashcardService.createBulk(flashcards, token);
       queryClient.setQueryData<Flashcard[]>(
-        ["flashcards", selectedGroupId],
+        ["flashcards", selectedGroupId, selectedSubjectId],
         (old) => (old ? [...old, ...result] : [...result])
       );
     } catch (err) {

@@ -36,7 +36,7 @@ namespace StudyPlatform.Controllers
         public async Task<IActionResult> GetBySubject(Guid subjectId, [FromQuery] bool includeMaterials = false)
         {
             Guid userId = User.GetUserId();
-            var subGroups = await _service.GetSubjectAsync(subjectId, userId, includeMaterials);
+            var subGroups = await _service.GetAsync(subjectId, userId, includeMaterials);
             return Ok(subGroups);
         }
 
@@ -82,6 +82,24 @@ namespace StudyPlatform.Controllers
             var deleted = await _service.DeleteAsync(ids, userId);
             if (!deleted) return NotFound();
             return NoContent();
+        }
+
+        /// <summary>
+        /// Endpoint for updating a specific sub group that the user owns.
+        /// </summary>
+        /// <param name="model">The model for updating the sub group.</param>
+        /// <param name="id">The id of the sub group.</param>
+        /// <returns>An edited sub group if successful.</returns>
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update([FromBody] CreateMaterialSubGroupViewModel model, [FromRoute] Guid id)
+        {
+            // Load userId from JWT token
+            Guid userId = User.GetUserId();
+
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+
+            MaterialSubGroupDTO res = await _service.UpdateAsync(model, userId, id);
+            return Ok(res);
         }
     }
 }

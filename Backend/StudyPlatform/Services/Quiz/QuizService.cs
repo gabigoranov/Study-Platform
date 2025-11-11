@@ -342,8 +342,6 @@ namespace StudyPlatform.Services.Quiz
         public async Task<IEnumerable<QuizDTO>> GetAllAsync(Guid userId, Guid? groupId = null, Guid? subjectId = null)
         {
             if (userId == Guid.Empty) throw new ArgumentNullException("UserId can not be null or empty.");
-            if (groupId == Guid.Empty) throw new ArgumentOutOfRangeException("GroupId can not be null or empty.");
-            if (subjectId == Guid.Empty) throw new ArgumentOutOfRangeException("SubjectId can not be null or empty.");
 
             try
             {
@@ -355,10 +353,10 @@ namespace StudyPlatform.Services.Quiz
                         .ThenInclude(qq => qq.CorrectQuizQuestionAnswer)
                     .Where(x => x.UserId == userId);
 
-                if(groupId != null)
+                if(groupId != Guid.Empty && subjectId != null)
                     query = query.Where(x => x.MaterialSubGroupId == groupId);
 
-                if (subjectId != null)
+                if (subjectId != Guid.Empty && subjectId != null)
                     query = query.Where(x => x.MaterialSubGroup.SubjectId == subjectId);
 
                 var entities = await query.ToListAsync();

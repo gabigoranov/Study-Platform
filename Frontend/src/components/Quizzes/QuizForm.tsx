@@ -1,4 +1,4 @@
-import { FlashcardDTO } from "@/data/DTOs/FlashcardDTO";
+import { QuizDTO } from "@/data/DTOs/QuizDTO";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -26,36 +26,36 @@ import {
 import { useTranslation } from "react-i18next";
 import { keys } from "@/types/keys";
 
-interface FlashcardsFormProps {
-  model?: FlashcardDTO | undefined;
-  onSubmit: (data: FlashcardDTO) => void;
+interface QuizFormProps {
+  model?: QuizDTO | undefined;
+  onSubmit: (data: QuizDTO) => void;
   submitLabel?: string;
   onCancel?: () => void; // optional for edit mode
 }
 
-const flashcardSchema = z.object({
+const quizSchema = z.object({
   title: z.string().min(1, "A title is required"),
-  front: z.string().min(1, "Front side is required"),
-  back: z.string().min(1, "Back side is required"),
+  description: z.string().min(1, "Description is required"),
   difficulty: z.enum(Difficulty),
+  materialSubGroupId: z.string().min(1, "Material sub group ID is required"),
 });
 
-export default function FlashcardsForm({
+export default function QuizForm({
   model,
   onSubmit,
   submitLabel = "Save",
   onCancel,
-}: FlashcardsFormProps) {
+}: QuizFormProps) {
   const { selectedGroupId } = useVariableContext();
   const { t } = useTranslation();
 
-  const form = useForm<z.infer<typeof flashcardSchema>>({
-    resolver: zodResolver(flashcardSchema),
+  const form = useForm<z.infer<typeof quizSchema>>({
+    resolver: zodResolver(quizSchema),
     defaultValues: {
       title: model?.title ?? "",
-      front: model?.front ?? "",
-      back: model?.back ?? "",
+      description: model?.description ?? "",
       difficulty: model?.difficulty ?? Difficulty.Easy,
+      materialSubGroupId: model?.materialSubGroupId ?? selectedGroupId!,
     },
   });
 
@@ -63,18 +63,19 @@ export default function FlashcardsForm({
     if (model) {
       form.reset({
         title: model.title,
-        front: model.front,
-        back: model.back,
+        description: model.description,
         difficulty: model?.difficulty ?? Difficulty.Easy,
+        materialSubGroupId: model?.materialSubGroupId ?? selectedGroupId!,
       });
     }
-  }, [model, form]);
+  }, [model, form, selectedGroupId]);
 
-  function handleSubmit(values: z.infer<typeof flashcardSchema>) {
+  function handleSubmit(values: z.infer<typeof quizSchema>) {
     onSubmit({
       ...model,
       ...values,
-      materialSubGroupId: model?.materialSubGroupId ?? selectedGroupId!,
+      materialSubGroupId: values.materialSubGroupId,
+      questions: []
     });
   }
 
@@ -99,26 +100,13 @@ export default function FlashcardsForm({
         />
         <FormField
           control={form.control}
-          name="front"
+          name="description"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>{t(keys.frontLabel)}</FormLabel>
-              <FormControl>
-                <Input placeholder={t("Enter question here...")} {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="back"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>{t(keys.backLabel)}</FormLabel>
+              <FormLabel>{t(keys.Description)}</FormLabel>
               <FormControl>
                 <Textarea
-                  placeholder={t("Enter answer here...")}
+                  placeholder={t("Enter quiz description")}
                   {...field}
                   rows={4}
                 />
@@ -127,7 +115,7 @@ export default function FlashcardsForm({
             </FormItem>
           )}
         />
-        
+
         <FormField
           control={form.control}
           name="difficulty"

@@ -76,7 +76,7 @@ export default function MindmapsForm({
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(handleSubmit)}
-        className="flex flex-col gap-4 w-full md:max-w-[50%] mx-auto py-8 px-6 bg-white rounded shadow dark:bg-surface"
+        className="flex flex-col gap-4 w-full md:max-w-[50%] mx-auto py-8 px-6 bg-background-muted rounded shadow dark:bg-surface"
       >
         <FormField
           control={form.control}

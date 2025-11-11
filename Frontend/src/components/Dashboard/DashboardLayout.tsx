@@ -8,6 +8,7 @@ import { SidebarProvider } from "../ui/sidebar";
 import { Home } from "lucide-react";
 import { PiNoteBlankFill } from "react-icons/pi";
 import { AppSidebar } from "../Sidebar/AppSidebar";
+import { FaQuestionCircle } from "react-icons/fa";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useAuth } from "@/hooks/useAuth";
 import { useVariableContext } from "@/context/VariableContext";
@@ -51,6 +52,11 @@ export default function Layout() {
           title: t(keys.navMindmaps),
           url: "/mindmaps",
           icon: RiMindMap,
+        },
+        {
+          title: t(keys.navQuizzes),
+          url: "/quizzes",
+          icon: FaQuestionCircle,
         },
       ]
     },

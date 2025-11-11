@@ -89,14 +89,14 @@ export function useMindmapsGeneration({
     options: {
       title: string;
       description: string;
-      subjectId: number;
+      subjectId: string;
     }
   ): CreateMindmapDTO => {
     return {
       title: options.title,
       description: options.description,
       subjectId: options.subjectId,
-      materialSubGroupId: generated.materialSubGroupId ?? 0, // default to 0 if null/undefined
+      materialSubGroupId: generated.materialSubGroupId ?? '', // default to 0 if null/undefined
       data: {
         nodes: generated.nodes,
         edges: generated.edges,

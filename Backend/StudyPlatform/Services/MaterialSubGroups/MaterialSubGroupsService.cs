@@ -1,8 +1,5 @@
 ﻿using AutoMapper;
-using AutoMapper.QueryableExtensions;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
-using StudyPlatform.Data;
 using StudyPlatform.Data.Common;
 using StudyPlatform.Data.Models;
 using StudyPlatform.Exceptions;
@@ -31,7 +28,7 @@ namespace StudyPlatform.Services.MaterialSubGroups
         }
 
         /// <inheritdoc />
-        public async Task<IEnumerable<MaterialSubGroupDTO>> GetSubjectAsync(Guid subjectId, Guid userId, bool includeMaterials = false)
+        public async Task<IEnumerable<MaterialSubGroupDTO>> GetAsync(Guid subjectId, Guid userId, bool includeMaterials = false)
         {
             if (subjectId == Guid.Empty) throw new ArgumentException("SubjectId can not be less than zero.");
             if (userId == Guid.Empty) throw new ArgumentNullException("UserId can not be null or empty.");
@@ -158,6 +155,45 @@ namespace StudyPlatform.Services.MaterialSubGroups
                 throw new DbUpdateException("Failed to delete the sub group. Please try again!", ex);
             }
            
+        }
+
+        /// <inheritdoc />
+        public async Task<MaterialSubGroupDTO> UpdateAsync(CreateMaterialSubGroupViewModel model, Guid userId, Guid id)
+        {
+            if (model == null) throw new ArgumentNullException("The sub group model can not be null or empty.");
+            if (userId == Guid.Empty) throw new ArgumentNullException("UserId can not be null or empty.");
+            if (id == Guid.Empty) throw new ArgumentNullException("Id can not be null or empty.");
+
+            try
+            {
+                _logger.LogInformation("Editing sub group {sub groupId} for user {UserId}", id, userId);
+
+                var subGroup = await _repo.All<MaterialSubGroup>().FirstOrDefaultAsync(f => f.Id == id && f.Subject.UserId == userId);
+
+                if (subGroup == null)
+                {
+                    _logger.LogWarning("sub group {sub groupId} not found for user {UserId}", id, userId);
+                    throw new KeyNotFoundException("Could not find the requested sub group.");
+                }
+
+                _mapper.Map(model, subGroup); // maps updated fields from ViewModel to entity
+
+                await _repo.SaveChangesAsync();
+
+                _logger.LogInformation("sub group {sub groupId} edited successfully for user {UserId}", subGroup.Id, userId);
+
+                return _mapper.Map<MaterialSubGroupDTO>(subGroup);
+            }
+            catch (DbUpdateException ex)
+            {
+                _logger.LogError("Could not update sub group for user {UserId}", userId);
+                throw new DbUpdateException("Failed to save the new material to the database.", ex);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("Could not update sub group for user {UserId}", userId);
+                throw new MaterialUpdateException("Something went wrong while updating the new material. Please try again!", ex);
+            }
         }
     }
 }

@@ -147,15 +147,7 @@ namespace StudyPlatform.Services.Subjects
             {
                 _logger.LogInformation("Deleting subject {SubjectId} for user {UserId}", id, userId);
 
-                var subject = await _repo.All<Subject>().FirstOrDefaultAsync(s => s.Id == id && s.UserId == userId);
-                if (subject == null)
-                {
-                    _logger.LogWarning("Subject {SubjectId} not found for user {UserId}", id, userId);
-                    return false;
-                }
-
-                await _repo.DeleteAsync<Subject>(subject);
-                await _repo.SaveChangesAsync();
+                await _repo.ExecuteDeleteAsync<Subject>(f => f.Id == id && f.UserId == userId);
 
                 _logger.LogInformation("Subject {SubjectId} deleted successfully for user {UserId}", id, userId);
 

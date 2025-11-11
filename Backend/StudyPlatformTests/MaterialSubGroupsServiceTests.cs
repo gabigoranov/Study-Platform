@@ -53,7 +53,7 @@ namespace StudyPlatformTests
             var expected = _mapper.Map<IEnumerable<MaterialSubGroupDTO>>(groups);
 
             // Act
-            var result = await _service.GetSubjectAsync(subjectId, userId, includeMaterials);
+            var result = await _service.GetAsync(subjectId, userId, includeMaterials);
 
             // Assert
             result.Should().NotBeNull();
@@ -73,7 +73,7 @@ namespace StudyPlatformTests
             var groups = TestData.SubGroups.Where(s => s.SubjectId == subjectId);
 
             // Act
-            var result = await _service.GetSubjectAsync(subjectId, userId, includeMaterials);
+            var result = await _service.GetAsync(subjectId, userId, includeMaterials);
 
             // Assert
             result.Should().NotBeNull();
@@ -86,8 +86,8 @@ namespace StudyPlatformTests
         public async Task GetSubGroupsBySubjectAsync_WithInvalidProps_ThrowsException()
         {
             // Act & Assert
-            await Assert.ThrowsAsync<ArgumentException>(() => _service.GetSubjectAsync(Guid.Empty, Guid.Empty));
-            await Assert.ThrowsAsync<ArgumentNullException>(() => _service.GetSubjectAsync(Guid.Empty, Guid.Empty));
+            await Assert.ThrowsAsync<ArgumentException>(() => _service.GetAsync(Guid.Empty, Guid.Empty));
+            await Assert.ThrowsAsync<ArgumentNullException>(() => _service.GetAsync(Guid.Empty, Guid.Empty));
 
             _repoMock.Verify(r => r.AllReadonly<MaterialSubGroup>(), Times.Never);
         }

@@ -110,6 +110,14 @@
             <param name="ids">The subgroup IDs.</param>
             <returns>No content if deleted.</returns>
         </member>
+        <member name="M:StudyPlatform.Controllers.MaterialSubGroupsController.Update(StudyPlatform.Models.CreateMaterialSubGroupViewModel,System.Guid)">
+            <summary>
+            Endpoint for updating a specific sub group that the user owns.
+            </summary>
+            <param name="model">The model for updating the sub group.</param>
+            <param name="id">The id of the sub group.</param>
+            <returns>An edited sub group if successful.</returns>
+        </member>
         <member name="T:StudyPlatform.Controllers.MindmapsController">
             <summary>
             A controller responsible for handling all requests related to mindmaps.
@@ -179,7 +187,7 @@
             </summary>
             <returns>A list of quizzes if successful.</returns>
         </member>
-        <member name="M:StudyPlatform.Controllers.QuizzesController.GetAllFromGroup(System.Guid,System.Guid)">
+        <member name="M:StudyPlatform.Controllers.QuizzesController.GetAllFromGroup(System.Guid,System.Nullable{System.Guid})">
             <summary>
             Endpoint for getting all quizzes that the user owns in a certain group.
             </summary>
@@ -898,7 +906,7 @@
             Defines methods for managing material subgroups.
             </summary>
         </member>
-        <member name="M:StudyPlatform.Services.MaterialSubGroups.IMaterialSubGroupsService.GetSubjectAsync(System.Guid,System.Guid,System.Boolean)">
+        <member name="M:StudyPlatform.Services.MaterialSubGroups.IMaterialSubGroupsService.GetAsync(System.Guid,System.Guid,System.Boolean)">
             <summary>
             Retrieves all material subgroups for a given subject.
             </summary>
@@ -931,6 +939,18 @@
             <param name="userId">The ID of the authenticated user.</param>
             <returns>True if deleted, false otherwise.</returns>
         </member>
+        <member name="M:StudyPlatform.Services.MaterialSubGroups.IMaterialSubGroupsService.UpdateAsync(StudyPlatform.Models.CreateMaterialSubGroupViewModel,System.Guid,System.Guid)">
+            <summary>
+            Edits an existing sub group for the specified user.
+            </summary>
+            <param name="model">The updated sub group data.</param>
+            <param name="userId">The ID of the user who owns the sub group.</param>
+            <param name="id">The ID of the sub group.</param>
+            <returns>
+            A <see cref="T:System.Threading.Tasks.Task`1"/> representing the asynchronous operation.
+            The task result contains the updated <see cref="T:StudyPlatform.Models.DTOs.MaterialSubGroupDTO"/>.
+            </returns>
+        </member>
         <member name="T:StudyPlatform.Services.MaterialSubGroups.MaterialSubGroupsService">
             <summary>
             Service for managing material subgroups.
@@ -941,7 +961,7 @@
             Initializes a new instance of the <see cref="T:StudyPlatform.Services.MaterialSubGroups.MaterialSubGroupsService"/> class.
             </summary>
         </member>
-        <member name="M:StudyPlatform.Services.MaterialSubGroups.MaterialSubGroupsService.GetSubjectAsync(System.Guid,System.Guid,System.Boolean)">
+        <member name="M:StudyPlatform.Services.MaterialSubGroups.MaterialSubGroupsService.GetAsync(System.Guid,System.Guid,System.Boolean)">
             <inheritdoc />
         </member>
         <member name="M:StudyPlatform.Services.MaterialSubGroups.MaterialSubGroupsService.GetByIdAsync(System.Guid,System.Guid)">
@@ -951,6 +971,9 @@
             <inheritdoc />
         </member>
         <member name="M:StudyPlatform.Services.MaterialSubGroups.MaterialSubGroupsService.DeleteAsync(System.Guid[],System.Guid)">
+            <inheritdoc />
+        </member>
+        <member name="M:StudyPlatform.Services.MaterialSubGroups.MaterialSubGroupsService.UpdateAsync(StudyPlatform.Models.CreateMaterialSubGroupViewModel,System.Guid,System.Guid)">
             <inheritdoc />
         </member>
         <member name="T:StudyPlatform.Services.Mindmaps.IMindmapsService">
