@@ -43,12 +43,6 @@ namespace StudyPlatform.Data
                 .HasForeignKey(a => a.QuizQuestionId)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            // One-to-one: QuizQuestion → CorrectAnswer
-            modelBuilder.Entity<QuizQuestion>()
-                .HasOne(q => q.CorrectQuizQuestionAnswer)
-                .WithOne()
-                .HasForeignKey<QuizQuestion>(q => q.CorrectQuizQuestionAnswerId)
-                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

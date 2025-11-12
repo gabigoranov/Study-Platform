@@ -15,10 +15,9 @@ namespace StudyPlatform.Models.DTOs
         [Required]
         public Guid QuizId { get; set; }
 
-        [Required]
-        public Guid CorrectQuizQuestionAnswerId { get; set; }
+        public Guid CorrectQuizQuestionAnswerId => Answers.Single(x => x.IsCorrect).Id;
 
-        public virtual QuizQuestionAnswerDTO CorrectQuizQuestionAnswer { get; set; }
+        public virtual QuizQuestionAnswerDTO CorrectQuizQuestionAnswer => Answers.Single(x => x.IsCorrect);
 
         public IEnumerable<QuizQuestionAnswerDTO> Answers { get; set; } = new List<QuizQuestionAnswerDTO>();
     }

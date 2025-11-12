@@ -70,5 +70,17 @@ namespace StudyPlatform.Services.Quiz
         /// <param name="userId">The ID of the user who owns the quizzes.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous delete operation.</returns>
         Task DeleteAsync(Guid[] ids, Guid userId);
+
+        /// <summary>
+        /// Adds questions and their answers to an existing quiz.
+        /// </summary>
+        /// <param name="questions">The questions and answers to add to the quiz.</param>
+        /// <param name="userId">The ID of the user who owns the quiz.</param>
+        /// <param name="quizId">The ID of the quiz to add questions to.</param>
+        /// <returns>
+        /// A <see cref="Task{QuizDTO}"/> representing the asynchronous operation.
+        /// The task result contains the updated <see cref="QuizDTO"/>.
+        /// </returns>
+        Task<QuizDTO> AddQuestionsToQuizAsync(IEnumerable<CreateQuizQuestionViewModel> questions, Guid userId, Guid quizId);
     }
 }

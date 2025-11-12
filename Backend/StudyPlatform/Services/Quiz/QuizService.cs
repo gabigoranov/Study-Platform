@@ -86,38 +86,13 @@ namespace StudyPlatform.Services.Quiz
                             
                             await _repo.AddRangeAsync<QuizQuestionAnswer>(answersToCreate);
                             await _repo.SaveChangesAsync();
-
-                            // Now set the correct answer - we'll use the position in the list
-                            // If the first answer in the ViewModel list should be the correct one
-                            if (answersList.Count > 0)
-                            {
-                                var correctAnswerModel = answersList[0]; // Assuming first answer is correct
-                                var correctAnswer = await _repo.All<QuizQuestionAnswer>()
-                                    .FirstOrDefaultAsync(a => a.QuizQuestionId == question.Id && 
-                                                              a.Description == correctAnswerModel.Description);
-                                
-                                if (correctAnswer != null)
-                                {
-                                    question.CorrectQuizQuestionAnswerId = correctAnswer.Id;
-                                    _repo.Update<QuizQuestion>(question);
-                                    await _repo.SaveChangesAsync();
-                                }
-                            }
                         }
                     }
                 }
 
                 _logger.LogInformation("Quiz {QuizId} created successfully for user {UserId}", quiz.Id, userId);
 
-                // Return the complete quiz with questions
-                var createdQuiz = await _repo.AllReadonly<StudyPlatform.Data.Models.Quiz>()
-                    .Include(q => q.Questions)
-                        .ThenInclude(qq => qq.Answers)
-                    .Include(q => q.Questions)
-                        .ThenInclude(qq => qq.CorrectQuizQuestionAnswer)
-                    .FirstOrDefaultAsync(q => q.Id == quiz.Id);
-
-                return _mapper.Map<QuizDTO>(createdQuiz);
+                return _mapper.Map<QuizDTO>(quiz);
             }
             catch (DbUpdateException ex)
             {
@@ -208,37 +183,13 @@ namespace StudyPlatform.Services.Quiz
                             
                             await _repo.AddRangeAsync<QuizQuestionAnswer>(answersToCreate);
                             await _repo.SaveChangesAsync();
-
-                            // Now set the correct answer 
-                            if (answersList.Count > 0)
-                            {
-                                var correctAnswerModel = answersList[0]; // Assuming first answer is correct
-                                var correctAnswer = await _repo.All<QuizQuestionAnswer>()
-                                    .FirstOrDefaultAsync(a => a.QuizQuestionId == question.Id && 
-                                                              a.Description == correctAnswerModel.Description);
-                                
-                                if (correctAnswer != null)
-                                {
-                                    question.CorrectQuizQuestionAnswerId = correctAnswer.Id;
-                                    _repo.Update<QuizQuestion>(question);
-                                    await _repo.SaveChangesAsync();
-                                }
-                            }
                         }
                     }
                 }
 
                 _logger.LogInformation("Quiz {QuizId} edited successfully for user {UserId}", quiz.Id, userId);
 
-                // Return the complete quiz with questions
-                var updatedQuiz = await _repo.AllReadonly<StudyPlatform.Data.Models.Quiz>()
-                    .Include(q => q.Questions)
-                        .ThenInclude(qq => qq.Answers)
-                    .Include(q => q.Questions)
-                        .ThenInclude(qq => qq.CorrectQuizQuestionAnswer)
-                    .FirstOrDefaultAsync(q => q.Id == quiz.Id);
-
-                return _mapper.Map<QuizDTO>(updatedQuiz);
+                return _mapper.Map<QuizDTO>(quiz);
             }
             catch (DbUpdateException ex)
             {
@@ -267,8 +218,6 @@ namespace StudyPlatform.Services.Quiz
                 var quiz = await _repo.AllReadonly<StudyPlatform.Data.Models.Quiz>()
                     .Include(q => q.Questions)
                         .ThenInclude(qq => qq.Answers)
-                    .Include(q => q.Questions)
-                        .ThenInclude(qq => qq.CorrectQuizQuestionAnswer)
                     .SingleAsync(q => q.Id == id && q.UserId == userId);
 
                 if (quiz == null)
@@ -349,11 +298,9 @@ namespace StudyPlatform.Services.Quiz
                 var query = _repo.AllReadonly<StudyPlatform.Data.Models.Quiz>()
                     .Include(q => q.Questions)
                         .ThenInclude(qq => qq.Answers)
-                    .Include(q => q.Questions)
-                        .ThenInclude(qq => qq.CorrectQuizQuestionAnswer)
                     .Where(x => x.UserId == userId);
 
-                if(groupId != Guid.Empty && subjectId != null)
+                if(groupId != Guid.Empty && groupId != null)
                     query = query.Where(x => x.MaterialSubGroupId == groupId);
 
                 if (subjectId != Guid.Empty && subjectId != null)
@@ -400,6 +347,71 @@ namespace StudyPlatform.Services.Quiz
             {
                 _logger.LogError("Could not create Quizzes for user {UserId}", userId);
                 throw new MaterialCreationException("Something went wrong while creating the new quizzes. Please try again!", ex);
+            }
+        }
+
+        /// <summary>
+        /// Adds questions and their answers to an existing quiz.
+        /// </summary>
+        /// <param name="questions">The questions and answers to add to the quiz.</param>
+        /// <param name="userId">The ID of the user who owns the quiz.</param>
+        /// <param name="quizId">The ID of the quiz to add questions to.</param>
+        /// <returns>
+        /// A <see cref="Task{QuizDTO}"/> representing the asynchronous operation.
+        /// The task result contains the updated <see cref="QuizDTO"/>.
+        /// </returns>
+        public async Task<QuizDTO> AddQuestionsToQuizAsync(IEnumerable<CreateQuizQuestionViewModel> questions, Guid userId, Guid quizId)
+        {
+            if (questions == null) throw new ArgumentNullException("Questions model can not be null or empty.");
+            if (userId == Guid.Empty) throw new ArgumentNullException("UserId can not be null or empty.");
+            if (quizId == Guid.Empty) throw new ArgumentNullException("QuizId can not be null or empty.");
+
+            try
+            {
+                _logger.LogInformation("Adding questions to quiz {QuizId} for user {UserId}", quizId, userId);
+
+                // First, verify that the quiz exists and belongs to the user
+                var quiz = await _repo.All<StudyPlatform.Data.Models.Quiz>()
+                    .FirstOrDefaultAsync(q => q.Id == quizId && q.UserId == userId);
+
+                if (quiz == null)
+                {
+                    _logger.LogWarning("Quiz {QuizId} not found for user {UserId}", quizId, userId);
+                    throw new KeyNotFoundException("Could not find the requested quiz.");
+                }
+
+                // Process each question and its answers
+                foreach (var questionModel in questions)
+                {
+                    var question = _mapper.Map<QuizQuestion>(questionModel);
+                    question.QuizId = quizId;
+
+                    // Add the question first
+                    await _repo.AddAsync<QuizQuestion>(question);
+
+                    // Ensure no more than one answer is correct
+                    if(question.Answers.Where(x => x.IsCorrect).Count() > 1)
+                    {
+                        _logger.LogError("Could not add questions to quiz {QuizId} for user {UserId}", quizId, userId);
+                        throw new ArgumentException("QuizQuestion can not have more than 1 correct asnwer.");
+                    }
+
+                    await _repo.SaveChangesAsync();
+                }
+
+                _logger.LogInformation("Questions added successfully to quiz {QuizId} for user {UserId}", quizId, userId);
+
+                return _mapper.Map<QuizDTO>(quiz);
+            }
+            catch (DbUpdateException ex)
+            {
+                _logger.LogError("Could not add questions to quiz {QuizId} for user {UserId}", quizId, userId);
+                throw new DbUpdateException("Failed to save the new questions to the database.", ex);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("Could not add questions to quiz {QuizId} for user {UserId}", quizId, userId);
+                throw new MaterialUpdateException("Something went wrong while adding questions to the quiz. Please try again!", ex);
             }
         }
     }

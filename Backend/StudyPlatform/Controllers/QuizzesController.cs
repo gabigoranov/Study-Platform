@@ -138,5 +138,23 @@ namespace StudyPlatform.Controllers
             await _quizService.DeleteAsync(ids, userId);
             return Ok();
         }
+
+        /// <summary>
+        /// Endpoint for adding questions and answers to a specific quiz.
+        /// </summary>
+        /// <param name="quizId">The ID of the quiz to add questions to.</param>
+        /// <param name="questions">The questions and answers to add to the quiz.</param>
+        /// <returns>The updated quiz with the new questions if successful.</returns>
+        [HttpPost("{quizId}/questions")]
+        public async Task<IActionResult> AddQuestionsToQuiz([FromRoute] Guid quizId, [FromBody] IEnumerable<CreateQuizQuestionViewModel> questions)
+        {
+            // Load userId from JWT token
+            Guid userId = User.GetUserId();
+
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+
+            QuizDTO res = await _quizService.AddQuestionsToQuizAsync(questions, userId, quizId);
+            return Ok(res);
+        }
     }
 }

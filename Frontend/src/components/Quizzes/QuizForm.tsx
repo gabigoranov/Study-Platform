@@ -1,4 +1,4 @@
-import { QuizDTO } from "@/data/DTOs/QuizDTO";
+import { Quiz } from "@/data/Quiz";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -27,8 +27,8 @@ import { useTranslation } from "react-i18next";
 import { keys } from "@/types/keys";
 
 interface QuizFormProps {
-  model?: QuizDTO | undefined;
-  onSubmit: (data: QuizDTO) => void;
+  model?: Quiz | undefined;
+  onSubmit: (data: Quiz) => void;
   submitLabel?: string;
   onCancel?: () => void; // optional for edit mode
 }
@@ -73,9 +73,11 @@ export default function QuizForm({
   function handleSubmit(values: z.infer<typeof quizSchema>) {
     onSubmit({
       ...model,
+      id: model?.id || "",
+      userId: model?.userId || "",
+      dateCreated: model?.dateCreated || new Date(),
+      questions: model?.questions || [],
       ...values,
-      materialSubGroupId: values.materialSubGroupId,
-      questions: []
     });
   }
 

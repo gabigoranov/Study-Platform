@@ -18,5 +18,8 @@ namespace StudyPlatform.Data.Models
         public Guid QuizQuestionId { get; set; }
 
         public virtual QuizQuestion QuizQuestion { get; set; }
+
+        [Required]
+        public bool IsCorrect { get; set; }
     }
 }

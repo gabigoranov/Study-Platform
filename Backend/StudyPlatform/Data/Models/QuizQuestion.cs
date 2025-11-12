@@ -18,11 +18,11 @@ namespace StudyPlatform.Data.Models
 
         public virtual Quiz Quiz { get; set; }
 
-        [Required]
-        [ForeignKey(nameof(QuizQuestionAnswer))]
-        public Guid CorrectQuizQuestionAnswerId { get; set; }
+        [NotMapped]
+        public Guid CorrectQuizQuestionAnswerId => Answers.Single(x => x.IsCorrect).Id;
 
-        public virtual QuizQuestionAnswer CorrectQuizQuestionAnswer { get; set; }
+        [NotMapped]
+        public virtual QuizQuestionAnswer CorrectQuizQuestionAnswer => Answers.Single(x => x.IsCorrect);
 
         public ICollection<QuizQuestionAnswer> Answers { get; set; } = new List<QuizQuestionAnswer>();
     }

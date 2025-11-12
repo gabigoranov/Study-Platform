@@ -208,6 +208,14 @@
             <param name="ids">The array of quiz ids.</param>
             <returns>Nothing.</returns>
         </member>
+        <member name="M:StudyPlatform.Controllers.QuizzesController.AddQuestionsToQuiz(System.Guid,System.Collections.Generic.IEnumerable{StudyPlatform.Models.CreateQuizQuestionViewModel})">
+            <summary>
+            Endpoint for adding questions and answers to a specific quiz.
+            </summary>
+            <param name="quizId">The ID of the quiz to add questions to.</param>
+            <param name="questions">The questions and answers to add to the quiz.</param>
+            <returns>The updated quiz with the new questions if successful.</returns>
+        </member>
         <member name="T:StudyPlatform.Controllers.SubjectsController">
             <summary>
             API controller for managing subjects.
@@ -675,6 +683,30 @@
         <member name="M:StudyPlatform.Migrations.SupabaseDb.AddQuizRelatedTables.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
         </member>
+        <member name="T:StudyPlatform.Migrations.SupabaseDb.MakeCorrectQuizAnswerNullable">
+            <inheritdoc />
+        </member>
+        <member name="M:StudyPlatform.Migrations.SupabaseDb.MakeCorrectQuizAnswerNullable.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:StudyPlatform.Migrations.SupabaseDb.MakeCorrectQuizAnswerNullable.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:StudyPlatform.Migrations.SupabaseDb.MakeCorrectQuizAnswerNullable.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:StudyPlatform.Migrations.SupabaseDb.UpdateQuizCorrectQuestionAnswerToBeDynamic">
+            <inheritdoc />
+        </member>
+        <member name="M:StudyPlatform.Migrations.SupabaseDb.UpdateQuizCorrectQuestionAnswerToBeDynamic.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:StudyPlatform.Migrations.SupabaseDb.UpdateQuizCorrectQuestionAnswerToBeDynamic.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:StudyPlatform.Migrations.SupabaseDb.UpdateQuizCorrectQuestionAnswerToBeDynamic.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
         <member name="T:StudyPlatform.Models.Common.AutoMapper">
             <summary>
             Defines the AutoMapper initialization and maps.
@@ -1111,6 +1143,18 @@
             <param name="userId">The ID of the user who owns the quizzes.</param>
             <returns>A <see cref="T:System.Threading.Tasks.Task"/> representing the asynchronous delete operation.</returns>
         </member>
+        <member name="M:StudyPlatform.Services.Quiz.IQuizService.AddQuestionsToQuizAsync(System.Collections.Generic.IEnumerable{StudyPlatform.Models.CreateQuizQuestionViewModel},System.Guid,System.Guid)">
+            <summary>
+            Adds questions and their answers to an existing quiz.
+            </summary>
+            <param name="questions">The questions and answers to add to the quiz.</param>
+            <param name="userId">The ID of the user who owns the quiz.</param>
+            <param name="quizId">The ID of the quiz to add questions to.</param>
+            <returns>
+            A <see cref="T:System.Threading.Tasks.Task`1"/> representing the asynchronous operation.
+            The task result contains the updated <see cref="T:StudyPlatform.Models.DTOs.QuizDTO"/>.
+            </returns>
+        </member>
         <member name="T:StudyPlatform.Services.Quiz.QuizService">
             <summary>
             Service for managing quizzes: create, edit, retrieve, and delete.
@@ -1162,6 +1206,18 @@
         </member>
         <member name="M:StudyPlatform.Services.Quiz.QuizService.CreateBulkAsync(System.Collections.Generic.IEnumerable{StudyPlatform.Models.CreateQuizViewModel},System.Guid)">
             <inheritdoc />
+        </member>
+        <member name="M:StudyPlatform.Services.Quiz.QuizService.AddQuestionsToQuizAsync(System.Collections.Generic.IEnumerable{StudyPlatform.Models.CreateQuizQuestionViewModel},System.Guid,System.Guid)">
+            <summary>
+            Adds questions and their answers to an existing quiz.
+            </summary>
+            <param name="questions">The questions and answers to add to the quiz.</param>
+            <param name="userId">The ID of the user who owns the quiz.</param>
+            <param name="quizId">The ID of the quiz to add questions to.</param>
+            <returns>
+            A <see cref="T:System.Threading.Tasks.Task`1"/> representing the asynchronous operation.
+            The task result contains the updated <see cref="T:StudyPlatform.Models.DTOs.QuizDTO"/>.
+            </returns>
         </member>
         <member name="T:StudyPlatform.Services.Subjects.ISubjectsService">
             <summary>

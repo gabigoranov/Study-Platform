@@ -3,6 +3,7 @@ using System;
 using System.Text.Json;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using StudyPlatform.Data;
@@ -12,9 +13,11 @@ using StudyPlatform.Data;
 namespace StudyPlatform.Migrations.SupabaseDb
 {
     [DbContext(typeof(SupabaseDbContext))]
-    partial class SupabaseDbContextModelSnapshot : ModelSnapshot
+    [Migration("20251111200308_MakeCorrectQuizAnswerNullable")]
+    partial class MakeCorrectQuizAnswerNullable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -88,6 +91,9 @@ namespace StudyPlatform.Migrations.SupabaseDb
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
+                    b.Property<Guid?>("CorrectQuizQuestionAnswerId")
+                        .HasColumnType("uuid");
+
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasMaxLength(400)
@@ -97,6 +103,9 @@ namespace StudyPlatform.Migrations.SupabaseDb
                         .HasColumnType("uuid");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CorrectQuizQuestionAnswerId")
+                        .IsUnique();
 
                     b.HasIndex("QuizId");
 
@@ -113,9 +122,6 @@ namespace StudyPlatform.Migrations.SupabaseDb
                         .IsRequired()
                         .HasMaxLength(400)
                         .HasColumnType("character varying(400)");
-
-                    b.Property<bool>("IsCorrect")
-                        .HasColumnType("boolean");
 
                     b.Property<Guid>("QuizQuestionId")
                         .HasColumnType("uuid");
@@ -218,11 +224,18 @@ namespace StudyPlatform.Migrations.SupabaseDb
 
             modelBuilder.Entity("StudyPlatform.Data.Models.QuizQuestion", b =>
                 {
+                    b.HasOne("StudyPlatform.Data.Models.QuizQuestionAnswer", "CorrectQuizQuestionAnswer")
+                        .WithOne()
+                        .HasForeignKey("StudyPlatform.Data.Models.QuizQuestion", "CorrectQuizQuestionAnswerId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
                     b.HasOne("StudyPlatform.Data.Models.Quiz", "Quiz")
                         .WithMany("Questions")
                         .HasForeignKey("QuizId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("CorrectQuizQuestionAnswer");
 
                     b.Navigation("Quiz");
                 });

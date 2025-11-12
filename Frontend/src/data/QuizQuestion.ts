@@ -5,6 +5,5 @@ export type QuizQuestion = {
   description: string;
   quizId: string;
   correctQuizQuestionAnswerId: string;
-  correctQuizQuestionAnswer: QuizQuestionAnswer;
   answers: QuizQuestionAnswer[];
 }

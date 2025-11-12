@@ -14,5 +14,7 @@ namespace StudyPlatform.Models.DTOs
 
         [Required]
         public Guid QuizQuestionId { get; set; }
+        [Required]
+        public bool IsCorrect { get; set; }
     }
 }

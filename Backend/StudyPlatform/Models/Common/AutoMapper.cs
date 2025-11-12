@@ -41,7 +41,8 @@ namespace StudyPlatform.Models.Common
             CreateMap<QuizQuestion, QuizQuestionDTO>().ReverseMap();
             CreateMap<CreateQuizQuestionViewModel, QuizQuestion>();
             CreateMap<QuizQuestionAnswer, QuizQuestionAnswerDTO>().ReverseMap();
-            CreateMap<CreateQuizQuestionAnswerViewModel, QuizQuestionAnswer>();
+            CreateMap<CreateQuizQuestionAnswerViewModel, QuizQuestionAnswer>()
+                .ForMember(dest => dest.Id, opt => opt.Ignore());
 
         }
     }
