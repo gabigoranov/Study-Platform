@@ -247,5 +247,8 @@
   "aiLearningDescription": "Sign up in seconds and set up your personalized learning profile with your subjects and goals.",
   "aiUploadDescription": "Drop your lecture slides, notes, or documents. Support for PDFs, PowerPoints, and more.",
   "aiCreationDescription": "Our AI instantly generates flashcards, quizzes, mindmaps, and podcasts tailored to your content.",
-  "themeToggle": "Toggle theme"
+  "themeToggle": "Toggle theme",
+  "difficultyEasy": "Easy",
+  "difficultyMedium": "Medium",
+  "difficultyHard": "Hard"
 }

@@ -1,4 +1,5 @@
 import { Difficulty } from "@/data/Difficulty";
+import { t } from "i18next";
 
 type DifficultyTagProps = {
     difficulty: Difficulty;
@@ -15,7 +16,7 @@ export default function DifficultyTag({ difficulty, className } : DifficultyTagP
 
     return (
         <span className={`${baseClasses} ${difficultyClasses} ${className ?? ""}`}>
-            {Difficulty[difficulty]}
+            {t('difficulty' + Difficulty[difficulty])}
         </span>
     );
 }
