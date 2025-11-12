@@ -123,7 +123,10 @@ namespace StudyPlatform.Services.Quiz
             {
                 _logger.LogInformation("Editing quiz {QuizId} for user {UserId}", id, userId);
 
-                var quiz = await _repo.All<StudyPlatform.Data.Models.Quiz>().FirstOrDefaultAsync(q => q.Id == id && q.UserId == userId);
+                var quiz = await _repo.All<StudyPlatform.Data.Models.Quiz>()
+                    .Include(x => x.Questions)
+                        .ThenInclude(x => x.Answers)
+                    .FirstOrDefaultAsync(q => q.Id == id && q.UserId == userId);
 
                 if (quiz == null)
                 {
@@ -134,58 +137,6 @@ namespace StudyPlatform.Services.Quiz
                 _mapper.Map(model, quiz); // maps updated fields from ViewModel to entity
 
                 await _repo.SaveChangesAsync();
-
-                // Handle questions and answers
-                if (model.Questions != null)
-                {
-                    // Delete existing questions for this quiz
-                    var existingQuestions = await _repo.All<QuizQuestion>()
-                        .Include(qq => qq.Answers) // Include answers to properly delete them
-                        .Where(qq => qq.QuizId == id)
-                        .ToListAsync();
-                    
-                    if (existingQuestions.Any())
-                    {
-                        // Delete all related answers first
-                        var allAnswers = existingQuestions.SelectMany(qq => qq.Answers).ToList();
-                        if (allAnswers.Any())
-                        {
-                            _repo.DeleteRange<QuizQuestionAnswer>(allAnswers);
-                        }
-                        
-                        _repo.DeleteRange<QuizQuestion>(existingQuestions);
-                        await _repo.SaveChangesAsync();
-                    }
-
-                    // Add updated questions
-                    foreach (var questionModel in model.Questions)
-                    {
-                        var question = _mapper.Map<QuizQuestion>(questionModel);
-                        question.QuizId = id;
-
-                        // Add the question first
-                        await _repo.AddAsync<QuizQuestion>(question);
-                        await _repo.SaveChangesAsync();
-
-                        // Add answers to this question
-                        if (questionModel.Answers != null && questionModel.Answers.Any())
-                        {
-                            var answersToCreate = new List<QuizQuestionAnswer>();
-                            var answersList = questionModel.Answers.ToList();
-                            
-                            // Create all answers for this question
-                            foreach (var answerModel in answersList)
-                            {
-                                var answer = _mapper.Map<QuizQuestionAnswer>(answerModel);
-                                answer.QuizQuestionId = question.Id;
-                                answersToCreate.Add(answer);
-                            }
-                            
-                            await _repo.AddRangeAsync<QuizQuestionAnswer>(answersToCreate);
-                            await _repo.SaveChangesAsync();
-                        }
-                    }
-                }
 
                 _logger.LogInformation("Quiz {QuizId} edited successfully for user {UserId}", quiz.Id, userId);
 
@@ -412,6 +363,35 @@ namespace StudyPlatform.Services.Quiz
             {
                 _logger.LogError("Could not add questions to quiz {QuizId} for user {UserId}", quizId, userId);
                 throw new MaterialUpdateException("Something went wrong while adding questions to the quiz. Please try again!", ex);
+            }
+        }
+
+        /// <inheritdoc />
+        public async Task DeleteQuestionAsync(Guid id, Guid userId)
+        {
+            if (id == Guid.Empty)
+            {
+                _logger.LogInformation("DeleteQuestionAsync called with empty or null IDs for user {UserId}", userId);
+                throw new KeyNotFoundException("No quiz IDs provided for deletion.");
+            }
+            if (userId == Guid.Empty) throw new ArgumentNullException("UserId can not be null or empty.");
+
+            try
+            {
+                await _repo.ExecuteDeleteAsync<QuizQuestion>(x => x.Id == id);
+                await _repo.SaveChangesAsync();
+
+                _logger.LogInformation("Quizzes deleted for user {UserId}", userId);
+            }
+            catch (DbUpdateException ex)
+            {
+                _logger.LogError("Could not save changes for deleted Quizzes for user {UserId}", userId);
+                throw new DbUpdateException("Failed to execute the deletion of the quiz from the database.", ex);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("Could not delete Quizzes for user {UserId}", userId);
+                throw new MaterialDeletionException("Something went wrong while deleting the quiz. Please try again!", ex);
             }
         }
     }

@@ -140,6 +140,36 @@ namespace StudyPlatform.Controllers
         }
 
         /// <summary>
+        /// Endpoint for deleting a single quiz by its Id.
+        /// </summary>
+        /// <param name="id">The array of quiz ids.</param>
+        /// <returns>Nothing.</returns>
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteSingle([FromRoute] Guid id)
+        {
+            // Load userId from JWT tokens
+            Guid userId = User.GetUserId();
+
+            await _quizService.DeleteAsync([id], userId);
+            return Ok();
+        }
+
+        /// <summary>
+        /// Endpoint for deleting a single quiz question by its Id.
+        /// </summary>
+        /// <param name="id">The array of quiz ids.</param>
+        /// <returns>Nothing.</returns>
+        [HttpDelete("question/{id}")]
+        public async Task<IActionResult> DeleteSingleQuestion([FromRoute] Guid id)
+        {
+            // Load userId from JWT tokens
+            Guid userId = User.GetUserId();
+
+            await _quizService.DeleteQuestionAsync(id, userId);
+            return Ok();
+        }
+
+        /// <summary>
         /// Endpoint for adding questions and answers to a specific quiz.
         /// </summary>
         /// <param name="quizId">The ID of the quiz to add questions to.</param>

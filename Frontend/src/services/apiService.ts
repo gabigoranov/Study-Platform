@@ -108,8 +108,8 @@ export const apiService = <T, TCreate = Partial<T>, TUpdate = Partial<T>>(resour
         });
     },
 
-    deleteSingle: async (token: string, id:string): Promise<void> => {
-        let url = `${BASE_URL}/${resource}/${id}`;
+    deleteSingle: async (token: string, id:string, route?:string): Promise<void> => {
+        let url = `${BASE_URL}/${resource}${route ? '/' + route : ''}/${id}`;
         
         await fetch(url, {
           method: "DELETE",

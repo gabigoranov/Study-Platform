@@ -208,6 +208,20 @@
             <param name="ids">The array of quiz ids.</param>
             <returns>Nothing.</returns>
         </member>
+        <member name="M:StudyPlatform.Controllers.QuizzesController.DeleteSingle(System.Guid)">
+            <summary>
+            Endpoint for deleting a single quiz by its Id.
+            </summary>
+            <param name="id">The array of quiz ids.</param>
+            <returns>Nothing.</returns>
+        </member>
+        <member name="M:StudyPlatform.Controllers.QuizzesController.DeleteSingleQuestion(System.Guid)">
+            <summary>
+            Endpoint for deleting a single quiz question by its Id.
+            </summary>
+            <param name="id">The array of quiz ids.</param>
+            <returns>Nothing.</returns>
+        </member>
         <member name="M:StudyPlatform.Controllers.QuizzesController.AddQuestionsToQuiz(System.Guid,System.Collections.Generic.IEnumerable{StudyPlatform.Models.CreateQuizQuestionViewModel})">
             <summary>
             Endpoint for adding questions and answers to a specific quiz.
@@ -1218,6 +1232,9 @@
             A <see cref="T:System.Threading.Tasks.Task`1"/> representing the asynchronous operation.
             The task result contains the updated <see cref="T:StudyPlatform.Models.DTOs.QuizDTO"/>.
             </returns>
+        </member>
+        <member name="M:StudyPlatform.Services.Quiz.QuizService.DeleteQuestionAsync(System.Guid,System.Guid)">
+            <inheritdoc />
         </member>
         <member name="T:StudyPlatform.Services.Subjects.ISubjectsService">
             <summary>

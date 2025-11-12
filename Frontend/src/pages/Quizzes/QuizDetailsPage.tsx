@@ -79,7 +79,7 @@ export default function QuizDetailsPage({
   // Mutation for deleting a question
   const deleteQuestionMutation = useMutation({
     mutationFn: (questionId: string) =>
-      quizService.deleteSingle(token!, questionId),
+      quizService.deleteSingle(token!, questionId, 'question'),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["quiz", quizId] });
       queryClient.invalidateQueries({ queryKey: ["quizzes"] });
@@ -324,7 +324,7 @@ export default function QuizDetailsPage({
     correctAnswerIndex !== null;
 
   return (
-    <div className="w-full max-w-5xl mx-auto p-6">
+    <div className="w-full sm:max-w-5xl mx-auto">
       {/* Header Section */}
       <div className="mb-8">
         <Button variant="ghost" onClick={onBack} className="mb-4">
@@ -407,7 +407,7 @@ export default function QuizDetailsPage({
                   </div>
                 ))}
                 {correctAnswerIndex === null && filledAnswersCount >= 2 && (
-                  <p className="text-sm text-amber-600 flex items-center gap-1">
+                  <p className="text-sm text-warning flex items-center gap-1">
                     <AlertCircle className="h-4 w-4" />
                     Please select the correct answer
                   </p>
@@ -501,7 +501,7 @@ export default function QuizDetailsPage({
                         </Button>
                       </>
                     ) : (
-                      <>
+                      <div className="flex gap-2 flex-col sm:flex-row">
                         <Button
                           variant="outline"
                           size="sm"
@@ -520,7 +520,7 @@ export default function QuizDetailsPage({
                           <Trash2 className="h-4 w-4" />
                           {t(keys.delete)}
                         </Button>
-                      </>
+                      </div>
                     )}
                   </div>
                 </div>
@@ -537,7 +537,7 @@ export default function QuizDetailsPage({
                           key={answer.id}
                           className={`flex items-center justify-between p-3 border rounded-lg transition-colors ${
                             isCorrect && !isQuestionInEditMode(question.id)
-                              ? "bg-green-50 border-green-200 dark:text-text-inverted dark:bg-green-950 dark:border-green-800"
+                              ? "bg-success-light/10 border-success-light/20 dark:text-text-inverted dark:bg-success-dark dark:border-success-dark"
                               : "hover:bg-muted/50"
                           }`}
                         >
@@ -572,7 +572,7 @@ export default function QuizDetailsPage({
                               !isQuestionInEditMode(question.id) && (
                                 <Badge
                                   variant="default"
-                                  className="bg-green-600 hover:bg-green-600"
+                                  className="bg-success hover:bg-success py-1.5"
                                 >
                                   {t(keys.CorrectAnswer)}
                                 </Badge>

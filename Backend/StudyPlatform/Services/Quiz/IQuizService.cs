@@ -82,5 +82,6 @@ namespace StudyPlatform.Services.Quiz
         /// The task result contains the updated <see cref="QuizDTO"/>.
         /// </returns>
         Task<QuizDTO> AddQuestionsToQuizAsync(IEnumerable<CreateQuizQuestionViewModel> questions, Guid userId, Guid quizId);
+        Task DeleteQuestionAsync(Guid id, Guid userId);
     }
 }
