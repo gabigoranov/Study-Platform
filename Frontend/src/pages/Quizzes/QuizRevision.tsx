@@ -207,11 +207,11 @@ export default function QuizRevision({ quizId, onBack }: QuizRevisionProps) {
               
               if (isAnswerSubmitted) {
                 if (isSelected && isCorrect) {
-                  answerClass = "bg-success border-success text-text-inverted shadow-lg transform scale-[1.02]";
+                  answerClass = "bg-success border-success text-text shadow-lg transform scale-[1.02]";
                 } else if (isSelected && !isCorrect) {
                   answerClass = "bg-error/20 border-error text-destructive transform scale-[1.02]";
                 } else if (!isSelected && isCorrect) {
-                  answerClass = "bg-success/30 border-success text-success-light";
+                  answerClass = "bg-success/30 border-success text-text";
                 } else {
                   answerClass = "bg-muted border-muted-foreground/20";
                 }

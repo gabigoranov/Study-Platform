@@ -23,7 +23,11 @@ export function useGenerationActions() {
     },
     {
       id: "generateMindmaps",
-      title: "Generate Mindmaps",
+      title: "Generate Mindmap",
+    },
+    {
+      id: "generateQuizzes",
+      title: "Generate Quiz",
     },
   ];
 

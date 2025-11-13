@@ -83,5 +83,13 @@ namespace StudyPlatform.Services.Quiz
         /// </returns>
         Task<QuizDTO> AddQuestionsToQuizAsync(IEnumerable<CreateQuizQuestionViewModel> questions, Guid userId, Guid quizId);
         Task DeleteQuestionAsync(Guid id, Guid userId);
+
+        /// <summary>
+        /// Request the generation of quizzes using AI based on the provided model from a microservice.
+        /// </summary>
+        /// <param name="userId">The user's ID</param>
+        /// <param name="model">The model containing the download url and other prompt data.</param>
+        /// <returns></returns>
+        Task<GeneratedQuizDTO> GenerateAsync(Guid userId, GenerateQuizViewModel model);
     }
 }

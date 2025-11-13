@@ -186,5 +186,23 @@ namespace StudyPlatform.Controllers
             QuizDTO res = await _quizService.AddQuestionsToQuizAsync(questions, userId, quizId);
             return Ok(res);
         }
+
+        /// <summary>
+        /// Endpoint for generating quizzes from a file.
+        /// </summary>
+        /// <param name="model">The model containing the file's download url and other prompt data.</param>
+        /// <returns>A quiz if successful.</returns>
+        [HttpPost("generate")]
+        public async Task<IActionResult> Generate([FromBody] GenerateQuizViewModel model)
+        {
+            // Load userId from JWT token
+            Guid userId = User.GetUserId();
+
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+
+            GeneratedQuizDTO res = await _quizService.GenerateAsync(userId, model);
+
+            return Ok(res);
+        }
     }
 }

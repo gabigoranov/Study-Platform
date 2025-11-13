@@ -2,8 +2,9 @@ import { Quiz } from "@/data/Quiz";
 import { apiService } from "./apiService";
 import { QuizDTO } from "@/data/DTOs/QuizDTO";
 import { BASE_URL } from "@/types/urls";
+import { CreateQuizDTO } from "@/data/DTOs/CreateQuizDTO";
 
-const quizServiceBase = apiService<Quiz, QuizDTO, QuizDTO>("quizzes");
+const quizServiceBase = apiService<Quiz, CreateQuizDTO, QuizDTO>("quizzes");
 
 // Helper functions to convert between models and DTOs
 export const quizToDTO = (quiz: Quiz): QuizDTO => {

@@ -13,6 +13,7 @@ import { Badge } from "@/components/ui/badge";
 import { Plus, X, Edit3, Trash2, Save, AlertCircle } from "lucide-react";
 import DifficultyTag from "../../components/Common/DifficultyTag";
 import { QuizQuestionDTO } from "@/data/DTOs/QuizQuestionDTO";
+import { QuizDTO } from "@/data/DTOs/QuizDTO";
 
 interface QuizDetailsPageProps {
   quizId: string;
@@ -60,9 +61,15 @@ export default function QuizDetailsPage({
   const addQuestionsMutation = useMutation({
     mutationFn: (questions: any[]) =>
       quizService.addQuestionsToQuiz(token!, quizId, questions),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["quiz", quizId] });
-      queryClient.invalidateQueries({ queryKey: ["quizzes"] });
+    onSuccess: (quizDto: QuizDTO) => {
+      console.log(quizDto)
+
+      queryClient.setQueryData(["quiz", quizId], (old: Quiz | undefined) => {
+        if (!old) return old;
+        return quizDto;
+      });
+      
+      //queryClient.invalidateQueries({ queryKey: ["quizzes"] });
     },
   });
 
@@ -70,8 +77,16 @@ export default function QuizDetailsPage({
   const updateQuizMutation = useMutation({
     mutationFn: ({ id, data }: { id: string; data: Quiz }) =>
       quizService.update(id, quizService.quizToDTO(data), token!),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["quiz", quizId] });
+    onSuccess: (updatedQuiz) => {
+      // Directly update the quiz cache to avoid reorder flicker
+      queryClient.setQueryData(["quiz", quizId], (old: Quiz | undefined) => {
+        if (!old) return updatedQuiz;
+        return {
+          ...old,
+          ...updatedQuiz,
+          questions: updatedQuiz.questions ?? old.questions, // preserve stable order
+        };
+      });
       queryClient.invalidateQueries({ queryKey: ["quizzes"] });
     },
   });
@@ -79,9 +94,15 @@ export default function QuizDetailsPage({
   // Mutation for deleting a question
   const deleteQuestionMutation = useMutation({
     mutationFn: (questionId: string) =>
-      quizService.deleteSingle(token!, questionId, 'question'),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["quiz", quizId] });
+      quizService.deleteSingle(token!, questionId, "question"),
+    onSuccess: (_, questionId) => {
+      queryClient.setQueryData(["quiz", quizId], (old: Quiz | undefined) => {
+        if (!old) return old;
+        return {
+          ...old,
+          questions: old.questions.filter((q) => q.id !== questionId),
+        };
+      });
       queryClient.invalidateQueries({ queryKey: ["quizzes"] });
     },
   });
@@ -336,12 +357,7 @@ export default function QuizDetailsPage({
           <DifficultyTag difficulty={quiz.difficulty} />
         </div>
 
-        <div className="mt-4 p-4 bg-muted/50 rounded-lg border">
-          <p className="text-muted-foreground">
-            <strong className="text-foreground">{t(keys.Description)}: </strong>
-            {quiz.description}
-          </p>
-        </div>
+        <p className="text-muted-foreground">{quiz.description}</p>
       </div>
 
       {/* Add New Question Section */}
@@ -547,9 +563,7 @@ export default function QuizDetailsPage({
                             </span>
                             {isQuestionInEditMode(question.id) ? (
                               <Input
-                                defaultValue={
-                                  answer.description
-                                }
+                                defaultValue={answer.description}
                                 onChange={(e) =>
                                   updateAnswerText(
                                     question.id,

@@ -281,6 +281,13 @@
             <param name="questions">The questions and answers to add to the quiz.</param>
             <returns>The updated quiz with the new questions if successful.</returns>
         </member>
+        <member name="M:StudyPlatform.Controllers.QuizzesController.Generate(StudyPlatform.Models.GenerateQuizViewModel)">
+            <summary>
+            Endpoint for generating quizzes from a file.
+            </summary>
+            <param name="model">The model containing the file's download url and other prompt data.</param>
+            <returns>A quiz if successful.</returns>
+        </member>
         <member name="T:StudyPlatform.Controllers.SubjectsController">
             <summary>
             API controller for managing subjects.
@@ -1086,7 +1093,7 @@
             Service for managing friends and AppUser relationships.
             </summary>
         </member>
-        <member name="M:StudyPlatform.Services.Friends.FriendsService.#ctor(StudyPlatform.Data.Common.IRepository,Microsoft.Extensions.Logging.ILogger{StudyPlatform.Services.Friends.FriendsService})">
+        <member name="M:StudyPlatform.Services.Friends.FriendsService.#ctor(StudyPlatform.Data.Common.IRepository,Microsoft.Extensions.Logging.ILogger{StudyPlatform.Services.Friends.FriendsService},AutoMapper.IMapper)">
             <summary>
             Initializes a new instance of the <see cref="T:StudyPlatform.Services.Friends.FriendsService"/> class.
             </summary>
@@ -1382,12 +1389,20 @@
             The task result contains the updated <see cref="T:StudyPlatform.Models.DTOs.QuizDTO"/>.
             </returns>
         </member>
+        <member name="M:StudyPlatform.Services.Quiz.IQuizService.GenerateAsync(System.Guid,StudyPlatform.Models.GenerateQuizViewModel)">
+            <summary>
+            Request the generation of quizzes using AI based on the provided model from a microservice.
+            </summary>
+            <param name="userId">The user's ID</param>
+            <param name="model">The model containing the download url and other prompt data.</param>
+            <returns></returns>
+        </member>
         <member name="T:StudyPlatform.Services.Quiz.QuizService">
             <summary>
             Service for managing quizzes: create, edit, retrieve, and delete.
             </summary>
         </member>
-        <member name="M:StudyPlatform.Services.Quiz.QuizService.#ctor(StudyPlatform.Data.Common.IRepository,Microsoft.Extensions.Logging.ILogger{StudyPlatform.Services.Quiz.QuizService},AutoMapper.IMapper)">
+        <member name="M:StudyPlatform.Services.Quiz.QuizService.#ctor(StudyPlatform.Data.Common.IRepository,Microsoft.Extensions.Logging.ILogger{StudyPlatform.Services.Quiz.QuizService},AutoMapper.IMapper,System.Net.Http.HttpClient)">
             <summary>
             Initializes a new instance of the <see cref="T:StudyPlatform.Services.Quiz.QuizService"/> class.
             </summary>

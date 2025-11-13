@@ -19,6 +19,7 @@ import { GenerationActionHandler } from "./UploadFileMenu";
 import DocViewer, { DocViewerRenderers } from "@cyntler/react-doc-viewer";
 import "@cyntler/react-doc-viewer/dist/index.css";
 import { ScrollArea } from "@radix-ui/react-scroll-area";
+import QuizSkeleton from "../Quizzes/QuizSkeleton";
 
 type UploadFileFormProps = {
   resetForm: () => void;
@@ -111,6 +112,12 @@ export default function UploadFileForm({
             <MindmapSkeleton />
           </div>
         );
+      case "generateQuizzes":
+        return (
+          <div className="w-full h-full flex flex-wrap gap-3 self-start justify-center items-center overflow-x-hidden">
+            <QuizSkeleton />
+          </div>
+        );
     }
   }
 
@@ -123,6 +130,16 @@ export default function UploadFileForm({
               { uri: URL.createObjectURL(file), fileName: file.name },
             ]}
             pluginRenderers={DocViewerRenderers}
+            config={{
+              header: {
+                disableHeader: true,
+              },
+              pdfZoom: {
+                defaultZoom: 1.0,
+                zoomJump: 0.2,
+              },
+              pdfVerticalScrollByDefault: true, 
+            }}
           />
         ) : (
           <div className="h-[600px] flex items-center justify-center text-gray-500">

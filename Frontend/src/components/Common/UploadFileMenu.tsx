@@ -12,6 +12,9 @@ import { useFlashcardsGeneration } from "@/hooks/useFlashcardsGeneration";
 import { useMindmapsGeneration } from "@/hooks/useMindmapsGeneration";
 import { GeneratedFlashcardDTO } from "@/data/DTOs/GeneratedFlashcardDTO";
 import { Flashcard } from "@/data/Flashcard";
+import { useQuizzesGeneration } from "@/hooks/useQuizzesGeneration";
+import ReviewGeneratedQuiz from "../Quizzes/ReviewGeneratedQuiz";
+import { GeneratedQuizDTO } from "@/data/DTOs/GeneratedQuizDTO";
 
 type UploadFileMenuProps = {
   isFormOpen: boolean;
@@ -80,6 +83,17 @@ export default function UploadFileMenu({
     closeForm,
   });
 
+  const {
+    generatedQuiz,
+    handleApproveGeneration: handleApproveQuizzesGeneration,
+    handleSubmitGeneration: handleSubmitQuizzesGeneration,
+  } = useQuizzesGeneration({
+    setLoading,
+    setReviewing,
+    setError,
+    closeForm,
+  });
+
   const generationActionHandlerMap: Record<string, GenerationActionHandler> = {
     generateFlashcards: {
       id: "generateFlashcards",
@@ -92,6 +106,12 @@ export default function UploadFileMenu({
       title: "Generate Mindmaps",
       handleSubmitGeneration: handleSubmitMindmapsGeneration,
       handleApproveGeneration: handleApproveMindmapsGeneration,
+    },
+    generateQuizzes: {
+      id: "generateQuizzes",
+      title: "Generate Quizzes",
+      handleSubmitGeneration: handleSubmitQuizzesGeneration,
+      handleApproveGeneration: handleApproveQuizzesGeneration,
     },
   };
 
@@ -127,6 +147,16 @@ export default function UploadFileMenu({
               <ReactFlowProvider>
                 <ReviewGeneratedMindmap
                   mindmap={generatedMindmap as GeneratedMindmapDTO}
+                  onApprove={selectedActionHandler.handleApproveGeneration}
+                  onCancel={closeForm}
+                  loading={false}
+                  error={false}
+                />
+              </ReactFlowProvider>
+            ) : selectedActionId == "generateQuizzes" ? (
+              <ReactFlowProvider>
+                <ReviewGeneratedQuiz
+                  quiz={generatedQuiz as GeneratedQuizDTO}
                   onApprove={selectedActionHandler.handleApproveGeneration}
                   onCancel={closeForm}
                   loading={false}

@@ -10,6 +10,7 @@
         /// </summary>
         public const string FLASHCARDS_MICROSERVICE_BASE_URL = "http://localhost:8000/flashcards";
         public const string MINDMAPS_MICROSERVICE_BASE_URL = "http://localhost:8001/mindmaps";
+        public const string QUIZZES_MICROSERVICE_BASE_URL = "http://localhost:8002/quizzes";
 
     }
 }

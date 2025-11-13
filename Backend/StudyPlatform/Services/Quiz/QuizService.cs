@@ -9,6 +9,7 @@ using StudyPlatform.Exceptions;
 using StudyPlatform.Models;
 using StudyPlatform.Models.DTOs;
 using System.Diagnostics;
+using System.Text.Json;
 
 namespace StudyPlatform.Services.Quiz
 {
@@ -20,6 +21,7 @@ namespace StudyPlatform.Services.Quiz
         private readonly IRepository _repo;
         private readonly ILogger<QuizService> _logger;
         private readonly IMapper _mapper;
+        private readonly HttpClient _client;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="QuizService"/> class.
@@ -27,11 +29,12 @@ namespace StudyPlatform.Services.Quiz
         /// <param name="repo">The Repository instance.</param>
         /// <param name="logger">The logger instance.</param>
         /// <param name="mapper">The AutoMapper instance.</param>
-        public QuizService(IRepository repo, ILogger<QuizService> logger, IMapper mapper)
+        public QuizService(IRepository repo, ILogger<QuizService> logger, IMapper mapper, HttpClient client)
         {
             _repo = repo;
             _logger = logger;
             _mapper = mapper;
+            _client = client;
         }
 
         /// <summary>
@@ -55,40 +58,15 @@ namespace StudyPlatform.Services.Quiz
 
                 // Add quiz to the database first to get its ID
                 await _repo.AddAsync<StudyPlatform.Data.Models.Quiz>(quiz);
-                await _repo.SaveChangesAsync();
 
-                // Process questions and answers
-                if (model.Questions != null && model.Questions.Any())
+                // Ensure no more than one answer is correct
+                if (quiz.Questions.Any(x => x.Answers.Where(x => x.IsCorrect).Count() > 1))
                 {
-                    var questionList = model.Questions.ToList();
-                    foreach (var questionModel in questionList)
-                    {
-                        var question = _mapper.Map<QuizQuestion>(questionModel);
-                        question.QuizId = quiz.Id;
-
-                        // Add the question first
-                        await _repo.AddAsync<QuizQuestion>(question);
-                        await _repo.SaveChangesAsync();
-
-                        // Add answers to this question
-                        if (questionModel.Answers != null && questionModel.Answers.Any())
-                        {
-                            var answersToCreate = new List<QuizQuestionAnswer>();
-                            var answersList = questionModel.Answers.ToList();
-                            
-                            // Create all answers for this question
-                            foreach (var answerModel in answersList)
-                            {
-                                var answer = _mapper.Map<QuizQuestionAnswer>(answerModel);
-                                answer.QuizQuestionId = question.Id;
-                                answersToCreate.Add(answer);
-                            }
-                            
-                            await _repo.AddRangeAsync<QuizQuestionAnswer>(answersToCreate);
-                            await _repo.SaveChangesAsync();
-                        }
-                    }
+                    _logger.LogError("Could not create quiz for user {UserId}", userId);
+                    throw new ArgumentException("QuizQuestion can not have more than 1 correct asnwer.");
                 }
+
+                await _repo.SaveChangesAsync();
 
                 _logger.LogInformation("Quiz {QuizId} created successfully for user {UserId}", quiz.Id, userId);
 
@@ -322,7 +300,7 @@ namespace StudyPlatform.Services.Quiz
                 _logger.LogInformation("Adding questions to quiz {QuizId} for user {UserId}", quizId, userId);
 
                 // First, verify that the quiz exists and belongs to the user
-                var quiz = await _repo.All<StudyPlatform.Data.Models.Quiz>()
+                var quiz = await _repo.All<StudyPlatform.Data.Models.Quiz>().Include(x => x.Questions).ThenInclude(x => x.Answers)
                     .FirstOrDefaultAsync(q => q.Id == quizId && q.UserId == userId);
 
                 if (quiz == null)
@@ -393,6 +371,32 @@ namespace StudyPlatform.Services.Quiz
                 _logger.LogError("Could not delete Quizzes for user {UserId}", userId);
                 throw new MaterialDeletionException("Something went wrong while deleting the quiz. Please try again!", ex);
             }
+        }
+
+        public async Task<GeneratedQuizDTO> GenerateAsync(Guid userId, GenerateQuizViewModel model)
+        {
+            using var content = new MultipartFormDataContent();
+
+            var response = await _client.PostAsJsonAsync($"{AppConstants.QUIZZES_MICROSERVICE_BASE_URL}/generate", model);
+            response.EnsureSuccessStatusCode();
+
+            var jsonString = await response.Content.ReadAsStringAsync();
+            if (jsonString == null)
+            {
+                _logger.LogError("Failed to get a valid response from the flashcards microservice for user {UserId}", userId);
+                throw new Exception("Failed to get a valid response from the flashcards microservice.");
+            }
+
+            var options = new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true
+            };
+
+            // Convert to list of FlashcardModel
+            var quizzes = JsonSerializer.Deserialize<GeneratedQuizDTO>(jsonString, options)
+                 ?? new GeneratedQuizDTO();
+
+            return quizzes;
         }
     }
 }

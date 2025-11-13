@@ -132,6 +132,21 @@ export const keys = {
   cancel: "cancel",
   answer: "answer",
   // Additional keys for hardcoded text found
+  friends: "friends",
+  friendRequests: "friendRequests",
+  friendsTab: "friendsTab",
+  friendRequestsTab: "friendRequestsTab",
+  addFriend: "addFriend",
+  unfriend: "unfriend",
+  accept: "accept",
+  reject: "reject",
+  searchFriends: "searchFriends",
+  refresh: "refresh",
+  noFriendsFound: "noFriendsFound",
+  noFriendRequests: "noFriendRequests",
+  score: "score",
+  displayName: "displayName",
+  message: "message",
   sidebar: "sidebar",
   displaysMobileSidebar: "displaysMobileSidebar",
   toggleSidebar: "toggleSidebar",
@@ -241,5 +256,6 @@ export const keys = {
   difficultyMedium: "difficultyMedium",
   difficultyHard: "difficultyHard",
   zoomIn: "zoomIn",
-  clickOutside: "clickOutside"
+  clickOutside: "clickOutside",
+  submittingQuizLabel: "submittingQuizLabel"
 };

@@ -238,5 +238,21 @@
     "difficultyMedium": "Средно",
     "difficultyHard": "Трудно",
     "zoomIn": "Увеличаване",
-    "clickOutside": "Кликнете навън или скролнете за да затворите"
+    "clickOutside": "Кликнете навън или скролнете за да затворите",
+    "friends": "Приятели",
+    "friendRequests": "Покани за приятелство",
+    "friendsTab": "Приятели",
+    "friendRequestsTab": "Покани за приятелство",
+    "addFriend": "Добави приятел",
+    "unfriend": "Премахни приятел",
+    "accept": "Приеми",
+    "reject": "Откажи",
+    "searchFriends": "Търсене на приятели...",
+    "refresh": "Опресни",
+    "noFriendsFound": "Няма намерени приятели.",
+    "noFriendRequests": "Няма покани за приятелство.",
+    "score": "Точки",
+    "displayName": "Показвано име",
+    "message": "Съобщение",
+    "submittingQuizLabel": "Запазва се теста..."
 }

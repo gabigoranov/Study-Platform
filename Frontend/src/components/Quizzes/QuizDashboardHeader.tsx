@@ -3,6 +3,7 @@ import { Plus } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { keys } from "@/types/keys";
 import { Input } from "@/components/ui/input";
+import UploadFileButton from "../Common/UploadFileButton";
 
 interface QuizDashboardHeaderProps {
   onCreateNew: () => void;
@@ -30,6 +31,7 @@ export default function QuizDashboardHeader({
           onChange={(e) => onSearch(e.target.value)}
           className="w-full sm:w-[200px]"
         />
+        <UploadFileButton defaultActionId={"generateQuizzes"} />
         <Button onClick={onCreateNew} className="w-full sm:w-auto">
           <Plus className="mr-2 h-4 w-4" />
           {t(keys.createNewQuiz)}
