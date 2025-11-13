@@ -29,7 +29,7 @@ export default function FlashcardsDashboardHeader({ setView, handleFileUpload, h
     const { data: groups, isLoading, error } = useQuery({
         queryKey: ["materialSubGroups", selectedSubjectId],
         queryFn: () => materialSubGroupsService.getAll(token!, `subject/${selectedSubjectId}`, {
-            includeMaterials: true
+            includeMaterials: false
         }),
         staleTime: 1000 * 60 * 5,
     });

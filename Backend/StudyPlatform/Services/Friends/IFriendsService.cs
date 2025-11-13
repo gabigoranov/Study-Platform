@@ -1,4 +1,5 @@
 ﻿using StudyPlatform.Data.Models;
+using StudyPlatform.Models.DTOs;
 
 namespace StudyPlatform.Services.Friends
 {
@@ -13,7 +14,7 @@ namespace StudyPlatform.Services.Friends
         /// <param name="requesterId">The ID of the user sending the request.</param>
         /// <param name="addresseeId">The ID of the user receiving the request.</param>
         /// <returns>The created AppUserFriend relationship.</returns>
-        Task<AppUserFriend> CreateFriendRequestAsync(Guid requesterId, Guid addresseeId);
+        Task<AppUserFriendDTO> CreateFriendRequestAsync(Guid requesterId, Guid addresseeId);
 
         /// <summary>
         /// Accepts a friend request.
@@ -44,13 +45,13 @@ namespace StudyPlatform.Services.Friends
         /// </summary>
         /// <param name="userId">The ID of the user whose friend requests to retrieve.</param>
         /// <returns>A collection of AppUserFriend relationships.</returns>
-        Task<IEnumerable<AppUserFriend>> GetAllFriendRequestsAsync(Guid userId);
+        Task<IEnumerable<AppUserFriendDTO>> GetAllFriendRequestsAsync(Guid userId);
 
         /// <summary>
-        /// Gets all friends for a user.
+        /// Gets all friends for a user including themselves.
         /// </summary>
         /// <param name="userId">The ID of the user whose friends to retrieve.</param>
         /// <returns>A collection of AppUserFriend relationships.</returns>
-        Task<IEnumerable<AppUser>> GetAllFriendsAsync(Guid userId);
+        Task<IEnumerable<AppUserDTO>> GetAllFriendsAsync(Guid userId);
     }
 }

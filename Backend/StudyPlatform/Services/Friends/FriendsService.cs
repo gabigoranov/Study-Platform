@@ -1,7 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using AutoMapper;
+using Azure.Core;
+using Microsoft.EntityFrameworkCore;
 using StudyPlatform.Data.Common;
 using StudyPlatform.Data.Models;
 using StudyPlatform.Exceptions;
+using StudyPlatform.Models.DTOs;
 
 namespace StudyPlatform.Services.Friends
 {
@@ -11,19 +14,21 @@ namespace StudyPlatform.Services.Friends
     public class FriendsService : IFriendsService
     {
         private readonly IRepository _repo;
+        private readonly IMapper _mapper;
         private readonly ILogger<FriendsService> _logger;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="FriendsService"/> class.
         /// </summary>
-        public FriendsService(IRepository repo, ILogger<FriendsService> logger)
+        public FriendsService(IRepository repo, ILogger<FriendsService> logger, IMapper mapper)
         {
             _repo = repo;
             _logger = logger;
+            _mapper = mapper;
         }
 
         /// <inheritdoc />
-        public async Task<AppUserFriend> CreateFriendRequestAsync(Guid requesterId, Guid addresseeId)
+        public async Task<AppUserFriendDTO> CreateFriendRequestAsync(Guid requesterId, Guid addresseeId)
         {
             if (requesterId == Guid.Empty) throw new ArgumentException("RequesterId can not be null or empty.");
             if (addresseeId == Guid.Empty) throw new ArgumentException("AddresseeId can not be null or empty.");
@@ -56,7 +61,7 @@ namespace StudyPlatform.Services.Friends
 
                 _logger.LogInformation("Friend request created successfully from user {RequesterId} to user {AddresseeId}", requesterId, addresseeId);
 
-                return friendRequest;
+                return _mapper.Map<AppUserFriendDTO>(friendRequest);
             }
             catch (Exception ex)
             {
@@ -173,7 +178,7 @@ namespace StudyPlatform.Services.Friends
         }
 
         /// <inheritdoc />
-        public async Task<IEnumerable<AppUserFriend>> GetAllFriendRequestsAsync(Guid userId)
+        public async Task<IEnumerable<AppUserFriendDTO>> GetAllFriendRequestsAsync(Guid userId)
         {
             if (userId == Guid.Empty) throw new ArgumentException("UserId can not be null or empty.");
 
@@ -187,7 +192,7 @@ namespace StudyPlatform.Services.Friends
 
                 _logger.LogInformation("Found {FriendCount} friend requests for user {UserId}", requests.Count, userId);
 
-                return requests;
+                return _mapper.Map<IEnumerable<AppUserFriendDTO>>(requests);
             }
             catch (Exception ex)
             {
@@ -197,7 +202,7 @@ namespace StudyPlatform.Services.Friends
         }
 
         /// <inheritdoc />
-        public async Task<IEnumerable<AppUser>> GetAllFriendsAsync(Guid userId)
+        public async Task<IEnumerable<AppUserDTO>> GetAllFriendsAsync(Guid userId)
         {
             if (userId == Guid.Empty) throw new ArgumentException("UserId can not be null or empty.");
 
@@ -207,12 +212,12 @@ namespace StudyPlatform.Services.Friends
 
                 // does not include subjects ( materials )
                 var friends = await _repo.AllReadonly<AppUser>()
-                    .Where(f => f.FriendsReceived.Any(x => (x.AddresseeId == userId || x.RequesterId == userId) && x.IsAccepted))
+                    .Where(f => f.FriendsReceived.Any(x => (x.AddresseeId == userId || x.RequesterId == userId) && x.IsAccepted) || f.Id == userId)
                     .ToListAsync();
 
                 _logger.LogInformation("Found {FriendCount} friends for user {UserId}", friends.Count, userId);
 
-                return friends;
+                return _mapper.Map<IEnumerable<AppUserDTO>>(friends);
             }
             catch (Exception ex)
             {

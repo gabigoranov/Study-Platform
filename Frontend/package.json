@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@cyntler/react-doc-viewer": "^1.17.1",
     "@dagrejs/dagre": "^1.1.5",
     "@floating-ui/react": "^0.27.16",
     "@hookform/resolvers": "^5.2.2",
@@ -19,6 +20,7 @@
     "@radix-ui/react-dialog": "^1.1.15",
     "@radix-ui/react-dropdown-menu": "^2.1.16",
     "@radix-ui/react-label": "^2.1.7",
+    "@radix-ui/react-scroll-area": "^1.2.10",
     "@radix-ui/react-select": "^2.2.6",
     "@radix-ui/react-separator": "^1.1.7",
     "@radix-ui/react-slot": "^1.2.4",
@@ -40,7 +42,9 @@
     "motion": "^12.23.22",
     "pdf-dist": "^1.0.0",
     "react": "^19.1.1",
+    "react-doc-viewer": "^0.1.15",
     "react-dom": "^19.1.1",
+    "react-file-viewer-extended": "^2.1.0",
     "react-hook-form": "^7.62.0",
     "react-i18next": "^15.7.3",
     "react-icons": "^5.5.0",

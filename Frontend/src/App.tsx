@@ -17,6 +17,7 @@ import { VariableProvider } from "./context/VariableContext";
 import MindmapsDashboard from "./pages/Mindmaps/MindmapsDashboard";
 import LandingPage from "./pages/Landing/LandingPage";
 import QuizzesDashboard from "./pages/Quizzes/QuizzesDashboard";
+import FriendsDashboard from "./pages/Friends/FriendsDashboard";
 
 export function App() {
   return (
@@ -44,6 +45,7 @@ export function App() {
                 <Route path="flashcards/*" element={<FlashcardsDashboard />} />
                 <Route path="mindmaps/*" element={<MindmapsDashboard />} />
                 <Route path="quizzes/*" element={<QuizzesDashboard />} />
+                <Route path="friends/*" element={<FriendsDashboard />} />
               </Route>
 
               <Route

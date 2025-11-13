@@ -121,7 +121,7 @@ namespace StudyPlatform.Controllers
         {
             Guid userId = User.GetUserId();
 
-            var friendRequests = await _service.GetAllFriendRequestsAsync(userId);
+            var friendRequests = await _service.GetAllFriendsAsync(userId);
             return Ok(friendRequests);
         }
     }

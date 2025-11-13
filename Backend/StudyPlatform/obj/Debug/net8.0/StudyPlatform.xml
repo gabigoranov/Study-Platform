@@ -838,6 +838,18 @@
         <member name="M:StudyPlatform.Migrations.SupabaseDb.AddAppUserFriendsTable.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
         </member>
+        <member name="T:StudyPlatform.Migrations.SupabaseDb.AddEmailToAppUser">
+            <inheritdoc />
+        </member>
+        <member name="M:StudyPlatform.Migrations.SupabaseDb.AddEmailToAppUser.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:StudyPlatform.Migrations.SupabaseDb.AddEmailToAppUser.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:StudyPlatform.Migrations.SupabaseDb.AddEmailToAppUser.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
         <member name="T:StudyPlatform.Models.Common.AutoMapper">
             <summary>
             Defines the AutoMapper initialization and maps.
@@ -1143,7 +1155,7 @@
         </member>
         <member name="M:StudyPlatform.Services.Friends.IFriendsService.GetAllFriendsAsync(System.Guid)">
             <summary>
-            Gets all friends for a user.
+            Gets all friends for a user including themselves.
             </summary>
             <param name="userId">The ID of the user whose friends to retrieve.</param>
             <returns>A collection of AppUserFriend relationships.</returns>

@@ -70,6 +70,57 @@
             <param name="model">The model containing the file's download url and other prompt data.</param>
             <returns>A list of flashcards if successful.</returns>
         </member>
+        <member name="T:StudyPlatform.Controllers.FriendsController">
+            <summary>
+            Provides endpoints for managing friends and AppUser relationships.
+            </summary>
+        </member>
+        <member name="M:StudyPlatform.Controllers.FriendsController.#ctor(StudyPlatform.Services.Friends.IFriendsService)">
+            <summary>
+            A constructor for injecting the services.
+            </summary>
+            <param name="friendsService">The friends service, dependency injected.</param>
+        </member>
+        <member name="M:StudyPlatform.Controllers.FriendsController.CreateFriendRequest(StudyPlatform.Models.CreateFriendRequestViewModel)">
+            <summary>
+            Creates a friend request to another user.
+            </summary>
+            <param name="model">The model containing the user ID to send the friend request to.</param>
+            <returns>The created friend request.</returns>
+        </member>
+        <member name="M:StudyPlatform.Controllers.FriendsController.AcceptFriendRequest(System.Guid)">
+            <summary>
+            Accepts a friend request from another user.
+            </summary>
+            <param name="id">The ID of the user who sent the friend request.</param>
+            <returns>True if the request was accepted successfully.</returns>
+        </member>
+        <member name="M:StudyPlatform.Controllers.FriendsController.RejectFriendRequest(System.Guid)">
+            <summary>
+            Rejects a friend request from another user.
+            </summary>
+            <param name="id">The ID of the user who sent the friend request.</param>
+            <returns>True if the request was rejected successfully.</returns>
+        </member>
+        <member name="M:StudyPlatform.Controllers.FriendsController.DeleteFriend(System.Guid)">
+            <summary>
+            Deletes a friend relationship.
+            </summary>
+            <param name="id">The ID of the friend to remove.</param>
+            <returns>True if the friend was deleted successfully.</returns>
+        </member>
+        <member name="M:StudyPlatform.Controllers.FriendsController.GetAllFriendRequests">
+            <summary>
+            Gets all friend requests for the authenticated user.
+            </summary>
+            <returns>A list of all friends.</returns>
+        </member>
+        <member name="M:StudyPlatform.Controllers.FriendsController.GetAllFriends">
+            <summary>
+            Gets all friends for the authenticated user.
+            </summary>
+            <returns>A list of all friends.</returns>
+        </member>
         <member name="T:StudyPlatform.Controllers.MaterialSubGroupsController">
             <summary>
             API controller for managing material subgroups.
@@ -511,6 +562,36 @@
             </summary>
             <param name="message">The message returned by the exception.</param>
         </member>
+        <member name="T:StudyPlatform.Exceptions.FriendRequestException">
+            <summary>
+            Exception thrown when a problem occurs during friend request operations.
+            </summary>
+        </member>
+        <member name="M:StudyPlatform.Exceptions.FriendRequestException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:StudyPlatform.Exceptions.FriendRequestException"/> class.
+            </summary>
+        </member>
+        <member name="M:StudyPlatform.Exceptions.FriendRequestException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:StudyPlatform.Exceptions.FriendRequestException"/> class with a specified error message.
+            </summary>
+            <param name="message">The message that describes the error.</param>
+        </member>
+        <member name="M:StudyPlatform.Exceptions.FriendRequestException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:StudyPlatform.Exceptions.FriendRequestException"/> class with a specified error message and a reference to the inner exception that is the cause of this exception.
+            </summary>
+            <param name="message">The error message that explains the reason for the exception.</param>
+            <param name="innerException">The exception that is the cause of the current exception, or a null reference if no inner exception is specified.</param>
+        </member>
+        <member name="M:StudyPlatform.Exceptions.FriendRequestException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:StudyPlatform.Exceptions.FriendRequestException"/> class with serialized data.
+            </summary>
+            <param name="info">The SerializationInfo that holds the serialized object data about the exception being thrown.</param>
+            <param name="context">The StreamingContext that contains contextual information about the source or destination.</param>
+        </member>
         <member name="T:StudyPlatform.Exceptions.MaterialCreationException">
             <summary>
             Exception thrown when there is an error during the creation of study material.
@@ -757,9 +838,26 @@
         <member name="M:StudyPlatform.Migrations.SupabaseDb.AddAppUserFriendsTable.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
         </member>
+        <member name="T:StudyPlatform.Migrations.SupabaseDb.AddEmailToAppUser">
+            <inheritdoc />
+        </member>
+        <member name="M:StudyPlatform.Migrations.SupabaseDb.AddEmailToAppUser.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:StudyPlatform.Migrations.SupabaseDb.AddEmailToAppUser.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:StudyPlatform.Migrations.SupabaseDb.AddEmailToAppUser.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
         <member name="T:StudyPlatform.Models.Common.AutoMapper">
             <summary>
             Defines the AutoMapper initialization and maps.
+            </summary>
+        </member>
+        <member name="T:StudyPlatform.Models.CreateFriendRequestViewModel">
+            <summary>
+            Model for creating a friend request.
             </summary>
         </member>
         <member name="T:StudyPlatform.Models.CreateMaterialSubGroupViewModel">
@@ -982,6 +1080,85 @@
             <param name="userId">The user's ID</param>
             <param name="model">The model containing the download url and other prompt data.</param>
             <returns></returns>
+        </member>
+        <member name="T:StudyPlatform.Services.Friends.FriendsService">
+            <summary>
+            Service for managing friends and AppUser relationships.
+            </summary>
+        </member>
+        <member name="M:StudyPlatform.Services.Friends.FriendsService.#ctor(StudyPlatform.Data.Common.IRepository,Microsoft.Extensions.Logging.ILogger{StudyPlatform.Services.Friends.FriendsService})">
+            <summary>
+            Initializes a new instance of the <see cref="T:StudyPlatform.Services.Friends.FriendsService"/> class.
+            </summary>
+        </member>
+        <member name="M:StudyPlatform.Services.Friends.FriendsService.CreateFriendRequestAsync(System.Guid,System.Guid)">
+            <inheritdoc />
+        </member>
+        <member name="M:StudyPlatform.Services.Friends.FriendsService.AcceptFriendRequestAsync(System.Guid,System.Guid)">
+            <inheritdoc />
+        </member>
+        <member name="M:StudyPlatform.Services.Friends.FriendsService.RejectFriendRequestAsync(System.Guid,System.Guid)">
+            <inheritdoc />
+        </member>
+        <member name="M:StudyPlatform.Services.Friends.FriendsService.DeleteFriendAsync(System.Guid,System.Guid)">
+            <inheritdoc />
+        </member>
+        <member name="M:StudyPlatform.Services.Friends.FriendsService.GetAllFriendRequestsAsync(System.Guid)">
+            <inheritdoc />
+        </member>
+        <member name="M:StudyPlatform.Services.Friends.FriendsService.GetAllFriendsAsync(System.Guid)">
+            <inheritdoc />
+        </member>
+        <member name="T:StudyPlatform.Services.Friends.IFriendsService">
+            <summary>
+            Defines methods for managing friends and AppUser relationships.
+            </summary>
+        </member>
+        <member name="M:StudyPlatform.Services.Friends.IFriendsService.CreateFriendRequestAsync(System.Guid,System.Guid)">
+            <summary>
+            Creates a friend request between two users.
+            </summary>
+            <param name="requesterId">The ID of the user sending the request.</param>
+            <param name="addresseeId">The ID of the user receiving the request.</param>
+            <returns>The created AppUserFriend relationship.</returns>
+        </member>
+        <member name="M:StudyPlatform.Services.Friends.IFriendsService.AcceptFriendRequestAsync(System.Guid,System.Guid)">
+            <summary>
+            Accepts a friend request.
+            </summary>
+            <param name="requesterId">The ID of the user sending the request.</param>
+            <param name="addresseeId">The ID of the user receiving the request.</param>
+            <returns>True if the request was accepted successfully, false otherwise.</returns>
+        </member>
+        <member name="M:StudyPlatform.Services.Friends.IFriendsService.RejectFriendRequestAsync(System.Guid,System.Guid)">
+            <summary>
+            Rejects a friend request.
+            </summary>
+            <param name="requesterId">The ID of the user sending the request.</param>
+            <param name="addresseeId">The ID of the user receiving the request.</param>
+            <returns>True if the request was rejected successfully, false otherwise.</returns>
+        </member>
+        <member name="M:StudyPlatform.Services.Friends.IFriendsService.DeleteFriendAsync(System.Guid,System.Guid)">
+            <summary>
+            Deletes a friend relationship.
+            </summary>
+            <param name="friendId">The ID of the friend relationship.</param>
+            <param name="userId">The ID of the user initiating the deletion.</param>
+            <returns>True if the friend relationship was deleted successfully, false otherwise.</returns>
+        </member>
+        <member name="M:StudyPlatform.Services.Friends.IFriendsService.GetAllFriendRequestsAsync(System.Guid)">
+            <summary>
+            Gets all friend requests for a user.
+            </summary>
+            <param name="userId">The ID of the user whose friend requests to retrieve.</param>
+            <returns>A collection of AppUserFriend relationships.</returns>
+        </member>
+        <member name="M:StudyPlatform.Services.Friends.IFriendsService.GetAllFriendsAsync(System.Guid)">
+            <summary>
+            Gets all friends for a user including themselves.
+            </summary>
+            <param name="userId">The ID of the user whose friends to retrieve.</param>
+            <returns>A collection of AppUserFriend relationships.</returns>
         </member>
         <member name="T:StudyPlatform.Services.MaterialSubGroups.IMaterialSubGroupsService">
             <summary>

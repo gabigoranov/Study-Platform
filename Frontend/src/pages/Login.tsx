@@ -56,7 +56,7 @@ export default function Login() {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-background dark:bg-background-dark">
-      <div className="bg-white dark:bg-surface p-8 rounded-lg shadow-lg w-80 sm:w-96 text-center">
+      <div className="bg-surface dark:bg-surface p-8 rounded-lg shadow-lg w-80 sm:w-96 text-center">
         <h1 className="text-2xl font-bold mb-6">{t(keys.signInTitle)}</h1>
 
         <form onSubmit={handleSubmit} className="flex flex-col gap-4 mb-6">

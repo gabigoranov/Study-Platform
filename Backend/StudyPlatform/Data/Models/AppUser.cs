@@ -13,6 +13,9 @@ namespace StudyPlatform.Data.Models
         [Column("display_name")]
         public string DisplayName { get; set; }
 
+        [Column("email")]
+        public string Email { get; set; }
+
         [Column("avatar_url")]
         public string AvatarUrl { get; set; }
 

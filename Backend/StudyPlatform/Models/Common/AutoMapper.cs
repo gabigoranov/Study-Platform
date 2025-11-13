@@ -17,6 +17,9 @@ namespace StudyPlatform.Models.Common
             .Include<Quiz, QuizDTO>()
             .ForMember(dest => dest.SubjectId, opt => opt.MapFrom(x => x.MaterialSubGroup.SubjectId));
 
+            CreateMap<AppUser, AppUserDTO>().ReverseMap();
+            CreateMap<AppUserFriend, AppUserFriendDTO>().ReverseMap();
+
 
             //Flashcard mappings
             CreateMap<CreateFlashcardViewModel, Flashcard>().ReverseMap();
