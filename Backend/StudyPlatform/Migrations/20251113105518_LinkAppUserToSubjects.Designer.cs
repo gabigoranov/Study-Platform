@@ -3,6 +3,7 @@ using System;
 using System.Text.Json;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using StudyPlatform.Data;
@@ -12,9 +13,11 @@ using StudyPlatform.Data;
 namespace StudyPlatform.Migrations.SupabaseDb
 {
     [DbContext(typeof(SupabaseDbContext))]
-    partial class SupabaseDbContextModelSnapshot : ModelSnapshot
+    [Migration("20251113105518_LinkAppUserToSubjects")]
+    partial class LinkAppUserToSubjects
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -50,30 +53,6 @@ namespace StudyPlatform.Migrations.SupabaseDb
                     b.HasKey("Id");
 
                     b.ToTable("app_users", "public");
-                });
-
-            modelBuilder.Entity("StudyPlatform.Data.Models.AppUserFriend", b =>
-                {
-                    b.Property<Guid>("RequesterId")
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("AddresseeId")
-                        .HasColumnType("uuid");
-
-                    b.Property<DateTime?>("AcceptedAt")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<bool>("IsAccepted")
-                        .HasColumnType("boolean");
-
-                    b.Property<DateTime>("RequestedAt")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.HasKey("RequesterId", "AddresseeId");
-
-                    b.HasIndex("AddresseeId");
-
-                    b.ToTable("AppUsersFriends");
                 });
 
             modelBuilder.Entity("StudyPlatform.Data.Models.Material", b =>
@@ -301,25 +280,6 @@ namespace StudyPlatform.Migrations.SupabaseDb
                     b.Navigation("AuthUser");
                 });
 
-            modelBuilder.Entity("StudyPlatform.Data.Models.AppUserFriend", b =>
-                {
-                    b.HasOne("StudyPlatform.Data.Models.AppUser", "Addressee")
-                        .WithMany("FriendsReceived")
-                        .HasForeignKey("AddresseeId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.HasOne("StudyPlatform.Data.Models.AppUser", "Requester")
-                        .WithMany("FriendsInitiated")
-                        .HasForeignKey("RequesterId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.Navigation("Addressee");
-
-                    b.Navigation("Requester");
-                });
-
             modelBuilder.Entity("StudyPlatform.Data.Models.Material", b =>
                 {
                     b.HasOne("StudyPlatform.Data.Models.MaterialSubGroup", "MaterialSubGroup")
@@ -404,10 +364,6 @@ namespace StudyPlatform.Migrations.SupabaseDb
 
             modelBuilder.Entity("StudyPlatform.Data.Models.AppUser", b =>
                 {
-                    b.Navigation("FriendsInitiated");
-
-                    b.Navigation("FriendsReceived");
-
                     b.Navigation("Subjects");
                 });
 

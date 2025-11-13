@@ -3,6 +3,7 @@ using System;
 using System.Text.Json;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using StudyPlatform.Data;
@@ -12,9 +13,11 @@ using StudyPlatform.Data;
 namespace StudyPlatform.Migrations.SupabaseDb
 {
     [DbContext(typeof(SupabaseDbContext))]
-    partial class SupabaseDbContextModelSnapshot : ModelSnapshot
+    [Migration("20251113103635_CreateAppUsersTable")]
+    partial class CreateAppUsersTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -43,37 +46,9 @@ namespace StudyPlatform.Migrations.SupabaseDb
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("joined_at");
 
-                    b.Property<int>("Score")
-                        .HasColumnType("integer")
-                        .HasColumnName("score");
-
                     b.HasKey("Id");
 
                     b.ToTable("app_users", "public");
-                });
-
-            modelBuilder.Entity("StudyPlatform.Data.Models.AppUserFriend", b =>
-                {
-                    b.Property<Guid>("RequesterId")
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("AddresseeId")
-                        .HasColumnType("uuid");
-
-                    b.Property<DateTime?>("AcceptedAt")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<bool>("IsAccepted")
-                        .HasColumnType("boolean");
-
-                    b.Property<DateTime>("RequestedAt")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.HasKey("RequesterId", "AddresseeId");
-
-                    b.HasIndex("AddresseeId");
-
-                    b.ToTable("AppUsersFriends");
                 });
 
             modelBuilder.Entity("StudyPlatform.Data.Models.Material", b =>
@@ -189,9 +164,6 @@ namespace StudyPlatform.Migrations.SupabaseDb
                     b.Property<DateTimeOffset>("DateCreated")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<Guid>("Subject")
-                        .HasColumnType("uuid");
-
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasMaxLength(20)
@@ -201,8 +173,6 @@ namespace StudyPlatform.Migrations.SupabaseDb
                         .HasColumnType("uuid");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Subjects");
                 });
@@ -301,25 +271,6 @@ namespace StudyPlatform.Migrations.SupabaseDb
                     b.Navigation("AuthUser");
                 });
 
-            modelBuilder.Entity("StudyPlatform.Data.Models.AppUserFriend", b =>
-                {
-                    b.HasOne("StudyPlatform.Data.Models.AppUser", "Addressee")
-                        .WithMany("FriendsReceived")
-                        .HasForeignKey("AddresseeId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.HasOne("StudyPlatform.Data.Models.AppUser", "Requester")
-                        .WithMany("FriendsInitiated")
-                        .HasForeignKey("RequesterId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.Navigation("Addressee");
-
-                    b.Navigation("Requester");
-                });
-
             modelBuilder.Entity("StudyPlatform.Data.Models.Material", b =>
                 {
                     b.HasOne("StudyPlatform.Data.Models.MaterialSubGroup", "MaterialSubGroup")
@@ -364,17 +315,6 @@ namespace StudyPlatform.Migrations.SupabaseDb
                     b.Navigation("QuizQuestion");
                 });
 
-            modelBuilder.Entity("StudyPlatform.Data.Models.Subject", b =>
-                {
-                    b.HasOne("StudyPlatform.Data.Models.AppUser", "User")
-                        .WithMany("Subjects")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("StudyPlatform.Data.Models.Flashcard", b =>
                 {
                     b.HasOne("StudyPlatform.Data.Models.Material", null)
@@ -400,15 +340,6 @@ namespace StudyPlatform.Migrations.SupabaseDb
                         .HasForeignKey("StudyPlatform.Data.Models.Quiz", "Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("StudyPlatform.Data.Models.AppUser", b =>
-                {
-                    b.Navigation("FriendsInitiated");
-
-                    b.Navigation("FriendsReceived");
-
-                    b.Navigation("Subjects");
                 });
 
             modelBuilder.Entity("StudyPlatform.Data.Models.MaterialSubGroup", b =>

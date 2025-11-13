@@ -16,10 +16,50 @@ namespace StudyPlatform.Data
         public DbSet<Quiz> Quizzes { get; set; } = null!;
         public DbSet<QuizQuestion> QuizQuestions { get; set; } = null!;
         public DbSet<QuizQuestionAnswer> QuizQuestionAnswers { get; set; } = null!;
+        public DbSet<SupabaseUser> SupabaseUsers { get; set; } = null!;
+        public DbSet<AppUser> AppUsers { get; set; } = null!;
+        public DbSet<AppUserFriend> AppUsersFriends { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<SupabaseUser>(entity =>
+            {
+                entity.ToTable("users", "auth", t => t.ExcludeFromMigrations());
+            });
+
+            modelBuilder.Entity<AppUser>(entity =>
+            {
+                entity.ToTable("app_users", "public");
+                entity.HasKey(e => e.Id);
+
+                entity.HasOne(a => a.AuthUser)
+                      .WithOne()
+                      .HasForeignKey<AppUser>(a => a.Id)
+                      .HasPrincipalKey<SupabaseUser>(u => u.Id)
+                      .OnDelete(DeleteBehavior.Cascade);
+
+                entity.HasMany(x => x.Subjects)
+                    .WithOne(x => x.User)
+                    .HasForeignKey(x => x.UserId)
+                    .OnDelete(DeleteBehavior.Cascade);
+            });
+
+            modelBuilder.Entity<AppUserFriend>()
+                .HasKey(f => new { f.RequesterId, f.AddresseeId });
+
+            modelBuilder.Entity<AppUserFriend>()
+                .HasOne(f => f.Requester)
+                .WithMany(u => u.FriendsInitiated)
+                .HasForeignKey(f => f.RequesterId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<AppUserFriend>()
+                .HasOne(f => f.Addressee)
+                .WithMany(u => u.FriendsReceived)
+                .HasForeignKey(f => f.AddresseeId)
+                .OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder.Entity<Mindmap>(entity =>
             {

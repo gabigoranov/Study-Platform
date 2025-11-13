@@ -16,7 +16,10 @@ namespace StudyPlatform.Data.Models
         public string Title { get; set; }
 
         [Required]
+        [ForeignKey(nameof(AppUser))]
         public Guid UserId { get; set; }
+
+        public virtual AppUser User { get; set; }
 
         public DateTimeOffset DateCreated { get; set; } = DateTimeOffset.UtcNow;
 

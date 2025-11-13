@@ -208,6 +208,20 @@
             <param name="ids">The array of quiz ids.</param>
             <returns>Nothing.</returns>
         </member>
+        <member name="M:StudyPlatform.Controllers.QuizzesController.DeleteSingle(System.Guid)">
+            <summary>
+            Endpoint for deleting a single quiz by its Id.
+            </summary>
+            <param name="id">The array of quiz ids.</param>
+            <returns>Nothing.</returns>
+        </member>
+        <member name="M:StudyPlatform.Controllers.QuizzesController.DeleteSingleQuestion(System.Guid)">
+            <summary>
+            Endpoint for deleting a single quiz question by its Id.
+            </summary>
+            <param name="id">The array of quiz ids.</param>
+            <returns>Nothing.</returns>
+        </member>
         <member name="M:StudyPlatform.Controllers.QuizzesController.AddQuestionsToQuiz(System.Guid,System.Collections.Generic.IEnumerable{StudyPlatform.Models.CreateQuizQuestionViewModel})">
             <summary>
             Endpoint for adding questions and answers to a specific quiz.
@@ -471,7 +485,7 @@
             A subject that groups material groups together.
             </summary>
         </member>
-        <member name="T:StudyPlatform.Data.Models.User">
+        <member name="T:StudyPlatform.Data.Models.SupabaseUser">
             <summary>
             PostgreSQL supabase auth.users table representation.
             </summary>
@@ -705,6 +719,42 @@
             <inheritdoc />
         </member>
         <member name="M:StudyPlatform.Migrations.SupabaseDb.UpdateQuizCorrectQuestionAnswerToBeDynamic.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:StudyPlatform.Migrations.SupabaseDb.CreateAppUsersTable">
+            <inheritdoc />
+        </member>
+        <member name="M:StudyPlatform.Migrations.SupabaseDb.CreateAppUsersTable.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:StudyPlatform.Migrations.SupabaseDb.CreateAppUsersTable.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:StudyPlatform.Migrations.SupabaseDb.CreateAppUsersTable.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:StudyPlatform.Migrations.SupabaseDb.LinkAppUserToSubjects">
+            <inheritdoc />
+        </member>
+        <member name="M:StudyPlatform.Migrations.SupabaseDb.LinkAppUserToSubjects.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:StudyPlatform.Migrations.SupabaseDb.LinkAppUserToSubjects.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:StudyPlatform.Migrations.SupabaseDb.LinkAppUserToSubjects.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:StudyPlatform.Migrations.SupabaseDb.AddAppUserFriendsTable">
+            <inheritdoc />
+        </member>
+        <member name="M:StudyPlatform.Migrations.SupabaseDb.AddAppUserFriendsTable.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:StudyPlatform.Migrations.SupabaseDb.AddAppUserFriendsTable.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:StudyPlatform.Migrations.SupabaseDb.AddAppUserFriendsTable.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
         </member>
         <member name="T:StudyPlatform.Models.Common.AutoMapper">
@@ -1218,6 +1268,9 @@
             A <see cref="T:System.Threading.Tasks.Task`1"/> representing the asynchronous operation.
             The task result contains the updated <see cref="T:StudyPlatform.Models.DTOs.QuizDTO"/>.
             </returns>
+        </member>
+        <member name="M:StudyPlatform.Services.Quiz.QuizService.DeleteQuestionAsync(System.Guid,System.Guid)">
+            <inheritdoc />
         </member>
         <member name="T:StudyPlatform.Services.Subjects.ISubjectsService">
             <summary>
