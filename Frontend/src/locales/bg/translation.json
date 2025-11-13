@@ -236,5 +236,7 @@
     "themeToggle": "Превключване на тема",
     "difficultyEasy": "Лесно",
     "difficultyMedium": "Средно",
-    "difficultyHard": "Трудно"
+    "difficultyHard": "Трудно",
+    "zoomIn": "Увеличаване",
+    "clickOutside": "Кликнете навън или скролнете за да затворите"
 }

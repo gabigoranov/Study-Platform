@@ -29,7 +29,11 @@ html {
     padding: 0; 
   }
 
-  footer .section-container {
+  #hero .section-container {
+    padding: 0.5rem !important;
+  }
+
+  footer .section-container{
     padding: 1rem;
   }
 }

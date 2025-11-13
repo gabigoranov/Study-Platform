@@ -1,17 +1,17 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAuth } from "../hooks/useAuth";
 import { Link, useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import { supabase } from "../lib/supabaseClient";
 import InputComponent from "../components/Login/InputComponent";
 import { useTranslation } from "react-i18next";
-import { keys } from '../types/keys';
+import { keys } from "../types/keys";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
 export default function Login() {
   const { t, i18n } = useTranslation();
-  
+
   const { signInWithGoogle, user, loading } = useAuth();
   const navigate = useNavigate();
 
@@ -19,11 +19,11 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState<string[]>([]);
 
-  // if (loading) return <p className="text-center mt-10">{t(keys.loading)}</p>;
-  // if (user) {
-  //   navigate("/");
-  //   return null;
-  // }
+  useEffect(() => {
+    if (user) {
+      navigate("/");
+    }
+  }, [user]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -67,8 +67,18 @@ export default function Login() {
               ))}
             </div>
           )}
-          <Input type="email" placeholder={t(keys.emailPlaceholder)} onChange={(e) => setEmail(e.target.value)} required />
-          <Input type="password" placeholder={t(keys.passwordPlaceholder)} onChange={(e) => setPassword(e.target.value)} required />    
+          <Input
+            type="email"
+            placeholder={t(keys.emailPlaceholder)}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+          <Input
+            type="password"
+            placeholder={t(keys.passwordPlaceholder)}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
           <Button
             type="submit"
             variant="outline"

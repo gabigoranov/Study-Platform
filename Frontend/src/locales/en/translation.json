@@ -236,5 +236,7 @@
   "themeToggle": "Toggle theme",
   "difficultyEasy": "Easy",
   "difficultyMedium": "Medium",
-  "difficultyHard": "Hard"
+  "difficultyHard": "Hard",
+  "zoomIn": "Zoom In",
+  "clickOutside": "Click outside or scroll to close"
 }

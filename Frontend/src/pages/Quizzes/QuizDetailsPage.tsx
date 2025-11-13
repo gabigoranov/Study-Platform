@@ -547,8 +547,7 @@ export default function QuizDetailsPage({
                             </span>
                             {isQuestionInEditMode(question.id) ? (
                               <Input
-                                value={
-                                  answerTexts[question.id]?.[answer.id] ||
+                                defaultValue={
                                   answer.description
                                 }
                                 onChange={(e) =>

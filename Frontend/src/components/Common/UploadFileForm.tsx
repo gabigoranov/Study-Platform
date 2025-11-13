@@ -3,7 +3,7 @@ import PdfViewer from "./PdfViewer";
 import { Button } from "../ui/button";
 import { Textarea } from "../ui/textarea";
 import Loading from "./Loading";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import ErrorScreen from "./ErrorScreen";
 import { useTranslation } from "react-i18next";
 import { keys } from "@/types/keys";
@@ -41,11 +41,35 @@ export default function UploadFileForm({
   setCustomPrompt,
   handleFileChange,
   selectedActionId,
-  setSelectedActionId
+  setSelectedActionId,
 }: UploadFileFormProps) {
   const [t] = useTranslation();
 
   const { actions } = useGenerationActions();
+  const [isDragging, setIsDragging] = useState(false);
+
+  const handleDragOver = (e: React.DragEvent<HTMLLabelElement>) => {
+    e.preventDefault();
+    setIsDragging(true);
+  };
+
+  const handleDragLeave = (e: React.DragEvent<HTMLLabelElement>) => {
+    e.preventDefault();
+    setIsDragging(false);
+  };
+
+  const handleDrop = (e: React.DragEvent<HTMLLabelElement>) => {
+    e.preventDefault();
+    setIsDragging(false);
+
+    const droppedFiles = e.dataTransfer.files;
+    if (droppedFiles && droppedFiles.length > 0) {
+      const fakeEvent = {
+        target: { files: droppedFiles },
+      } as unknown as React.ChangeEvent<HTMLInputElement>;
+      handleFileChange(fakeEvent);
+    }
+  };
 
   // If an error occurs, show the error screen with buttons to retry or cancel
   if (error) {
@@ -95,7 +119,16 @@ export default function UploadFileForm({
 
       <div className="h-full w-full flex flex-col gap-4">
         {/* Upload area */}
-        <label className="flex flex-col items-center justify-center border-2 border-dashed border-gray-400 rounded-xl h-[600px] cursor-pointer hover:border-gray-600 transition">
+        <label
+          className={`flex flex-col items-center justify-center border-2 border-dashed rounded-xl h-[600px] cursor-pointer transition ${
+            isDragging
+              ? "border-primary bg-primary/5"
+              : "border-gray-400 hover:border-gray-600"
+          }`}
+          onDragOver={handleDragOver}
+          onDragLeave={handleDragLeave}
+          onDrop={handleDrop}
+        >
           <Upload className="w-10 h-10 text-gray-500 mb-2" />
           <span className="text-gray-500">{t(keys.uploadFileLabel)}</span>
           <input type="file" className="hidden" onChange={handleFileChange} />

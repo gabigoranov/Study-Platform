@@ -46,16 +46,13 @@ const FAQ = () => {
   ];
 
   return (
-    <section className="py-20 px-4 bg-gradient-hero" id="faq">
+    <section className="py-20 bg-gradient-hero" id="faq">
       <div className="section-container container mx-auto">
         <div className="max-w-3xl mx-auto">
           <div className="text-center mb-12 animate-fade-in">
             <h2 className="text-4xl md:text-5xl font-bold mb-4 text-text">
               {t(keys.frequentlyAskedQuestions)}
             </h2>
-            <p className="text-xl text-text-muted">
-              {t(keys.everythingYouNeedToKnow)}
-            </p>
           </div>
 
           <div className="bg-surface/50 backdrop-blur-sm rounded-2xl border border-border p-6 md:p-8 shadow-soft animate-slide-up">

@@ -29,6 +29,7 @@ interface QuizListProps {
   onEdit: (quiz: Quiz) => void;
   onDelete: (id: string) => void;
   onView?: (id: string) => void;
+  onRevise?: (id: string) => void;
   loading?: boolean;
 }
 
@@ -37,6 +38,7 @@ export default function QuizList({
   onEdit, 
   onDelete,
   onView,
+  onRevise,
   loading = false 
 }: QuizListProps) {
   const { t } = useTranslation();
@@ -77,6 +79,13 @@ export default function QuizList({
                 </TableCell>
                 <TableCell>
                   <div className="flex gap-2">
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => onRevise?.(quiz.id)}
+                    >
+                      {t("Revise")}
+                    </Button>
                     <Button
                       variant="outline"
                       size="sm"

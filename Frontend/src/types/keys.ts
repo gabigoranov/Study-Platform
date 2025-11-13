@@ -240,4 +240,6 @@ export const keys = {
   difficultyEasy: "difficultyEasy",
   difficultyMedium: "difficultyMedium",
   difficultyHard: "difficultyHard",
+  zoomIn: "zoomIn",
+  clickOutside: "clickOutside"
 };
