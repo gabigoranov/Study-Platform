@@ -34,7 +34,6 @@ export default function UserSearchResultBox({
               className="flex w-full items-center gap-3 px-4 py-2 hover:bg-surface-muted rounded-lg text-left"
             >
               <Avatar className="h-6 w-6">
-                <AvatarImage src={u.avatarUrl} />
                 <AvatarFallback>{u.displayName[0].toUpperCase()}</AvatarFallback>
               </Avatar>
               <span>{u.displayName}</span>

@@ -30,5 +30,21 @@ namespace StudyPlatform.Services.Users
             var users = _repo.AllReadonly<AppUser>().Where(x => x.DisplayName.Contains(input) || x.Email.Contains(input));
             return _mapper.Map<ICollection<AppUserDTO>>(users);
         }
+
+        /// <inheritdoc />
+        public async Task<AppUserDTO> UpdateScoreAsync(Guid userId, int modifyBy)
+        {
+            AppUser? user = await _repo.All<AppUser>().SingleOrDefaultAsync(x => x.Id == userId);
+
+            if(user == null)
+            {
+                throw new KeyNotFoundException("User with specified id not found");
+            }
+
+            user.Score += modifyBy;
+            await _repo.SaveChangesAsync();
+
+            return _mapper.Map<AppUserDTO>(user);
+        }
     }
 }

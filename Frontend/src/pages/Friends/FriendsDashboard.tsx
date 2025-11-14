@@ -78,7 +78,6 @@ export default function FriendsDashboard() {
 
   // Filter and sort friends based on search and sort options
   const filteredAndSortedFriends = useMemo(() => {
-    console.log(friends);
     // Apply sorting
     let result = friends.sort((a, b) => {
       if (friendsSortBy === "name") {
@@ -98,17 +97,17 @@ export default function FriendsDashboard() {
 
   // Filter incoming friend requests (received requests)
   const incomingRequests = useMemo(() => {
-    return friendRequests.filter((req) => req.addresseeId === user?.id && !req.isAccepted);
+    return friendRequests.filter(
+      (req) => req.addresseeId === user?.id && !req.isAccepted
+    );
   }, [friendRequests, user]);
 
   // Filter sent friend requests (requests we sent)
   const sentRequests = useMemo(() => {
-    return friendRequests.filter((req) => req.requesterId === user?.id && !req.isAccepted);
+    return friendRequests.filter(
+      (req) => req.requesterId === user?.id && !req.isAccepted
+    );
   }, [friendRequests, user]);
-
-  useEffect(() => {
-    console.log(friendRequests);
-  }, [friendRequests]);
 
   useEffect(() => {
     if (search.length <= 0 || search == null) return;
@@ -277,16 +276,9 @@ export default function FriendsDashboard() {
                                 <ProfileIcon />
                               ) : (
                                 <Avatar>
-                                  {friend.avatarUrl ? (
-                                    <AvatarImage
-                                      src={friend.avatarUrl}
-                                      alt={friend.displayName}
-                                    />
-                                  ) : (
-                                    <AvatarFallback>
-                                      {friend.displayName[0].toUpperCase()}
-                                    </AvatarFallback>
-                                  )}
+                                  <AvatarFallback>
+                                    {friend.displayName[0].toUpperCase()}
+                                  </AvatarFallback>
                                 </Avatar>
                               )}
                             </TableCell>
@@ -363,20 +355,13 @@ export default function FriendsDashboard() {
                             <TableCell>{index + 1}</TableCell>
                             <TableCell>
                               <Avatar>
-                                {requester?.avatarUrl ? (
-                                  <AvatarImage
-                                    src={requester.avatarUrl}
-                                    alt={requester.displayName}
-                                  />
-                                ) : (
-                                  <AvatarFallback>
-                                    {requester
-                                      ? requester.displayName[0].toUpperCase()
-                                      : req.requesterId
-                                          .substring(0, 2)
-                                          .toUpperCase()}
-                                  </AvatarFallback>
-                                )}
+                                <AvatarFallback>
+                                  {requester
+                                    ? requester.displayName[0].toUpperCase()
+                                    : req.requesterId
+                                        .substring(0, 2)
+                                        .toUpperCase()}
+                                </AvatarFallback>
                               </Avatar>
                             </TableCell>
                             <TableCell>
@@ -469,20 +454,13 @@ export default function FriendsDashboard() {
                             <TableCell>{index + 1}</TableCell>
                             <TableCell>
                               <Avatar>
-                                {addressee?.avatarUrl ? (
-                                  <AvatarImage
-                                    src={addressee.avatarUrl}
-                                    alt={addressee.displayName}
-                                  />
-                                ) : (
-                                  <AvatarFallback>
-                                    {addressee
-                                      ? addressee.displayName[0].toUpperCase()
-                                      : req.addresseeId
-                                          .substring(0, 2)
-                                          .toUpperCase()}
-                                  </AvatarFallback>
-                                )}
+                                <AvatarFallback>
+                                  {addressee
+                                    ? addressee.displayName[0].toUpperCase()
+                                    : req.addresseeId
+                                        .substring(0, 2)
+                                        .toUpperCase()}
+                                </AvatarFallback>
                               </Avatar>
                             </TableCell>
                             <TableCell>

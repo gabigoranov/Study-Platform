@@ -3,5 +3,4 @@ export type AppUser = {
     displayName: string,
     email: string,
     score: number,
-    avatarUrl?: string
 }

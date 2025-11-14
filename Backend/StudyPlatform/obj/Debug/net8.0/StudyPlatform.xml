@@ -857,6 +857,18 @@
         <member name="M:StudyPlatform.Migrations.SupabaseDb.AddEmailToAppUser.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
         </member>
+        <member name="T:StudyPlatform.Migrations.SupabaseDb.RemoveAvatarUrlFromAppUser">
+            <inheritdoc />
+        </member>
+        <member name="M:StudyPlatform.Migrations.SupabaseDb.RemoveAvatarUrlFromAppUser.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:StudyPlatform.Migrations.SupabaseDb.RemoveAvatarUrlFromAppUser.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:StudyPlatform.Migrations.SupabaseDb.RemoveAvatarUrlFromAppUser.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
         <member name="T:StudyPlatform.Models.Common.AutoMapper">
             <summary>
             Defines the AutoMapper initialization and maps.
@@ -1540,6 +1552,9 @@
             <inheritdoc />
         </member>
         <member name="M:StudyPlatform.Services.Users.UsersService.SearchAsync(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:StudyPlatform.Services.Users.UsersService.UpdateScoreAsync(System.Guid,System.Int32)">
             <inheritdoc />
         </member>
     </members>
