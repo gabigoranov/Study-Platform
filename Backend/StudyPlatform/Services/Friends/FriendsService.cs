@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Azure.Core;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 using StudyPlatform.Data.Common;
 using StudyPlatform.Data.Models;
@@ -71,7 +72,7 @@ namespace StudyPlatform.Services.Friends
         }
 
         /// <inheritdoc />
-        public async Task<bool> AcceptFriendRequestAsync(Guid requesterId, Guid addresseeId)
+        public async Task<AppUserFriendDTO> AcceptFriendRequestAsync(Guid requesterId, Guid addresseeId)
         {
             if (requesterId == Guid.Empty) throw new ArgumentException("RequesterId can not be null or empty.");
             if (addresseeId == Guid.Empty) throw new ArgumentException("AddresseeId can not be null or empty.");
@@ -87,7 +88,7 @@ namespace StudyPlatform.Services.Friends
                 if (friendRequest == null)
                 {
                     _logger.LogWarning("Pending friend request from user {Id} to user {UserId} not found", requesterId, addresseeId);
-                    return false;
+                    throw new KeyNotFoundException("No such friend request was found.");
                 }
 
                 friendRequest.IsAccepted = true;
@@ -97,7 +98,7 @@ namespace StudyPlatform.Services.Friends
 
                 _logger.LogInformation("Friend request from user {Id} to user {UserId} accepted successfully", requesterId, addresseeId);
 
-                return true;
+                return _mapper.Map<AppUserFriendDTO>(friendRequest);
             }
             catch (Exception ex)
             {
@@ -151,20 +152,11 @@ namespace StudyPlatform.Services.Friends
                 _logger.LogInformation("Deleting friend relationship between user {Id} and user {UserId}", friendId, userId);
 
                 // Look for an accepted friend relationship between the two users (in either direction)
-                AppUserFriend? friendRelationship = await _repo.All<AppUserFriend>()
-                    .FirstOrDefaultAsync(f => 
-                        ((f.RequesterId == friendId && f.AddresseeId == userId) || 
-                         (f.RequesterId == userId && f.AddresseeId == friendId)) && 
-                        f.IsAccepted);
-
-                if (friendRelationship == null)
-                {
-                    _logger.LogWarning("Accepted friend relationship between users {Id} and {UserId} not found", friendId, userId);
-                    return false;
-                }
-
-                await _repo.DeleteAsync<AppUserFriend>(friendRelationship);
-                await _repo.SaveChangesAsync();
+                await _repo.All<AppUserFriend>()
+                    .Where(f =>
+                        ((f.RequesterId == friendId && f.AddresseeId == userId) ||
+                         (f.RequesterId == userId && f.AddresseeId == friendId)))
+                    .ExecuteDeleteAsync();
 
                 _logger.LogInformation("Friend relationship between users {Id} and {UserId} deleted successfully", friendId, userId);
 
@@ -187,6 +179,8 @@ namespace StudyPlatform.Services.Friends
                 _logger.LogInformation("Retrieving all friend requests for user {UserId}", userId);
 
                 var requests = await _repo.AllReadonly<AppUserFriend>()
+                    .Include(x => x.Requester)
+                    .Include(x => x.Addressee)
                     .Where(f => f.RequesterId == userId || f.AddresseeId == userId)
                     .ToListAsync();
 
@@ -212,7 +206,7 @@ namespace StudyPlatform.Services.Friends
 
                 // does not include subjects ( materials )
                 var friends = await _repo.AllReadonly<AppUser>()
-                    .Where(f => f.FriendsReceived.Any(x => (x.AddresseeId == userId || x.RequesterId == userId) && x.IsAccepted) || f.Id == userId)
+                    .Where(f => f.FriendsReceived.Any(x => (x.AddresseeId == userId || x.RequesterId == userId) && x.IsAccepted) || f.FriendsInitiated.Any(x => (x.AddresseeId == userId || x.RequesterId == userId) && x.IsAccepted) || f.Id == userId)
                     .ToListAsync();
 
                 _logger.LogInformation("Found {FriendCount} friends for user {UserId}", friends.Count, userId);

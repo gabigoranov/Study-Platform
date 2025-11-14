@@ -1539,5 +1539,8 @@
         <member name="M:StudyPlatform.Services.Subjects.SubjectsService.UpdateAsync(StudyPlatform.Models.CreateSubjectViewModel,System.Guid,System.Guid)">
             <inheritdoc />
         </member>
+        <member name="M:StudyPlatform.Services.Users.UsersService.SearchAsync(System.String)">
+            <inheritdoc />
+        </member>
     </members>
 </doc>

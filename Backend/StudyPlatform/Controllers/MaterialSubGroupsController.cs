@@ -1,8 +1,9 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using StudyPlatform.Extensions;
-using StudyPlatform.Models.DTOs;
 using StudyPlatform.Models;
+using StudyPlatform.Models.DTOs;
 using StudyPlatform.Services.MaterialSubGroups;
 
 namespace StudyPlatform.Controllers
@@ -12,6 +13,7 @@ namespace StudyPlatform.Controllers
     /// </summary>
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class MaterialSubGroupsController : ControllerBase
     {
         private readonly IMaterialSubGroupsService _service;

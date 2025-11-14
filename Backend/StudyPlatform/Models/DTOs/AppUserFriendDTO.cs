@@ -9,5 +9,8 @@ namespace StudyPlatform.Models.DTOs
         public bool IsAccepted { get; set; }
         public DateTime RequestedAt { get; set; } = DateTime.UtcNow;
         public DateTime? AcceptedAt { get; set; }
+
+        public AppUserDTO Requester { get; set; }
+        public AppUserDTO Addressee { get; set; }
     }
 }

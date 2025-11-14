@@ -22,7 +22,7 @@ namespace StudyPlatform.Services.Friends
         /// <param name="requesterId">The ID of the user sending the request.</param>
         /// <param name="addresseeId">The ID of the user receiving the request.</param>
         /// <returns>True if the request was accepted successfully, false otherwise.</returns>
-        Task<bool> AcceptFriendRequestAsync(Guid requesterId, Guid addresseeId);
+        Task<AppUserFriendDTO> AcceptFriendRequestAsync(Guid requesterId, Guid addresseeId);
 
         /// <summary>
         /// Rejects a friend request.

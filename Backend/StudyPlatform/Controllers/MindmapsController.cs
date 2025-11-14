@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using StudyPlatform.Extensions;
 using StudyPlatform.Models;
@@ -13,6 +14,7 @@ namespace StudyPlatform.Controllers
 
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class MindmapsController : ControllerBase
     {
         private readonly IMindmapsService _mindmapsService;

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using StudyPlatform.Data.Models;
 using StudyPlatform.Extensions;
@@ -12,6 +13,7 @@ namespace StudyPlatform.Controllers
     /// </summary>
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class FriendsController : ControllerBase
     {
         private readonly IFriendsService _service;
@@ -56,9 +58,8 @@ namespace StudyPlatform.Controllers
             Guid userId = User.GetUserId();
 
             var result = await _service.AcceptFriendRequestAsync(id, userId);
-            if (!result) return NotFound();
             
-            return Ok();
+            return Ok(result);
         }
 
         /// <summary>
