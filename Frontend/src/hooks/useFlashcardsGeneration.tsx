@@ -13,6 +13,7 @@ import { MindmapDTO } from "@/data/DTOs/MindmapDTO";
 import { CreateMindmapDTO } from "@/data/DTOs/CreateMindmapDTO";
 import { mindmapsService } from "@/services/mindmapsService";
 import { SubmitAction, useGenerationActions } from "./useGenerationActions";
+import { usersService } from "@/services/usersService";
 
 type FlashcardsGenerationProps = {
   setLoading: (value: boolean) => void;
@@ -75,6 +76,8 @@ export function useFlashcardsGeneration({
       json.forEach((element) => {
         element.materialSubGroupId = selectedGroupId;
       });
+
+      await usersService.updateScore(token!, 20);
 
       console.log(json);
 

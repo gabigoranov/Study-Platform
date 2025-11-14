@@ -8,6 +8,8 @@ import { useTranslation } from "react-i18next";
 import { CheckCircle, RotateCcw } from "lucide-react";
 import { useMemo, useState } from "react";
 import { Link } from "react-router";
+import { usersService } from "@/services/usersService";
+import { useAuth } from "@/hooks/useAuth";
 
 type FlashcardsRevisionProps = {
   flashcards: Flashcard[] | undefined;
@@ -17,6 +19,7 @@ export default function FlashcardsRevision({
   flashcards,
 }: FlashcardsRevisionProps) {
   const { t } = useTranslation();
+  const { token } = useAuth();
   
   if (flashcards === undefined || flashcards.length <= 0) {
     return <p className="text-center">{t(keys.noRevisionAvailableLabel)}</p>;
@@ -62,6 +65,7 @@ export default function FlashcardsRevision({
   }
 
   function handleFinishRevision() {
+    usersService.updateScore(token!, flashcards ? flashcards?.length*5 : 0);
     setIsRevisionFinished(true);
   }
 

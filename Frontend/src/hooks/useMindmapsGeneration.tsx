@@ -14,6 +14,7 @@ import { CreateMindmapDTO } from "@/data/DTOs/CreateMindmapDTO";
 import { mindmapsService } from "@/services/mindmapsService";
 import { SubmitAction, useGenerationActions } from "./useGenerationActions";
 import { Mindmap } from "@/data/Mindmap";
+import { usersService } from "@/services/usersService";
 
 type MindmapGenerationProps = {
   setLoading: (value: boolean) => void;
@@ -67,6 +68,8 @@ export function useMindmapsGeneration({
         }),
       });
 
+      await usersService.updateScore(token!, 20);
+
       console.log(response);
 
       let json: GeneratedMindmapDTO = await response.json();
@@ -96,7 +99,7 @@ export function useMindmapsGeneration({
       title: options.title,
       description: options.description,
       subjectId: options.subjectId,
-      materialSubGroupId: generated.materialSubGroupId ?? '', // default to 0 if null/undefined
+      materialSubGroupId: generated.materialSubGroupId ?? "", // default to 0 if null/undefined
       data: {
         nodes: generated.nodes,
         edges: generated.edges,
@@ -136,7 +139,7 @@ export function useMindmapsGeneration({
       setLoading(false);
       closeForm();
     }
-  }; 
+  };
 
   return {
     generatedMindmap,

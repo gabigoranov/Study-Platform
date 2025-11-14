@@ -21,6 +21,7 @@ import { GeneratedQuizDTO } from "@/data/DTOs/GeneratedQuizDTO";
 import { quizService } from "@/services/quizService";
 import { QuizDTO } from "@/data/DTOs/QuizDTO";
 import { Quiz } from "@/data/Quiz";
+import { usersService } from "@/services/usersService";
 
 type QuizGenerationProps = {
   setLoading: (value: boolean) => void;
@@ -72,6 +73,9 @@ export function useQuizzesGeneration({
           customPrompt: customPrompt,
         }),
       });
+
+      await usersService.updateScore(token!, 20);
+      
 
       console.log(response);
 
