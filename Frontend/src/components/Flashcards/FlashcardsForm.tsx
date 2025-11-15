@@ -91,7 +91,7 @@ export default function FlashcardsForm({
             <FormItem>
               <FormLabel>{t(keys.title)}</FormLabel>
               <FormControl>
-                <Input placeholder={t("Enter title")} {...field} />
+                <Input placeholder={t(keys.enterTitle)} {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -104,7 +104,7 @@ export default function FlashcardsForm({
             <FormItem>
               <FormLabel>{t(keys.frontLabel)}</FormLabel>
               <FormControl>
-                <Input placeholder={t("Enter question here...")} {...field} />
+                <Input placeholder={t(keys.enterQuestionHere)} {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -118,7 +118,7 @@ export default function FlashcardsForm({
               <FormLabel>{t(keys.backLabel)}</FormLabel>
               <FormControl>
                 <Textarea
-                  placeholder={t("Enter answer here...")}
+                  placeholder={t(keys.enterAnswerHere)}
                   {...field}
                   rows={4}
                 />
@@ -143,17 +143,17 @@ export default function FlashcardsForm({
                     onValueChange={(val) => field.onChange(Number(val))} // convert back to number
                   >
                     <SelectTrigger>
-                      <SelectValue placeholder={t("Select difficulty")} />
+                      <SelectValue placeholder={t(keys.selectDifficulty)} />
                     </SelectTrigger>
                     <SelectContent>
                       <SelectItem value={Difficulty.Easy.toString()}>
-                        {t("Easy")}
+                        {t(keys.difficultyEasy)}
                       </SelectItem>
                       <SelectItem value={Difficulty.Medium.toString()}>
-                        {t("Medium")}
+                        {t(keys.difficultyMedium)}
                       </SelectItem>
                       <SelectItem value={Difficulty.Hard.toString()}>
-                        {t("Hard")}
+                        {t(keys.difficultyHard)}
                       </SelectItem>
                     </SelectContent>
                   </Select>

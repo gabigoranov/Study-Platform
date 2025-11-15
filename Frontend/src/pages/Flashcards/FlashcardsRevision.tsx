@@ -81,17 +81,17 @@ export default function FlashcardsRevision({
     <div className="self-center bg-surface p-6 px-10 rounded-xl flex flex-col gap-4">
       <h2 className="text-3xl font-semibold">{t(keys.congratulations)}</h2>
       <p className="text-xl">
-        {t("You successfully revised {{count}} flashcards.", { count: currentCardIndex+1 })}
+        {t(keys.successfullyRevisedFlashcards, { count: currentCardIndex+1 })}
       </p>
 
       <div className="flex gap-4 self-end mt-10">
         <Button variant="ghost" className="text-lg" onClick={handleRetry}>
-          <RotateCcw /> {t("Retry")}
+          <RotateCcw /> {t(keys.retry)}
         </Button>
 
         <Link to="/flashcards">
           <Button variant="outline" className="rounded-xl text-lg">
-            {t("Close")}
+            {t(keys.close)}
           </Button>
         </Link>
       </div>
@@ -108,7 +108,7 @@ export default function FlashcardsRevision({
           className="h-4 w-fit p-4 rounded-full flex items-center"
           onClick={handleFinishRevision}
         >
-          <CheckCircle /> {t("Finish")}
+          <CheckCircle /> {t(keys.finish)}
         </Button>
       </div>
 

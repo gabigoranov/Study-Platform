@@ -85,7 +85,7 @@ export default function MindmapsForm({
             <FormItem>
               <FormLabel>{t(keys.title)}</FormLabel>
               <FormControl>
-                <Input placeholder={t("Enter mindmap title...")} {...field} />
+                <Input placeholder={t(keys.enterMindmapTitle)} {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -97,10 +97,10 @@ export default function MindmapsForm({
           name="description"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>{t("Description")}</FormLabel>
+              <FormLabel>{t(keys.Description)}</FormLabel>
               <FormControl>
                 <Textarea
-                  placeholder={t("Enter a short description...")}
+                  placeholder={t(keys.enterMindmapDescription)}
                   {...field}
                   rows={4}
                 />
@@ -125,17 +125,17 @@ export default function MindmapsForm({
                     onValueChange={(val) => field.onChange(Number(val))} // convert back to number
                   >
                     <SelectTrigger>
-                      <SelectValue placeholder={t("Select difficulty")} />
+                      <SelectValue placeholder={t(keys.selectDifficulty)} />
                     </SelectTrigger>
                     <SelectContent>
                       <SelectItem value={Difficulty.Easy.toString()}>
-                        {t("Easy")}
+                        {t(keys.difficultyEasy)}
                       </SelectItem>
                       <SelectItem value={Difficulty.Medium.toString()}>
-                        {t("Medium")}
+                        {t(keys.difficultyMedium)}
                       </SelectItem>
                       <SelectItem value={Difficulty.Hard.toString()}>
-                        {t("Hard")}
+                        {t(keys.difficultyHard)}
                       </SelectItem>
                     </SelectContent>
                   </Select>

@@ -53,7 +53,7 @@ export default function HomeDashboardHeader({ setView, handleDelete, selectedId 
                     </Button>
 
                     <Button className="rounded-3xl" variant="ghost" onClick={() => setView("createMaterialGroup")} disabled={selectedId === null}>
-                        <Plus className="inline" /> Add Group
+                        <Plus className="inline" /> {t(keys.addGroup)}
                     </Button>
 
                     <Button className="rounded-3xl" variant="ghost" onClick={() => handleDelete(selectedId!)} disabled={selectedId === null}>

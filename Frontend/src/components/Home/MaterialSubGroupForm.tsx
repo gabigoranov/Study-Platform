@@ -66,9 +66,9 @@ export default function MaterialSubGroupForm({
           name="title"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>{t(keys.title) || "Title"}</FormLabel>
+              <FormLabel>{t(keys.title)}</FormLabel>
               <FormControl>
-                <Input placeholder={t("Enter title")} {...field} />
+                <Input placeholder={t(keys.enterTitle)} {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>

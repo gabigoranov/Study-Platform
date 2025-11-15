@@ -137,7 +137,7 @@ export default function FriendsDashboard() {
                 className="border p-2 rounded w-full"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                placeholder="Search users..."
+                placeholder={t(keys.searchUsers)}
               />
               <UserSearchResultBox
                 users={searchResult ?? []}
@@ -179,7 +179,7 @@ export default function FriendsDashboard() {
                 }`}
                 onClick={() => setActiveTab("incoming")}
               >
-                Incoming Requests
+                {t(keys.incomingRequests)}
                 {incomingRequests.length > 0 && (
                   <span className="ml-2 bg-indigo-500 text-white rounded-full px-2 py-0.5 text-xs">
                     {incomingRequests.length}
@@ -194,7 +194,7 @@ export default function FriendsDashboard() {
                 }`}
                 onClick={() => setActiveTab("sent")}
               >
-                Sent Requests
+                {t(keys.sentRequests)}
                 {sentRequests.length > 0 && (
                   <span className="ml-2 bg-indigo-500 text-white rounded-full px-2 py-0.5 text-xs">
                     {sentRequests.length}

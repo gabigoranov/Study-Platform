@@ -3,6 +3,8 @@ import { Difficulty } from "@/data/Difficulty";
 import React from "react";
 import DifficultyTag from "../Common/DifficultyTag";
 import { Mindmap } from "@/data/Mindmap";
+import { t } from "i18next";
+import { keys } from "@/types/keys";
 
 interface MindmapDashboardComponentProps {
   mindmap: Mindmap;
@@ -44,7 +46,7 @@ export default function MindmapDashboardComponent({
       {/* Footer metadata */}
       <div className="flex items-center justify-between text-xs text-text-muted pt-4 border-t border-border">
         <span className="font-medium">
-          {nodeCount} {nodeCount === 1 ? 'node' : 'nodes'}
+          {nodeCount} {nodeCount === 1 ? t(keys.node) : t(keys.nodes)}
         </span>
         <time dateTime={mindmap.dateCreated}>
           {new Date(mindmap.dateCreated).toLocaleDateString('en-US', {

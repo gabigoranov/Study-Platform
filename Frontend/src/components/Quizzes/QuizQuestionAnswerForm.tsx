@@ -78,7 +78,7 @@ export default function QuizQuestionAnswerForm({
               <FormLabel>{t(keys.Answer)}</FormLabel>
               <FormControl>
                 <Textarea
-                  placeholder={t("Enter answer text")}
+                  placeholder={t(keys.enterAnswerText)}
                   {...field}
                   rows={3}
                 />

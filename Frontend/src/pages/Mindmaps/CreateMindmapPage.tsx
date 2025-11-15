@@ -131,7 +131,7 @@ export default function CreateMindmapPage({
 
       const newNode: Node = {
         id,
-        data: { label: newNodeLabel || t("New Node") },
+        data: { label: newNodeLabel || t(keys.newNode) },
         position,
         type: "default",
       };
@@ -242,23 +242,23 @@ export default function CreateMindmapPage({
         <Button onClick={() => setShowLabelModal(true)}>+ {t(keys.addNode)}</Button>
         {isPlacing && (
           <Button variant="outline" onClick={cancelPlacement}>
-            {t("Cancel")}
+            {t(keys.cancel)}
           </Button>
         )}
         {hasUnsavedChanges && (
           <Button onClick={handleSaveClick} variant="secondary">
-            <LucideSave /> {t("Save")}
+            <LucideSave /> {t(keys.save)}
           </Button>
         )}
         <Button variant="outline" onClick={handleAutoLayout}>
-          {t("Align Nodes")}
+          {t(keys.alignNodes)}
         </Button>
       </div>
 
       {/* Instruction ribbon */}
       {isPlacing && (
         <div className="absolute top-4 right-4 z-40 px-3 py-2 rounded-md text-sm bg-card text-card-foreground border border-border shadow-md max-w-xs">
-          {t("Click anywhere on the canvas to place the node —")}{" "}
+          {t(keys.clickCanvasPlaceNode)}{" "}
           <strong className="whitespace-nowrap">{newNodeLabel}</strong>
         </div>
       )}
@@ -296,11 +296,11 @@ export default function CreateMindmapPage({
                 autoFocus
                 value={newNodeLabel}
                 onChange={(e) => setNewNodeLabel(e.target.value)}
-                placeholder={t("Enter node label")}
+                placeholder={t(keys.enterNodeLabel)}
                 required
               />
               <p className="text-xs text-text-muted mt-1">
-                {t("After you submit, click anywhere on the canvas to place the node.")}
+                {t(keys.afterSubmitClickCanvas)}
               </p>
               <div className="flex justify-end gap-2 mt-4">
                 <Button
@@ -308,7 +308,7 @@ export default function CreateMindmapPage({
                   variant="secondary"
                   onClick={() => setShowLabelModal(false)}
                 >
-                  {t("Cancel")}
+                  {t(keys.cancel)}
                 </Button>
                 <Button type="submit">{t(keys.place)}</Button>
               </div>
@@ -321,14 +321,14 @@ export default function CreateMindmapPage({
       {showMindmapModal && (
         <div className="absolute inset-0 z-50 flex items-center justify-center bg-black/40">
           <div className="w-96 p-5 rounded-xl bg-card text-card-foreground border border-border shadow-lg">
-            <h3 className="text-lg font-medium mb-3">{t("Create New Mindmap")}</h3>
+            <h3 className="text-lg font-medium mb-3">{t(keys.createNewMindmap)}</h3>
             <form onSubmit={handleMindmapSubmit} className="flex flex-col gap-3">
               <div>
                 <Label className="text-sm">{t("Title")}</Label>
                 <Input
                   value={mindmapTitle}
                   onChange={(e) => setMindmapTitle(e.target.value)}
-                  placeholder={t("Enter mindmap title")}
+                  placeholder={t(keys.enterMindmapTitle)}
                   required
                   autoFocus
                 />
@@ -338,7 +338,7 @@ export default function CreateMindmapPage({
                 <Input
                   value={mindmapDescription}
                   onChange={(e) => setMindmapDescription(e.target.value)}
-                  placeholder={t("Enter mindmap description")}
+                  placeholder={t(keys.enterMindmapDescription)}
                   required
                 />
               </div>
@@ -368,9 +368,9 @@ export default function CreateMindmapPage({
                     setMindmapDescription("");
                   }}
                 >
-                  {t("Cancel")}
+                  {t(keys.cancel)}
                 </Button>
-                <Button type="submit">{t("Create Mindmap")}</Button>
+                <Button type="submit">{t(keys.createMindmap)}</Button>
               </div>
             </form>
           </div>

@@ -88,7 +88,7 @@ export default function QuizQuestionForm({
               <FormLabel>{t(keys.Question)}</FormLabel>
               <FormControl>
                 <Textarea
-                  placeholder={t("Enter question text")}
+                  placeholder={t(keys.enterQuestionText)}
                   {...field}
                   rows={3}
                 />
@@ -110,7 +110,7 @@ export default function QuizQuestionForm({
                   onValueChange={field.onChange}
                 >
                   <SelectTrigger>
-                    <SelectValue placeholder={t("Select correct answer")} />
+                    <SelectValue placeholder={t(keys.selectCorrectAnswer)} />
                   </SelectTrigger>
                   <SelectContent>
                     {/* This would be populated with actual answer options if available */}

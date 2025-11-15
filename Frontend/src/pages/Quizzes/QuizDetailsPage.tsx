@@ -438,7 +438,7 @@ export default function QuizDetailsPage({
                 >
                   <Plus className="h-4 w-4" />
                   {addQuestionsMutation.isPending
-                    ? t("Adding...")
+                    ? t(keys.adding)
                     : t(keys.addQuestion)}
                 </Button>
                 <Button
@@ -603,8 +603,8 @@ export default function QuizDetailsPage({
                                 disabled={updateQuizMutation.isPending}
                               >
                                 {isCorrect
-                                  ? "✓ " + t("Correct")
-                                  : t("setCorrect")}
+                                  ? t(keys.correctPrefix)
+                                  : t(keys.setCorrect)}
                               </Button>
                             )}
                             {isQuestionInEditMode(question.id) && (

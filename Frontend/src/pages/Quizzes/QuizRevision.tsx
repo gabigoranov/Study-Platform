@@ -130,24 +130,24 @@ export default function QuizRevision({ quizId, onBack }: QuizRevisionProps) {
           <CheckCircle className="h-16 w-16 text-white mx-auto" />
         </div>
         
-        <h2 className="text-3xl font-bold mb-2">{t("Revision Complete!")}</h2>
+        <h2 className="text-3xl font-bold mb-2">{t(keys.revisionComplete)}</h2>
         <p className="text-xl text-muted-foreground mb-8">
-          {t("You scored")} <span className="font-bold text-primary">{score}</span> {t("out of")} {totalQuestions}
+          {t(keys.youScored)} <span className="font-bold text-primary">{score}</span> {t(keys.outOf)} {totalQuestions}
         </p>
-        
+
         <div className="w-full max-w-md bg-card p-6 rounded-xl border">
-          <h3 className="text-lg font-semibold mb-4">{t("Summary")}</h3>
+          <h3 className="text-lg font-semibold mb-4">{t(keys.summary)}</h3>
           <div className="space-y-3">
             {quiz.questions.map((question, index) => {
               const userAnswer = userAnswers[question.id];
               return (
                 <div key={question.id} className="flex items-center justify-between p-3 rounded-lg bg-muted">
-                  <span className="text-sm font-medium">Question {index + 1}</span>
+                  <span className="text-sm font-medium">{t(keys.questionNumbering)} {index + 1}</span>
                   <div className="flex items-center gap-2">
                     {userAnswer?.isCorrect ? (
-                      <span className="text-success font-medium">Correct</span>
+                      <span className="text-success font-medium">{t(keys.correct)}</span>
                     ) : (
-                      <span className="text-destructive font-medium">Incorrect</span>
+                      <span className="text-destructive font-medium">{t(keys.incorrect)}</span>
                     )}
                   </div>
                 </div>
@@ -159,10 +159,10 @@ export default function QuizRevision({ quizId, onBack }: QuizRevisionProps) {
         <div className="flex gap-4 mt-8">
           <Button variant="outline" onClick={handleRetry} className="px-6">
             <RotateCcw className="h-4 w-4 mr-2" />
-            {t("Retry")}
+            {t(keys.retry)}
           </Button>
           <Button onClick={onBack} className="px-6">
-            {t("Back to Dashboard")}
+            {t(keys.backToDashboard)}
           </Button>
         </div>
       </div>
@@ -175,10 +175,10 @@ export default function QuizRevision({ quizId, onBack }: QuizRevisionProps) {
       <div className="w-full mb-6">
         <div className="flex justify-between text-sm text-muted-foreground mb-1">
           <span>
-            {t("Question")} {currentQuestionIndex + 1} {t("of")} {totalQuestions}
+            {t(keys.questionNumbering)} {currentQuestionIndex + 1} {t(keys.outOf)} {totalQuestions}
           </span>
           <span>
-            {t("Score")}: {score}/{totalQuestions}
+            {t(keys.score)}: {score}/{totalQuestions}
           </span>
         </div>
         <div className="w-full bg-muted rounded-full h-2.5 overflow-hidden">
@@ -253,14 +253,14 @@ export default function QuizRevision({ quizId, onBack }: QuizRevisionProps) {
                 disabled={!selectedAnswer}
                 className="px-8 py-6 text-lg h-auto rounded-xl shadow-lg"
               >
-                {t("Submit Answer")}
+                {t(keys.submitAnswer)}
               </Button>
             ) : (
               <Button 
                 onClick={handleNextQuestion} 
                 className="px-8 py-6 text-lg h-auto rounded-xl shadow-lg"
               >
-                {currentQuestionIndex < totalQuestions - 1 ? t("Next Question") : t("Finish Revision")}
+                {currentQuestionIndex < totalQuestions - 1 ? t(keys.nextQuestion) : t(keys.finishRevision)}
               </Button>
             )}
           </div>

@@ -73,7 +73,7 @@ export default function QuizList({
             quizzes.map((quiz) => (
               <TableRow key={quiz.id}>
                 <TableCell className="font-medium">{quiz.title}</TableCell>
-                <TableCell>{quiz.description}</TableCell>
+                <TableCell><p className="max-w-[500px] text-text-muted">{quiz.description}</p></TableCell>
                 <TableCell>
                   <DifficultyTag difficulty={quiz.difficulty} />
                 </TableCell>
