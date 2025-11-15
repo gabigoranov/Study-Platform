@@ -84,7 +84,7 @@ export default function QuizList({
                       size="sm"
                       onClick={() => onRevise?.(quiz.id)}
                     >
-                      {t("Revise")}
+                      {t(keys.reviseButtonLabel)}
                     </Button>
                     <Button
                       variant="outline"

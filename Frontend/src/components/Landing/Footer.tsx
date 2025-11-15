@@ -154,16 +154,7 @@ const Footer = () => {
           <div className="flex flex-col md:flex-row justify-center items-center gap-6 mb-4">
             {/* Social links */}
             <div className="flex gap-4">
-              <a
-                href="https://twitter.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full bg-surface-muted hover:bg-primary/10 flex items-center justify-center transition-colors group"
-                aria-label={t(keys.twitter)}
-              >
-                <Twitter className="w-5 h-5 text-text-muted group-hover:text-primary transition-colors" />
-              </a>
-              <a
+                <a
                 href="https://github.com/gabigoranov/Study-Platform"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -171,15 +162,6 @@ const Footer = () => {
                 aria-label={t(keys.github)}
               >
                 <Github className="w-5 h-5 text-text-muted group-hover:text-primary transition-colors" />
-              </a>
-              <a
-                href="https://linkedin.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full bg-surface-muted hover:bg-primary/10 flex items-center justify-center transition-colors group"
-                aria-label={t(keys.linkedin)}
-              >
-                <Linkedin className="w-5 h-5 text-text-muted group-hover:text-primary transition-colors" />
               </a>
               <a
                 href="mailto:contact@ailearning.com"

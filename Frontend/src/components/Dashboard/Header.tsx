@@ -5,6 +5,8 @@ import ProfileIcon from "./ProfileIcon";
 import { Button } from "../ui/button";
 import { User2 } from "lucide-react";
 import { Link } from "react-router-dom";
+import { t } from "i18next";
+import { keys } from "@/types/keys";
 
 export default function Header() {
   return (
@@ -14,7 +16,7 @@ export default function Header() {
       <div className="flex gap-1 justify-end">
         <Link to="/friends">
           <Button variant={"ghost"} size={"lg"} aria-label="friends">
-            <User2/> Friends
+            <User2/> {t(keys.friendsTab)}
           </Button>
         </Link>
         <ProfileIcon />

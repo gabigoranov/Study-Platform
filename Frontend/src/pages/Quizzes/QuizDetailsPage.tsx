@@ -462,7 +462,7 @@ export default function QuizDetailsPage({
       {/* Questions List */}
       <div className="space-y-4">
         <h2 className="text-xl font-semibold mb-4">
-          {t("Questions")} ({quiz.questions?.length || 0})
+          {t(keys.questionsLabel)} ({quiz.questions?.length || 0})
         </h2>
 
         {quiz.questions && quiz.questions.length > 0 ? (

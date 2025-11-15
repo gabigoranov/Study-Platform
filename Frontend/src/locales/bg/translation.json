@@ -254,5 +254,6 @@
     "score": "Точки",
     "displayName": "Показвано име",
     "message": "Съобщение",
-    "submittingQuizLabel": "Запазва се теста..."
+    "submittingQuizLabel": "Запазва се теста...",
+    "questionsLabel": "Въпроси"
 }

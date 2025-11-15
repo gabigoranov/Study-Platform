@@ -3,7 +3,7 @@ import PdfViewer from "./PdfViewer";
 import { Button } from "../ui/button";
 import { Textarea } from "../ui/textarea";
 import Loading from "./Loading";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import ErrorScreen from "./ErrorScreen";
 import { useTranslation } from "react-i18next";
 import { keys } from "@/types/keys";
@@ -20,6 +20,7 @@ import DocViewer, { DocViewerRenderers } from "@cyntler/react-doc-viewer";
 import "@cyntler/react-doc-viewer/dist/index.css";
 import { ScrollArea } from "@radix-ui/react-scroll-area";
 import QuizSkeleton from "../Quizzes/QuizSkeleton";
+import StableDocViewer from "./StableDocViewer";
 
 type UploadFileFormProps = {
   resetForm: () => void;
@@ -51,6 +52,15 @@ export default function UploadFileForm({
 
   const { actions } = useGenerationActions();
   const [isDragging, setIsDragging] = useState(false);
+  const memoizedDoc = useMemo(() => {
+    if (!file) return null;
+    return [
+      {
+        uri: URL.createObjectURL(file),
+        fileName: file.name,
+      },
+    ];
+  }, [file]);
 
   const handleDragOver = (e: React.DragEvent<HTMLLabelElement>) => {
     e.preventDefault();
@@ -125,24 +135,9 @@ export default function UploadFileForm({
     <>
       <div className="w-full sm:max-w-[50%] h-full overflow-auto border rounded">
         {file ? (
-          <DocViewer
-            documents={[
-              { uri: URL.createObjectURL(file), fileName: file.name },
-            ]}
-            pluginRenderers={DocViewerRenderers}
-            config={{
-              header: {
-                disableHeader: true,
-              },
-              pdfZoom: {
-                defaultZoom: 1.0,
-                zoomJump: 0.2,
-              },
-              pdfVerticalScrollByDefault: true, 
-            }}
-          />
+          <StableDocViewer documents={memoizedDoc || []} />
         ) : (
-          <div className="h-[600px] flex items-center justify-center text-gray-500">
+          <div className="h-[600px] flex items-center justify-center text-text-muted">
             {t(keys.uploadFileLabel)}
           </div>
         )}

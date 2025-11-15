@@ -254,5 +254,6 @@
   "difficultyHard": "Hard",
   "zoomIn": "Zoom In",
   "clickOutside": "Click outside or scroll to close",
-  "submittingQuizLabel": "Saving the quiz..."
+  "submittingQuizLabel": "Saving the quiz...",
+  "questionsLabel": "Questions"
 }

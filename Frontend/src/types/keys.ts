@@ -257,5 +257,6 @@ export const keys = {
   difficultyHard: "difficultyHard",
   zoomIn: "zoomIn",
   clickOutside: "clickOutside",
-  submittingQuizLabel: "submittingQuizLabel"
+  submittingQuizLabel: "submittingQuizLabel",
+  questionsLabel: "questionsLabel"
 };
