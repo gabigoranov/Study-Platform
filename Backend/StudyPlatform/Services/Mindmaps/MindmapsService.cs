@@ -78,7 +78,7 @@ namespace StudyPlatform.Services.Mindmaps
 
             try
             {
-                await _repo.ExecuteDeleteAsync<Mindmap>(f => ids.Contains(f.Id) && f.UserId == userId);
+                await _repo.All<Mindmap>().Where(f => ids.Contains(f.Id) && f.UserId == userId).ExecuteDeleteAsync();
 
                 _logger.LogInformation("Mindmaps deleted for user {UserId}", userId);
             }

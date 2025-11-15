@@ -20,4 +20,9 @@ i18n
     },
   });
 
+
+// Load saved lang BEFORE the app renders
+const savedLang = localStorage.getItem("lang");
+if (savedLang) i18n.changeLanguage(savedLang);
+
 export default i18n;

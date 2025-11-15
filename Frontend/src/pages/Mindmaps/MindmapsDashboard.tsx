@@ -77,9 +77,7 @@ export default function MindmapsDashboard() {
   // --- Mutation: delete ---
   const deleteMutation = useMutation({
     mutationFn: (id: string) =>
-      mindmapsService.delete(token!, {
-        ids: id,
-      }),
+      mindmapsService.deleteSingle(token!, id),
     onSuccess: (_, id) => {
       queryClient.setQueryData<Mindmap[]>(
         ["mindmaps", selectedGroupId, selectedSubjectId],

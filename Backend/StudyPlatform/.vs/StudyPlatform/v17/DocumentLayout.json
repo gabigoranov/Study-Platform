@@ -3,6 +3,30 @@
   "WorkspaceRootPath": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|d:\\projects\\studyplatform\\backend\\studyplatform\\services\\mindmaps\\mindmapsservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|solutionrelative:services\\mindmaps\\mindmapsservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|d:\\projects\\studyplatform\\backend\\studyplatform\\services\\friends\\friendsservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|solutionrelative:services\\friends\\friendsservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|d:\\projects\\studyplatform\\backend\\studyplatform\\services\\quiz\\quizservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|solutionrelative:services\\quiz\\quizservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|d:\\projects\\studyplatform\\backend\\studyplatform\\controllers\\mindmapscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|solutionrelative:controllers\\mindmapscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|d:\\projects\\studyplatform\\backend\\studyplatform\\controllers\\quizzescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|solutionrelative:controllers\\quizzescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|d:\\projects\\studyplatform\\backend\\studyplatform\\controllers\\flashcardscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|solutionrelative:controllers\\flashcardscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|d:\\projects\\studyplatform\\backend\\studyplatform\\models\\dtos\\appuserdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|solutionrelative:models\\dtos\\appuserdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -19,20 +43,12 @@
       "RelativeMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|solutionrelative:models\\updatescoreviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|d:\\projects\\studyplatform\\backend\\studyplatform\\controllers\\flashcardscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|solutionrelative:controllers\\flashcardscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|d:\\projects\\studyplatform\\backend\\studyplatform\\services\\users\\usersservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|solutionrelative:services\\users\\usersservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|d:\\projects\\studyplatform\\backend\\studyplatform\\services\\users\\iusersservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|solutionrelative:services\\users\\iusersservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|d:\\projects\\studyplatform\\backend\\studyplatform\\services\\friends\\friendsservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|solutionrelative:services\\friends\\friendsservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|d:\\projects\\studyplatform\\backend\\studyplatform\\models\\dtos\\appuserfrienddto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -49,14 +65,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|d:\\projects\\studyplatform\\backend\\studyplatform\\controllers\\subjectscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|solutionrelative:controllers\\subjectscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|d:\\projects\\studyplatform\\backend\\studyplatform\\controllers\\quizzescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|solutionrelative:controllers\\quizzescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|d:\\projects\\studyplatform\\backend\\studyplatform\\controllers\\mindmapscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|solutionrelative:controllers\\mindmapscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{94B86014-320F-4117-A137-5A51B2E916EC}|StudyPlatform.csproj|d:\\projects\\studyplatform\\backend\\studyplatform\\controllers\\materialsubgroupscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -78,7 +86,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 135,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
@@ -86,7 +94,33 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "QuizService.cs",
+              "DocumentMoniker": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Services\\Quiz\\QuizService.cs",
+              "RelativeDocumentMoniker": "Services\\Quiz\\QuizService.cs",
+              "ToolTip": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Services\\Quiz\\QuizService.cs",
+              "RelativeToolTip": "Services\\Quiz\\QuizService.cs",
+              "ViewState": "AgIAAKQAAAAAAAAAAAAIwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-15T22:36:41.096Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "MindmapsService.cs",
+              "DocumentMoniker": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Services\\Mindmaps\\MindmapsService.cs",
+              "RelativeDocumentMoniker": "Services\\Mindmaps\\MindmapsService.cs",
+              "ToolTip": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Services\\Mindmaps\\MindmapsService.cs",
+              "RelativeToolTip": "Services\\Mindmaps\\MindmapsService.cs",
+              "ViewState": "AgIAADkAAAAAAAAAAAAowFAAAAByAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-15T22:35:21.174Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
               "Title": "AppUserDTO.cs",
               "DocumentMoniker": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Models\\DTOs\\AppUserDTO.cs",
               "RelativeDocumentMoniker": "Models\\DTOs\\AppUserDTO.cs",
@@ -99,19 +133,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
-              "Title": "20251114124702_RemoveAvatarUrlFromAppUser.cs",
-              "DocumentMoniker": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Migrations\\20251114124702_RemoveAvatarUrlFromAppUser.cs",
-              "RelativeDocumentMoniker": "Migrations\\20251114124702_RemoveAvatarUrlFromAppUser.cs",
-              "ToolTip": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Migrations\\20251114124702_RemoveAvatarUrlFromAppUser.cs",
-              "RelativeToolTip": "Migrations\\20251114124702_RemoveAvatarUrlFromAppUser.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAAjAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-14T12:47:02.517Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 12,
               "Title": "AppUserFriendDTO.cs",
               "DocumentMoniker": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Models\\DTOs\\AppUserFriendDTO.cs",
               "RelativeDocumentMoniker": "Models\\DTOs\\AppUserFriendDTO.cs",
@@ -123,31 +145,33 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 1,
               "Title": "FriendsService.cs",
               "DocumentMoniker": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Services\\Friends\\FriendsService.cs",
               "RelativeDocumentMoniker": "Services\\Friends\\FriendsService.cs",
               "ToolTip": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Services\\Friends\\FriendsService.cs",
               "RelativeToolTip": "Services\\Friends\\FriendsService.cs",
-              "ViewState": "AgIAALoAAAAAAAAAAAAqwM8AAABAAAAAAAAAAA==",
+              "ViewState": "AgIAAH0AAAAAAAAAAAAUwJ4AAAAqAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-14T07:37:53.218Z"
+              "WhenOpened": "2025-11-14T07:37:53.218Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "FlashcardsController.cs",
               "DocumentMoniker": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Controllers\\FlashcardsController.cs",
               "RelativeDocumentMoniker": "Controllers\\FlashcardsController.cs",
               "ToolTip": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Controllers\\FlashcardsController.cs",
               "RelativeToolTip": "Controllers\\FlashcardsController.cs",
-              "ViewState": "AgIAABIAAAAAAAAAAAAAAC0AAAAbAAAAAAAAAA==",
+              "ViewState": "AgIAAGIAAAAAAAAAAAAIwC0AAAAbAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-14T06:44:18.443Z"
+              "WhenOpened": "2025-11-14T06:44:18.443Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 13,
               "Title": "FriendsController.cs",
               "DocumentMoniker": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Controllers\\FriendsController.cs",
               "RelativeDocumentMoniker": "Controllers\\FriendsController.cs",
@@ -155,23 +179,25 @@
               "RelativeToolTip": "Controllers\\FriendsController.cs",
               "ViewState": "AgIAAGAAAAAAAAAAAAAgwHwAAAA6AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-14T06:44:15.708Z"
+              "WhenOpened": "2025-11-14T06:44:15.708Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 4,
               "Title": "QuizzesController.cs",
               "DocumentMoniker": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Controllers\\QuizzesController.cs",
               "RelativeDocumentMoniker": "Controllers\\QuizzesController.cs",
               "ToolTip": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Controllers\\QuizzesController.cs",
               "RelativeToolTip": "Controllers\\QuizzesController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAIMAAAAAAAAAAAAuwI0AAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-14T06:44:08.708Z"
+              "WhenOpened": "2025-11-14T06:44:08.708Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 15,
               "Title": "SubjectsController.cs",
               "DocumentMoniker": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Controllers\\SubjectsController.cs",
               "RelativeDocumentMoniker": "Controllers\\SubjectsController.cs",
@@ -183,7 +209,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 8,
               "Title": "UsersController.cs",
               "DocumentMoniker": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Controllers\\UsersController.cs",
               "RelativeDocumentMoniker": "Controllers\\UsersController.cs",
@@ -191,11 +217,12 @@
               "RelativeToolTip": "Controllers\\UsersController.cs",
               "ViewState": "AgIAAAoAAAAAAAAAAAAcwCcAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-14T06:34:02.21Z"
+              "WhenOpened": "2025-11-14T06:34:02.21Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 11,
               "Title": "IUsersService.cs",
               "DocumentMoniker": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Services\\Users\\IUsersService.cs",
               "RelativeDocumentMoniker": "Services\\Users\\IUsersService.cs",
@@ -207,7 +234,32 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 3,
+              "Title": "MindmapsController.cs",
+              "DocumentMoniker": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Controllers\\MindmapsController.cs",
+              "RelativeDocumentMoniker": "Controllers\\MindmapsController.cs",
+              "ToolTip": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Controllers\\MindmapsController.cs",
+              "RelativeToolTip": "Controllers\\MindmapsController.cs",
+              "ViewState": "AgIAAEwAAAAAAAAAAAAcwHEAAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-14T06:44:32.32Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "20251114124702_RemoveAvatarUrlFromAppUser.cs",
+              "DocumentMoniker": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Migrations\\20251114124702_RemoveAvatarUrlFromAppUser.cs",
+              "RelativeDocumentMoniker": "Migrations\\20251114124702_RemoveAvatarUrlFromAppUser.cs",
+              "ToolTip": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Migrations\\20251114124702_RemoveAvatarUrlFromAppUser.cs",
+              "RelativeToolTip": "Migrations\\20251114124702_RemoveAvatarUrlFromAppUser.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAAjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-14T12:47:02.517Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
               "Title": "UsersService.cs",
               "DocumentMoniker": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Services\\Users\\UsersService.cs",
               "RelativeDocumentMoniker": "Services\\Users\\UsersService.cs",
@@ -219,7 +271,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 7,
               "Title": "AppUser.cs",
               "DocumentMoniker": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Data\\Models\\AppUser.cs",
               "RelativeDocumentMoniker": "Data\\Models\\AppUser.cs",
@@ -231,7 +283,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 9,
               "Title": "UpdateScoreViewModel.cs",
               "DocumentMoniker": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Models\\UpdateScoreViewModel.cs",
               "RelativeDocumentMoniker": "Models\\UpdateScoreViewModel.cs",
@@ -243,7 +295,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 16,
               "Title": "MaterialSubGroupsController.cs",
               "DocumentMoniker": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Controllers\\MaterialSubGroupsController.cs",
               "RelativeDocumentMoniker": "Controllers\\MaterialSubGroupsController.cs",
@@ -255,19 +307,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "MindmapsController.cs",
-              "DocumentMoniker": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Controllers\\MindmapsController.cs",
-              "RelativeDocumentMoniker": "Controllers\\MindmapsController.cs",
-              "ToolTip": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Controllers\\MindmapsController.cs",
-              "RelativeToolTip": "Controllers\\MindmapsController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAPAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-14T06:44:32.32Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 14,
               "Title": "IFriendsService.cs",
               "DocumentMoniker": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Services\\Friends\\IFriendsService.cs",
               "RelativeDocumentMoniker": "Services\\Friends\\IFriendsService.cs",
@@ -279,7 +319,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 17,
               "Title": "Program.cs",
               "DocumentMoniker": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",

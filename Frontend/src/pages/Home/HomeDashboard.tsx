@@ -25,6 +25,7 @@ import {
   FileAudio,
   GitBranch,
 } from "lucide-react";
+import { queryClient } from "@/main";
 
 type View =
   | "list"
@@ -48,7 +49,6 @@ export default function HomeDashboard() {
     string | null
   >(null);
   const { token } = useAuth();
-  const queryClient = useQueryClient();
   const { selectedSubjectId, setSelectedSubjectId } = useVariableContext();
 
   // Query: load all subjects

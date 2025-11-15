@@ -200,6 +200,13 @@
             <param name="ids">The array of mindmap ids.</param>
             <returns>Nothing.</returns>
         </member>
+        <member name="M:StudyPlatform.Controllers.MindmapsController.DeleteSingle(System.Guid)">
+            <summary>
+            Endpoint for deleting a single mindmap by its Id.
+            </summary>
+            <param name="id">Mindmap id.</param>
+            <returns>Nothing.</returns>
+        </member>
         <member name="T:StudyPlatform.Controllers.QuizzesController">
             <summary>
             Provides endpoints for managing quizzes.

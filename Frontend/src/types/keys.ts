@@ -325,4 +325,7 @@ export const keys = {
   nodes: "nodes",
   incomingRequests: "incomingRequests",
   sentRequests: "sentRequests",
+  ascending: "ascending",
+  descending: "descending",
+  orderBy: "orderBy",
 };

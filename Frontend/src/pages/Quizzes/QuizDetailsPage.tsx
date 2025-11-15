@@ -14,6 +14,7 @@ import { Plus, X, Edit3, Trash2, Save, AlertCircle } from "lucide-react";
 import DifficultyTag from "../../components/Common/DifficultyTag";
 import { QuizQuestionDTO } from "@/data/DTOs/QuizQuestionDTO";
 import { QuizDTO } from "@/data/DTOs/QuizDTO";
+import { queryClient } from "@/main";
 
 interface QuizDetailsPageProps {
   quizId: string;
@@ -25,7 +26,6 @@ export default function QuizDetailsPage({
   onBack,
 }: QuizDetailsPageProps) {
   const { t } = useTranslation();
-  const queryClient = useQueryClient();
   const { token } = useAuth();
 
   // State for creating a new question (step by step)

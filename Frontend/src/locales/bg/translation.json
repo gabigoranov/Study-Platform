@@ -321,5 +321,8 @@
   "node": "Компонент",
   "nodes": "Компонента",
   "incomingRequests": "Входни Покани",
-  "sentRequests": "Изпратени Покани"
+  "sentRequests": "Изпратени Покани",
+  "ascending": "Възходящи",
+  "descending": "Низходящи",
+  "orderBy": "Подреди По"
 }

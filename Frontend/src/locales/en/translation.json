@@ -321,5 +321,8 @@
   "node": "Node",
   "nodes": "Nodes",
   "incomingRequests": "Incoming Requests",
-  "sentRequests": "Sent Requests"
+  "sentRequests": "Sent Requests",
+  "ascending": "Ascending",
+  "descending": "Descending",
+  "orderBy": "Order By"
 }

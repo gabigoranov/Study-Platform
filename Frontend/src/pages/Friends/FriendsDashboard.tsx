@@ -209,7 +209,7 @@ export default function FriendsDashboard() {
             <>
               {/* Friends sorting controls */}
               <div className="flex items-center space-x-4">
-                <span>Sort by:</span>
+                <span>{t(keys.orderBy)}</span>
                 <Select
                   value={friendsSortBy}
                   onValueChange={(value) =>
@@ -235,8 +235,8 @@ export default function FriendsDashboard() {
                     <SelectValue placeholder="Order" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="desc">Descending</SelectItem>
-                    <SelectItem value="asc">Ascending</SelectItem>
+                    <SelectItem value="desc">{t(keys.descending)}</SelectItem>
+                    <SelectItem value="asc">{t(keys.ascending)}</SelectItem>
                   </SelectContent>
                 </Select>
               </div>

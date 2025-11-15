@@ -99,5 +99,20 @@ namespace StudyPlatform.Controllers
             await _mindmapsService.DeleteAsync(ids, userId);
             return NoContent();
         }
+
+        /// <summary>
+        /// Endpoint for deleting a single mindmap by its Id.
+        /// </summary>
+        /// <param name="id">Mindmap id.</param>
+        /// <returns>Nothing.</returns>
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteSingle([FromRoute] Guid id)
+        {
+            // Load userId from JWT tokens
+            Guid userId = User.GetUserId();
+
+            await _mindmapsService.DeleteAsync([id], userId);
+            return Ok();
+        }
     }
 }

@@ -3,27 +3,28 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { Button } from "@/components/ui/button"
-import { useTranslation } from "react-i18next"
+} from "@/components/ui/dropdown-menu";
+import { Button } from "@/components/ui/button";
+import { useTranslation } from "react-i18next";
 
 type LanguageToggleProps = {
-  className?: string
-}
+  className?: string;
+};
 
 export default function LanguageToggle({ className }: LanguageToggleProps) {
-  const { i18n } = useTranslation()
+  const { i18n } = useTranslation();
 
   const languages = [
     { code: "en", label: "English" },
     { code: "bg", label: "Български" },
-  ]
+  ];
 
   const changeLanguage = (lang: string) => {
     i18n.changeLanguage(lang, (err) => {
-      if (err) console.error("Failed to load language", err)
-    })
-  }
+      if (err) console.error("Failed to load language", err);
+      else localStorage.setItem("lang", lang); // persist language
+    });
+  };
 
   return (
     <DropdownMenu modal={false}>
@@ -63,5 +64,5 @@ export default function LanguageToggle({ className }: LanguageToggleProps) {
         ))}
       </DropdownMenuContent>
     </DropdownMenu>
-  )
+  );
 }

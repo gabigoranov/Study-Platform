@@ -12,12 +12,12 @@ import { Quiz } from "@/data/Quiz";
 import { useVariableContext } from "@/context/VariableContext";
 import QuizRevision from "./QuizRevision";
 import { Route, Routes, useNavigate } from "react-router";
+import { queryClient } from "@/main";
 
 type View = "list" | "create" | "edit" | "view" | "revise";
 
 export default function QuizzesDashboard() {
   const { t } = useTranslation();
-  const queryClient = useQueryClient();
   const { token } = useAuth();
   const [view, setView] = useState<View>("list");
   const [editingQuiz, setEditingQuiz] = useState<Quiz | undefined>(undefined);
