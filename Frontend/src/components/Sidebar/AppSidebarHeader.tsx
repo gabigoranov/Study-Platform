@@ -17,7 +17,7 @@ export default function AppSidebarHeader({ items }: AppSidebarHeaderProps) {
   const { t } = useTranslation();
   return (
     <SidebarHeader className="py-4 flex flex-col gap-4">
-      <Link to="/">
+      <Link to="/landing">
         <AppLogo />
       </Link>
       {items.length > 0 && (
