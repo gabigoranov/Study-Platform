@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { useAuth } from "../hooks/useAuth";
 import { Link, useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import { supabase } from "../lib/supabaseClient";
@@ -8,6 +7,7 @@ import { useTranslation } from "react-i18next";
 import { keys } from "../types/keys";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { useAuth } from "@/hooks/Supabase/useAuth";
 
 export default function Login() {
   const { t, i18n } = useTranslation();

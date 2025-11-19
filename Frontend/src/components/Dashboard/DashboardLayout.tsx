@@ -10,7 +10,7 @@ import { PiNoteBlankFill } from "react-icons/pi";
 import { AppSidebar } from "../Sidebar/AppSidebar";
 import { FaQuestionCircle } from "react-icons/fa";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { useAuth } from "@/hooks/useAuth";
+import { useAuth } from "@/hooks/Supabase/useAuth";
 import { useVariableContext } from "@/context/VariableContext";
 import { subjectService } from "@/services/subjectService";
 

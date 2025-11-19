@@ -1,14 +1,9 @@
 import { keys } from "@/types/keys";
-import { Input } from "../ui/input";
+import { ChevronLeft, Edit, Plus, Trash2 } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { FaMagnifyingGlass } from "react-icons/fa6";
 import { Button } from "../ui/button";
-import { ChevronDown, ChevronLeft, Edit, Eye, Plus, Trash2 } from "lucide-react";
-import { useQuery } from "@tanstack/react-query";
-import { useAuth } from "@/hooks/useAuth";
-import { useVariableContext } from "@/context/VariableContext";
-import { subjectService } from "@/services/subjectService";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "../ui/dropdown-menu";
+import { Input } from "../ui/input";
 
 type HomeDashboardHeaderProps = {
     setView: (view: "list" | "create" | "edit" | "view" | "createMaterialGroup" | "editMaterialGroup") => void;

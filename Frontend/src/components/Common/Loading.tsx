@@ -1,4 +1,4 @@
-import { useTheme } from "@/hooks/useThemeProvider";
+import { useTheme } from "@/hooks/Theme/useThemeProvider";
 import { CSSProperties, useState } from "react";
 import { BarLoader, CircleLoader, ClipLoader, DotLoader } from "react-spinners";
 

@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { SidebarTrigger } from "../ui/sidebar";
-import { useAuth } from "@/hooks/useAuth";
+import { useAuth } from "@/hooks/Supabase/useAuth";
 import ProfileIcon from "./ProfileIcon";
 import { Button } from "../ui/button";
 import { User2 } from "lucide-react";

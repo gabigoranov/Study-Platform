@@ -5,8 +5,8 @@ import UploadFileMenu from "./UploadFileMenu";
 import { keys } from "@/types/keys";
 import { useTranslation } from "react-i18next";
 import { AnimatePresence, motion } from "motion/react";
-import { useGenerationActions } from "@/hooks/useGenerationActions";
-import { useGenerationVariables } from "@/hooks/useGenerationVariables";
+import { useGenerationActions } from "@/hooks/MaterialGeneration/useGenerationActions";
+import { useGenerationVariables } from "@/hooks/MaterialGeneration/useGenerationVariables";
 
 type UploadFileButtonProps = {
   defaultActionId: string

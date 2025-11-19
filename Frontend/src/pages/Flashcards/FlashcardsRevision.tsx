@@ -9,7 +9,7 @@ import { CheckCircle, RotateCcw } from "lucide-react";
 import { useMemo, useState } from "react";
 import { Link } from "react-router";
 import { usersService } from "@/services/usersService";
-import { useAuth } from "@/hooks/useAuth";
+import { useAuth } from "@/hooks/Supabase/useAuth";
 
 type FlashcardsRevisionProps = {
   flashcards: Flashcard[] | undefined;

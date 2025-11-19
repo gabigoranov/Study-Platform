@@ -102,8 +102,7 @@
               "RelativeToolTip": "Services\\Quiz\\QuizService.cs",
               "ViewState": "AgIAAKQAAAAAAAAAAAAIwAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-15T22:36:41.096Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-15T22:36:41.096Z"
             },
             {
               "$type": "Document",
@@ -113,7 +112,7 @@
               "RelativeDocumentMoniker": "Services\\Mindmaps\\MindmapsService.cs",
               "ToolTip": "D:\\Projects\\StudyPlatform\\Backend\\StudyPlatform\\Services\\Mindmaps\\MindmapsService.cs",
               "RelativeToolTip": "Services\\Mindmaps\\MindmapsService.cs",
-              "ViewState": "AgIAADkAAAAAAAAAAAAowFAAAAByAAAAAAAAAA==",
+              "ViewState": "AgIAADkAAAAAAAAAAAAowFsAAABYAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-11-15T22:35:21.174Z",
               "EditorCaption": ""
@@ -128,8 +127,7 @@
               "RelativeToolTip": "Models\\DTOs\\AppUserDTO.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-14T10:41:20.232Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-14T10:41:20.232Z"
             },
             {
               "$type": "Document",
@@ -153,8 +151,7 @@
               "RelativeToolTip": "Services\\Friends\\FriendsService.cs",
               "ViewState": "AgIAAH0AAAAAAAAAAAAUwJ4AAAAqAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-14T07:37:53.218Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-14T07:37:53.218Z"
             },
             {
               "$type": "Document",
@@ -166,8 +163,7 @@
               "RelativeToolTip": "Controllers\\FlashcardsController.cs",
               "ViewState": "AgIAAGIAAAAAAAAAAAAIwC0AAAAbAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-14T06:44:18.443Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-14T06:44:18.443Z"
             },
             {
               "$type": "Document",
@@ -179,8 +175,7 @@
               "RelativeToolTip": "Controllers\\FriendsController.cs",
               "ViewState": "AgIAAGAAAAAAAAAAAAAgwHwAAAA6AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-14T06:44:15.708Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-14T06:44:15.708Z"
             },
             {
               "$type": "Document",
@@ -192,8 +187,7 @@
               "RelativeToolTip": "Controllers\\QuizzesController.cs",
               "ViewState": "AgIAAIMAAAAAAAAAAAAuwI0AAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-14T06:44:08.708Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-14T06:44:08.708Z"
             },
             {
               "$type": "Document",
@@ -217,8 +211,7 @@
               "RelativeToolTip": "Controllers\\UsersController.cs",
               "ViewState": "AgIAAAoAAAAAAAAAAAAcwCcAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-14T06:34:02.21Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-14T06:34:02.21Z"
             },
             {
               "$type": "Document",
@@ -242,8 +235,7 @@
               "RelativeToolTip": "Controllers\\MindmapsController.cs",
               "ViewState": "AgIAAEwAAAAAAAAAAAAcwHEAAAArAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-14T06:44:32.32Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-14T06:44:32.32Z"
             },
             {
               "$type": "Document",

@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext, createContext } from "react";
-import { supabase } from "../lib/supabaseClient";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { queryClient } from "@/main";
+import { supabase } from "@/lib/supabaseClient";
 
 type UserProfile = {
   id: string;

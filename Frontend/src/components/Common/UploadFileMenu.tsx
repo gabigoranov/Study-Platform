@@ -6,13 +6,13 @@ import ReviewGeneratedMindmap from "../Mindmaps/ReviewGeneratedMindmap";
 import { MindmapDTO } from "@/data/DTOs/MindmapDTO";
 import { ReactFlowProvider } from "@xyflow/react";
 import { GeneratedMindmapDTO } from "@/data/DTOs/GeneratedMindmapDTO";
-import { SubmitAction, useGenerationActions } from "@/hooks/useGenerationActions";
+import { SubmitAction, useGenerationActions } from "@/hooks/MaterialGeneration/useGenerationActions";
 import { useState } from "react";
-import { useFlashcardsGeneration } from "@/hooks/useFlashcardsGeneration";
-import { useMindmapsGeneration } from "@/hooks/useMindmapsGeneration";
+import { useFlashcardsGeneration } from "@/hooks/Flashcards/useFlashcardsGeneration";
+import { useMindmapsGeneration } from "@/hooks/Mindmaps/useMindmapsGeneration";
 import { GeneratedFlashcardDTO } from "@/data/DTOs/GeneratedFlashcardDTO";
 import { Flashcard } from "@/data/Flashcard";
-import { useQuizzesGeneration } from "@/hooks/useQuizzesGeneration";
+import { useQuizzesGeneration } from "@/hooks/Quizzes/useQuizzesGeneration";
 import ReviewGeneratedQuiz from "../Quizzes/ReviewGeneratedQuiz";
 import { GeneratedQuizDTO } from "@/data/DTOs/GeneratedQuizDTO";
 

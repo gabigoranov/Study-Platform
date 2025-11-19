@@ -1,19 +1,15 @@
-import { useAuth } from "@/hooks/useAuth";
 import { useVariableContext } from "@/context/VariableContext";
-import { storageService } from "@/services/storageService";
-import { flashcardService } from "@/services/flashcardService";
-import { GeneratedFlashcardDTO } from "@/data/DTOs/GeneratedFlashcardDTO";
 import { FlashcardDTO } from "@/data/DTOs/FlashcardDTO";
+import { GeneratedFlashcardDTO } from "@/data/DTOs/GeneratedFlashcardDTO";
 import { Flashcard } from "@/data/Flashcard";
+import { flashcardService } from "@/services/flashcardService";
+import { storageService } from "@/services/storageService";
+import { usersService } from "@/services/usersService";
 import { BASE_URL } from "@/types/urls";
 import { useQueryClient } from "@tanstack/react-query";
-import { useEffect, useState } from "react";
-import { GeneratedMindmapDTO } from "@/data/DTOs/GeneratedMindmapDTO";
-import { MindmapDTO } from "@/data/DTOs/MindmapDTO";
-import { CreateMindmapDTO } from "@/data/DTOs/CreateMindmapDTO";
-import { mindmapsService } from "@/services/mindmapsService";
-import { SubmitAction, useGenerationActions } from "./useGenerationActions";
-import { usersService } from "@/services/usersService";
+import { useState } from "react";
+import { SubmitAction } from "../MaterialGeneration/useGenerationActions";
+import { useAuth } from "../Supabase/useAuth";
 
 type FlashcardsGenerationProps = {
   setLoading: (value: boolean) => void;

@@ -1,5 +1,4 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { AuthProvider } from "./hooks/useAuth";
 import ProtectedRoute from "./routes/ProtectedRoute";
 
 import Login from "./pages/Login";
@@ -11,13 +10,14 @@ import GeneralSettings from "./pages/Settings/GeneralSettings";
 import AccountSettings from "./pages/Settings/AccountSettings";
 import ThemeSettings from "./pages/Settings/ThemeSettings";
 import ErrorPage from "./pages/ErrorPage";
-import { ThemeProvider } from "./hooks/useThemeProvider";
+import { ThemeProvider } from "./hooks/Theme/useThemeProvider";
 import FlashcardsDashboard from "./pages/Flashcards/FlashcardsDashboard";
 import { VariableProvider } from "./context/VariableContext";
 import MindmapsDashboard from "./pages/Mindmaps/MindmapsDashboard";
 import LandingPage from "./pages/Landing/LandingPage";
 import QuizzesDashboard from "./pages/Quizzes/QuizzesDashboard";
 import FriendsDashboard from "./pages/Friends/FriendsDashboard";
+import { AuthProvider } from "./hooks/Supabase/useAuth";
 
 export function App() {
   return (

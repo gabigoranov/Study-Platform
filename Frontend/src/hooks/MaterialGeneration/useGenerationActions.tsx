@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { useMindmapsGeneration } from "./useMindmapsGeneration";
-import { useFlashcardsGeneration } from "./useFlashcardsGeneration";
+import { useMindmapsGeneration } from "../Mindmaps/useMindmapsGeneration";
+import { useFlashcardsGeneration } from "../Flashcards/useFlashcardsGeneration";
 import { FlashcardDTO } from "@/data/DTOs/FlashcardDTO";
 import { MindmapDTO } from "@/data/DTOs/MindmapDTO";
 

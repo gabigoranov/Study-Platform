@@ -4,7 +4,7 @@ import { Flashcard } from "../../data/Flashcard";
 import { useTranslation } from "react-i18next";
 import { keys } from "../../types/keys";
 import { FlashcardDTO } from "@/data/DTOs/FlashcardDTO";
-import { useAuth } from "@/hooks/useAuth";
+import { useAuth } from "@/hooks/Supabase/useAuth";
 import FlashcardsForm from "@/components/Flashcards/FlashcardsForm";
 import FlashcardsDashboardHeader from "@/components/Flashcards/FlashcardsDashboardHeader";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";

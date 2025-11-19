@@ -1,6 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useAuth } from '../../hooks/useAuth';
 import { keys } from '../../types/keys';
 import { Button } from '../../components/ui/button';
 import { Input } from '../../components/ui/input';
@@ -9,6 +8,7 @@ import { Avatar, AvatarImage, AvatarFallback } from '../../components/ui/avatar'
 import { Card, CardHeader, CardTitle, CardContent } from '../../components/ui/card';
 import { Alert, AlertDescription } from '../../components/ui/alert';
 import Loading from '@/components/Common/Loading';
+import { useAuth } from '@/hooks/Supabase/useAuth';
 
 export default function AccountSettings() {
   const { t } = useTranslation();
@@ -24,7 +24,7 @@ export default function AccountSettings() {
   
   const [fullName, setFullName] = useState(user?.user_metadata?.full_name || '');
   const [email, setEmail] = useState(user?.email || '');
-  const [avatarPreview, setAvatarPreview] = useState(useAuth().avatarUrl);
+  const [avatarPreview, setAvatarPreview] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
   const [deleteConfirm, setDeleteConfirm] = useState('');
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -46,7 +46,6 @@ export default function AccountSettings() {
     e.preventDefault();
     const file = fileInputRef.current?.files?.[0];
     await updateProfile({
-      avatar: file,
       fullName,
       email
     });

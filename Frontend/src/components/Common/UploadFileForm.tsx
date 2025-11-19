@@ -12,7 +12,7 @@ import ViewMindmapSkeleton from "../Mindmaps/ViewMindmapSekeleton";
 import {
   SubmitAction,
   useGenerationActions,
-} from "@/hooks/useGenerationActions";
+} from "@/hooks/MaterialGeneration/useGenerationActions";
 import { useVariableContext } from "@/context/VariableContext";
 import MindmapSkeleton from "../Mindmaps/MindmapSkeleton";
 import { GenerationActionHandler } from "./UploadFileMenu";

@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { keys } from "@/types/keys";
 import { useQuery, useQueryClient, useMutation } from "@tanstack/react-query";
 import { quizService } from "@/services/quizService";
-import { useAuth } from "@/hooks/useAuth";
+import { useAuth } from "@/hooks/Supabase/useAuth";
 import QuizList from "@/components/Quizzes/QuizList";
 import QuizForm from "@/components/Quizzes/QuizForm";
 import QuizDashboardHeader from "@/components/Quizzes/QuizDashboardHeader";

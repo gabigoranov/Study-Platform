@@ -7,10 +7,10 @@ import { ChevronDown, ChevronLeft, Edit, Eye, Plus, TextSelection, Trash2, Uploa
 import { useEffect, useRef } from "react";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "../ui/dropdown-menu";
 import { useQuery } from "@tanstack/react-query";
-import { useAuth } from "@/hooks/useAuth";
 import { useVariableContext } from "@/context/VariableContext";
 import { materialSubGroupsService } from "@/services/materialSubGroupsService";
 import UploadFileButton from "../Common/UploadFileButton";
+import { useAuth } from "@/hooks/Supabase/useAuth";
 
 
 type MindmapsDashboardHeaderProps = {

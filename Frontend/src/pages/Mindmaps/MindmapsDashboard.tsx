@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { keys } from "../../types/keys";
-import { useAuth } from "@/hooks/useAuth";
+import { useAuth } from "@/hooks/Supabase/useAuth";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useVariableContext } from "@/context/VariableContext";
 import ScrollToTopButton from "@/components/Common/ScrollToTopButton";

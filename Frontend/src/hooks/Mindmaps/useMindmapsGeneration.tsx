@@ -1,4 +1,4 @@
-import { useAuth } from "@/hooks/useAuth";
+import { useAuth } from "@/hooks/Supabase/useAuth";
 import { useVariableContext } from "@/context/VariableContext";
 import { storageService } from "@/services/storageService";
 import { flashcardService } from "@/services/flashcardService";
@@ -12,7 +12,7 @@ import { GeneratedMindmapDTO } from "@/data/DTOs/GeneratedMindmapDTO";
 import { MindmapDTO } from "@/data/DTOs/MindmapDTO";
 import { CreateMindmapDTO } from "@/data/DTOs/CreateMindmapDTO";
 import { mindmapsService } from "@/services/mindmapsService";
-import { SubmitAction, useGenerationActions } from "./useGenerationActions";
+import { SubmitAction, useGenerationActions } from "../MaterialGeneration/useGenerationActions";
 import { Mindmap } from "@/data/Mindmap";
 import { usersService } from "@/services/usersService";
 
