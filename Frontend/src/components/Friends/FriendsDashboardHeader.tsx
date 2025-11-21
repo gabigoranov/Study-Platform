@@ -11,33 +11,33 @@ import SearchBar from "../Common/SearchBar";
 import { RefreshCcw } from "lucide-react";
 import { useState } from "react";
 import FriendsSearchDropdown from "./FriendsSearchDropdown";
+import { useFriendRequests } from "@/hooks/Friends/useFriendRequests";
+import { FriendsDashboardHeaderTabs } from "./FriendsDashboardHeaderTabs";
 
 type FriendsDashboardHeaderProps = {
   search: string;
   setSearch: (value: string) => void;
   searchResult: AppUser[] | undefined;
-  sendFriendRequest: (userId: string) => void;
   refetchFriends: () => void;
   refetchRequests: () => void;
   incomingRequests: AppUserFriend[];
   sentRequests: AppUserFriend[];
   activeTab: FriendsTab;
+  authToken: string;
 };
 
 export default function FriendsDashboardHeader({
   search,
   setSearch,
   searchResult,
-  sendFriendRequest,
   refetchFriends,
   refetchRequests,
   incomingRequests,
   sentRequests,
+  authToken,
 }: FriendsDashboardHeaderProps) {
   const location = useLocation();
-  const [isSearchOpen, setIsSearchOpen] = useState<boolean>(
-    !!searchResult?.length
-  );
+  const { sendRequest } = useFriendRequests(authToken);
 
   // Map path to shadcn Tabs value
   const currentTab = location.pathname.includes("/incoming")
@@ -47,68 +47,33 @@ export default function FriendsDashboardHeader({
       : "friends";
 
   return (
-    <>
-      <div className="flex justify-between items-center mb-4">
-        {/* Tabs */}
-        <Tabs value={currentTab}>
-          <TabsList>
-            <TabsTrigger asChild value="friends">
-              <NavLink
-                to="/friends/ranking"
-                className="px-3 py-2 font-medium text-sm border-b-2"
-              >
-                {t(keys.friendsTab)}
-              </NavLink>
-            </TabsTrigger>
+    <div className="flex justify-between items-center mb-4">
+      {/* Tabs */}
 
-            <TabsTrigger asChild value="incoming">
-              <NavLink
-                to="/friends/incoming"
-                className="px-3 py-2 font-medium text-sm border-b-2"
-              >
-                {t(keys.incomingRequests)}
-                {incomingRequests.length > 0 && (
-                  <span className="ml-2 bg-primary text-text-inverted rounded-full px-2 py-0.5 text-xs">
-                    {incomingRequests.length}
-                  </span>
-                )}
-              </NavLink>
-            </TabsTrigger>
+      <FriendsDashboardHeaderTabs
+        currentTab={currentTab}
+        incomingRequests={incomingRequests}
+        sentRequests={sentRequests}
+      />
 
-            <TabsTrigger asChild value="sent">
-              <NavLink
-                to="/friends/sent"
-                className="px-3 py-2 font-medium text-sm border-b-2"
-              >
-                {t(keys.sentRequests)}
-                {sentRequests.length > 0 && (
-                  <span className="ml-2 bg-primary text-text-inverted rounded-full px-2 py-0.5 text-xs">
-                    {sentRequests.length}
-                  </span>
-                )}
-              </NavLink>
-            </TabsTrigger>
-          </TabsList>
-        </Tabs>
-        <div className="flex space-x-2">
-          <FriendsSearchDropdown
-            value={search}
-            onChange={setSearch}
-            results={searchResult ?? []}
-            handleSendFriendRequest={sendFriendRequest}
-          />
+      <div className="flex space-x-2">
+        <FriendsSearchDropdown
+          value={search}
+          onChange={setSearch}
+          results={searchResult ?? []}
+          handleSendFriendRequest={sendRequest.mutate}
+        />
 
-          <Button
-            variant="secondary"
-            onClick={() => {
-              refetchFriends();
-              refetchRequests();
-            }}
-          >
-            <RefreshCcw />
-          </Button>
-        </div>
+        <Button
+          variant="secondary"
+          onClick={() => {
+            refetchFriends();
+            refetchRequests();
+          }}
+        >
+          <RefreshCcw />
+        </Button>
       </div>
-    </>
+    </div>
   );
 }

@@ -33,26 +33,45 @@ export default function FriendsDashboard() {
   const { tab } = useParams<{ tab: FriendsTab }>();
   const activeTab: FriendsTab = tab || "ranking";
 
-  const { data: friends = [], isLoading: friendsLoading, refetch: refetchFriends } = useFriends(token!);
-  const { data: friendRequests = [], isLoading: requestsLoading, refetch: refetchRequests } = useFriendRequests(token!);
+  const {
+    data: friends = [],
+    isLoading: friendsLoading,
+    refetch: refetchFriends,
+  } = useFriends(token!);
+  const {
+    data: friendRequests = [],
+    isLoading: requestsLoading,
+    refetch: refetchRequests,
+  } = useFriendRequests(token!);
 
   const [friendsSortBy, setFriendsSortBy] = useState<"name" | "score">("score");
-  const [friendsSortOrder, setFriendsSortOrder] = useState<"asc" | "desc">("desc");
+  const [friendsSortOrder, setFriendsSortOrder] = useState<"asc" | "desc">(
+    "desc"
+  );
 
-  const { query: search, setQuery: setSearch, results: searchResult } = useUserSearch(token!, user?.id);
+  const {
+    query: search,
+    setQuery: setSearch,
+    results: searchResult,
+  } = useUserSearch(token!, user?.id);
 
-  const filteredAndSortedFriends = useSortedFriends(friends, friendsSortBy, friendsSortOrder);
+  const filteredAndSortedFriends = useSortedFriends(
+    friends,
+    friendsSortBy,
+    friendsSortOrder
+  );
 
-  const incomingRequests = friendRequests.filter(r => r.addresseeId === user?.id && !r.isAccepted);
-  const sentRequests = friendRequests.filter(r => r.requesterId === user?.id && !r.isAccepted);
+  const incomingRequests = friendRequests.filter(
+    (r) => r.addresseeId === user?.id && !r.isAccepted
+  );
+  const sentRequests = friendRequests.filter(
+    (r) => r.requesterId === user?.id && !r.isAccepted
+  );
 
-  async function sendFriendRequest(userId: string) {
-    await friendsService.sendRequest(token!, userId);
-    refetchRequests();
-  }
-
-  if ((friendsLoading && activeTab === "ranking") || 
-      (requestsLoading && (activeTab === "incoming" || activeTab === "sent"))) {
+  if (
+    (friendsLoading && activeTab === "ranking") ||
+    (requestsLoading && (activeTab === "incoming" || activeTab === "sent"))
+  ) {
     return <FriendsTabSkeleton />;
   }
 
@@ -62,12 +81,12 @@ export default function FriendsDashboard() {
         search={search}
         setSearch={setSearch}
         searchResult={searchResult}
-        sendFriendRequest={sendFriendRequest}
         refetchFriends={refetchFriends}
         refetchRequests={refetchRequests}
         activeTab={activeTab}
         incomingRequests={incomingRequests}
         sentRequests={sentRequests}
+        authToken={token!}
       />
 
       <Routes>
@@ -83,7 +102,6 @@ export default function FriendsDashboard() {
               filteredAndSortedFriends={filteredAndSortedFriends}
               currentUserId={user!.id}
               authToken={token!}
-              refetchFriends={refetchFriends}
             />
           }
         />
@@ -91,8 +109,6 @@ export default function FriendsDashboard() {
           path="/incoming"
           element={
             <IncomingRequestsTab
-              refetchFriends={refetchFriends}
-              refetchRequests={refetchRequests}
               incomingRequests={incomingRequests}
               authToken={token!}
             />
@@ -101,12 +117,7 @@ export default function FriendsDashboard() {
         <Route
           path="/sent"
           element={
-            <SentRequestsTab
-              refetchFriends={refetchFriends}
-              refetchRequests={refetchRequests}
-              sentRequests={sentRequests}
-              authToken={token!}
-            />
+            <SentRequestsTab sentRequests={sentRequests} authToken={token!} />
           }
         />
       </Routes>
