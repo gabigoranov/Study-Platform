@@ -19,7 +19,7 @@ import {
 } from "@xyflow/react";
 import "@xyflow/react/dist/style.css";
 import { useTheme } from "@/hooks/Theme/useThemeProvider";
-import { LucideSave } from "lucide-react";
+import { LucideSave, LucideTrash2 } from "lucide-react"; // Added LucideTrash2
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
@@ -52,9 +52,17 @@ export default function CreateMindmapPage({
   const [nodes, setNodes] = useState<Node[]>(initialNodes);
   const [edges, setEdges] = useState<Edge[]>(initialEdges);
   const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
+  
+  // Node Creation State
   const [showLabelModal, setShowLabelModal] = useState(false);
   const [newNodeLabel, setNewNodeLabel] = useState("");
   const [isPlacing, setIsPlacing] = useState(false);
+  
+  // Edge Labeling State
+  const [showEdgeLabelModal, setShowEdgeLabelModal] = useState(false);
+  const [edgeLabel, setEdgeLabel] = useState("");
+  const [selectedEdgeId, setSelectedEdgeId] = useState<string | null>(null);
+
   const [isInitialAlignment, setIsInitialAlignment] = useState<boolean>(
     isInitialLayout ?? false
   );
@@ -70,12 +78,10 @@ export default function CreateMindmapPage({
   // Auto-align nodes on initial load
   React.useEffect(() => {
     if (isInitialAlignment && nodes.length > 0) {
-      // Small delay to ensure ReactFlow is ready
       const timer = setTimeout(() => {
         handleAutoLayout();
-        setIsInitialAlignment(false); // ← Add this line!
+        setIsInitialAlignment(false);
       }, 100);
-
       return () => clearTimeout(timer);
     }
   }, [isInitialAlignment, nodes.length]);
@@ -107,6 +113,27 @@ export default function CreateMindmapPage({
       )
     );
   }, []);
+
+  // NEW: Handle clicking an edge to edit its label
+  const onEdgeClick = useCallback((event: React.MouseEvent, edge: Edge) => {
+    event.stopPropagation();
+    setSelectedEdgeId(edge.id);
+    // Try to get existing label from data or top-level property
+    const currentLabel = (edge.data?.label as string) || (edge.label as string) || "";
+    setEdgeLabel(currentLabel);
+    setShowEdgeLabelModal(true);
+  }, []);
+
+  // NEW: Handle deleting selected nodes/edges
+  const handleDeleteSelected = useCallback(() => {
+    const selectedNodes = nodes.filter((node) => node.selected);
+    const selectedEdges = edges.filter((edge) => edge.selected);
+
+    if (selectedNodes.length > 0 || selectedEdges.length > 0) {
+      reactFlowInstance.deleteElements({ nodes: selectedNodes, edges: selectedEdges });
+      setHasUnsavedChanges(true);
+    }
+  }, [nodes, edges, reactFlowInstance]);
 
   /* --------------------------
       Node placement logic
@@ -149,21 +176,50 @@ export default function CreateMindmapPage({
     setNewNodeLabel("");
   };
 
+  /* --------------------------
+      Edge Label logic
+  --------------------------- */
+
+  const handleEdgeLabelSubmit = (e: FormEvent) => {
+    e.preventDefault();
+    
+    if (!selectedEdgeId) return;
+
+    setEdges((eds) => 
+      eds.map((edge) => {
+        if (edge.id === selectedEdgeId) {
+          return {
+            ...edge,
+            label: edgeLabel, // Update visual label
+            data: { ...edge.data, label: edgeLabel } // Update data for DTO
+          };
+        }
+        return edge;
+      })
+    );
+
+    setHasUnsavedChanges(true);
+    setShowEdgeLabelModal(false);
+    setEdgeLabel("");
+    setSelectedEdgeId(null);
+  };
+
+  /* --------------------------
+      Saving logic
+  --------------------------- */
+
   const handleSaveClick = () => {
-    // Show the modal to collect mindmap information
     setShowMindmapModal(true);
   };
 
-  // Handle the mindmap creation form submission
   const handleMindmapSubmit = (e: FormEvent) => {
     e.preventDefault();
     
-    // Create MindmapDTO object with the collected information
     const mindmapData: MindmapDTO = {
       title: mindmapTitle,
       description: mindmapDescription,
-      subjectId: selectedSubjectId || "", // Use selectedSubjectId from VariableContext
-      materialSubGroupId: selectedGroupId || "", // Use selectedGroupId from VariableContext
+      subjectId: selectedSubjectId || "",
+      materialSubGroupId: selectedGroupId || "",
       data: {
         nodes: nodes.map(node => ({
           id: node.id,
@@ -174,22 +230,18 @@ export default function CreateMindmapPage({
           id: edge.id || `${edge.source}-${edge.target}`,
           source: edge.source,
           target: edge.target,
-          label: edge.data?.label || ""
+          label: (edge.data?.label as string) || ""
         }))  as MindmapEdgeDTO[]
       },
       difficulty: difficulty
     };
     
-    // Call the handleCreate function passed as prop
     handleCreate(mindmapData);
     
-    // Reset form and close modal
     setMindmapTitle("");
     setMindmapDescription("");
     setDifficulty(Difficulty.Medium);
     setShowMindmapModal(false);
-    
-    // Reset unsaved changes
     setHasUnsavedChanges(false);
   };
 
@@ -240,14 +292,21 @@ export default function CreateMindmapPage({
       {/* Toolbar */}
       <div className="absolute top-4 left-4 z-30 flex gap-2">
         <Button onClick={() => setShowLabelModal(true)}>+ {t(keys.addNode)}</Button>
+        
         {isPlacing && (
           <Button variant="outline" onClick={cancelPlacement}>
             {t(keys.cancel)}
           </Button>
         )}
+        
+        {/* Delete Button */}
+        <Button variant="destructive" size="icon" onClick={handleDeleteSelected} title="Delete selected">
+            <LucideTrash2 className="h-4 w-4" />
+        </Button>
+
         {hasUnsavedChanges && (
           <Button onClick={handleSaveClick} variant="secondary">
-            <LucideSave /> {t(keys.save)}
+            <LucideSave className="mr-2 h-4 w-4" /> {t(keys.save)}
           </Button>
         )}
         <Button variant="outline" onClick={handleAutoLayout}>
@@ -274,10 +333,12 @@ export default function CreateMindmapPage({
           onNodesChange={onNodesChange}
           onEdgesChange={onEdgesChange}
           onConnect={onConnect}
+          onEdgeClick={onEdgeClick} // Added click handler for edges
           fitView
           proOptions={{ hideAttribution: true }}
           style={{ width: "100%", height: "100%" }}
           onPaneClick={handlePaneClick as any}
+          deleteKeyCode={["Backspace", "Delete"]} // Ensures keyboard delete still works
         >
           <Background variant={BackgroundVariant.Dots} gap={16} size={1} />
           <MiniMap />
@@ -285,7 +346,7 @@ export default function CreateMindmapPage({
         </ReactFlow>
       </div>
 
-      {/* Label modal */}
+      {/* Node Label Modal */}
       {showLabelModal && (
         <div className="absolute inset-0 z-50 flex items-center justify-center bg-black/40">
           <div className="w-80 p-5 rounded-xl bg-card text-card-foreground border border-border shadow-lg">
@@ -299,7 +360,7 @@ export default function CreateMindmapPage({
                 placeholder={t(keys.enterNodeLabel)}
                 required
               />
-              <p className="text-xs text-text-muted mt-1">
+              <p className="text-xs text-muted-foreground mt-1">
                 {t(keys.afterSubmitClickCanvas)}
               </p>
               <div className="flex justify-end gap-2 mt-4">
@@ -311,6 +372,38 @@ export default function CreateMindmapPage({
                   {t(keys.cancel)}
                 </Button>
                 <Button type="submit">{t(keys.place)}</Button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* Edge Label Modal */}
+      {showEdgeLabelModal && (
+        <div className="absolute inset-0 z-50 flex items-center justify-center bg-black/40">
+          <div className="w-80 p-5 rounded-xl bg-card text-card-foreground border border-border shadow-lg">
+            <h3 className="text-lg font-medium mb-3">Label Link</h3>
+            <form onSubmit={handleEdgeLabelSubmit} className="flex flex-col gap-3">
+              <Label className="text-sm">Link Label</Label>
+              <Input
+                autoFocus
+                value={edgeLabel}
+                onChange={(e) => setEdgeLabel(e.target.value)}
+                placeholder="Enter relationship name..."
+              />
+              <div className="flex justify-end gap-2 mt-4">
+                <Button
+                  type="button"
+                  variant="secondary"
+                  onClick={() => {
+                    setShowEdgeLabelModal(false);
+                    setEdgeLabel("");
+                    setSelectedEdgeId(null);
+                  }}
+                >
+                  {t(keys.cancel)}
+                </Button>
+                <Button type="submit">Set Label</Button>
               </div>
             </form>
           </div>

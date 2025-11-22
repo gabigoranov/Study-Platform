@@ -113,7 +113,7 @@ export default function UploadFileForm({
       case "generateFlashcards":
         return (
           <div className="w-full flex flex-wrap gap-3 p-2 py-4 self-start justify-center overflow-x-hidden">
-            {renderSkeletons(9)}
+            {renderSkeletons(12)}
           </div>
         );
       case "generateMindmaps":
