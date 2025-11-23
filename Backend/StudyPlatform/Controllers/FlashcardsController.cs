@@ -11,8 +11,14 @@ using System.Collections.Generic;
 namespace StudyPlatform.Controllers
 {
     /// <summary>
-    /// Provides endpoints for managing flashcards.
+    /// Manages flashcards for the authenticated user.
     /// </summary>
+    /// <remarks>
+    /// All endpoints in this controller require authentication.
+    /// The user ID is extracted from the JWT token.
+    /// Validation errors are automatically handled by global middleware.
+    /// Unhandled exceptions return a standardized error response.
+    /// </remarks>
     [Route("api/[controller]")]
     [ApiController]
     [Authorize]
@@ -21,7 +27,7 @@ namespace StudyPlatform.Controllers
         private readonly IFlashcardsService _flashcardsService;
 
         /// <summary>
-        /// A constructor for injecting the services.
+        /// Initializes the controller with required services.
         /// </summary>
         /// <param name="flashcardsService">The flashcards service, dependency injected.</param>
         public FlashcardsController(IFlashcardsService flashcardsService)
@@ -30,11 +36,13 @@ namespace StudyPlatform.Controllers
         }
 
         /// <summary>
-        /// Endpoint for creating a new flashcard.
+        /// Creates flashcard.
         /// </summary>
-        /// <param name="model">The model for the flashcard created by the user.</param>
-        /// <returns>A new flashcard if successful.</returns>
+        /// <param name="model">The model used to create a new flashcard.</param>
+        /// <returns>The created flashcard.</returns>
         [HttpPost]
+        [ProducesResponseType(typeof(FlashcardDTO), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Create([FromBody] CreateFlashcardViewModel model)
         {
             // Load userId from JWT token
@@ -47,11 +55,13 @@ namespace StudyPlatform.Controllers
         }
 
         /// <summary>
-        /// Endpoint for creating a new flashcards from a list of models.
+        /// Creates multiple flashcards.
         /// </summary>
-        /// <param name="model">The model for the flashcard created by the user.</param>
-        /// <returns>A new flashcard if successful.</returns>
+        /// <param name="model">The model used to create new flashcards.</param>
+        /// <returns>The created flashcards.</returns>
         [HttpPost("bulk")]
+        [ProducesResponseType(typeof(IEnumerable<FlashcardDTO>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> CreateBulk([FromBody] IEnumerable<CreateFlashcardViewModel> model)
         {
             // Load userId from JWT token
@@ -64,11 +74,12 @@ namespace StudyPlatform.Controllers
         }
 
         /// <summary>
-        /// Endpoint for getting a flashcard by it's ID.
+        /// Gets a flashcard by its ID.
         /// </summary>
-        /// <param name="id">The card id..</param>
-        /// <returns>A flashcard if successful.</returns>
+        /// <param name="id">The id of the flashcard to retrieve.</param>
+        /// <returns>The retrieved flashcard.</returns>
         [HttpGet("{id}")]
+        [ProducesResponseType(typeof(FlashcardDTO), StatusCodes.Status200OK)]
         public async Task<IActionResult> Get([FromRoute] Guid id)
         {
             // Load userId from JWT token
@@ -79,10 +90,11 @@ namespace StudyPlatform.Controllers
         }
 
         /// <summary>
-        /// Endpoint for getting all flashcards that the user owns.
+        /// Gets all of user's flashcards.
         /// </summary>
-        /// <returns>A list of flashcards if successful.</returns>
+        /// <returns>All of the user's flashcards.</returns>
         [HttpGet]
+        [ProducesResponseType(typeof(IEnumerable<FlashcardDTO>), StatusCodes.Status200OK)]
         public async Task<IActionResult> Get()
         {
             // Load userId from JWT token
@@ -93,10 +105,13 @@ namespace StudyPlatform.Controllers
         }
 
         /// <summary>
-        /// Endpoint for getting all flashcards that the user owns in a certain group.
+        /// Gets all of user's flashcards in a certain group.
         /// </summary>
-        /// <returns>A list of flashcards if successful.</returns>
+        /// <param name="id">The groupId used to retrieve flashcards.</param>
+        /// <param name="subjectId">The subjectId used to retrieve flashcards.</param>
+        /// <returns>The retrieved flashcards.</returns>
         [HttpGet("group/{id}")]
+        [ProducesResponseType(typeof(IEnumerable<FlashcardDTO>), StatusCodes.Status200OK)]
         public async Task<IActionResult> GetAllFromGroup([FromRoute] Guid id, [FromQuery] Guid subjectId)
         {
             // Load userId from JWT token
@@ -107,12 +122,14 @@ namespace StudyPlatform.Controllers
         }
 
         /// <summary>
-        /// Endpoint for updating a specific flashcard that the user owns.
+        /// Updates flashcard.
         /// </summary>
-        /// <param name="model">The model for updating the flashcard.</param>
-        /// <param name="id">The id of the flashcard.</param>
-        /// <returns>An edited flashcard if successful.</returns>
+        /// <param name="model">The model used to update a flashcard.</param>
+        /// <param name="id">The model id.</param>
+        /// <returns>The updated flashcard.</returns>
         [HttpPut("{id}")]
+        [ProducesResponseType(typeof(FlashcardDTO), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Update([FromBody] CreateFlashcardViewModel model, [FromRoute] Guid id)
         {
             // Load userId from JWT token
@@ -125,11 +142,12 @@ namespace StudyPlatform.Controllers
         }
 
         /// <summary>
-        /// Endpoint for deleting an array of flashcards by their IDs.
+        /// Deletes multiple flashcards IDs.
         /// </summary>
-        /// <param name="ids">The array of flashcard ids.</param>
+        /// <param name="ids">A list of flashcard ids to delete.</param>
         /// <returns>Nothing.</returns>
         [HttpDelete]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> Delete([FromQuery] Guid[] ids)
         {
             // Load userId from JWT tokens
@@ -140,11 +158,13 @@ namespace StudyPlatform.Controllers
         }
 
         /// <summary>
-        /// Endpoint for generating flashcards from a file.
+        /// Generates flashcards from a file url via microservice.
         /// </summary>
-        /// <param name="model">The model containing the file's download url and other prompt data.</param>
-        /// <returns>A list of flashcards if successful.</returns>
+        /// <param name="model">The model used to generate new flashcards with AI.</param>
+        /// <returns>The generated flashcards.</returns>
         [HttpPost("generate")]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(IEnumerable<GeneratedFlashcardDTO>), StatusCodes.Status200OK)]
         public async Task<IActionResult> Generate([FromBody] GenerateFlashcardsViewModel model)
         {
             // Load userId from JWT token

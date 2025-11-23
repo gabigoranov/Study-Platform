@@ -9,26 +9,32 @@ using StudyPlatform.Services.MaterialSubGroups;
 namespace StudyPlatform.Controllers
 {
     /// <summary>
-    /// API controller for managing material subgroups.
+    /// Manages material sub groups for the authenticated user.
     /// </summary>
+    /// <remarks>
+    /// All endpoints in this controller require authentication.
+    /// The user ID is extracted from the JWT token.
+    /// Validation errors are automatically handled by global middleware.
+    /// Unhandled exceptions return a standardized error response.
+    /// </remarks>
     [Route("api/[controller]")]
     [ApiController]
     [Authorize]
     public class MaterialSubGroupsController : ControllerBase
     {
-        private readonly IMaterialSubGroupsService _service;
+        private readonly IMaterialSubGroupsService _groupsService;
 
         /// <summary>
-        /// Initializes the controller.
+        /// Initializes the controller with required services.
         /// </summary>
-        /// <param name="service">The service DI.</param>
-        public MaterialSubGroupsController(IMaterialSubGroupsService service)
+        /// <param name="groupsService">The sub groups service, dependency injected.</param>
+        public MaterialSubGroupsController(IMaterialSubGroupsService groupsService)
         {
-            _service = service;
+            _groupsService = groupsService;
         }
 
         /// <summary>
-        /// Gets all material subgroups for a subject.
+        /// Gets all subgroups for a subject.
         /// </summary>
         /// <param name="subjectId">The subject ID.</param>
         /// <param name="includeMaterials">Whether or not to include the materials in each group.</param>
@@ -38,7 +44,7 @@ namespace StudyPlatform.Controllers
         public async Task<IActionResult> GetBySubject(Guid subjectId, [FromQuery] bool includeMaterials = false)
         {
             Guid userId = User.GetUserId();
-            var subGroups = await _service.GetAsync(subjectId, userId, includeMaterials);
+            var subGroups = await _groupsService.GetAsync(subjectId, userId, includeMaterials);
             return Ok(subGroups);
         }
 
@@ -53,7 +59,7 @@ namespace StudyPlatform.Controllers
         public async Task<IActionResult> Get(Guid id)
         {
             Guid userId = User.GetUserId();
-            var subGroup = await _service.GetByIdAsync(id, userId);
+            var subGroup = await _groupsService.GetByIdAsync(id, userId);
             if (subGroup == null) return NotFound();
             return Ok(subGroup);
         }
@@ -68,7 +74,7 @@ namespace StudyPlatform.Controllers
         public async Task<IActionResult> Create([FromBody] CreateMaterialSubGroupViewModel model)
         {
             Guid userId = User.GetUserId();
-            var created = await _service.CreateAsync(model, userId);
+            var created = await _groupsService.CreateAsync(model, userId);
             return CreatedAtAction(nameof(Get), new { id = created.Id }, created);
         }
 
@@ -76,23 +82,27 @@ namespace StudyPlatform.Controllers
         /// Deletes a material subgroup by ID.
         /// </summary>
         /// <param name="ids">The subgroup IDs.</param>
-        /// <returns>No content if deleted.</returns>
+        /// <returns>Nothing.</returns>
         [HttpDelete]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> Delete([FromQuery] Guid[] ids)
         {
             Guid userId = User.GetUserId();
-            var deleted = await _service.DeleteAsync(ids, userId);
+            var deleted = await _groupsService.DeleteAsync(ids, userId);
             if (!deleted) return NotFound();
-            return NoContent();
+            return Ok();
         }
 
         /// <summary>
-        /// Endpoint for updating a specific sub group that the user owns.
+        /// Updates a specific sub group.
         /// </summary>
         /// <param name="model">The model for updating the sub group.</param>
         /// <param name="id">The id of the sub group.</param>
         /// <returns>An edited sub group if successful.</returns>
         [HttpPut("{id}")]
+        [ProducesResponseType(typeof(MaterialSubGroupDTO), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Update([FromBody] CreateMaterialSubGroupViewModel model, [FromRoute] Guid id)
         {
             // Load userId from JWT token
@@ -100,7 +110,7 @@ namespace StudyPlatform.Controllers
 
             if (!ModelState.IsValid) return BadRequest(ModelState);
 
-            MaterialSubGroupDTO res = await _service.UpdateAsync(model, userId, id);
+            MaterialSubGroupDTO res = await _groupsService.UpdateAsync(model, userId, id);
             return Ok(res);
         }
     }

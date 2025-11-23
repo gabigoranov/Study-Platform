@@ -148,9 +148,9 @@
 
 ### 🛠️ Използвани технологии
 
-- **Python  
+- **Python**  
 - **AI / NLP библиотеки** – OpenAI API, Transformers, spaCy и др.  
-- **FastAPI
+- **FastAPI**
 
 ---
 

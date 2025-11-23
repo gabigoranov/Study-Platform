@@ -11,8 +11,14 @@ using System.Collections.Generic;
 namespace StudyPlatform.Controllers
 {
     /// <summary>
-    /// Provides endpoints for managing quizzes.
+    /// Manages quizzes for the authenticated user.
     /// </summary>
+    /// <remarks>
+    /// All endpoints in this controller require authentication.
+    /// The user ID is extracted from the JWT token.
+    /// Validation errors are automatically handled by global middleware.
+    /// Unhandled exceptions return a standardized error response.
+    /// </remarks>
     [Route("api/[controller]")]
     [ApiController]
     [Authorize]
@@ -21,7 +27,7 @@ namespace StudyPlatform.Controllers
         private readonly IQuizService _quizService;
 
         /// <summary>
-        /// A constructor for injecting the services.
+        /// Initializes the controller with required services.
         /// </summary>
         /// <param name="quizService">The quiz service, dependency injected.</param>
         public QuizzesController(IQuizService quizService)
@@ -30,11 +36,13 @@ namespace StudyPlatform.Controllers
         }
 
         /// <summary>
-        /// Endpoint for creating a new quiz.
+        /// Creates a quiz.
         /// </summary>
         /// <param name="model">The model for the quiz created by the user.</param>
         /// <returns>A new quiz if successful.</returns>
         [HttpPost]
+        [ProducesResponseType(typeof(QuizDTO), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Create([FromBody] CreateQuizViewModel model)
         {
             // Load userId from JWT token
@@ -47,11 +55,13 @@ namespace StudyPlatform.Controllers
         }
 
         /// <summary>
-        /// Endpoint for creating a new quizzes from a list of models.
+        /// Creates multiple quizzes.
         /// </summary>
         /// <param name="model">The model for the quiz created by the user.</param>
         /// <returns>A new quiz if successful.</returns>
         [HttpPost("bulk")]
+        [ProducesResponseType(typeof(IEnumerable<QuizDTO>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> CreateBulk([FromBody] IEnumerable<CreateQuizViewModel> model)
         {
             // Load userId from JWT token
@@ -64,11 +74,12 @@ namespace StudyPlatform.Controllers
         }
 
         /// <summary>
-        /// Endpoint for getting a quiz by it's ID.
+        /// Gets a quiz by ID.
         /// </summary>
         /// <param name="id">The quiz id.</param>
         /// <returns>A quiz if successful.</returns>
         [HttpGet("{id}")]
+        [ProducesResponseType(typeof(QuizDTO), StatusCodes.Status200OK)]
         public async Task<IActionResult> Get([FromRoute] Guid id)
         {
             // Load userId from JWT token
@@ -79,10 +90,11 @@ namespace StudyPlatform.Controllers
         }
 
         /// <summary>
-        /// Endpoint for getting all quizzes that the user owns.
+        /// Gets all of user's quizzes.
         /// </summary>
         /// <returns>A list of quizzes if successful.</returns>
         [HttpGet]
+        [ProducesResponseType(typeof(IEnumerable<QuizDTO>), StatusCodes.Status200OK)]
         public async Task<IActionResult> Get()
         {
             // Load userId from JWT token
@@ -93,10 +105,11 @@ namespace StudyPlatform.Controllers
         }
 
         /// <summary>
-        /// Endpoint for getting all quizzes that the user owns in a certain group.
+        /// Gets all of user's quizzes from a sub group.
         /// </summary>
         /// <returns>A list of quizzes if successful.</returns>
         [HttpGet("group/{id}")]
+        [ProducesResponseType(typeof(IEnumerable<QuizDTO>), StatusCodes.Status200OK)]
         public async Task<IActionResult> GetAllFromGroup([FromRoute] Guid id, [FromQuery] Guid? subjectId)
         {
             // Load userId from JWT token
@@ -107,12 +120,14 @@ namespace StudyPlatform.Controllers
         }
 
         /// <summary>
-        /// Endpoint for updating a specific quiz that the user owns.
+        /// Updates quiz.
         /// </summary>
         /// <param name="model">The model for updating the quiz.</param>
         /// <param name="id">The id of the quiz.</param>
         /// <returns>An edited quiz if successful.</returns>
         [HttpPut("{id}")]
+        [ProducesResponseType(typeof(QuizDTO), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Update([FromBody] CreateQuizViewModel model, [FromRoute] Guid id)
         {
             // Load userId from JWT token
@@ -125,11 +140,12 @@ namespace StudyPlatform.Controllers
         }
 
         /// <summary>
-        /// Endpoint for deleting an array of quizzes by their IDs.
+        /// Deletes multiple quizzes by IDs.
         /// </summary>
         /// <param name="ids">The array of quiz ids.</param>
         /// <returns>Nothing.</returns>
         [HttpDelete]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> Delete([FromQuery] Guid[] ids)
         {
             // Load userId from JWT tokens
@@ -140,11 +156,12 @@ namespace StudyPlatform.Controllers
         }
 
         /// <summary>
-        /// Endpoint for deleting a single quiz by its Id.
+        /// Deletes a quiz by Id.
         /// </summary>
         /// <param name="id">The array of quiz ids.</param>
         /// <returns>Nothing.</returns>
         [HttpDelete("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> DeleteSingle([FromRoute] Guid id)
         {
             // Load userId from JWT tokens
@@ -155,11 +172,12 @@ namespace StudyPlatform.Controllers
         }
 
         /// <summary>
-        /// Endpoint for deleting a single quiz question by its Id.
+        /// Deletes a quiz question by Id.
         /// </summary>
         /// <param name="id">The array of quiz ids.</param>
         /// <returns>Nothing.</returns>
         [HttpDelete("question/{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> DeleteSingleQuestion([FromRoute] Guid id)
         {
             // Load userId from JWT tokens
@@ -170,12 +188,14 @@ namespace StudyPlatform.Controllers
         }
 
         /// <summary>
-        /// Endpoint for adding questions and answers to a specific quiz.
+        /// Adds questions and answers to a quiz.
         /// </summary>
         /// <param name="quizId">The ID of the quiz to add questions to.</param>
         /// <param name="questions">The questions and answers to add to the quiz.</param>
         /// <returns>The updated quiz with the new questions if successful.</returns>
         [HttpPost("{quizId}/questions")]
+        [ProducesResponseType(typeof(QuizDTO), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> AddQuestionsToQuiz([FromRoute] Guid quizId, [FromBody] IEnumerable<CreateQuizQuestionViewModel> questions)
         {
             // Load userId from JWT token
@@ -188,11 +208,13 @@ namespace StudyPlatform.Controllers
         }
 
         /// <summary>
-        /// Endpoint for generating quizzes from a file.
+        /// Generates quizz from a file url via microservice.
         /// </summary>
         /// <param name="model">The model containing the file's download url and other prompt data.</param>
         /// <returns>A quiz if successful.</returns>
         [HttpPost("generate")]
+        [ProducesResponseType(typeof(GeneratedQuizDTO), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Generate([FromBody] GenerateQuizViewModel model)
         {
             // Load userId from JWT token

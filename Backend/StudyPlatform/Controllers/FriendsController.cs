@@ -4,13 +4,20 @@ using Microsoft.AspNetCore.Mvc;
 using StudyPlatform.Data.Models;
 using StudyPlatform.Extensions;
 using StudyPlatform.Models;
+using StudyPlatform.Models.DTOs;
 using StudyPlatform.Services.Friends;
 
 namespace StudyPlatform.Controllers
 {
     /// <summary>
-    /// Provides endpoints for managing friends and AppUser relationships.
+    /// Manages friends and AppUser relationships.
     /// </summary>
+    /// <remarks>
+    /// All endpoints in this controller require authentication.
+    /// The user ID is extracted from the JWT token.
+    /// Validation errors are automatically handled by global middleware.
+    /// Unhandled exceptions return a standardized error response.
+    /// </remarks>
     [Route("api/[controller]")]
     [ApiController]
     [Authorize]
@@ -19,7 +26,7 @@ namespace StudyPlatform.Controllers
         private readonly IFriendsService _service;
 
         /// <summary>
-        /// A constructor for injecting the services.
+        /// Initializes the controller with required services.
         /// </summary>
         /// <param name="friendsService">The friends service, dependency injected.</param>
         public FriendsController(IFriendsService friendsService)
@@ -49,10 +56,9 @@ namespace StudyPlatform.Controllers
         /// Accepts a friend request from another user.
         /// </summary>
         /// <param name="id">The ID of the user who sent the friend request.</param>
-        /// <returns>True if the request was accepted successfully.</returns>
+        /// <returns>The newly accepted friend request.</returns>
         [HttpPatch("{id}/accept")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> AcceptFriendRequest(Guid id)
         {
             Guid userId = User.GetUserId();
@@ -77,7 +83,7 @@ namespace StudyPlatform.Controllers
             var result = await _service.RejectFriendRequestAsync(id, userId);
             if (!result) return NotFound();
             
-            return Ok();
+            return Ok(result);
         }
 
         /// <summary>
@@ -95,13 +101,13 @@ namespace StudyPlatform.Controllers
             var result = await _service.DeleteFriendAsync(id, userId);
             if (!result) return NotFound();
             
-            return Ok();
+            return Ok(result);
         }
 
         /// <summary>
         /// Gets all friend requests for the authenticated user.
         /// </summary>
-        /// <returns>A list of all friends.</returns>
+        /// <returns>A list of all friend requests.</returns>
         [HttpGet("requests")]
         [ProducesResponseType(typeof(IEnumerable<AppUserFriend>), StatusCodes.Status200OK)]
         public async Task<IActionResult> GetAllFriendRequests()
@@ -117,13 +123,13 @@ namespace StudyPlatform.Controllers
         /// </summary>
         /// <returns>A list of all friends.</returns>
         [HttpGet]
-        [ProducesResponseType(typeof(IEnumerable<AppUserFriend>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(IEnumerable<AppUserDTO>), StatusCodes.Status200OK)]
         public async Task<IActionResult> GetAllFriends()
         {
             Guid userId = User.GetUserId();
 
-            var friendRequests = await _service.GetAllFriendsAsync(userId);
-            return Ok(friendRequests);
+            var friends = await _service.GetAllFriendsAsync(userId);
+            return Ok(friends);
         }
     }
 
