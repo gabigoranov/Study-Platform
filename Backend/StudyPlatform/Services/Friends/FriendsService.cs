@@ -140,15 +140,11 @@ namespace StudyPlatform.Services.Friends
             if (userId == Guid.Empty) throw new ArgumentException("UserId can not be null or empty.");
 
             // does not include subjects ( materials )
-            var friends = await _repo.AllReadonly<AppUserFriend>()
-                .Where(x => x.IsAccepted && (x.RequesterId == userId || x.AddresseeId == userId))
-                .Include(x => x.Requester)
-                .Include(x => x.Addressee)
+            var friends = await _repo.AllReadonly<AppUser>()
+                .Where(f => f.FriendsReceived.Any(x => (x.AddresseeId == userId || x.RequesterId == userId) && x.IsAccepted) || f.FriendsInitiated.Any(x => (x.AddresseeId == userId || x.RequesterId == userId) && x.IsAccepted) || f.Id == userId)
                 .ToListAsync();
 
-            var friendUsers = friends.Select(x => x.RequesterId == userId ? x.Addressee : x.Requester);
-
-            return _mapper.Map<IEnumerable<AppUserDTO>>(friendUsers);
+            return _mapper.Map<IEnumerable<AppUserDTO>>(friends);
         }
     }
 }
