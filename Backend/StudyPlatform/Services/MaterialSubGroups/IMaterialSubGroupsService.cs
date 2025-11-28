@@ -40,7 +40,7 @@ namespace StudyPlatform.Services.MaterialSubGroups
         /// <param name="ids">The subgroup IDs.</param>
         /// <param name="userId">The ID of the authenticated user.</param>
         /// <returns>True if deleted, false otherwise.</returns>
-        Task<bool> DeleteAsync(Guid[] ids, Guid userId);
+        Task DeleteAsync(Guid[] ids, Guid userId);
 
         /// <summary>
         /// Edits an existing sub group for the specified user.

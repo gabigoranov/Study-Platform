@@ -30,7 +30,7 @@ namespace StudyPlatform.Services.Friends
         /// <param name="requesterId">The ID of the user sending the request.</param>
         /// <param name="addresseeId">The ID of the user receiving the request.</param>
         /// <returns>True if the request was rejected successfully, false otherwise.</returns>
-        Task<bool> RejectFriendRequestAsync(Guid requesterId, Guid addresseeId);
+        Task RejectFriendRequestAsync(Guid requesterId, Guid addresseeId);
 
         /// <summary>
         /// Deletes a friend relationship.
@@ -38,7 +38,7 @@ namespace StudyPlatform.Services.Friends
         /// <param name="friendId">The ID of the friend relationship.</param>
         /// <param name="userId">The ID of the user initiating the deletion.</param>
         /// <returns>True if the friend relationship was deleted successfully, false otherwise.</returns>
-        Task<bool> DeleteFriendAsync(Guid friendId, Guid userId);
+        Task DeleteFriendAsync(Guid friendId, Guid userId);
 
         /// <summary>
         /// Gets all friend requests for a user.

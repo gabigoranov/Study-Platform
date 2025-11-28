@@ -151,33 +151,6 @@ const VideoDemo = () => {
                     </>
                   )}
                 </div>
-
-                <div className="hidden sm:grid md:grid-cols-3 gap-6 p-8 bg-surface">
-                  <div className="text-center">
-                    <div className="text-2xl font-bold text-primary mb-1">
-                      30 sec
-                    </div>
-                    <div className="text-sm text-text-muted">
-                      {t(keys.processingTime)}
-                    </div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-2xl font-bold text-accent mb-1">
-                      50+
-                    </div>
-                    <div className="text-sm text-text-muted">
-                      {t(keys.materialsCreated)}
-                    </div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-2xl font-bold text-success mb-1">
-                      100%
-                    </div>
-                    <div className="text-sm text-text-muted">
-                      {t(keys.customized)}
-                    </div>
-                  </div>
-                </div>
               </div>
 
               <Button

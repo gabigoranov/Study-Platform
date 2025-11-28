@@ -31,169 +31,140 @@ namespace StudyPlatform.Services.MaterialSubGroups
         public async Task<IEnumerable<MaterialSubGroupDTO>> GetAsync(Guid subjectId, Guid userId, bool includeMaterials = false)
         {
             if (subjectId == Guid.Empty) throw new ArgumentException("SubjectId can not be less than zero.");
-            if (userId == Guid.Empty) throw new ArgumentNullException("UserId can not be null or empty.");
+            if (userId == Guid.Empty) throw new ArgumentException("UserId can not be null or empty.");
 
-            try
+            var query = _repo.AllReadonly<MaterialSubGroup>().Include(x => x.Subject).Where(sg => sg.SubjectId == subjectId);
+
+            if (!await query.AnyAsync())
             {
-                _logger.LogInformation("Retrieving subgroups for subject {SubjectId} and user {UserId}", subjectId, userId);
-
-                var res = _repo.AllReadonly<MaterialSubGroup>().Where(sg => sg.SubjectId == subjectId && sg.Subject.UserId == userId);
-
-                if (includeMaterials)
-                    res = res.Include(sg => sg.Materials);
-
-                var entities = await res.ToListAsync();
-
-                return _mapper.Map<IEnumerable<MaterialSubGroupDTO>>(entities);
+                _logger.LogWarning("No subgroups found for subject {SubjectId} and user {UserId}", subjectId, userId);
+                throw new KeyNotFoundException("No material sub groups found for the given subject.");
             }
-            catch (Exception ex)
+
+            // filter for authorization
+            query = query.Where(x => x.Subject.UserId == userId);
+            if (!await query.AnyAsync())
             {
-                _logger.LogError(ex, "Error retrieving subgroups for subject {SubjectId} and user {UserId}: {Message}", subjectId, userId, ex.Message);
-                throw new SubGroupFetchingException("Something went wrong while fetching the material sub groups. Please try again!", ex);
+                _logger.LogWarning("Unauthorized attempt to access subgroups for subject {SubjectId} by user {UserId}", subjectId, userId);
+                throw new UnauthorizedAccessException("You do not own this subject.");
             }
+
+            if (includeMaterials)
+                query = query.Include(sg => sg.Materials);
+
+            var entities = await query.ToListAsync();
+
+            return _mapper.Map<IEnumerable<MaterialSubGroupDTO>>(entities);
         }
 
         /// <inheritdoc />
         public async Task<MaterialSubGroupDTO?> GetByIdAsync(Guid id, Guid userId)
         {
             if (id == Guid.Empty) throw new ArgumentException("MaterialSubGroupId can not be less than zero.");
-            if (userId == Guid.Empty) throw new ArgumentNullException("UserId can not be null or empty.");
+            if (userId == Guid.Empty) throw new ArgumentException("UserId can not be null or empty.");
 
-            try
+            var entity = await _repo.AllReadonly<MaterialSubGroup>()
+                .Include(x => x.Subject)
+                .FirstOrDefaultAsync(sg => sg.Id == id);
+
+            if (entity == null)
             {
-                _logger.LogInformation("Retrieving subgroup {SubGroupId} for user {UserId}", id, userId);
-
-
-                return _mapper.Map<MaterialSubGroupDTO>(await _repo.AllReadonly<MaterialSubGroup>()
-                    .FirstOrDefaultAsync(sg => sg.Id == id && sg.Subject.UserId == userId));
+                _logger.LogWarning("No subgroups found with ID {Id} and user {UserId}", id, userId);
+                throw new KeyNotFoundException("No material sub groups found for the given subject.");
             }
-            catch (Exception ex)
+
+            if (entity.Subject.UserId != userId)
             {
-                _logger.LogError(ex, "Error retrieving subgroup with Id {Id} for user {UserId}: {Message}", id, userId, ex.Message);
-                throw new SubGroupFetchingException("Something went wrong while fetching the material sub groups. Please try again!", ex);
+                _logger.LogWarning("Unauthorized attempt to access MaterialSubGroup {SubGroupId} by user {UserId}", id, userId);
+                throw new UnauthorizedAccessException("You do not own this material sub group.");
             }
+
+            return _mapper.Map<MaterialSubGroupDTO>(entity);
         }
 
         /// <inheritdoc />
         public async Task<MaterialSubGroupDTO> CreateAsync(CreateMaterialSubGroupViewModel model, Guid userId)
         {
             if (model == null) throw new ArgumentNullException("The sub group model can not be null or empty.");
-            if (userId == Guid.Empty) throw new ArgumentNullException("UserId can not be null or empty.");
+            if (userId == Guid.Empty) throw new ArgumentException("UserId can not be null or empty.");
 
-            try
+            var subject = await _repo.AllReadonly<Subject>().FirstOrDefaultAsync(s => s.Id == model.SubjectId);
+            if (subject == null)
             {
-                _logger.LogInformation("Creating subgroup for subject {SubjectId} and user {UserId}", model.SubjectId, userId);
-
-                bool subjectExists = await _repo.AllReadonly<Subject>().AnyAsync(s => s.Id == model.SubjectId && s.UserId == userId);
-                if (!subjectExists)
-                {
-                    _logger.LogWarning("Unauthorized attempt to create subgroup for subject {SubjectId} by user {UserId}", model.SubjectId, userId);
-                    throw new UnauthorizedAccessException("You do not own this subject.");
-                }
-
-                var subGroup = _mapper.Map<MaterialSubGroup>(model);
-                subGroup.DateCreated = DateTimeOffset.UtcNow;
-
-                await _repo.AddAsync<MaterialSubGroup>(subGroup);
-                await _repo.SaveChangesAsync();
-
-                _logger.LogInformation("Subgroup {SubGroupId} created successfully for user {UserId}", subGroup.Id, userId);
-
-                return _mapper.Map<MaterialSubGroupDTO>(subGroup);
+                _logger.LogWarning("No subgroups found with Subject ID {Id} and user {UserId}", model.SubjectId, userId);
+                throw new KeyNotFoundException("No material sub groups found for the given subject.");
             }
-            catch (DbUpdateException ex)
+
+            if(subject.UserId != userId)
             {
-                _logger.LogError("Could not save MaterialSubGroup for user {UserId}", userId);
-                throw new DbUpdateException("Failed to save the new sub group to the database.", ex);
-            }     
-            catch (UnauthorizedAccessException)
-            {
-                throw;
+                _logger.LogWarning("Unauthorized attempt to acess Subject {Id} by user {UserId}", model.SubjectId, userId);
+                throw new UnauthorizedAccessException("You do not own this material sub group.");
             }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Error creating subgroup for user {UserId}: {Message}", userId, ex.Message);
-                throw new SubGroupCreationException("Something went wrong while creating the material sub groups. Please try again!", ex);
-            }
+
+            var subGroup = _mapper.Map<MaterialSubGroup>(model);
+            subGroup.DateCreated = DateTimeOffset.UtcNow;
+
+            await _repo.AddAsync<MaterialSubGroup>(subGroup);
+            await _repo.SaveChangesAsync();
+
+            return _mapper.Map<MaterialSubGroupDTO>(subGroup);
         }
 
         /// <inheritdoc />
-        public async Task<bool> DeleteAsync(Guid[] ids, Guid userId)
+        public async Task DeleteAsync(Guid[] ids, Guid userId)
         {
-            if (ids.Length <= 0) throw new ArgumentException("MaterialSubGroupId can not be less than zero.");
-            if (userId == Guid.Empty) throw new ArgumentNullException("UserId can not be null or empty.");
+            if (ids.Length == 0) throw new ArgumentException("No sub group IDs provided.");
+            if (userId == Guid.Empty) throw new ArgumentException("UserId can not be null or empty.");
 
-            try
+            var groups = await _repo.All<MaterialSubGroup>()
+                                    .Include(x => x.Subject)
+                                    .Where(f => ids.Contains(f.Id))
+                                    .ToListAsync();
+
+            if (groups.Count == 0)
             {
-                _logger.LogInformation("Deleting subgroups {SubGroupId} for user {UserId}", ids, userId);
-
-                var groups = await _repo.All<MaterialSubGroup>()
-                .Where(f => ids.Contains(f.Id) && f.Subject.UserId == userId)
-                .ToListAsync();
-
-                if (groups == null)
-                {
-                    _logger.LogWarning("Subgroup {SubGroupId} not found or unauthorized for user {UserId}", ids, userId);
-                    return false;
-                }
-
-                _repo.DeleteRange<MaterialSubGroup>(groups);
-                await _repo.SaveChangesAsync();
-
-                _logger.LogInformation("Subgroup {SubGroupId} deleted successfully for user {UserId}", ids, userId);
-
-                return true;
+                _logger.LogWarning("No subgroups found for IDs {Ids}", ids);
+                throw new KeyNotFoundException("No sub groups found for the specified IDs.");
             }
-            catch (DbUpdateException ex)
+
+            var unauthorized = groups.Where(g => g.Subject.UserId != userId).ToList();
+            if (unauthorized.Any())
             {
-                _logger.LogError("Could not save MaterialSubGroup deletion for user {UserId}", userId);
-                throw new DbUpdateException("Failed to save the deletion of the sub group to the database.", ex);
+                _logger.LogWarning("Unauthorized attempt to delete subgroups {Ids} by user {UserId}", unauthorized.Select(g => g.Id), userId);
+                throw new UnauthorizedAccessException("You do not own one or more of the specified sub groups.");
             }
-            catch (Exception ex)
-            {
-                _logger.LogError("Could not delete MaterialSubGroup for user {UserId}", userId);
-                throw new DbUpdateException("Failed to delete the sub group. Please try again!", ex);
-            }
-           
+
+            _repo.DeleteRange(groups);
+            await _repo.SaveChangesAsync();
         }
 
         /// <inheritdoc />
         public async Task<MaterialSubGroupDTO> UpdateAsync(CreateMaterialSubGroupViewModel model, Guid userId, Guid id)
         {
             if (model == null) throw new ArgumentNullException("The sub group model can not be null or empty.");
-            if (userId == Guid.Empty) throw new ArgumentNullException("UserId can not be null or empty.");
-            if (id == Guid.Empty) throw new ArgumentNullException("Id can not be null or empty.");
+            if (userId == Guid.Empty) throw new ArgumentException("UserId can not be null or empty.");
+            if (id == Guid.Empty) throw new ArgumentException("Id can not be null or empty.");
 
-            try
+            var subGroup = await _repo.All<MaterialSubGroup>()
+                                      .Include(x => x.Subject)
+                                      .FirstOrDefaultAsync(f => f.Id == id);
+
+            if (subGroup == null)
             {
-                _logger.LogInformation("Editing sub group {sub groupId} for user {UserId}", id, userId);
-
-                var subGroup = await _repo.All<MaterialSubGroup>().FirstOrDefaultAsync(f => f.Id == id && f.Subject.UserId == userId);
-
-                if (subGroup == null)
-                {
-                    _logger.LogWarning("sub group {sub groupId} not found for user {UserId}", id, userId);
-                    throw new KeyNotFoundException("Could not find the requested sub group.");
-                }
-
-                _mapper.Map(model, subGroup); // maps updated fields from ViewModel to entity
-
-                await _repo.SaveChangesAsync();
-
-                _logger.LogInformation("sub group {sub groupId} edited successfully for user {UserId}", subGroup.Id, userId);
-
-                return _mapper.Map<MaterialSubGroupDTO>(subGroup);
+                _logger.LogWarning("Sub group {SubGroupId} not found", id);
+                throw new KeyNotFoundException("Could not find the requested sub group.");
             }
-            catch (DbUpdateException ex)
+
+            if (subGroup.Subject.UserId != userId)
             {
-                _logger.LogError("Could not update sub group for user {UserId}", userId);
-                throw new DbUpdateException("Failed to save the new material to the database.", ex);
+                _logger.LogWarning("Unauthorized attempt to update sub group {SubGroupId} by user {UserId}", id, userId);
+                throw new UnauthorizedAccessException("You do not own this sub group.");
             }
-            catch (Exception ex)
-            {
-                _logger.LogError("Could not update sub group for user {UserId}", userId);
-                throw new MaterialUpdateException("Something went wrong while updating the new material. Please try again!", ex);
-            }
+
+            _mapper.Map(model, subGroup);
+            await _repo.SaveChangesAsync();
+
+            return _mapper.Map<MaterialSubGroupDTO>(subGroup);
         }
     }
 }

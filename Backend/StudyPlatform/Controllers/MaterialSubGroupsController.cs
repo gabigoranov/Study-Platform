@@ -89,8 +89,7 @@ namespace StudyPlatform.Controllers
         public async Task<IActionResult> Delete([FromQuery] Guid[] ids)
         {
             Guid userId = User.GetUserId();
-            var deleted = await _groupsService.DeleteAsync(ids, userId);
-            if (!deleted) return NotFound();
+            await _groupsService.DeleteAsync(ids, userId);
             return Ok();
         }
 

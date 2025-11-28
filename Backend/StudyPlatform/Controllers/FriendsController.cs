@@ -80,10 +80,9 @@ namespace StudyPlatform.Controllers
         {
             Guid userId = User.GetUserId();
 
-            var result = await _service.RejectFriendRequestAsync(id, userId);
-            if (!result) return NotFound();
+            await _service.RejectFriendRequestAsync(id, userId);
             
-            return Ok(result);
+            return Ok();
         }
 
         /// <summary>
@@ -98,10 +97,9 @@ namespace StudyPlatform.Controllers
         {
             Guid userId = User.GetUserId();
 
-            var result = await _service.DeleteFriendAsync(id, userId);
-            if (!result) return NotFound();
+            await _service.DeleteFriendAsync(id, userId);
             
-            return Ok(result);
+            return Ok();
         }
 
         /// <summary>

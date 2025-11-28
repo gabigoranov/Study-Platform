@@ -18,52 +18,58 @@ import LandingPage from "./pages/Landing/LandingPage";
 import QuizzesDashboard from "./pages/Quizzes/QuizzesDashboard";
 import FriendsDashboard from "./pages/Friends/FriendsDashboard";
 import { AuthProvider } from "./hooks/Supabase/useAuth";
+import { AppErrorBoundary } from "./components/Common/AppErrorBoundary";
 
 export function App() {
   return (
-    <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
-      <VariableProvider>
-        <AuthProvider>
-          <BrowserRouter>
-            <Routes>
-              {/* Public routes */}
-              <Route path="/landing" element={<LandingPage />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/signup" element={<SignUp />} />
+    <AppErrorBoundary>
+      <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+        <VariableProvider>
+          <AuthProvider>
+            <BrowserRouter>
+              <Routes>
+                {/* Public routes */}
+                <Route path="/landing" element={<LandingPage />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/signup" element={<SignUp />} />
 
-              {/* Protected routes */}
-              <Route
-                path="/"
-                element={
-                  <ProtectedRoute>
-                    <DashboardLayout />
-                  </ProtectedRoute>
-                }
-                errorElement={<ErrorPage />}
-              >
-                <Route index element={<HomeDashboard />} />
-                <Route path="flashcards/*" element={<FlashcardsDashboard />} />
-                <Route path="mindmaps/*" element={<MindmapsDashboard />} />
-                <Route path="quizzes/*" element={<QuizzesDashboard />} />
-                <Route path="friends/*" element={<FriendsDashboard />} />
-              </Route>
+                {/* Protected routes */}
+                <Route
+                  path="/"
+                  element={
+                    <ProtectedRoute>
+                      <DashboardLayout />
+                    </ProtectedRoute>
+                  }
+                  errorElement={<ErrorPage />}
+                >
+                  <Route index element={<HomeDashboard />} />
+                  <Route
+                    path="flashcards/*"
+                    element={<FlashcardsDashboard />}
+                  />
+                  <Route path="mindmaps/*" element={<MindmapsDashboard />} />
+                  <Route path="quizzes/*" element={<QuizzesDashboard />} />
+                  <Route path="friends/*" element={<FriendsDashboard />} />
+                </Route>
 
-              <Route
-                path="settings"
-                element={
-                  <ProtectedRoute>
-                    <SettingsLayout />
-                  </ProtectedRoute>
-                }
-              >
-                <Route index element={<GeneralSettings />} />
-                <Route path="account" element={<AccountSettings />} />
-                <Route path="theme" element={<ThemeSettings />} />
-              </Route>
-            </Routes>
-          </BrowserRouter>
-        </AuthProvider>
-      </VariableProvider>
-    </ThemeProvider>
+                <Route
+                  path="settings"
+                  element={
+                    <ProtectedRoute>
+                      <SettingsLayout />
+                    </ProtectedRoute>
+                  }
+                >
+                  <Route index element={<GeneralSettings />} />
+                  <Route path="account" element={<AccountSettings />} />
+                  <Route path="theme" element={<ThemeSettings />} />
+                </Route>
+              </Routes>
+            </BrowserRouter>
+          </AuthProvider>
+        </VariableProvider>
+      </ThemeProvider>
+    </AppErrorBoundary>
   );
 }

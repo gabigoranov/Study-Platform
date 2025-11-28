@@ -26,7 +26,6 @@ export default function FriendsListItemComponent({
 
   return (
     <TableRow
-      key={friend.id}
       className={isCurrentUser ? "bg-success-light/10 font-semibold" : ""}
     >
       <TableCell>{index + 1}</TableCell>

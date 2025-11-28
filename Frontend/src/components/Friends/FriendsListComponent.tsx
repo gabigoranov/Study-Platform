@@ -43,6 +43,7 @@ export default function FriendsListComponent({
           const isCurrentUser = friend.id === currentUserId;
           return (
             <FriendsListItemComponent
+              key={index}
               authToken={authToken}
               friend={friend}
               index={index}

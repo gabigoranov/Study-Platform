@@ -6,78 +6,92 @@
     <members>
         <member name="T:StudyPlatform.Controllers.FlashcardsController">
             <summary>
-            Provides endpoints for managing flashcards.
+            Manages flashcards for the authenticated user.
             </summary>
+            <remarks>
+            All endpoints in this controller require authentication.
+            The user ID is extracted from the JWT token.
+            Validation errors are automatically handled by global middleware.
+            Unhandled exceptions return a standardized error response.
+            </remarks>
         </member>
         <member name="M:StudyPlatform.Controllers.FlashcardsController.#ctor(StudyPlatform.Services.Flashcards.IFlashcardsService)">
             <summary>
-            A constructor for injecting the services.
+            Initializes the controller with required services.
             </summary>
             <param name="flashcardsService">The flashcards service, dependency injected.</param>
         </member>
         <member name="M:StudyPlatform.Controllers.FlashcardsController.Create(StudyPlatform.Models.CreateFlashcardViewModel)">
             <summary>
-            Endpoint for creating a new flashcard.
+            Creates flashcard.
             </summary>
-            <param name="model">The model for the flashcard created by the user.</param>
-            <returns>A new flashcard if successful.</returns>
+            <param name="model">The model used to create a new flashcard.</param>
+            <returns>The created flashcard.</returns>
         </member>
         <member name="M:StudyPlatform.Controllers.FlashcardsController.CreateBulk(System.Collections.Generic.IEnumerable{StudyPlatform.Models.CreateFlashcardViewModel})">
             <summary>
-            Endpoint for creating a new flashcards from a list of models.
+            Creates multiple flashcards.
             </summary>
-            <param name="model">The model for the flashcard created by the user.</param>
-            <returns>A new flashcard if successful.</returns>
+            <param name="model">The model used to create new flashcards.</param>
+            <returns>The created flashcards.</returns>
         </member>
         <member name="M:StudyPlatform.Controllers.FlashcardsController.Get(System.Guid)">
             <summary>
-            Endpoint for getting a flashcard by it's ID.
+            Gets a flashcard by its ID.
             </summary>
-            <param name="id">The card id..</param>
-            <returns>A flashcard if successful.</returns>
+            <param name="id">The id of the flashcard to retrieve.</param>
+            <returns>The retrieved flashcard.</returns>
         </member>
         <member name="M:StudyPlatform.Controllers.FlashcardsController.Get">
             <summary>
-            Endpoint for getting all flashcards that the user owns.
+            Gets all of user's flashcards.
             </summary>
-            <returns>A list of flashcards if successful.</returns>
+            <returns>All of the user's flashcards.</returns>
         </member>
         <member name="M:StudyPlatform.Controllers.FlashcardsController.GetAllFromGroup(System.Guid,System.Guid)">
             <summary>
-            Endpoint for getting all flashcards that the user owns in a certain group.
+            Gets all of user's flashcards in a certain group.
             </summary>
-            <returns>A list of flashcards if successful.</returns>
+            <param name="id">The groupId used to retrieve flashcards.</param>
+            <param name="subjectId">The subjectId used to retrieve flashcards.</param>
+            <returns>The retrieved flashcards.</returns>
         </member>
         <member name="M:StudyPlatform.Controllers.FlashcardsController.Update(StudyPlatform.Models.CreateFlashcardViewModel,System.Guid)">
             <summary>
-            Endpoint for updating a specific flashcard that the user owns.
+            Updates flashcard.
             </summary>
-            <param name="model">The model for updating the flashcard.</param>
-            <param name="id">The id of the flashcard.</param>
-            <returns>An edited flashcard if successful.</returns>
+            <param name="model">The model used to update a flashcard.</param>
+            <param name="id">The model id.</param>
+            <returns>The updated flashcard.</returns>
         </member>
         <member name="M:StudyPlatform.Controllers.FlashcardsController.Delete(System.Guid[])">
             <summary>
-            Endpoint for deleting an array of flashcards by their IDs.
+            Deletes multiple flashcards IDs.
             </summary>
-            <param name="ids">The array of flashcard ids.</param>
+            <param name="ids">A list of flashcard ids to delete.</param>
             <returns>Nothing.</returns>
         </member>
         <member name="M:StudyPlatform.Controllers.FlashcardsController.Generate(StudyPlatform.Models.GenerateFlashcardsViewModel)">
             <summary>
-            Endpoint for generating flashcards from a file.
+            Generates flashcards from a file url via microservice.
             </summary>
-            <param name="model">The model containing the file's download url and other prompt data.</param>
-            <returns>A list of flashcards if successful.</returns>
+            <param name="model">The model used to generate new flashcards with AI.</param>
+            <returns>The generated flashcards.</returns>
         </member>
         <member name="T:StudyPlatform.Controllers.FriendsController">
             <summary>
-            Provides endpoints for managing friends and AppUser relationships.
+            Manages friends and AppUser relationships.
             </summary>
+            <remarks>
+            All endpoints in this controller require authentication.
+            The user ID is extracted from the JWT token.
+            Validation errors are automatically handled by global middleware.
+            Unhandled exceptions return a standardized error response.
+            </remarks>
         </member>
         <member name="M:StudyPlatform.Controllers.FriendsController.#ctor(StudyPlatform.Services.Friends.IFriendsService)">
             <summary>
-            A constructor for injecting the services.
+            Initializes the controller with required services.
             </summary>
             <param name="friendsService">The friends service, dependency injected.</param>
         </member>
@@ -93,7 +107,7 @@
             Accepts a friend request from another user.
             </summary>
             <param name="id">The ID of the user who sent the friend request.</param>
-            <returns>True if the request was accepted successfully.</returns>
+            <returns>The newly accepted friend request.</returns>
         </member>
         <member name="M:StudyPlatform.Controllers.FriendsController.RejectFriendRequest(System.Guid)">
             <summary>
@@ -113,7 +127,7 @@
             <summary>
             Gets all friend requests for the authenticated user.
             </summary>
-            <returns>A list of all friends.</returns>
+            <returns>A list of all friend requests.</returns>
         </member>
         <member name="M:StudyPlatform.Controllers.FriendsController.GetAllFriends">
             <summary>
@@ -123,18 +137,24 @@
         </member>
         <member name="T:StudyPlatform.Controllers.MaterialSubGroupsController">
             <summary>
-            API controller for managing material subgroups.
+            Manages material sub groups for the authenticated user.
             </summary>
+            <remarks>
+            All endpoints in this controller require authentication.
+            The user ID is extracted from the JWT token.
+            Validation errors are automatically handled by global middleware.
+            Unhandled exceptions return a standardized error response.
+            </remarks>
         </member>
         <member name="M:StudyPlatform.Controllers.MaterialSubGroupsController.#ctor(StudyPlatform.Services.MaterialSubGroups.IMaterialSubGroupsService)">
             <summary>
-            Initializes the controller.
+            Initializes the controller with required services.
             </summary>
-            <param name="service">The service DI.</param>
+            <param name="groupsService">The sub groups service, dependency injected.</param>
         </member>
         <member name="M:StudyPlatform.Controllers.MaterialSubGroupsController.GetBySubject(System.Guid,System.Boolean)">
             <summary>
-            Gets all material subgroups for a subject.
+            Gets all subgroups for a subject.
             </summary>
             <param name="subjectId">The subject ID.</param>
             <param name="includeMaterials">Whether or not to include the materials in each group.</param>
@@ -159,11 +179,11 @@
             Deletes a material subgroup by ID.
             </summary>
             <param name="ids">The subgroup IDs.</param>
-            <returns>No content if deleted.</returns>
+            <returns>Nothing.</returns>
         </member>
         <member name="M:StudyPlatform.Controllers.MaterialSubGroupsController.Update(StudyPlatform.Models.CreateMaterialSubGroupViewModel,System.Guid)">
             <summary>
-            Endpoint for updating a specific sub group that the user owns.
+            Updates a specific sub group.
             </summary>
             <param name="model">The model for updating the sub group.</param>
             <param name="id">The id of the sub group.</param>
@@ -171,89 +191,116 @@
         </member>
         <member name="T:StudyPlatform.Controllers.MindmapsController">
             <summary>
-            A controller responsible for handling all requests related to mindmaps.
+            Manages mindmaps for the authenticated user.
             </summary>
+            <remarks>
+            All endpoints in this controller require authentication.
+            The user ID is extracted from the JWT token.
+            Validation errors are automatically handled by global middleware.
+            Unhandled exceptions return a standardized error response.
+            </remarks>
         </member>
         <member name="M:StudyPlatform.Controllers.MindmapsController.#ctor(StudyPlatform.Services.Mindmaps.IMindmapsService)">
             <summary>
-            Initializes the MindmapsController and injects dependencies.
+            Initializes the controller with required services.
             </summary>
+            <param name="mindmapsService">The mindmaps service, dependency injected.</param>
+        </member>
+        <member name="M:StudyPlatform.Controllers.MindmapsController.Create(StudyPlatform.Models.CreateMindmapViewModel)">
+            <summary>
+            Creates mindmap.
+            </summary>
+            <param name="model">The model used to create a new mindmap.</param>
+            <returns>The created mindmap.</returns>
         </member>
         <member name="M:StudyPlatform.Controllers.MindmapsController.GetAllFromGroup(System.Guid,System.Guid)">
             <summary>
-            Endpoint for getting all mindmaps that the user owns in a certain group.
+            Gets all mindmaps for a subgroup or subject
             </summary>
             <returns>A list of mindmaps if successful.</returns>
         </member>
         <member name="M:StudyPlatform.Controllers.MindmapsController.Update(StudyPlatform.Models.CreateMindmapViewModel,System.Guid)">
             <summary>
-            Endpoint for updating a specific mindmap that the user owns.
+            Updates a mindmap.
             </summary>
             <param name="model">The model for updating the mindmap.</param>
             <param name="id">The id of the mindmap.</param>
-            <returns>An edited mindmap if successful.</returns>
+            <returns>The updated mindmap.</returns>
+        </member>
+        <member name="M:StudyPlatform.Controllers.MindmapsController.Generate(StudyPlatform.Models.GenerateMindmapsViewModel)">
+            <summary>
+            Generates a mindmap.
+            </summary>
+            <param name="model">The model for generating the mindmap via AI microservice.</param>
+            <returns>The generated mindmap.</returns>
         </member>
         <member name="M:StudyPlatform.Controllers.MindmapsController.Delete(System.Guid[])">
             <summary>
-            Endpoint for deleting an array of mindmaps by their IDs.
+            Deletes multiple mindmaps by IDs.
             </summary>
             <param name="ids">The array of mindmap ids.</param>
             <returns>Nothing.</returns>
         </member>
         <member name="M:StudyPlatform.Controllers.MindmapsController.DeleteSingle(System.Guid)">
             <summary>
-            Endpoint for deleting a single mindmap by its Id.
+            Deletes a mindmap by Id.
             </summary>
             <param name="id">Mindmap id.</param>
             <returns>Nothing.</returns>
         </member>
         <member name="T:StudyPlatform.Controllers.QuizzesController">
             <summary>
-            Provides endpoints for managing quizzes.
+            Manages quizzes for the authenticated user.
             </summary>
+            <remarks>
+            All endpoints in this controller require authentication.
+            The user ID is extracted from the JWT token.
+            Validation errors are automatically handled by global middleware.
+            Unhandled exceptions return a standardized error response.
+            </remarks>
         </member>
         <member name="M:StudyPlatform.Controllers.QuizzesController.#ctor(StudyPlatform.Services.Quiz.IQuizService)">
             <summary>
-            A constructor for injecting the services.
+            Initializes the controller with required services.
             </summary>
             <param name="quizService">The quiz service, dependency injected.</param>
         </member>
         <member name="M:StudyPlatform.Controllers.QuizzesController.Create(StudyPlatform.Models.CreateQuizViewModel)">
             <summary>
-            Endpoint for creating a new quiz.
+            Creates a quiz.
             </summary>
             <param name="model">The model for the quiz created by the user.</param>
             <returns>A new quiz if successful.</returns>
         </member>
         <member name="M:StudyPlatform.Controllers.QuizzesController.CreateBulk(System.Collections.Generic.IEnumerable{StudyPlatform.Models.CreateQuizViewModel})">
             <summary>
-            Endpoint for creating a new quizzes from a list of models.
+            Creates multiple quizzes.
             </summary>
             <param name="model">The model for the quiz created by the user.</param>
             <returns>A new quiz if successful.</returns>
         </member>
         <member name="M:StudyPlatform.Controllers.QuizzesController.Get(System.Guid)">
             <summary>
-            Endpoint for getting a quiz by it's ID.
+            Gets a quiz by ID.
             </summary>
             <param name="id">The quiz id.</param>
             <returns>A quiz if successful.</returns>
         </member>
         <member name="M:StudyPlatform.Controllers.QuizzesController.Get">
             <summary>
-            Endpoint for getting all quizzes that the user owns.
+            Gets all of user's quizzes.
             </summary>
             <returns>A list of quizzes if successful.</returns>
         </member>
         <member name="M:StudyPlatform.Controllers.QuizzesController.GetAllFromGroup(System.Guid,System.Nullable{System.Guid})">
             <summary>
-            Endpoint for getting all quizzes that the user owns in a certain group.
+            Gets all of user's quizzes from a sub group.
             </summary>
             <returns>A list of quizzes if successful.</returns>
         </member>
         <member name="M:StudyPlatform.Controllers.QuizzesController.Update(StudyPlatform.Models.CreateQuizViewModel,System.Guid)">
             <summary>
-            Endpoint for updating a specific quiz that the user owns.
+            Updates quiz.
             </summary>
             <param name="model">The model for updating the quiz.</param>
             <param name="id">The id of the quiz.</param>
@@ -261,28 +308,28 @@
         </member>
         <member name="M:StudyPlatform.Controllers.QuizzesController.Delete(System.Guid[])">
             <summary>
-            Endpoint for deleting an array of quizzes by their IDs.
+            Deletes multiple quizzes by IDs.
             </summary>
             <param name="ids">The array of quiz ids.</param>
             <returns>Nothing.</returns>
         </member>
         <member name="M:StudyPlatform.Controllers.QuizzesController.DeleteSingle(System.Guid)">
             <summary>
-            Endpoint for deleting a single quiz by its Id.
+            Deletes a quiz by Id.
             </summary>
             <param name="id">The array of quiz ids.</param>
             <returns>Nothing.</returns>
         </member>
         <member name="M:StudyPlatform.Controllers.QuizzesController.DeleteSingleQuestion(System.Guid)">
             <summary>
-            Endpoint for deleting a single quiz question by its Id.
+            Deletes a quiz question by Id.
             </summary>
             <param name="id">The array of quiz ids.</param>
             <returns>Nothing.</returns>
         </member>
         <member name="M:StudyPlatform.Controllers.QuizzesController.AddQuestionsToQuiz(System.Guid,System.Collections.Generic.IEnumerable{StudyPlatform.Models.CreateQuizQuestionViewModel})">
             <summary>
-            Endpoint for adding questions and answers to a specific quiz.
+            Adds questions and answers to a quiz.
             </summary>
             <param name="quizId">The ID of the quiz to add questions to.</param>
             <param name="questions">The questions and answers to add to the quiz.</param>
@@ -290,25 +337,31 @@
         </member>
         <member name="M:StudyPlatform.Controllers.QuizzesController.Generate(StudyPlatform.Models.GenerateQuizViewModel)">
             <summary>
-            Endpoint for generating quizzes from a file.
+            Generates quizz from a file url via microservice.
             </summary>
             <param name="model">The model containing the file's download url and other prompt data.</param>
             <returns>A quiz if successful.</returns>
         </member>
         <member name="T:StudyPlatform.Controllers.SubjectsController">
             <summary>
-            API controller for managing subjects.
+            Manages subjects for the authenticated user.
             </summary>
+            <remarks>
+            All endpoints in this controller require authentication.
+            The user ID is extracted from the JWT token.
+            Validation errors are automatically handled by global middleware.
+            Unhandled exceptions return a standardized error response.
+            </remarks>
         </member>
         <member name="M:StudyPlatform.Controllers.SubjectsController.#ctor(StudyPlatform.Services.Subjects.ISubjectsService)">
             <summary>
-            Initializes a new instance of the <see cref="T:StudyPlatform.Controllers.SubjectsController"/> class.
+            Initializes the controller with required services.
             </summary>
-            <param name="service">The subjects service DI.</param>
+            <param name="subjectsService">The subjects service, dependency injected.</param>
         </member>
         <member name="M:StudyPlatform.Controllers.SubjectsController.GetSubjectsByUser(System.Boolean,System.Boolean)">
             <summary>
-            Gets all subjects for a user.
+            Gets all of user's subjects.
             </summary>
             <param name="includeGroups">Whether or not to include material sub groups with their materials.</param>
             <param name="includeGroupsSummary">Whether or not to include material sub groups without their materials.</param>
@@ -316,7 +369,7 @@
         </member>
         <member name="M:StudyPlatform.Controllers.SubjectsController.GetSubject(System.Guid)">
             <summary>
-            Gets a single subject by ID.
+            Gets a single subject.
             </summary>
             <param name="id">The subject ID.</param>
             <returns>The subject if found.</returns>
@@ -333,15 +386,44 @@
             Deletes a subject by ID.
             </summary>
             <param name="id">The subject ID.</param>
-            <returns>No content if deleted.</returns>
+            <returns>Nothing.</returns>
         </member>
         <member name="M:StudyPlatform.Controllers.SubjectsController.Update(StudyPlatform.Models.CreateSubjectViewModel,System.Guid)">
             <summary>
-            Endpoint for updating a specific subject that the user owns.
+            Updates a subject.
             </summary>
             <param name="model">The model for updating the subject.</param>
             <param name="id">The id of the subject.</param>
             <returns>An edited subject if successful.</returns>
+        </member>
+        <member name="T:StudyPlatform.Controllers.UsersController">
+            <summary>
+            Manages app users.
+            </summary>
+            <remarks>
+            All endpoints in this controller require authentication.
+            The user ID is extracted from the JWT token.
+            Validation errors are automatically handled by global middleware.
+            Unhandled exceptions return a standardized error response.
+            </remarks>
+        </member>
+        <member name="M:StudyPlatform.Controllers.UsersController.#ctor(StudyPlatform.Services.Users.IUsersService)">
+            <summary>
+            Initializes the controller with required services.
+            </summary>
+            <param name="usersService">The users service, dependency injected.</param>
+        </member>
+        <member name="M:StudyPlatform.Controllers.UsersController.Search(System.String)">
+            <summary>
+            Searches for users by input string.
+            </summary>
+            <returns>All of the found users.</returns>
+        </member>
+        <member name="M:StudyPlatform.Controllers.UsersController.UpdateScore(StudyPlatform.Models.UpdateScoreViewModel)">
+            <summary>
+            Updates a user's score by a specified amount.
+            </summary>
+            <returns>The updated user model.</returns>
         </member>
         <member name="T:StudyPlatform.Data.Common.AppConstants">
             <summary>
@@ -717,32 +799,9 @@
         </member>
         <member name="T:StudyPlatform.Middlewares.ExceptionHandlingMiddleware">
             <summary>
-            Middleware for global exception handling in the application.
-            Converts unhandled exceptions into consistent JSON error responses
-            based on <see cref="T:Microsoft.AspNetCore.Mvc.ProblemDetails"/> (RFC 7807).
+            Middleware for global exception handling.
+            Converts unhandled exceptions into consistent JSON error responses.
             </summary>
-        </member>
-        <member name="M:StudyPlatform.Middlewares.ExceptionHandlingMiddleware.#ctor(Microsoft.AspNetCore.Http.RequestDelegate,Microsoft.Extensions.Logging.ILogger{StudyPlatform.Middlewares.ExceptionHandlingMiddleware},Microsoft.Extensions.Hosting.IHostEnvironment)">
-            <summary>
-            Initializes a new instance of the <see cref="T:StudyPlatform.Middlewares.ExceptionHandlingMiddleware"/> class.
-            </summary>
-            <param name="next">The next middleware component in the pipeline.</param>
-            <param name="logger">The logger used to log exception details.</param>
-            <param name="environment">The hosting environment (used to show detailed errors in Development).</param>
-        </member>
-        <member name="M:StudyPlatform.Middlewares.ExceptionHandlingMiddleware.Invoke(Microsoft.AspNetCore.Http.HttpContext)">
-            <summary>
-            Invokes the middleware logic. Wraps the request delegate in a try-catch block
-            to capture and process unhandled exceptions.
-            </summary>
-            <param name="context">The current <see cref="T:Microsoft.AspNetCore.Http.HttpContext"/>.</param>
-        </member>
-        <member name="M:StudyPlatform.Middlewares.ExceptionHandlingMiddleware.HandleExceptionAsync(Microsoft.AspNetCore.Http.HttpContext,System.Exception)">
-            <summary>
-            Maps exceptions to HTTP status codes and writes a standardized JSON error response.
-            </summary>
-            <param name="context">The current <see cref="T:Microsoft.AspNetCore.Http.HttpContext"/>.</param>
-            <param name="ex">The exception that was thrown.</param>
         </member>
         <member name="T:StudyPlatform.Migrations.SupabaseDb.Init">
             <inheritdoc />
@@ -991,37 +1050,16 @@
             <param name="client">The HttpClient instance.</param>
         </member>
         <member name="M:StudyPlatform.Services.Flashcards.FlashcardsService.CreateAsync(StudyPlatform.Models.CreateFlashcardViewModel,System.Guid)">
-            <summary>
-            Creates a new flashcard for a specific user.
-            </summary>
-            <param name="model">The flashcard view model containing data.</param>
-            <param name="userId">The ID of the user who owns the flashcard.</param>
-            <returns>The created <see cref="T:StudyPlatform.Data.Models.Flashcard"/>.</returns>
+            <inheritdoc />
         </member>
         <member name="M:StudyPlatform.Services.Flashcards.FlashcardsService.UpdateAsync(StudyPlatform.Models.CreateFlashcardViewModel,System.Guid,System.Guid)">
-            <summary>
-            Edits an existing flashcard for a specific user.
-            </summary>
-            <param name="model">The flashcard view model containing updated data.</param>
-            <param name="userId">The ID of the user who owns the flashcard.</param>
-            <param name="id">The ID of the flashcard.</param>
-            <returns>The updated <see cref="T:StudyPlatform.Data.Models.Flashcard"/>.</returns>
+            <inheritdoc />
         </member>
         <member name="M:StudyPlatform.Services.Flashcards.FlashcardsService.GetAsync(System.Guid,System.Guid)">
-            <summary>
-            Retrieves multiple flashcards by their IDs for a specific user.
-            </summary>
-            <param name="userId">The ID of the user who owns the flashcards.</param>
-            <param name="id">The ID of the flashcard.</param>
-            <returns>A collection of <see cref="T:StudyPlatform.Data.Models.Flashcard"/> objects.</returns>
+            <inheritdoc />
         </member>
         <member name="M:StudyPlatform.Services.Flashcards.FlashcardsService.DeleteAsync(System.Guid[],System.Guid)">
-            <summary>
-            Deletes multiple flashcards by their IDs for a specific user.
-            </summary>
-            <param name="ids">Array of flashcard IDs to delete.</param>
-            <param name="userId">The ID of the user who owns the flashcards.</param>
-            <returns>A task representing the asynchronous delete operation.</returns>
+            <inheritdoc />
         </member>
         <member name="M:StudyPlatform.Services.Flashcards.FlashcardsService.GetAllAsync(System.Guid,System.Nullable{System.Guid},System.Nullable{System.Guid})">
             <inheritdoc />
