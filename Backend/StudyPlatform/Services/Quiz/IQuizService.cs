@@ -82,6 +82,15 @@ namespace StudyPlatform.Services.Quiz
         /// The task result contains the updated <see cref="QuizDTO"/>.
         /// </returns>
         Task<QuizDTO> AddQuestionsToQuizAsync(IEnumerable<CreateQuizQuestionViewModel> questions, Guid userId, Guid quizId);
+        
+        /// <summary>
+        /// Asynchronously deletes the question identified by the specified ID if the operation is authorized for the
+        /// given user.
+        /// </summary>
+        /// <param name="id">The unique identifier of the question to delete.</param>
+        /// <param name="userId">The unique identifier of the user requesting the deletion. The user must have permission to delete the
+        /// question.</param>
+        /// <returns>A task that represents the asynchronous delete operation.</returns>
         Task DeleteQuestionAsync(Guid id, Guid userId);
 
         /// <summary>

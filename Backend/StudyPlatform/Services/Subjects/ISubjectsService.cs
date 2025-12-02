@@ -39,8 +39,7 @@ namespace StudyPlatform.Services.Subjects
         /// </summary>
         /// <param name="id">The subject ID.</param>
         /// <param name="userId">The user ID.</param>
-        /// <returns>True if deleted, false otherwise.</returns>
-        Task<bool> DeleteAsync(Guid id, Guid userId);
+        Task DeleteAsync(Guid id, Guid userId);
 
         /// <summary>
         /// Edits an existing subject for the specified user.
