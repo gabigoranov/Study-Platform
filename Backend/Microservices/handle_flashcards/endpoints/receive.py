@@ -74,7 +74,7 @@ def generate_flashcards_endpoint(req: FlashcardRequest):
     """
 
     response = client.responses.create(
-        model="gpt-5-nano-2025-08-07",
+        model="gpt-5-nano",
         input=prompt
     )
 

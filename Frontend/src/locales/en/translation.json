@@ -324,5 +324,9 @@
   "sentRequests": "Sent Requests",
   "ascending": "Ascending",
   "descending": "Descending",
-  "orderBy": "Order By"
+  "orderBy": "Order By",
+  "agreeTo": "I agree with the",
+  "termsAndConditions": "Terms & Conditions",
+  "registerWith": "Or register with",
+  "dontHaveAccount": "Don't have an account?"
 }

@@ -1367,6 +1367,9 @@
         <member name="M:StudyPlatform.Services.Mindmaps.MindmapsService.GetAllAsync(System.Guid,System.Nullable{System.Guid},System.Nullable{System.Guid})">
             <inheritdoc/>
         </member>
+        <member name="M:StudyPlatform.Services.Mindmaps.MindmapsService.UpdateAsync(StudyPlatform.Models.CreateMindmapViewModel,System.Guid,System.Guid)">
+            <inheritdoc/>
+        </member>
         <member name="T:StudyPlatform.Services.Quiz.IQuizService">
             <summary>
             Provides operations for creating, editing, retrieving, and deleting quizzes.
@@ -1446,6 +1449,16 @@
             The task result contains the updated <see cref="T:StudyPlatform.Models.DTOs.QuizDTO"/>.
             </returns>
         </member>
+        <member name="M:StudyPlatform.Services.Quiz.IQuizService.DeleteQuestionAsync(System.Guid,System.Guid)">
+            <summary>
+            Asynchronously deletes the question identified by the specified ID if the operation is authorized for the
+            given user.
+            </summary>
+            <param name="id">The unique identifier of the question to delete.</param>
+            <param name="userId">The unique identifier of the user requesting the deletion. The user must have permission to delete the
+            question.</param>
+            <returns>A task that represents the asynchronous delete operation.</returns>
+        </member>
         <member name="M:StudyPlatform.Services.Quiz.IQuizService.GenerateAsync(System.Guid,StudyPlatform.Models.GenerateQuizViewModel)">
             <summary>
             Request the generation of quizzes using AI based on the provided model from a microservice.
@@ -1473,32 +1486,15 @@
             </summary>
             <param name="model">The quiz view model containing data.</param>
             <param name="userId">The ID of the user who owns the quiz.</param>
-            <returns>The created <see cref="N:StudyPlatform.Services.Quiz"/>.</returns>
         </member>
         <member name="M:StudyPlatform.Services.Quiz.QuizService.UpdateAsync(StudyPlatform.Models.CreateQuizViewModel,System.Guid,System.Guid)">
-            <summary>
-            Edits an existing quiz for a specific user.
-            </summary>
-            <param name="model">The quiz view model containing updated data.</param>
-            <param name="userId">The ID of the user who owns the quiz.</param>
-            <param name="id">The ID of the quiz.</param>
-            <returns>The updated <see cref="N:StudyPlatform.Services.Quiz"/>.</returns>
+            <inheritdoc />
         </member>
         <member name="M:StudyPlatform.Services.Quiz.QuizService.GetAsync(System.Guid,System.Guid)">
-            <summary>
-            Retrieves a quiz by its ID for a specific user.
-            </summary>
-            <param name="userId">The ID of the user who owns the quiz.</param>
-            <param name="id">The ID of the quiz.</param>
-            <returns>A <see cref="T:StudyPlatform.Models.DTOs.QuizDTO"/> object.</returns>
+            <inheritdoc />
         </member>
         <member name="M:StudyPlatform.Services.Quiz.QuizService.DeleteAsync(System.Guid[],System.Guid)">
-            <summary>
-            Deletes quizzes by their IDs for a specific user.
-            </summary>
-            <param name="ids">Array of quiz IDs to delete.</param>
-            <param name="userId">The ID of the user who owns the quizzes.</param>
-            <returns>A task representing the asynchronous delete operation.</returns>
+            <inheritdoc />
         </member>
         <member name="M:StudyPlatform.Services.Quiz.QuizService.GetAllAsync(System.Guid,System.Nullable{System.Guid},System.Nullable{System.Guid})">
             <inheritdoc />
@@ -1507,18 +1503,12 @@
             <inheritdoc />
         </member>
         <member name="M:StudyPlatform.Services.Quiz.QuizService.AddQuestionsToQuizAsync(System.Collections.Generic.IEnumerable{StudyPlatform.Models.CreateQuizQuestionViewModel},System.Guid,System.Guid)">
-            <summary>
-            Adds questions and their answers to an existing quiz.
-            </summary>
-            <param name="questions">The questions and answers to add to the quiz.</param>
-            <param name="userId">The ID of the user who owns the quiz.</param>
-            <param name="quizId">The ID of the quiz to add questions to.</param>
-            <returns>
-            A <see cref="T:System.Threading.Tasks.Task`1"/> representing the asynchronous operation.
-            The task result contains the updated <see cref="T:StudyPlatform.Models.DTOs.QuizDTO"/>.
-            </returns>
+            <inheritdoc />
         </member>
         <member name="M:StudyPlatform.Services.Quiz.QuizService.DeleteQuestionAsync(System.Guid,System.Guid)">
+            <inheritdoc />
+        </member>
+        <member name="M:StudyPlatform.Services.Quiz.QuizService.GenerateAsync(System.Guid,StudyPlatform.Models.GenerateQuizViewModel)">
             <inheritdoc />
         </member>
         <member name="T:StudyPlatform.Services.Subjects.ISubjectsService">
@@ -1557,7 +1547,6 @@
             </summary>
             <param name="id">The subject ID.</param>
             <param name="userId">The user ID.</param>
-            <returns>True if deleted, false otherwise.</returns>
         </member>
         <member name="M:StudyPlatform.Services.Subjects.ISubjectsService.UpdateAsync(StudyPlatform.Models.CreateSubjectViewModel,System.Guid,System.Guid)">
             <summary>

@@ -301,5 +301,5 @@ D:\Projects\StudyPlatform\Backend\StudyPlatform\obj\Debug\net8.0\rjsmrazor.dswa.
 D:\Projects\StudyPlatform\Backend\StudyPlatform\obj\Debug\net8.0\rjsmcshtml.dswa.cache.json
 D:\Projects\StudyPlatform\Backend\StudyPlatform\obj\Debug\net8.0\staticwebassets.build.json.cache
 D:\Projects\StudyPlatform\Backend\StudyPlatform\obj\Debug\net8.0\staticwebassets.build.endpoints.json
-D:\Projects\StudyPlatform\Backend\StudyPlatform\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
 D:\Projects\StudyPlatform\Backend\StudyPlatform\obj\Debug\net8.0\swae.build.ex.cache
+D:\Projects\StudyPlatform\Backend\StudyPlatform\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt

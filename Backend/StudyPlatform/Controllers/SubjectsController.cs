@@ -99,8 +99,7 @@ namespace StudyPlatform.Controllers
             // Load userId from JWT token
             Guid userId = User.GetUserId();
 
-            var deleted = await _subjectsService.DeleteAsync(id, userId);
-            if (!deleted) return NotFound();
+            await _subjectsService.DeleteAsync(id, userId);
             return Ok();
         }
 

@@ -216,9 +216,7 @@ namespace StudyPlatformTests
         {
             Subject subject = TestData.Subjects.First();
 
-            bool res = await _service.DeleteAsync(subject.Id, subject.UserId);
-
-            res.Should().BeTrue();
+            await _service.DeleteAsync(subject.Id, subject.UserId);
 
 
             _repoMock.Verify(r => r.AllReadonly<Subject>(), Times.Once);
@@ -241,9 +239,7 @@ namespace StudyPlatformTests
         [Fact]
         public async Task DeleteSubjectAsync_WithNonExistentId_ReturnsFalse()
         {
-            bool res = await _service.DeleteAsync(Guid.NewGuid(), Guid.NewGuid());
-
-            res.Should().BeFalse();
+            await _service.DeleteAsync(Guid.NewGuid(), Guid.NewGuid());
 
             _repoMock.Verify(r => r.AllReadonly<Subject>(), Times.Once);
             _repoMock.Verify(r => r.DeleteAsync<Subject>(It.IsAny<Subject>()), Times.Never);

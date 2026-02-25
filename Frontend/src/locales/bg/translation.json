@@ -324,5 +324,9 @@
   "sentRequests": "Изпратени Покани",
   "ascending": "Възходящи",
   "descending": "Низходящи",
-  "orderBy": "Подреди По"
+  "orderBy": "Подреди По",
+  "agreeTo": "Съгласявам се с",
+  "termsAndConditions": "Политиката за Сигурност",
+  "registerWith": "Или се регистрирайте с",
+  "dontHaveAccount": "Нямате акаунт?"
 }

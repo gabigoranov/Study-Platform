@@ -110,7 +110,7 @@ def generate_mindmap_endpoint(req: MindmapRequest):
 
 
     response = client.responses.create(
-        model="gpt-5-nano-2025-08-07",
+        model="gpt-5-nano",
         input=prompt,
     )
 

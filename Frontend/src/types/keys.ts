@@ -328,4 +328,8 @@ export const keys = {
   ascending: "ascending",
   descending: "descending",
   orderBy: "orderBy",
+  agreeTo: "agreeTo",
+  termsAndConditions: "termsAndConditions",
+  registerWith: "registerWith",
+  dontHaveAccount: "dontHaveAccount"
 };

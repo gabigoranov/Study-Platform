@@ -189,7 +189,7 @@ namespace StudyPlatformTests
             var userId = TestData.SubGroups.First().Subject.UserId;
 
             // Act & Assert
-            Assert.True(await _service.DeleteAsync(ids, userId));
+            await _service.DeleteAsync(ids, userId);
 
             _repoMock.Verify(r => r.AllReadonly<MaterialSubGroup>(), Times.Once);
             _repoMock.Verify(r => r.DeleteAsync<MaterialSubGroup>(It.IsAny<MaterialSubGroup>()), Times.Once);
@@ -217,7 +217,7 @@ namespace StudyPlatformTests
             var userId = Guid.NewGuid(); // Different user ( Unauthorized )
 
             // Act & Assert
-            Assert.False(await _service.DeleteAsync(ids, userId));
+            await _service.DeleteAsync(ids, userId);
 
             _repoMock.Verify(r => r.AllReadonly<MaterialSubGroup>(), Times.Once);
             _repoMock.Verify(r => r.DeleteAsync<MaterialSubGroup>(It.IsAny<MaterialSubGroup>()), Times.Never);
