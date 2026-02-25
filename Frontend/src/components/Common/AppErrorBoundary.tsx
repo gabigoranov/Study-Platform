@@ -1,6 +1,5 @@
 import React, { Component, ReactNode } from "react";
 import ErrorScreen from "./ErrorScreen";
-import { useNavigate } from "react-router";
 
 interface Props {
   children: ReactNode;
