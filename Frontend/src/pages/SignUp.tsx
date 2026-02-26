@@ -28,10 +28,7 @@ export default function SignUp() {
   const [emailConfirmation, setEmailConfirmation] = useState(false);
 
   if (loading) return <p className="text-center mt-10">{t(keys.loading)}</p>;
-  if (user) {
-    navigate("/");
-    return null;
-  }
+
 
   const validatePassword = (pwd: string) => {
     const errs: string[] = [];

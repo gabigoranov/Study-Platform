@@ -5,11 +5,15 @@ import { ThemeToggle } from "../Common/ThemeToggle";
 import AppLogo from "../Common/AppLogo";
 import { useTranslation } from "react-i18next";
 import { keys } from "@/types/keys";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "@/hooks/Supabase/useAuth";
 
 const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { t } = useTranslation();
+
+  const { user } = useAuth();
+  const navigate = useNavigate();
 
   const navLinks = [
     { href: "#features", label: t(keys.features) },
@@ -18,8 +22,16 @@ const Navigation = () => {
     { href: "#faq", label: t(keys.faq) },
   ];
 
+  function handleGetStarted() {
+    if (user) {
+      navigate("/");
+      return null;
+    }
+    navigate("/signup");
+  }
+
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-background/20 backdrop-blur-md border-b border-border">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
@@ -50,11 +62,12 @@ const Navigation = () => {
                 {t(keys.signIn)}
               </Button>
             </Link>
-            <Link to="/signup">
-              <Button className="bg-primary text-primary-foreground hover:bg-primary/90">
-                {t(keys.getStarted)}
-              </Button>
-            </Link>
+            <Button
+              onClick={handleGetStarted}
+              className="bg-primary text-primary-foreground hover:bg-primary/90 w-full"
+            >
+              {t(keys.getStarted)}
+            </Button>
           </div>
 
           {/* Mobile Menu Button */}
@@ -94,11 +107,12 @@ const Navigation = () => {
                     {t(keys.signIn)}
                   </Button>
                 </Link>
-                <Link to="/signup">
-                  <Button className="bg-primary text-primary-foreground hover:bg-primary/90 w-full">
-                    {t(keys.getStarted)}
-                  </Button>
-                </Link>
+                <Button
+                  onClick={handleGetStarted}
+                  className="bg-primary text-primary-foreground hover:bg-primary/90 w-full"
+                >
+                  {t(keys.getStarted)}
+                </Button>
               </div>
             </div>
           </div>
