@@ -57,7 +57,7 @@ export default function Login() {
         </div>
 
         {/* Right Side: Form */}
-        <div className="w-full md:w-1/2 p-8 md:p-16 flex flex-col justify-center bg-surface">
+        <div className="w-full h-full md:w-1/2 p-8 md:p-16 flex flex-col justify-center bg-surface">
           <div className="max-w-md mx-auto w-full">
             {/* title */}
             <h1 className="text-4xl font-semibold mb-2 text-text">{t(keys.signInTitle)}</h1>

@@ -96,7 +96,7 @@ export default function SignUp() {
     <div className="flex min-h-screen w-full bg-background text-text font-sans p-4 md:p-8 transition-colors duration-300">
       <div className="flex flex-col md:flex-row w-full max-w-[1440px] mx-auto overflow-hidden rounded-3xl bg-surface border border-border shadow-2xl">
         {/* Left Side: Form */}
-        <div className="w-full md:w-1/2 p-8 md:p-16 flex flex-col justify-center bg-surface">
+        <div className="w-full h-full md:w-1/2 p-8 md:p-16 flex flex-col justify-center bg-surface">
           <div className="max-w-md mx-auto w-full">
             {/* title */}
             <h1 className="text-4xl font-semibold mb-2 text-text">
