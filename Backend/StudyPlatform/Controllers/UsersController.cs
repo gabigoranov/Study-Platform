@@ -44,23 +44,5 @@ namespace StudyPlatform.Controllers
             var res = await _usersService.SearchAsync(input);
             return Ok(res);
         }
-
-        /// <summary>
-        /// Updates a user's score by a specified amount.
-        /// </summary>
-        /// <returns>The updated user model.</returns>
-        [HttpPatch("score")]
-        [ProducesResponseType(typeof(AppUserDTO), StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> UpdateScore([FromBody] UpdateScoreViewModel model)
-        {
-            // Load userId from JWT token
-            Guid userId = User.GetUserId();
-
-            if (!ModelState.IsValid) return BadRequest(ModelState);
-
-            AppUserDTO res = await _usersService.UpdateScoreAsync(userId, model.ModifyScoreBy);
-            return Ok(res);
-        }
     }
 }

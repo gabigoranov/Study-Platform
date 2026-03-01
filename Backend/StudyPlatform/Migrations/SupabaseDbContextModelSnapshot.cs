@@ -29,6 +29,10 @@ namespace StudyPlatform.Migrations.SupabaseDb
                         .HasColumnType("uuid")
                         .HasColumnName("id");
 
+                    b.Property<int>("Discriminator")
+                        .HasColumnType("integer")
+                        .HasColumnName("discriminator");
+
                     b.Property<string>("DisplayName")
                         .IsRequired()
                         .HasColumnType("text")
@@ -43,13 +47,19 @@ namespace StudyPlatform.Migrations.SupabaseDb
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("joined_at");
 
-                    b.Property<int>("Score")
+                    b.Property<int?>("OrganizationGroupId")
                         .HasColumnType("integer")
-                        .HasColumnName("score");
+                        .HasColumnName("organization_group_id");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("OrganizationGroupId");
+
                     b.ToTable("app_users", "public");
+
+                    b.HasDiscriminator();
+
+                    b.UseTphMappingStrategy();
                 });
 
             modelBuilder.Entity("StudyPlatform.Data.Models.AppUserFriend", b =>
@@ -133,6 +143,61 @@ namespace StudyPlatform.Migrations.SupabaseDb
                     b.HasIndex("SubjectId");
 
                     b.ToTable("MaterialSubGroups");
+                });
+
+            modelBuilder.Entity("StudyPlatform.Data.Models.Organization", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)");
+
+                    b.Property<string>("Country")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)");
+
+                    b.Property<string>("Town")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Organizations");
+                });
+
+            modelBuilder.Entity("StudyPlatform.Data.Models.OrganizationGroup", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("OrganizationId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OrganizationId");
+
+                    b.ToTable("OrganizationGroups");
                 });
 
             modelBuilder.Entity("StudyPlatform.Data.Models.QuizQuestion", b =>
@@ -245,6 +310,37 @@ namespace StudyPlatform.Migrations.SupabaseDb
                         });
                 });
 
+            modelBuilder.Entity("StudyPlatform.Data.Models.Admin", b =>
+                {
+                    b.HasBaseType("StudyPlatform.Data.Models.AppUser");
+
+                    b.ToTable("app_users", "public");
+
+                    b.HasDiscriminator().HasValue(2);
+                });
+
+            modelBuilder.Entity("StudyPlatform.Data.Models.Student", b =>
+                {
+                    b.HasBaseType("StudyPlatform.Data.Models.AppUser");
+
+                    b.Property<int>("Score")
+                        .HasColumnType("integer")
+                        .HasColumnName("score");
+
+                    b.ToTable("app_users", "public");
+
+                    b.HasDiscriminator().HasValue(0);
+                });
+
+            modelBuilder.Entity("StudyPlatform.Data.Models.Teacher", b =>
+                {
+                    b.HasBaseType("StudyPlatform.Data.Models.AppUser");
+
+                    b.ToTable("app_users", "public");
+
+                    b.HasDiscriminator().HasValue(1);
+                });
+
             modelBuilder.Entity("StudyPlatform.Data.Models.Flashcard", b =>
                 {
                     b.HasBaseType("StudyPlatform.Data.Models.Material");
@@ -298,18 +394,24 @@ namespace StudyPlatform.Migrations.SupabaseDb
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("StudyPlatform.Data.Models.OrganizationGroup", "OrganizationGroup")
+                        .WithMany("AppUsers")
+                        .HasForeignKey("OrganizationGroupId");
+
                     b.Navigation("AuthUser");
+
+                    b.Navigation("OrganizationGroup");
                 });
 
             modelBuilder.Entity("StudyPlatform.Data.Models.AppUserFriend", b =>
                 {
-                    b.HasOne("StudyPlatform.Data.Models.AppUser", "Addressee")
+                    b.HasOne("StudyPlatform.Data.Models.Student", "Addressee")
                         .WithMany("FriendsReceived")
                         .HasForeignKey("AddresseeId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("StudyPlatform.Data.Models.AppUser", "Requester")
+                    b.HasOne("StudyPlatform.Data.Models.Student", "Requester")
                         .WithMany("FriendsInitiated")
                         .HasForeignKey("RequesterId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -340,6 +442,17 @@ namespace StudyPlatform.Migrations.SupabaseDb
                         .IsRequired();
 
                     b.Navigation("Subject");
+                });
+
+            modelBuilder.Entity("StudyPlatform.Data.Models.OrganizationGroup", b =>
+                {
+                    b.HasOne("StudyPlatform.Data.Models.Organization", "Organization")
+                        .WithMany("OrganizationGroups")
+                        .HasForeignKey("OrganizationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Organization");
                 });
 
             modelBuilder.Entity("StudyPlatform.Data.Models.QuizQuestion", b =>
@@ -404,16 +517,22 @@ namespace StudyPlatform.Migrations.SupabaseDb
 
             modelBuilder.Entity("StudyPlatform.Data.Models.AppUser", b =>
                 {
-                    b.Navigation("FriendsInitiated");
-
-                    b.Navigation("FriendsReceived");
-
                     b.Navigation("Subjects");
                 });
 
             modelBuilder.Entity("StudyPlatform.Data.Models.MaterialSubGroup", b =>
                 {
                     b.Navigation("Materials");
+                });
+
+            modelBuilder.Entity("StudyPlatform.Data.Models.Organization", b =>
+                {
+                    b.Navigation("OrganizationGroups");
+                });
+
+            modelBuilder.Entity("StudyPlatform.Data.Models.OrganizationGroup", b =>
+                {
+                    b.Navigation("AppUsers");
                 });
 
             modelBuilder.Entity("StudyPlatform.Data.Models.QuizQuestion", b =>
@@ -424,6 +543,13 @@ namespace StudyPlatform.Migrations.SupabaseDb
             modelBuilder.Entity("StudyPlatform.Data.Models.Subject", b =>
                 {
                     b.Navigation("MaterialSubGroups");
+                });
+
+            modelBuilder.Entity("StudyPlatform.Data.Models.Student", b =>
+                {
+                    b.Navigation("FriendsInitiated");
+
+                    b.Navigation("FriendsReceived");
                 });
 
             modelBuilder.Entity("StudyPlatform.Data.Models.Quiz", b =>

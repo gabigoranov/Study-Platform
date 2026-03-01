@@ -19,6 +19,7 @@ namespace StudyPlatform.Models.Common
 
             CreateMap<AppUser, AppUserDTO>().ReverseMap();
             CreateMap<AppUserFriend, AppUserFriendDTO>().ReverseMap();
+            CreateMap<Student, StudentDTO>().ReverseMap();
 
 
             //Flashcard mappings

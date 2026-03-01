@@ -10,7 +10,7 @@ namespace StudyPlatform.Models.DTOs
         public DateTime RequestedAt { get; set; } = DateTime.UtcNow;
         public DateTime? AcceptedAt { get; set; }
 
-        public AppUserDTO Requester { get; set; }
-        public AppUserDTO Addressee { get; set; }
+        public StudentDTO Requester { get; set; }
+        public StudentDTO Addressee { get; set; }
     }
 }

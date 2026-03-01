@@ -14,7 +14,5 @@ namespace StudyPlatform.Models.DTOs
         public string Email { get; set; }
 
         public DateTime JoinedAt { get; set; } = DateTime.UtcNow;
-
-        public int Score { get; set; }
     }
 }

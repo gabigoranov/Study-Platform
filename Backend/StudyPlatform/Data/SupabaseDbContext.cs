@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using StudyPlatform.Data.Models;
+using StudyPlatform.Data.Types;
+using System.Diagnostics;
 
 namespace StudyPlatform.Data
 {
@@ -18,7 +20,12 @@ namespace StudyPlatform.Data
         public DbSet<QuizQuestionAnswer> QuizQuestionAnswers { get; set; } = null!;
         public DbSet<SupabaseUser> SupabaseUsers { get; set; } = null!;
         public DbSet<AppUser> AppUsers { get; set; } = null!;
+        public DbSet<Student> Students { get; set; } = null!;
+        public DbSet<Teacher> Teachers { get; set; } = null!;
+        public DbSet<Admin> Admins { get; set; } = null!;
         public DbSet<AppUserFriend> AppUsersFriends { get; set; } = null!;
+        public DbSet<Organization> Organizations { get; set; }
+        public DbSet<OrganizationGroup> OrganizationGroups { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -44,6 +51,11 @@ namespace StudyPlatform.Data
                     .WithOne(x => x.User)
                     .HasForeignKey(x => x.UserId)
                     .OnDelete(DeleteBehavior.Cascade);
+
+                entity.HasDiscriminator<AppUserType>("Discriminator")
+                    .HasValue<Student>(AppUserType.Student)
+                    .HasValue<Teacher>(AppUserType.Teacher)
+                    .HasValue<Admin>(AppUserType.Admin);
             });
 
             modelBuilder.Entity<AppUserFriend>()

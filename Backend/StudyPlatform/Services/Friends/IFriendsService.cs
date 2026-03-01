@@ -51,7 +51,7 @@ namespace StudyPlatform.Services.Friends
         /// Gets all friends for a user including themselves.
         /// </summary>
         /// <param name="userId">The ID of the user whose friends to retrieve.</param>
-        /// <returns>A collection of AppUserFriend relationships.</returns>
-        Task<IEnumerable<AppUserDTO>> GetAllFriendsAsync(Guid userId);
+        /// <returns>A collection of StudentDTO relationships.</returns>
+        Task<IEnumerable<StudentDTO>> GetAllFriendsAsync(Guid userId);
     }
 }

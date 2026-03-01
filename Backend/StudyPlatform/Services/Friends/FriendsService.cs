@@ -135,16 +135,25 @@ namespace StudyPlatform.Services.Friends
         }
 
         /// <inheritdoc />
-        public async Task<IEnumerable<AppUserDTO>> GetAllFriendsAsync(Guid userId)
+        public async Task<IEnumerable<StudentDTO>> GetAllFriendsAsync(Guid userId)
         {
             if (userId == Guid.Empty) throw new ArgumentException("UserId can not be null or empty.");
 
             // does not include subjects ( materials )
-            var friends = await _repo.AllReadonly<AppUser>()
+            var friends = await _repo.AllReadonly<Student>()
                 .Where(f => f.FriendsReceived.Any(x => (x.AddresseeId == userId || x.RequesterId == userId) && x.IsAccepted) || f.FriendsInitiated.Any(x => (x.AddresseeId == userId || x.RequesterId == userId) && x.IsAccepted) || f.Id == userId)
                 .ToListAsync();
 
-            return _mapper.Map<IEnumerable<AppUserDTO>>(friends);
+            // include others from their organization group ( if they have one )
+            // who have mandatory relationship with them ( for example students in the same class )
+            var organizationGroupFriends = await _repo.AllReadonly<Student>()
+                .Include(x => x.OrganizationGroup)
+                .Where(s => s.OrganizationGroupId != null && s.OrganizationGroup.AppUsers.Any(x => x.Id == userId))
+                .ToListAsync();
+
+            friends.AddRange(organizationGroupFriends);
+
+            return _mapper.Map<IEnumerable<StudentDTO>>(friends);
         }
     }
 }

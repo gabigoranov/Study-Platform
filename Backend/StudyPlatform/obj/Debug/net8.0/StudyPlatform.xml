@@ -342,6 +342,18 @@
             <param name="model">The model containing the file's download url and other prompt data.</param>
             <returns>A quiz if successful.</returns>
         </member>
+        <member name="M:StudyPlatform.Controllers.StudentsController.#ctor(StudyPlatform.Services.Students.IStudentsService)">
+            <summary>
+            Initializes a new instance of the StudentsController class with the specified students service.
+            </summary>
+            <param name="studentsService">The service used to manage and retrieve student data. Cannot be null.</param>
+        </member>
+        <member name="M:StudyPlatform.Controllers.StudentsController.UpdateScore(StudyPlatform.Models.UpdateScoreViewModel)">
+            <summary>
+            Updates a students's score by a specified amount.
+            </summary>
+            <returns>The updated student model.</returns>
+        </member>
         <member name="T:StudyPlatform.Controllers.SubjectsController">
             <summary>
             Manages subjects for the authenticated user.
@@ -418,12 +430,6 @@
             Searches for users by input string.
             </summary>
             <returns>All of the found users.</returns>
-        </member>
-        <member name="M:StudyPlatform.Controllers.UsersController.UpdateScore(StudyPlatform.Models.UpdateScoreViewModel)">
-            <summary>
-            Updates a user's score by a specified amount.
-            </summary>
-            <returns>The updated user model.</returns>
         </member>
         <member name="T:StudyPlatform.Data.Common.AppConstants">
             <summary>
@@ -625,6 +631,17 @@
         <member name="T:StudyPlatform.Data.Models.MaterialSubGroup">
             <summary>
             A subgroup within a MaterialGroup that contains specific materials.
+            </summary>
+        </member>
+        <member name="T:StudyPlatform.Data.Models.Organization">
+            <summary>
+            Represents an organization entity with identifying and location information.
+            </summary>
+        </member>
+        <member name="T:StudyPlatform.Data.Models.OrganizationGroup">
+            <summary>
+            A subclass for the Organization model, representing groups within an organization.
+            A group will have a many-to-one relationship with the AppUser model.
             </summary>
         </member>
         <member name="T:StudyPlatform.Data.Models.Subject">
@@ -935,6 +952,30 @@
         <member name="M:StudyPlatform.Migrations.SupabaseDb.RemoveAvatarUrlFromAppUser.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
         </member>
+        <member name="T:StudyPlatform.Migrations.SupabaseDb.ImplementOrganizationsAndSubGroupsEntities">
+            <inheritdoc />
+        </member>
+        <member name="M:StudyPlatform.Migrations.SupabaseDb.ImplementOrganizationsAndSubGroupsEntities.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:StudyPlatform.Migrations.SupabaseDb.ImplementOrganizationsAndSubGroupsEntities.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:StudyPlatform.Migrations.SupabaseDb.ImplementOrganizationsAndSubGroupsEntities.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:StudyPlatform.Migrations.SupabaseDb.ImplementAppUserRolesWithEntities">
+            <inheritdoc />
+        </member>
+        <member name="M:StudyPlatform.Migrations.SupabaseDb.ImplementAppUserRolesWithEntities.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:StudyPlatform.Migrations.SupabaseDb.ImplementAppUserRolesWithEntities.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:StudyPlatform.Migrations.SupabaseDb.ImplementAppUserRolesWithEntities.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
         <member name="T:StudyPlatform.Models.Common.AutoMapper">
             <summary>
             Defines the AutoMapper initialization and maps.
@@ -1222,7 +1263,7 @@
             Gets all friends for a user including themselves.
             </summary>
             <param name="userId">The ID of the user whose friends to retrieve.</param>
-            <returns>A collection of AppUserFriend relationships.</returns>
+            <returns>A collection of StudentDTO relationships.</returns>
         </member>
         <member name="T:StudyPlatform.Services.MaterialSubGroups.IMaterialSubGroupsService">
             <summary>
@@ -1511,6 +1552,33 @@
         <member name="M:StudyPlatform.Services.Quiz.QuizService.GenerateAsync(System.Guid,StudyPlatform.Models.GenerateQuizViewModel)">
             <inheritdoc />
         </member>
+        <member name="T:StudyPlatform.Services.Students.IStudentsService">
+            <summary>
+            Provides operations for managing student data, including updating student scores asynchronously.
+            </summary>
+        </member>
+        <member name="M:StudyPlatform.Services.Students.IStudentsService.UpdateScoreAsync(System.Guid,System.Int32)">
+            <summary>
+            Asynchronously updates the score for the specified student and returns the updated student information.
+            </summary>
+            <param name="userId">The unique identifier of the student whose score will be updated.</param>
+            <param name="modifyBy">The identifier of the user performing the update operation.</param>
+            <returns>A task that represents the asynchronous operation. The task result contains a StudentDTO with the updated
+            student information.</returns>
+        </member>
+        <member name="T:StudyPlatform.Services.Students.StudentsService">
+            <inheritdoc />
+        </member>
+        <member name="M:StudyPlatform.Services.Students.StudentsService.#ctor(StudyPlatform.Data.Common.IRepository,AutoMapper.IMapper)">
+            <summary>
+            Initializes a new instance of the StudentsService class with the specified repository and object mapper.
+            </summary>
+            <param name="repo">The repository used for accessing and managing student data.</param>
+            <param name="mapper">The object mapper used for converting between data models and transfer objects.</param>
+        </member>
+        <member name="M:StudyPlatform.Services.Students.StudentsService.UpdateScoreAsync(System.Guid,System.Int32)">
+            <inheritdoc />
+        </member>
         <member name="T:StudyPlatform.Services.Subjects.ISubjectsService">
             <summary>
             Defines methods for managing subjects.
@@ -1586,9 +1654,6 @@
             <inheritdoc />
         </member>
         <member name="M:StudyPlatform.Services.Users.UsersService.SearchAsync(System.String)">
-            <inheritdoc />
-        </member>
-        <member name="M:StudyPlatform.Services.Users.UsersService.UpdateScoreAsync(System.Guid,System.Int32)">
             <inheritdoc />
         </member>
     </members>
