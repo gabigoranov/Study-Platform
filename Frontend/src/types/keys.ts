@@ -331,5 +331,10 @@ export const keys = {
   agreeTo: "agreeTo",
   termsAndConditions: "termsAndConditions",
   registerWith: "registerWith",
-  dontHaveAccount: "dontHaveAccount"
+  dontHaveAccount: "dontHaveAccount",
+  signUpOrganizationDescription: "signUpOrganizationDescription",
+  signUpIndividualDescription: "signUpIndividualDescription",
+  individial: "individial",
+  organization: "organization",
+  selectSignUpOptionText: "selectSignUpOptionText"
 };

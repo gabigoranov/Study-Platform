@@ -22,6 +22,7 @@ import { quizService } from "@/services/quizService";
 import { QuizDTO } from "@/data/DTOs/QuizDTO";
 import { Quiz } from "@/data/Quiz";
 import { usersService } from "@/services/usersService";
+import { studentsService } from "@/services/studentsService";
 
 type QuizGenerationProps = {
   setLoading: (value: boolean) => void;
@@ -74,7 +75,7 @@ export function useQuizzesGeneration({
         }),
       });
 
-      await usersService.updateScore(token!, 20);
+      await studentsService.updateScore(token!, 20);
       
 
       console.log(response);

@@ -328,5 +328,10 @@
   "agreeTo": "I agree with the",
   "termsAndConditions": "Terms & Conditions",
   "registerWith": "Or register with",
-  "dontHaveAccount": "Don't have an account?"
+  "dontHaveAccount": "Don't have an account?",
+  "signUpOrganizationDescription": "Built for organizations and institutions, this platform is designed specifically for students in schools and universities. Access is granted exclusively through your affiliated organization.",
+  "signUpIndividualDescription": "Perfect for independent students and learners of all ages. Move at your own pace and explore the subjects that interest you most.",
+  "individial": "Individual",
+  "organization": "Organization",
+  "selectSignUpOptionText": "Select how you would like to get started"
 }

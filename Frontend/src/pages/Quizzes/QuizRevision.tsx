@@ -10,6 +10,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { CheckCircle, RotateCcw, XCircle } from "lucide-react";
 import { AlertCircle } from "lucide-react";
 import { usersService } from "@/services/usersService";
+import { studentsService } from "@/services/studentsService";
 
 interface QuizRevisionProps {
   quizId: string;
@@ -105,7 +106,7 @@ export default function QuizRevision({ quizId, onBack }: QuizRevisionProps) {
       setSelectedAnswer(null);
       setIsAnswerSubmitted(false);
     } else {
-      usersService.updateScore(token!, score*10);
+      studentsService.updateScore(token!, score*10);
       setIsRevisionFinished(true);
     }
   };

@@ -10,6 +10,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import { SubmitAction } from "../MaterialGeneration/useGenerationActions";
 import { useAuth } from "../Supabase/useAuth";
+import { studentsService } from "@/services/studentsService";
 
 type FlashcardsGenerationProps = {
   setLoading: (value: boolean) => void;
@@ -73,7 +74,7 @@ export function useFlashcardsGeneration({
         element.materialSubGroupId = selectedGroupId;
       });
 
-      await usersService.updateScore(token!, 20);
+      await studentsService.updateScore(token!, 20);
 
       console.log(json);
 

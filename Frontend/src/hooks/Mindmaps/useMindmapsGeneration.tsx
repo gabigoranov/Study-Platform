@@ -15,6 +15,7 @@ import { mindmapsService } from "@/services/mindmapsService";
 import { SubmitAction, useGenerationActions } from "../MaterialGeneration/useGenerationActions";
 import { Mindmap } from "@/data/Mindmap";
 import { usersService } from "@/services/usersService";
+import { studentsService } from "@/services/studentsService";
 
 type MindmapGenerationProps = {
   setLoading: (value: boolean) => void;
@@ -68,7 +69,7 @@ export function useMindmapsGeneration({
         }),
       });
 
-      await usersService.updateScore(token!, 20);
+      await studentsService.updateScore(token!, 20);
 
       console.log(response);
 

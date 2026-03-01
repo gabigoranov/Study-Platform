@@ -15,7 +15,7 @@ import ScrollToTopButton from "@/components/Common/ScrollToTopButton";
 import { Route, Routes, useNavigate } from "react-router";
 import Loading from "@/components/Common/Loading";
 import FlashcardsRevision from "./FlashcardsRevision";
-import { useFlashcards } from "@/hooks/Friends/useFlashcards";
+import { useFlashcards } from "@/hooks/Flashcards/useFlashcards";
 
 type View = "list" | "create" | "edit" | "view" | "revise";
 export const flashcardService = apiService<

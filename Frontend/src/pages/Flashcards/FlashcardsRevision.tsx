@@ -10,6 +10,7 @@ import { useMemo, useState } from "react";
 import { Link } from "react-router";
 import { usersService } from "@/services/usersService";
 import { useAuth } from "@/hooks/Supabase/useAuth";
+import { studentsService } from "@/services/studentsService";
 
 type FlashcardsRevisionProps = {
   flashcards: Flashcard[] | undefined;
@@ -65,7 +66,7 @@ export default function FlashcardsRevision({
   }
 
   function handleFinishRevision() {
-    usersService.updateScore(token!, flashcards ? flashcards?.length*5 : 0);
+    studentsService.updateScore(token!, flashcards ? flashcards?.length*5 : 0);
     setIsRevisionFinished(true);
   }
 

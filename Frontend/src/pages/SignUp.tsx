@@ -9,7 +9,9 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/hooks/Supabase/useAuth";
 import { Checkbox } from "@/components/ui/checkbox";
-import { FaRegEye } from "react-icons/fa";
+import { FaBackward, FaRegEye } from "react-icons/fa";
+import ChooseSignUpType from "@/components/SignUp/ChooseSignUpType";
+import { LucideStepBack } from "lucide-react";
 
 export default function SignUp() {
   const { t, i18n } = useTranslation();
@@ -26,9 +28,9 @@ export default function SignUp() {
   const [lastName, setLastName] = useState("");
   const [errors, setErrors] = useState<string[]>([]);
   const [emailConfirmation, setEmailConfirmation] = useState(false);
+  const [signUpType, setSignUpType] = useState<"organization" | "individual" | null>(null);
 
   if (loading) return <p className="text-center mt-10">{t(keys.loading)}</p>;
-
 
   const validatePassword = (pwd: string) => {
     const errs: string[] = [];
@@ -93,88 +95,101 @@ export default function SignUp() {
     <div className="flex min-h-screen w-full bg-background text-text font-sans p-4 md:p-8 transition-colors duration-300">
       <div className="flex flex-col md:flex-row w-full max-w-[1440px] mx-auto overflow-hidden rounded-3xl bg-surface border border-border shadow-2xl">
         {/* Left Side: Form */}
-        <div className="w-full h-full md:w-1/2 p-8 md:p-16 flex flex-col justify-center bg-surface">
-          <div className="max-w-md mx-auto w-full">
-            {/* title */}
+        {/* if the user has chosen a sign up type, display the sign up form */}
+        <div className="relative w-full h-full max-w-md mx-auto flex flex-col justify-center bg-surface">
+          {/* title */}
+          <div className="flex flex-row justify-between items-center">
             <h1 className="text-4xl font-semibold mb-2 text-text">
               {t(keys.signUpTitle)}
             </h1>
-            <p className="text-text-muted mb-10 text-sm">
-              {t(keys.haveAccountText)}{" "}
-              <Link
-                to="/login"
-                className="text-primary underline underline-offset-4 font-medium"
-              >
-                {t(keys.signInButton)}
-              </Link>
-            </p>
+            {/* Display a back button if a sign up type has been selected */}
+            {signUpType ? (
+              <Button variant="outline" onClick={() => setSignUpType(null)}>
+                <LucideStepBack />
+                Back
+              </Button>
+            ) : (
+              ""
+            )}
+          </div>
 
-            <form onSubmit={handleSubmit} className="space-y-4">
-              {errors.length > 0 && (
-                <div className="text-error text-sm italic">
-                  {errors[0]}
-                </div>
-              )}
+          <p className="text-text-muted mb-10 text-sm">
+            {t(keys.haveAccountText)}{" "}
+            <Link
+              to="/login"
+              className="text-primary underline underline-offset-4 font-medium"
+            >
+              {t(keys.signInButton)}
+            </Link>
+          </p>
 
-              <Input
-                type="email"
-                placeholder={t(keys.email)}
-                className="bg-surface-muted border-none text-text h-12 focus-visible:ring-2 focus-visible:ring-primary"
-                onChange={(e) => setEmail(e.target.value)}
-              />
+          {signUpType ? (
+            <>
+              <form onSubmit={handleSubmit} className="space-y-4">
+                {errors.length > 0 && (
+                  <div className="text-error text-sm italic">{errors[0]}</div>
+                )}
 
-              <div className="relative">
                 <Input
-                  type="password"
-                  placeholder={t(keys.passwordPlaceholder)}
-                  className="bg-surface-muted border-none text-text h-12 pr-10 focus-visible:ring-2 focus-visible:ring-primary"
-                  onChange={(e) => setPassword(e.target.value)}
+                  type="email"
+                  placeholder={t(keys.email)}
+                  className="bg-surface-muted border-none text-text h-12 focus-visible:ring-2 focus-visible:ring-primary"
+                  onChange={(e) => setEmail(e.target.value)}
                 />
-                <FaRegEye className="absolute right-3 top-4 text-text-muted cursor-pointer hover:text-text transition-colors" />
-              </div>
 
-              <div className="flex items-center space-x-2 py-2">
-                <Checkbox
-                  id="terms"
-                  className="border-border data-[state=checked]:bg-primary"
-                />
-                <label
-                  htmlFor="terms"
-                  className="text-xs text-text-muted"
+                <div className="relative">
+                  <Input
+                    type="password"
+                    placeholder={t(keys.passwordPlaceholder)}
+                    className="bg-surface-muted border-none text-text h-12 pr-10 focus-visible:ring-2 focus-visible:ring-primary"
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                  <FaRegEye className="absolute right-3 top-4 text-text-muted cursor-pointer hover:text-text transition-colors" />
+                </div>
+
+                <div className="flex items-center space-x-2 py-2">
+                  <Checkbox
+                    id="terms"
+                    className="border-border data-[state=checked]:bg-primary"
+                  />
+                  <label htmlFor="terms" className="text-xs text-text-muted">
+                    {t(keys.agreeTo)}{" "}
+                    <span className="underline cursor-pointer text-text">
+                      {t(keys.termsAndConditions)}
+                    </span>
+                  </label>
+                </div>
+
+                <Button
+                  type="submit"
+                  className="w-full h-12 bg-primary hover:opacity-90 text-primary-foreground rounded-xl text-md font-medium transition-all shadow-soft"
                 >
-                  {t(keys.agreeTo)}{" "}
-                  <span className="underline cursor-pointer text-text">
-                    {t(keys.termsAndConditions)}
+                  {t(keys.signUpButton)}
+                </Button>
+              </form>
+
+              <div className="relative my-8">
+                <div className="relative flex justify-center text-xs uppercase">
+                  <span className="bg-surface px-4 text-text-muted font-medium">
+                    {t(keys.registerWith)}
                   </span>
-                </label>
+                </div>
               </div>
 
               <Button
-                type="submit"
-                className="w-full h-12 bg-primary hover:opacity-90 text-primary-foreground rounded-xl text-md font-medium transition-all shadow-soft"
+                variant="outline"
+                onClick={handleGoogle}
+                className="bg-transparent w-full border-border rounded-xl hover:bg-surface-muted h-12 text-text"
               >
-                {t(keys.signUpButton)}
+                <FcGoogle className="mr-2 h-5 w-5" /> Google
               </Button>
-            </form>
-
-            <div className="relative my-8">
-              <div className="relative flex justify-center text-xs uppercase">
-                <span className="bg-surface px-4 text-text-muted font-medium">
-                  {t(keys.registerWith)}
-                </span>
-              </div>
-            </div>
-
-            <Button
-              variant="outline"
-              onClick={handleGoogle}
-              className="bg-transparent w-full border-border rounded-xl hover:bg-surface-muted h-12 text-text"
-            >
-              <FcGoogle className="mr-2 h-5 w-5" /> Google
-            </Button>
-          </div>
+            </>
+          ) : (
+            <ChooseSignUpType selectType={setSignUpType} />
+          )}
         </div>
 
+        {/* // if the user has not chosen a sign up type, display the sign up type form */}
         <div
           className="relative hidden md:flex md:w-1/2 bg-cover bg-center p-12 flex-col justify-between"
           style={{ backgroundImage: "url('register.jpg')" }}
