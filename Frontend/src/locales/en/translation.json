@@ -333,5 +333,22 @@
   "signUpIndividualDescription": "Perfect for independent students and learners of all ages. Move at your own pace and explore the subjects that interest you most.",
   "individial": "Individual",
   "organization": "Organization",
-  "selectSignUpOptionText": "Select how you would like to get started"
+  "selectSignUpOptionText": "Select how you would like to get started",
+  "student": "Student",
+  "teacher": "Teacher",
+  "admin": "Admin",
+  "signUpStudentDescription": "Access learning materials and courses as a student. Join classes, complete assignments, and track your progress.",
+  "signUpTeacherDescription": "Create and manage courses as a teacher. Upload materials, assign tasks, and monitor student progress.",
+  "signUpAdminDescription": "Manage the entire platform as an administrator. Oversee users, courses, and system settings.",
+  "phoneNumberPlaceholder": "Phone Number",
+  "organizationCodePlaceholder": "Organization Code",
+  "organizationNamePlaceholder": "Organization Name",
+  "signUpStudentTitle": "Student Sign Up",
+  "signUpTeacherTitle": "Teacher Sign Up",
+  "signUpAdminTitle": "Admin Sign Up",
+  "signUpStudentDescription2": "Enter your organization code to join your school or university.",
+  "signUpTeacherDescription2": "Enter your organization code to create and manage courses for your institution.",
+  "signUpAdminDescription2": "Create a new organization or manage an existing one.",
+  "backToSignUp": "Back to Sign Up",
+  "continueButton": "Continue"
 }

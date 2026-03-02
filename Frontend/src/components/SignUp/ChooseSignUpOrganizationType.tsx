@@ -1,17 +1,16 @@
-import React, { useState } from "react";
-import { User, Building2, CheckCircle2 } from "lucide-react";
-import { t } from "i18next";
 import { keys } from "@/types/keys";
+import { t } from "i18next";
+import { User, Building2 } from "lucide-react";
+import { useState } from "react";
 import ChooseOptionBlock from "../Common/ChooseOptionBlock";
 
-type ChooseSignUpTypeProps = {
-  selectType: (selectedType: string | null) => void;
-};
+type ChooseSignUpOrganizationTypeProps = {
+    onSelect: (value: string) => void;
+}
 
-export default function ChooseSignUpType({
-  selectType,
-}: ChooseSignUpTypeProps) {
-  // --- STATE ---
+// lets the user choose whether to register as a student, teacher or create a new organization as an admin
+export default function ChooseSignUpOrganizationType({onSelect} : ChooseSignUpOrganizationTypeProps) {
+    // --- STATE ---
   const [selected, setSelected] = useState<
     string | null
   >(null);
@@ -20,7 +19,7 @@ export default function ChooseSignUpType({
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (selected) {
-      selectType(selected);
+      onSelect(selected);
     }
   };
 
@@ -35,23 +34,33 @@ export default function ChooseSignUpType({
 
         {/* SELECTION CARDS SECTION */}
         <div className="flex flex-col gap-4">
-          {/* Individual Option */}
+          {/* Student Option */}
           <ChooseOptionBlock
             Icon={User}
-            title={t(keys.individial)}
-            description={t(keys.signUpIndividualDescription)}
-            isSelected={selected === "individual"}
-            type="individual"
+            title={t(keys.student)}
+            description={t(keys.signUpStudentDescription)}
+            isSelected={selected === "student"}
+            type="student"
             onSelect={setSelected}
           />
 
-          {/* Organization Option */}
+          {/* Teacher Option */}
+          <ChooseOptionBlock
+            Icon={User}
+            title={t(keys.teacher)}
+            description={t(keys.signUpTeacherDescription)}
+            isSelected={selected === "teacher"}
+            type="teacher"
+            onSelect={setSelected}
+          />
+
+          {/* Admin Option */}
           <ChooseOptionBlock
             Icon={Building2}
-            title={t(keys.organization)}
-            description={t(keys.signUpOrganizationDescription)}
-            isSelected={selected === "organization"}
-            type="organization"
+            title={t(keys.admin)}
+            description={t(keys.signUpAdminDescription)}
+            isSelected={selected === "admin"}
+            type="admin"
             onSelect={setSelected}
           />
         </div>

@@ -17,6 +17,10 @@ namespace StudyPlatform.Data.Models
         [Column("email")]
         public string Email { get; set; }
 
+        [Column("phone")]
+        [Phone]
+        public string Phone { get; set; }
+
         [Column("joined_at")]
         public DateTime JoinedAt { get; set; } = DateTime.UtcNow;
 

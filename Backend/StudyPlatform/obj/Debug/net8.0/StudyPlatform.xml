@@ -248,6 +248,120 @@
             <param name="id">Mindmap id.</param>
             <returns>Nothing.</returns>
         </member>
+        <member name="T:StudyPlatform.Controllers.OrganizationGroupsController">
+            <summary>
+            Manages organization groups.
+            </summary>
+            <remarks>
+            All endpoints in this controller require authentication and admin role.
+            The user ID is extracted from the JWT token.
+            Validation errors are automatically handled by global middleware.
+            Unhandled exceptions return a standardized error response.
+            </remarks>
+        </member>
+        <member name="M:StudyPlatform.Controllers.OrganizationGroupsController.#ctor(StudyPlatform.Services.OrganizationGroups.IOrganizationGroupsService)">
+            <summary>
+            Initializes the controller with required services.
+            </summary>
+            <param name="organizationGroupsService">The organization groups service, dependency injected.</param>
+        </member>
+        <member name="M:StudyPlatform.Controllers.OrganizationGroupsController.GetOrganizationGroups(System.Int32,System.Boolean)">
+            <summary>
+            Gets all organization groups for a specific organization.
+            </summary>
+            <param name="organizationId">The organization ID.</param>
+            <param name="includeUsers">Whether to include users count.</param>
+            <returns>A collection of organization groups.</returns>
+        </member>
+        <member name="M:StudyPlatform.Controllers.OrganizationGroupsController.GetOrganizationGroup(System.Int32)">
+            <summary>
+            Gets a single organization group by ID.
+            </summary>
+            <param name="id">The organization group ID.</param>
+            <returns>The organization group if found.</returns>
+        </member>
+        <member name="M:StudyPlatform.Controllers.OrganizationGroupsController.CreateOrganizationGroup(StudyPlatform.Models.CreateOrganizationGroupViewModel)">
+            <summary>
+            Creates a new organization group.
+            </summary>
+            <remarks>
+            The calling user must be an admin. The admin user ID is extracted from the JWT token.
+            </remarks>
+            <param name="model">The organization group creation model.</param>
+            <returns>The created organization group.</returns>
+        </member>
+        <member name="M:StudyPlatform.Controllers.OrganizationGroupsController.UpdateOrganizationGroup(StudyPlatform.Models.UpdateOrganizationGroupViewModel,System.Int32)">
+            <summary>
+            Updates an existing organization group.
+            </summary>
+            <param name="model">The organization group update model.</param>
+            <param name="id">The organization group ID.</param>
+            <returns>The updated organization group.</returns>
+        </member>
+        <member name="M:StudyPlatform.Controllers.OrganizationGroupsController.DeleteOrganizationGroup(System.Int32)">
+            <summary>
+            Deletes an organization group by ID.
+            </summary>
+            <param name="id">The organization group ID.</param>
+            <returns>Nothing.</returns>
+        </member>
+        <member name="T:StudyPlatform.Controllers.OrganizationsController">
+            <summary>
+            Manages organizations.
+            </summary>
+            <remarks>
+            All endpoints in this controller require authentication and admin role.
+            The user ID is extracted from the JWT token.
+            Validation errors are automatically handled by global middleware.
+            Unhandled exceptions return a standardized error response.
+            </remarks>
+        </member>
+        <member name="M:StudyPlatform.Controllers.OrganizationsController.#ctor(StudyPlatform.Services.Organizations.IOrganizationsService)">
+            <summary>
+            Initializes the controller with required services.
+            </summary>
+            <param name="organizationsService">The organizations service, dependency injected.</param>
+        </member>
+        <member name="M:StudyPlatform.Controllers.OrganizationsController.GetOrganizations(System.Boolean)">
+            <summary>
+            Gets all organizations.
+            </summary>
+            <param name="includeGroups">Whether to include organization groups.</param>
+            <returns>A collection of organizations.</returns>
+        </member>
+        <member name="M:StudyPlatform.Controllers.OrganizationsController.GetOrganization(System.Int32,System.Boolean)">
+            <summary>
+            Gets a single organization by ID.
+            </summary>
+            <param name="id">The organization ID.</param>
+            <param name="includeGroups">Whether to include organization groups.</param>
+            <returns>The organization if found.</returns>
+        </member>
+        <member name="M:StudyPlatform.Controllers.OrganizationsController.CreateOrganization(StudyPlatform.Models.CreateOrganizationViewModel)">
+            <summary>
+            Creates a new organization.
+            </summary>
+            <remarks>
+            The calling user must be an admin. The admin user ID is extracted from the JWT token.
+            </remarks>
+            <param name="model">The organization creation model.</param>
+            <returns>The created organization.</returns>
+        </member>
+        <member name="M:StudyPlatform.Controllers.OrganizationsController.UpdateOrganization(StudyPlatform.Models.UpdateOrganizationViewModel,System.Int32)">
+            <summary>
+            Updates an existing organization.
+            </summary>
+            <param name="model">The organization update model.</param>
+            <param name="id">The organization ID.</param>
+            <returns>The updated organization.</returns>
+        </member>
+        <member name="M:StudyPlatform.Controllers.OrganizationsController.DeleteOrganization(System.Int32)">
+            <summary>
+            Deletes an organization by ID.
+            </summary>
+            <param name="id">The organization ID.</param>
+            <returns>Nothing.</returns>
+        </member>
         <member name="T:StudyPlatform.Controllers.QuizzesController">
             <summary>
             Manages quizzes for the authenticated user.
@@ -801,6 +915,20 @@
             <param name="message"></param>
             <param name="innerException"></param>
         </member>
+        <member name="T:StudyPlatform.Extensions.AdminAuthorizationExtensions">
+            <summary>
+            Extension methods for admin authorization checks.
+            </summary>
+        </member>
+        <member name="M:StudyPlatform.Extensions.AdminAuthorizationExtensions.IsAdminAsync(StudyPlatform.Data.Common.IRepository,System.Guid)">
+            <summary>
+            Checks if the current user is an admin.
+            </summary>
+            <param name="repo">The repository instance.</param>
+            <param name="userId">The user ID to check.</param>
+            <returns>True if the user is an admin.</returns>
+            <exception cref="T:StudyPlatform.Exceptions.ForbiddenAccessException">Thrown when the user is not an admin.</exception>
+        </member>
         <member name="T:StudyPlatform.Extensions.ClaimsPrincipalExtensions">
             <summary>
             An extension class for the claims prinicpal.
@@ -976,6 +1104,18 @@
         <member name="M:StudyPlatform.Migrations.SupabaseDb.ImplementAppUserRolesWithEntities.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
         </member>
+        <member name="T:StudyPlatform.Migrations.SupabaseDb.AddPhoneNumberToAppUser">
+            <inheritdoc />
+        </member>
+        <member name="M:StudyPlatform.Migrations.SupabaseDb.AddPhoneNumberToAppUser.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:StudyPlatform.Migrations.SupabaseDb.AddPhoneNumberToAppUser.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:StudyPlatform.Migrations.SupabaseDb.AddPhoneNumberToAppUser.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
         <member name="T:StudyPlatform.Models.Common.AutoMapper">
             <summary>
             Defines the AutoMapper initialization and maps.
@@ -1004,6 +1144,46 @@
         <member name="P:StudyPlatform.Models.CreateMaterialSubGroupViewModel.SubjectId">
             <summary>
             The ID of the subject this subgroup belongs to.
+            </summary>
+        </member>
+        <member name="T:StudyPlatform.Models.CreateOrganizationGroupViewModel">
+            <summary>
+            View model used when creating a new organization group.
+            </summary>
+        </member>
+        <member name="P:StudyPlatform.Models.CreateOrganizationGroupViewModel.Title">
+            <summary>
+            The title of the organization group.
+            </summary>
+        </member>
+        <member name="P:StudyPlatform.Models.CreateOrganizationGroupViewModel.OrganizationId">
+            <summary>
+            The ID of the organization this group belongs to.
+            </summary>
+        </member>
+        <member name="T:StudyPlatform.Models.CreateOrganizationViewModel">
+            <summary>
+            View model used when creating a new organization.
+            </summary>
+        </member>
+        <member name="P:StudyPlatform.Models.CreateOrganizationViewModel.Title">
+            <summary>
+            The title of the organization.
+            </summary>
+        </member>
+        <member name="P:StudyPlatform.Models.CreateOrganizationViewModel.Town">
+            <summary>
+            The town where the organization is located.
+            </summary>
+        </member>
+        <member name="P:StudyPlatform.Models.CreateOrganizationViewModel.Country">
+            <summary>
+            The country where the organization is located.
+            </summary>
+        </member>
+        <member name="P:StudyPlatform.Models.CreateOrganizationViewModel.Address">
+            <summary>
+            The address of the organization.
             </summary>
         </member>
         <member name="T:StudyPlatform.Models.CreateSubjectViewModel">
@@ -1051,6 +1231,66 @@
             List of materials in the sub group, optional.
             </summary>
         </member>
+        <member name="T:StudyPlatform.Models.DTOs.OrganizationDTO">
+            <summary>
+            Data transfer object returned when working with organizations.
+            </summary>
+        </member>
+        <member name="P:StudyPlatform.Models.DTOs.OrganizationDTO.Id">
+            <summary>
+            The unique identifier of the organization.
+            </summary>
+        </member>
+        <member name="P:StudyPlatform.Models.DTOs.OrganizationDTO.Title">
+            <summary>
+            The title of the organization.
+            </summary>
+        </member>
+        <member name="P:StudyPlatform.Models.DTOs.OrganizationDTO.Town">
+            <summary>
+            The town where the organization is located.
+            </summary>
+        </member>
+        <member name="P:StudyPlatform.Models.DTOs.OrganizationDTO.Country">
+            <summary>
+            The country where the organization is located.
+            </summary>
+        </member>
+        <member name="P:StudyPlatform.Models.DTOs.OrganizationDTO.Address">
+            <summary>
+            The address of the organization.
+            </summary>
+        </member>
+        <member name="P:StudyPlatform.Models.DTOs.OrganizationDTO.OrganizationGroupsCount">
+            <summary>
+            The number of organization groups in this organization.
+            </summary>
+        </member>
+        <member name="T:StudyPlatform.Models.DTOs.OrganizationGroupDTO">
+            <summary>
+            Data transfer object returned when working with organization groups.
+            </summary>
+        </member>
+        <member name="P:StudyPlatform.Models.DTOs.OrganizationGroupDTO.Id">
+            <summary>
+            The unique identifier of the organization group.
+            </summary>
+        </member>
+        <member name="P:StudyPlatform.Models.DTOs.OrganizationGroupDTO.Title">
+            <summary>
+            The title of the organization group.
+            </summary>
+        </member>
+        <member name="P:StudyPlatform.Models.DTOs.OrganizationGroupDTO.OrganizationId">
+            <summary>
+            The ID of the organization this group belongs to.
+            </summary>
+        </member>
+        <member name="P:StudyPlatform.Models.DTOs.OrganizationGroupDTO.UsersCount">
+            <summary>
+            The number of users in this organization group.
+            </summary>
+        </member>
         <member name="T:StudyPlatform.Models.DTOs.SubjectDTO">
             <summary>
             Data transfer object returned when working with subjects.
@@ -1074,6 +1314,46 @@
         <member name="P:StudyPlatform.Models.DTOs.SubjectDTO.DateCreated">
             <summary>
             The UTC date when the subject was created.
+            </summary>
+        </member>
+        <member name="T:StudyPlatform.Models.UpdateOrganizationGroupViewModel">
+            <summary>
+            View model used when updating an organization group.
+            </summary>
+        </member>
+        <member name="P:StudyPlatform.Models.UpdateOrganizationGroupViewModel.Title">
+            <summary>
+            The title of the organization group.
+            </summary>
+        </member>
+        <member name="P:StudyPlatform.Models.UpdateOrganizationGroupViewModel.OrganizationId">
+            <summary>
+            The ID of the organization this group belongs to.
+            </summary>
+        </member>
+        <member name="T:StudyPlatform.Models.UpdateOrganizationViewModel">
+            <summary>
+            View model used when updating an organization.
+            </summary>
+        </member>
+        <member name="P:StudyPlatform.Models.UpdateOrganizationViewModel.Title">
+            <summary>
+            The title of the organization.
+            </summary>
+        </member>
+        <member name="P:StudyPlatform.Models.UpdateOrganizationViewModel.Town">
+            <summary>
+            The town where the organization is located.
+            </summary>
+        </member>
+        <member name="P:StudyPlatform.Models.UpdateOrganizationViewModel.Country">
+            <summary>
+            The country where the organization is located.
+            </summary>
+        </member>
+        <member name="P:StudyPlatform.Models.UpdateOrganizationViewModel.Address">
+            <summary>
+            The address of the organization.
             </summary>
         </member>
         <member name="T:StudyPlatform.Services.Flashcards.FlashcardsService">
@@ -1410,6 +1690,139 @@
         </member>
         <member name="M:StudyPlatform.Services.Mindmaps.MindmapsService.UpdateAsync(StudyPlatform.Models.CreateMindmapViewModel,System.Guid,System.Guid)">
             <inheritdoc/>
+        </member>
+        <member name="T:StudyPlatform.Services.OrganizationGroups.IOrganizationGroupsService">
+            <summary>
+            Service interface for managing organization groups.
+            </summary>
+        </member>
+        <member name="M:StudyPlatform.Services.OrganizationGroups.IOrganizationGroupsService.GetByOrganizationAsync(System.Int32,System.Boolean)">
+            <summary>
+            Gets all organization groups for a specific organization.
+            </summary>
+            <param name="organizationId">The organization ID.</param>
+            <param name="includeUsers">Whether to include users count.</param>
+            <returns>A collection of organization groups.</returns>
+        </member>
+        <member name="M:StudyPlatform.Services.OrganizationGroups.IOrganizationGroupsService.GetByIdAsync(System.Int32)">
+            <summary>
+            Gets a single organization group by ID.
+            </summary>
+            <param name="id">The organization group ID.</param>
+            <returns>The organization group if found.</returns>
+        </member>
+        <member name="M:StudyPlatform.Services.OrganizationGroups.IOrganizationGroupsService.CreateAsync(StudyPlatform.Models.CreateOrganizationGroupViewModel)">
+            <summary>
+            Creates a new organization group.
+            </summary>
+            <param name="model">The organization group creation model.</param>
+            <returns>The created organization group.</returns>
+        </member>
+        <member name="M:StudyPlatform.Services.OrganizationGroups.IOrganizationGroupsService.UpdateAsync(StudyPlatform.Models.UpdateOrganizationGroupViewModel,System.Int32)">
+            <summary>
+            Updates an existing organization group.
+            </summary>
+            <param name="model">The organization group update model.</param>
+            <param name="id">The organization group ID.</param>
+            <returns>The updated organization group.</returns>
+        </member>
+        <member name="M:StudyPlatform.Services.OrganizationGroups.IOrganizationGroupsService.DeleteAsync(System.Int32)">
+            <summary>
+            Deletes an organization group by ID.
+            </summary>
+            <param name="id">The organization group ID.</param>
+        </member>
+        <member name="T:StudyPlatform.Services.OrganizationGroups.OrganizationGroupsService">
+            <summary>
+            Service for managing organization groups.
+            </summary>
+        </member>
+        <member name="M:StudyPlatform.Services.OrganizationGroups.OrganizationGroupsService.#ctor(StudyPlatform.Data.Common.IRepository,Microsoft.Extensions.Logging.ILogger{StudyPlatform.Services.OrganizationGroups.OrganizationGroupsService},AutoMapper.IMapper)">
+            <summary>
+            Initializes a new instance of the <see cref="T:StudyPlatform.Services.OrganizationGroups.OrganizationGroupsService"/> class.
+            </summary>
+        </member>
+        <member name="M:StudyPlatform.Services.OrganizationGroups.OrganizationGroupsService.GetByOrganizationAsync(System.Int32,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:StudyPlatform.Services.OrganizationGroups.OrganizationGroupsService.GetByIdAsync(System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:StudyPlatform.Services.OrganizationGroups.OrganizationGroupsService.CreateAsync(StudyPlatform.Models.CreateOrganizationGroupViewModel)">
+            <inheritdoc />
+        </member>
+        <member name="M:StudyPlatform.Services.OrganizationGroups.OrganizationGroupsService.UpdateAsync(StudyPlatform.Models.UpdateOrganizationGroupViewModel,System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:StudyPlatform.Services.OrganizationGroups.OrganizationGroupsService.DeleteAsync(System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="T:StudyPlatform.Services.Organizations.IOrganizationsService">
+            <summary>
+            Service interface for managing organizations.
+            </summary>
+        </member>
+        <member name="M:StudyPlatform.Services.Organizations.IOrganizationsService.GetAllAsync(System.Boolean)">
+            <summary>
+            Gets all organizations.
+            </summary>
+            <param name="includeGroups">Whether to include organization groups.</param>
+            <returns>A collection of organizations.</returns>
+        </member>
+        <member name="M:StudyPlatform.Services.Organizations.IOrganizationsService.GetByIdAsync(System.Int32,System.Boolean)">
+            <summary>
+            Gets a single organization by ID.
+            </summary>
+            <param name="id">The organization ID.</param>
+            <param name="includeGroups">Whether to include organization groups.</param>
+            <returns>The organization if found.</returns>
+        </member>
+        <member name="M:StudyPlatform.Services.Organizations.IOrganizationsService.CreateAsync(StudyPlatform.Models.CreateOrganizationViewModel,System.Guid)">
+            <summary>
+            Creates a new organization.
+            </summary>
+            <param name="model">The organization creation model.</param>
+            <param name="adminUserId">The ID of the admin user creating the organization.</param>
+            <returns>The created organization.</returns>
+        </member>
+        <member name="M:StudyPlatform.Services.Organizations.IOrganizationsService.UpdateAsync(StudyPlatform.Models.UpdateOrganizationViewModel,System.Int32)">
+            <summary>
+            Updates an existing organization.
+            </summary>
+            <param name="model">The organization update model.</param>
+            <param name="id">The organization ID.</param>
+            <returns>The updated organization.</returns>
+        </member>
+        <member name="M:StudyPlatform.Services.Organizations.IOrganizationsService.DeleteAsync(System.Int32)">
+            <summary>
+            Deletes an organization by ID.
+            </summary>
+            <param name="id">The organization ID.</param>
+        </member>
+        <member name="T:StudyPlatform.Services.Organizations.OrganizationsService">
+            <summary>
+            Service for managing organizations.
+            </summary>
+        </member>
+        <member name="M:StudyPlatform.Services.Organizations.OrganizationsService.#ctor(StudyPlatform.Data.Common.IRepository,Microsoft.Extensions.Logging.ILogger{StudyPlatform.Services.Organizations.OrganizationsService},AutoMapper.IMapper)">
+            <summary>
+            Initializes a new instance of the <see cref="T:StudyPlatform.Services.Organizations.OrganizationsService"/> class.
+            </summary>
+        </member>
+        <member name="M:StudyPlatform.Services.Organizations.OrganizationsService.GetAllAsync(System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:StudyPlatform.Services.Organizations.OrganizationsService.GetByIdAsync(System.Int32,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:StudyPlatform.Services.Organizations.OrganizationsService.CreateAsync(StudyPlatform.Models.CreateOrganizationViewModel,System.Guid)">
+            <inheritdoc />
+        </member>
+        <member name="M:StudyPlatform.Services.Organizations.OrganizationsService.UpdateAsync(StudyPlatform.Models.UpdateOrganizationViewModel,System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:StudyPlatform.Services.Organizations.OrganizationsService.DeleteAsync(System.Int32)">
+            <inheritdoc />
         </member>
         <member name="T:StudyPlatform.Services.Quiz.IQuizService">
             <summary>

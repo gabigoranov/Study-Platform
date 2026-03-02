@@ -48,6 +48,18 @@ namespace StudyPlatform.Models.Common
             CreateMap<CreateQuizQuestionAnswerViewModel, QuizQuestionAnswer>()
                 .ForMember(dest => dest.Id, opt => opt.Ignore());
 
+            // Organization mappings
+            CreateMap<Organization, OrganizationDTO>()
+                .ForMember(dest => dest.OrganizationGroupsCount, opt => opt.MapFrom(x => x.OrganizationGroups.Count()));
+            CreateMap<CreateOrganizationViewModel, Organization>();
+            CreateMap<UpdateOrganizationViewModel, Organization>();
+
+            // OrganizationGroup mappings
+            CreateMap<OrganizationGroup, OrganizationGroupDTO>()
+                .ForMember(dest => dest.UsersCount, opt => opt.MapFrom(x => x.AppUsers.Count()));
+            CreateMap<CreateOrganizationGroupViewModel, OrganizationGroup>();
+            CreateMap<UpdateOrganizationGroupViewModel, OrganizationGroup>();
+
         }
     }
 }

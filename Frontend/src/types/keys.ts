@@ -336,5 +336,22 @@ export const keys = {
   signUpIndividualDescription: "signUpIndividualDescription",
   individial: "individial",
   organization: "organization",
-  selectSignUpOptionText: "selectSignUpOptionText"
+  selectSignUpOptionText: "selectSignUpOptionText",
+  student: "student",
+  teacher: "teacher",
+  admin: "admin",
+  signUpStudentDescription: "signUpStudentDescription",
+  signUpTeacherDescription: "signUpTeacherDescription",
+  signUpAdminDescription: "signUpAdminDescription",
+  phoneNumberPlaceholder: "phoneNumberPlaceholder",
+  organizationCodePlaceholder: "organizationCodePlaceholder",
+  organizationNamePlaceholder: "organizationNamePlaceholder",
+  signUpStudentTitle: "signUpStudentTitle",
+  signUpTeacherTitle: "signUpTeacherTitle",
+  signUpAdminTitle: "signUpAdminTitle",
+  signUpStudentDescription2: "signUpStudentDescription2",
+  signUpTeacherDescription2: "signUpTeacherDescription2",
+  signUpAdminDescription2: "signUpAdminDescription2",
+  backToSignUp: "backToSignUp",
+  continueButton: "continueButton"
 };
