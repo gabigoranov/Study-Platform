@@ -30,16 +30,6 @@ export default function SignUpWithOrganization() {
 
   return (
     <div className="flex flex-col space-y-4">
-      {/* Header with back button */}
-      <div className="flex flex-row justify-between items-center">
-        {selectedRole && (
-          <Button variant="outline" onClick={() => setSelectedRole(null)}>
-            <LucideStepBack />
-            {t(keys.backToSignUp)}
-          </Button>
-        )}
-      </div>
-
       {/* Render the appropriate sign-up form based on role selection */}
       {!selectedRole ? (
         <ChooseSignUpOrganizationType onSelect={setSelectedRole} />

@@ -1,52 +1,105 @@
 /**
- * SignUpAdmin - Admin Sign Up Form
+ * SignUpAdmin - Admin Sign Up Form (Step 1)
  *
- * This component handles the sign-up flow for administrators creating or managing organizations.
- * Admins can create a new organization or manage an existing one.
- *
- * TODO: Implement form validation and organization creation/management logic
+ * This component handles the first step of the admin sign-up flow.
+ * It collects admin personal information and then proceeds to organization details.
  */
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { keys } from "../../types/keys";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { z } from "zod";
+import SignUpAdminOrganization from "./SignUpAdminOrganization";
 
 type SignUpAdminProps = {
   onBack: () => void;
 };
 
+type OrganizationData = {
+  organizationTitle: string;
+  organizationTown: string;
+  organizationCountry: string;
+  organizationAddress: string;
+};
+
 export default function SignUpAdmin({ onBack }: SignUpAdminProps) {
   const { t } = useTranslation();
 
-  const [organizationName, setOrganizationName] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [errors, setErrors] = useState<string[]>([]);
+  const [showOrganizationStep, setShowOrganizationStep] = useState(false);
+
+  const adminSignUpSchema = z.object({
+    firstName: z.string().min(1, t(keys.firstNameRequired)),
+    lastName: z.string().min(1, t(keys.lastNameRequired)),
+    email: z.string().email(t(keys.invalidEmailError)),
+    phoneNumber: z.string().optional(),
+    password: z
+      .string()
+      .min(8, t(keys.passwordLengthError))
+      .regex(/[a-z]/, t(keys.passwordLowercaseError))
+      .regex(/[A-Z]/, t(keys.passwordUppercaseError))
+      .regex(/[0-9]/, t(keys.passwordDigitError))
+      .regex(/[!@#$%^&*(),.?":{}|<>]/, t(keys.passwordSpecialCharError)),
+  });
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setErrors([]);
 
-    // TODO: Implement validation
-    if (!organizationName.trim()) {
-      setErrors(["Organization name is required"]);
-      return;
-    }
-
-    // TODO: Implement organization creation and sign-up logic
-    console.log("Admin sign up:", {
-      organizationName,
+    const result = adminSignUpSchema.safeParse({
       firstName,
       lastName,
       email,
-      password,
       phoneNumber,
+      password,
+    });
+
+    if (!result.success) {
+      const zodErrors = result.error.issues.map((issue) => issue.message);
+      setErrors(zodErrors);
+      return;
+    }
+
+    setShowOrganizationStep(true);
+  };
+
+  const handleOrganizationSubmit = (
+    adminData: {
+      firstName: string;
+      lastName: string;
+      email: string;
+      phoneNumber: string;
+      password: string;
+    },
+    organizationData: OrganizationData
+  ) => {
+    console.log("Admin sign up complete:", {
+      ...adminData,
+      ...organizationData,
     });
   };
+
+  if (showOrganizationStep) {
+    return (
+      <SignUpAdminOrganization
+        adminData={{
+          firstName,
+          lastName,
+          email,
+          phoneNumber,
+          password,
+        }}
+        onBack={() => setShowOrganizationStep(false)}
+        onSubmit={handleOrganizationSubmit}
+      />
+    );
+  }
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
@@ -54,29 +107,17 @@ export default function SignUpAdmin({ onBack }: SignUpAdminProps) {
         <div className="text-error text-sm italic">{errors[0]}</div>
       )}
 
+      <div className="mb-4">
+        <p className="text-text-muted text-xs">{t(keys.step1Of2)}</p>
+        <h3 className="text-text font-medium">{t(keys.adminDetailsStep)}</h3>
+      </div>
+
       <p className="text-text-muted text-sm">
         {t(keys.signUpAdminDescription2)}
       </p>
 
-      <div className="space-y-2">
-        <label htmlFor="orgName" className="text-sm font-medium text-text">
-          {t(keys.organizationNamePlaceholder)}
-        </label>
-        <Input
-          id="orgName"
-          type="text"
-          placeholder={t(keys.organizationNamePlaceholder)}
-          className="bg-surface-muted border-none text-text h-12 focus-visible:ring-2 focus-visible:ring-primary"
-          value={organizationName}
-          onChange={(e) => setOrganizationName(e.target.value)}
-        />
-      </div>
-
       <div className="grid grid-cols-2 gap-4">
         <div className="space-y-2">
-          <label htmlFor="firstName" className="text-sm font-medium text-text">
-            {t(keys.firstNamePlaceholder)}
-          </label>
           <Input
             id="firstName"
             type="text"
@@ -88,9 +129,6 @@ export default function SignUpAdmin({ onBack }: SignUpAdminProps) {
         </div>
 
         <div className="space-y-2">
-          <label htmlFor="lastName" className="text-sm font-medium text-text">
-            {t(keys.lastNamePlaceholder)}
-          </label>
           <Input
             id="lastName"
             type="text"
@@ -103,9 +141,6 @@ export default function SignUpAdmin({ onBack }: SignUpAdminProps) {
       </div>
 
       <div className="space-y-2">
-        <label htmlFor="email" className="text-sm font-medium text-text">
-          {t(keys.email)}
-        </label>
         <Input
           id="email"
           type="email"
@@ -117,9 +152,6 @@ export default function SignUpAdmin({ onBack }: SignUpAdminProps) {
       </div>
 
       <div className="space-y-2">
-        <label htmlFor="phone" className="text-sm font-medium text-text">
-          {t(keys.phoneNumberPlaceholder)}
-        </label>
         <Input
           id="phone"
           type="tel"
@@ -131,9 +163,6 @@ export default function SignUpAdmin({ onBack }: SignUpAdminProps) {
       </div>
 
       <div className="space-y-2">
-        <label htmlFor="password" className="text-sm font-medium text-text">
-          {t(keys.passwordPlaceholder)}
-        </label>
         <Input
           id="password"
           type="password"

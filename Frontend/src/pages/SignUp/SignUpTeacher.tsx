@@ -11,6 +11,7 @@ import { useTranslation } from "react-i18next";
 import { keys } from "../../types/keys";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { z } from "zod";
 
 type SignUpTeacherProps = {
   onBack: () => void;
@@ -27,13 +28,37 @@ export default function SignUpTeacher({ onBack }: SignUpTeacherProps) {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [errors, setErrors] = useState<string[]>([]);
 
+  const teacherSignUpSchema = z.object({
+    organizationCode: z.string().min(1, t(keys.organizationCodeRequired)),
+    firstName: z.string().min(1, t(keys.firstNameRequired)),
+    lastName: z.string().min(1, t(keys.lastNameRequired)),
+    email: z.string().email(t(keys.invalidEmailError)),
+    phoneNumber: z.string().optional(),
+    password: z
+      .string()
+      .min(8, t(keys.passwordLengthError))
+      .regex(/[a-z]/, t(keys.passwordLowercaseError))
+      .regex(/[A-Z]/, t(keys.passwordUppercaseError))
+      .regex(/[0-9]/, t(keys.passwordDigitError))
+      .regex(/[!@#$%^&*(),.?":{}|<>]/, t(keys.passwordSpecialCharError)),
+  });
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setErrors([]);
 
-    // TODO: Implement validation
-    if (!organizationCode.trim()) {
-      setErrors(["Organization code is required"]);
+    const result = teacherSignUpSchema.safeParse({
+      organizationCode,
+      firstName,
+      lastName,
+      email,
+      phoneNumber,
+      password,
+    });
+
+    if (!result.success) {
+      const zodErrors = result.error.issues.map((issue) => issue.message);
+      setErrors(zodErrors);
       return;
     }
 
@@ -59,9 +84,6 @@ export default function SignUpTeacher({ onBack }: SignUpTeacherProps) {
       </p>
 
       <div className="space-y-2">
-        <label htmlFor="orgCode" className="text-sm font-medium text-text">
-          {t(keys.organizationCodePlaceholder)}
-        </label>
         <Input
           id="orgCode"
           type="text"
@@ -74,9 +96,6 @@ export default function SignUpTeacher({ onBack }: SignUpTeacherProps) {
 
       <div className="grid grid-cols-2 gap-4">
         <div className="space-y-2">
-          <label htmlFor="firstName" className="text-sm font-medium text-text">
-            {t(keys.firstNamePlaceholder)}
-          </label>
           <Input
             id="firstName"
             type="text"
@@ -88,9 +107,6 @@ export default function SignUpTeacher({ onBack }: SignUpTeacherProps) {
         </div>
 
         <div className="space-y-2">
-          <label htmlFor="lastName" className="text-sm font-medium text-text">
-            {t(keys.lastNamePlaceholder)}
-          </label>
           <Input
             id="lastName"
             type="text"
@@ -103,9 +119,6 @@ export default function SignUpTeacher({ onBack }: SignUpTeacherProps) {
       </div>
 
       <div className="space-y-2">
-        <label htmlFor="email" className="text-sm font-medium text-text">
-          {t(keys.email)}
-        </label>
         <Input
           id="email"
           type="email"
@@ -117,9 +130,6 @@ export default function SignUpTeacher({ onBack }: SignUpTeacherProps) {
       </div>
 
       <div className="space-y-2">
-        <label htmlFor="phone" className="text-sm font-medium text-text">
-          {t(keys.phoneNumberPlaceholder)}
-        </label>
         <Input
           id="phone"
           type="tel"
@@ -131,9 +141,6 @@ export default function SignUpTeacher({ onBack }: SignUpTeacherProps) {
       </div>
 
       <div className="space-y-2">
-        <label htmlFor="password" className="text-sm font-medium text-text">
-          {t(keys.passwordPlaceholder)}
-        </label>
         <Input
           id="password"
           type="password"

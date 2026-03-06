@@ -353,5 +353,26 @@ export const keys = {
   signUpTeacherDescription2: "signUpTeacherDescription2",
   signUpAdminDescription2: "signUpAdminDescription2",
   backToSignUp: "backToSignUp",
-  continueButton: "continueButton"
+  continueButton: "continueButton",
+  invalidEmailError: "invalidEmailError",
+  firstNameRequired: "firstNameRequired",
+  lastNameRequired: "lastNameRequired",
+  emailRequired: "emailRequired",
+  organizationCodeRequired: "organizationCodeRequired",
+  passwordRequired: "passwordRequired",
+  backToWebsite: "backToWebsite",
+  // Organization fields
+  organizationTitle: "organizationTitle",
+  organizationTown: "organizationTown",
+  organizationCountry: "organizationCountry",
+  organizationAddress: "organizationAddress",
+  organizationTitleRequired: "organizationTitleRequired",
+  organizationTownRequired: "organizationTownRequired",
+  organizationCountryRequired: "organizationCountryRequired",
+  organizationAddressRequired: "organizationAddressRequired",
+  // Step labels
+  step1Of2: "step1Of2",
+  step2Of2: "step2Of2",
+  adminDetailsStep: "adminDetailsStep",
+  organizationDetailsStep: "organizationDetailsStep"
 };

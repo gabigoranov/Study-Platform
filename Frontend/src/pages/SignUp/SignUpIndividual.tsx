@@ -11,6 +11,7 @@ import { useAuth } from "@/hooks/Supabase/useAuth";
 import { Checkbox } from "@/components/ui/checkbox";
 import { FaRegEye } from "react-icons/fa";
 import { LucideStepBack } from "lucide-react";
+import { z } from "zod";
 
 /**
  * SignUpIndividual - Individual Sign Up Page
@@ -39,27 +40,40 @@ export default function SignUpIndividual() {
   const [errors, setErrors] = useState<string[]>([]);
   const [emailConfirmation, setEmailConfirmation] = useState(false);
 
-  if (loading) return <p className="text-center mt-10">{t(keys.loading)}</p>;
+  // Zod schema matching backend/Supabase requirements
+  const signUpSchema = z.object({
+    firstName: z.string().min(1, t(keys.firstNameRequired)),
+    lastName: z.string().min(1, t(keys.lastNameRequired)),
+    email: z.string().email(t(keys.invalidEmailError)),
+    phoneNumber: z.string().optional(),
+    password: z
+      .string()
+      .min(8, t(keys.passwordLengthError))
+      .regex(/[a-z]/, t(keys.passwordLowercaseError))
+      .regex(/[A-Z]/, t(keys.passwordUppercaseError))
+      .regex(/[0-9]/, t(keys.passwordDigitError))
+      .regex(/[!@#$%^&*(),.?":{}|<>]/, t(keys.passwordSpecialCharError)),
+  });
 
-  const validatePassword = (pwd: string) => {
-    const errs: string[] = [];
-    if (pwd.length < 8) errs.push(t(keys.passwordLengthError));
-    if (!/[a-z]/.test(pwd)) errs.push(t(keys.passwordLowercaseError));
-    if (!/[A-Z]/.test(pwd)) errs.push(t(keys.passwordUppercaseError));
-    if (!/[0-9]/.test(pwd)) errs.push(t(keys.passwordDigitError));
-    if (!/[!@#$%^&*(),.?":{}|<>]/.test(pwd))
-      errs.push(t(keys.passwordSpecialCharError));
-    return errs;
-  };
+  if (loading) return <p className="text-center mt-10">{t(keys.loading)}</p>;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setErrors([]);
     setEmailConfirmation(false);
 
-    const pwdErrors = validatePassword(password);
-    if (pwdErrors.length > 0) {
-      setErrors(pwdErrors);
+    // Validate with Zod
+    const result = signUpSchema.safeParse({
+      firstName,
+      lastName,
+      email,
+      phoneNumber,
+      password,
+    });
+
+    if (!result.success) {
+      const zodErrors = result.error.issues.map((issue) => issue.message);
+      setErrors(zodErrors);
       return;
     }
 

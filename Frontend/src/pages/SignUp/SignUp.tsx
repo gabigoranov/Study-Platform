@@ -4,10 +4,11 @@ import { useTranslation } from "react-i18next";
 import { keys } from "../../types/keys";
 import { Button } from "@/components/ui/button";
 import ChooseSignUpType from "@/components/SignUp/ChooseSignUpType";
-import { LucideStepBack } from "lucide-react";
+import { LucideStepBack, StepBack } from "lucide-react";
 import ChooseSignUpOrganizationType from "@/components/SignUp/ChooseSignUpOrganizationType";
 import SignUpIndividual from "./SignUpIndividual";
 import SignUpWithOrganization from "./SignUpWithOrganization";
+import LanguageToggle from "@/components/Common/LanguageToggle";
 
 /**
  * SignUp - Central Sign Up Hub
@@ -45,7 +46,7 @@ export default function SignUp() {
             {signUpType && (
               <Button variant="outline" onClick={() => setSignUpType(null)}>
                 <LucideStepBack />
-                Back
+                {t(keys.backLabel)}
               </Button>
             )}
           </div>
@@ -74,6 +75,8 @@ export default function SignUp() {
           ) : (
             <ChooseSignUpType selectType={setSignUpType} />
           )}
+
+          <LanguageToggle className="mt-6" />
         </div>
 
         {/* Right Side: Decorative Image */}
@@ -86,9 +89,10 @@ export default function SignUp() {
           <div className="relative z-10 flex justify-end items-center">
             <Link
               to="/"
-              className="text-xs border border-white/40 rounded-full px-4 py-1.5 bg-background-muted/50 hover:bg-background-muted/80 transition"
+              className="text-xs border border-white/40 rounded-full flex gap-2 items-center px-4 py-1.5 bg-background-muted/50 hover:bg-background-muted/80 transition"
             >
-              Back to website →
+              <StepBack />
+              {t(keys.backToWebsite)}
             </Link>
           </div>
 
