@@ -1,215 +1,183 @@
-# 🧠 AI Учебна Платформа
+# AI Study Platform
 
-Интерактивна уеб платформа, която помага на ученици и учащи да усвояват материала по-ефективно, като превръща качените от тях учебни ресурси в автоматично генерирани с помощта на изкуствен интелект флашкарти, мисловни карти, тестове и други.
+An interactive web platform that helps students and learners absorb material more effectively by transforming their uploaded study resources into automatically generated flashcards, mind maps, quizzes, and more using artificial intelligence.
 
-## 🌐 Достъп до проекта
+## Project Access
 
-Към момента проектът **AI Учебна Платформа** **не е публично достъпен онлайн**.  
-Системата се намира в процес на разработка и вътрешно тестване.
+At the moment, the **AI Study Platform** is not publicly available online.
+The system is currently under development and internal testing.
 
-След приключване на текущия етап на разработка в следващите седмици ще бъде осигурен **публичен уеб достъп** чрез официален домейн, заедно с **демонстрационна версия** и **документация за инсталация и използване**.
+After the current development stage is completed in the coming weeks, public web access will be provided through an official domain, along with a demonstration version and documentation for installation and usage.
 
-Всички актуализации относно достъпа и публикуването ще бъдат обявени в това хранилище.
+All updates regarding access and release will be announced in this repository.
 
-## 🚀 Общ преглед
+## Overview
 
-Много ученици срещат трудности при усвояването на нов материал поради неясни, еднообразни или слабо структурирани ресурси.  
+Many students struggle to learn new material due to unclear, repetitive, or poorly structured resources.
 
-**AI Учебна Платформа** има за цел да реши този проблем, като позволява на потребителите да **качват свои учебни материали** (PDF файлове, презентации, документи, видеа, изображения и др.), които след това се обработват от изкуствен интелект и се преобразуват в **интерактивни учебни инструменти**.
+The **AI Study Platform** aims to solve this problem by allowing users to upload their own study materials (PDF files, presentations, documents, videos, images, etc.), which are then processed by artificial intelligence and transformed into interactive learning tools.
 
-Освен това платформата включва **геймификационна система**, която позволява създаването на групи от приятели и съученици, натрупване на точки и съревнование на база на учебната активност и резултатите от тестове.
+In addition, the platform includes a gamification system that allows users to create groups with friends and classmates, earn points, and compete based on learning activity and quiz results.
 
----
+## Key Features
 
-### 🧩 Основни функции
+* Upload study materials (PDF, DOCX, PPTX, images, videos, etc.)
+* Automatic generation of flashcards, mind maps, and quizzes using AI
+* Personalized resources based on uploaded content
+* Gamification — points, progress, and friendly competition
+* Groups for collaborative learning
+* Secure authentication and user data management
 
-- 📚 Качване на учебни материали (PDF, DOCX, PPTX, изображения, видеа и др.)
-- 🤖 Автоматично генериране на флашкарти, мисловни карти и тестове чрез изкуствен интелект
-- 🧠 Персонализирани ресурси според каченото съдържание
-- 🎮 Геймификация — точки, прогрес и приятелско съревнование
-- 👥 Групи за съвместно учене
-- 💾 Сигурна автентикация и управление на потребителски данни
+## How It Works
 
----
-
-### ⚙️ Как работи
-
-1. **Качване на материали** – потребителят качва свои файлове или медия.  
-2. **AI обработка** – бекендът анализира съдържанието и генерира нови ресурси.  
-3. **Интерактивни инструменти** – потребителят получава флашкарти, мисловни карти и тестове по материала.  
-4. **Геймификация** – системата присъжда точки и проследява напредъка на всеки потребител.
+1. Upload materials – the user uploads files or media.
+2. AI processing – the backend analyzes the content and generates new resources.
+3. Interactive tools – the user receives flashcards, mind maps, and quizzes.
+4. Gamification – the system awards points and tracks user progress.
 
 ---
 
-### 🧱 Структура на проекта
+## Project Structure
 
-    Study-Platform/
-    │
-    ├── Backend/ # ASP.NET Core API
-    │ └── StudyPlatform # Изходен код на основния бекенд ASP.NET Core API
-    │ └── StudyPlatformTests # Unit Tests за основния бекенд
-    │ └── Microservices # Изходен код на отделните микроуслуги
-    │
-    ├── Frontend/ # React уеб приложение
-    │ └── README.md # Документация за фронтенда
-    │
-    └── README.md # Главен преглед на проекта
+```
+Study-Platform/
+│
+├── Backend/            # ASP.NET Core API
+│   ├── StudyPlatform       # Main backend source code
+│   ├── StudyPlatformTests  # Unit tests
+│   └── Microservices       # Microservices source code
+│
+├── Frontend/          # React web application
+│
+└── README.md          # Project overview
+```
 
+* The backend manages authentication, file uploads, AI resource generation, and the database.
+* The frontend provides the interface for uploading, learning, and interacting with resources.
 
-- **Бекендът** управлява автентикацията, качването на файлове, генерирането на ресурси чрез AI и базата данни.  
-- **Фронтендът** предоставя интерфейс за качване, учене и взаимодействие с ресурсите.
+## Technologies Used
 
----
+### Backend
 
-### 🛠️ Използвани технологии
+* ASP.NET Core API
+* C#
+* Entity Framework Core
+* SQL Server
 
-**Бекенд**
-- ASP.NET Core API  
-- C#  
-- Entity Framework Core  
-- SQL Server  
+### Frontend
 
-**Фронтенд**
-- React  
-- TypeScript / JavaScript  
-- HTML / CSS  
+* React
+* TypeScript / JavaScript
+* HTML / CSS
 
-**Допълнителни инструменти**
-- Canva, Draw.io, GIMP, MS Office, Overleaf (за дизайн, диаграми и документация)
+### Additional Tools
 
-# Фронтенд – AI Учебна Платформа
+* Canva, Draw.io, GIMP, MS Office, Overleaf (for design, diagrams, and documentation)
 
-Фронтендът е изграден с **React** и служи като потребителски интерфейс на платформата.
+# Frontend – AI Study Platform
 
----
+The frontend is built with React and serves as the user interface of the platform.
 
-### 🧠 Основни функции
+## Key Features
 
-- Качване на учебни материали (PDF, изображения, видеа и др.)
-- Преглед на генерирани от AI флашкарти, мисловни карти и тестове
-- Управление на групи и класации
-- Съвременен, отзивчив интерфейс с геймификационни елементи
+* Upload study materials (PDF, images, videos, etc.)
+* View AI-generated flashcards, mind maps, and quizzes
+* Manage groups and leaderboards
+* Modern, responsive interface with gamification elements
 
----
+## Technologies
 
-### 🛠️ Технологии
+* React
+* TypeScript / JavaScript
+* HTML, CSS
+* React Router, Context API
 
-- React  
-- TypeScript / JavaScript  
-- HTML, CSS  
-- React Router, Context API  
+# Backend and Microservices – AI Study Platform
 
-# 🧩 Бекенд и Микроуслуги – AI Учебна Платформа
+## Backend
 
----
+The backend is a RESTful ASP.NET Core API that serves as the main connection between the user interface, database, and AI microservices.
+It handles authentication, frontend requests, and the logic for gamification and learning.
 
-## ⚙️ Бекенд
+### Main Responsibilities
 
-Бекендът представлява RESTful **ASP.NET Core API**, което служи като основна връзка между потребителския интерфейс, базата данни и микроуслугите за изкуствен интелект.  
-Той управлява автентикацията, заявките от фронтенда, и логиката на геймификацията и ученето.
+* Authentication and authorization (JWT)
+* File upload and storage
+* Gamification logic and progress tracking
+* Database management using Entity Framework Core
+* Communication with microservices for content processing and AI
 
----
+### Technologies
 
-### 🧠 Основни отговорности
+* ASP.NET Core API
+* C#
+* Entity Framework Core
+* SQL Server
+* REST API architecture
 
-- 🔐 Автентикация и авторизация на потребителите (JWT)  
-- 💾 Качване и съхранение на файлове  
-- 🎮 Геймификационна логика и проследяване на напредъка  
-- 🗂️ Управление на базата данни чрез Entity Framework Core  
-- 🔗 Комуникация с микроуслугите за обработка на съдържание и AI  
+## Running the ASP.NET Core API and Accessing Swagger
 
----
+### 1. Clone the repository
 
-### 🛠️ Използвани технологии
-
-- **ASP.NET Core API**  
-- **C#**  
-- **Entity Framework Core**  
-- **SQL Server**  
-- **REST API архитектура**
-
----
-
-````markdown
-# 🚀 Стартиране на ASP.NET Core API и достъп до Swagger документацията
-
-## 1. Клониране на репозиторито
 ```bash
 git clone https://github.com/yourusername/Study-Platform.git
 cd Study-Platform/Backend/StudyPlatform
-````
+```
 
-## 2. Инсталиране на зависимостите
+### 2. Install dependencies
 
-Уверете се, че имате инсталиран .NET SDK 7 или по-нова версия:
+Make sure you have .NET SDK 7 or newer installed:
 
 ```bash
 dotnet restore
 ```
 
-## 3. Стартиране на API
+### 3. Run the API
 
 ```bash
 dotnet run
 ```
 
-По подразбиране приложението ще стартира на:
+By default, the application will run on:
 
 * HTTPS: `https://localhost:44300` `https://localhost:5163`
 * HTTP: `http://localhost:38976`
 
-## 4. Достъп до Swagger документацията
+### 4. Access Swagger documentation
 
-Отворете браузъра и отидете на:
+Open your browser and go to:
 
 ```bash
 https://localhost:44300/swagger
 ```
 
-Там ще видите интерактивна документация на API-то, където може да тествате всички крайни точки.
+There you will find interactive API documentation where you can test all endpoints.
 
-## 5. Допълнителни настройки (по избор)
+### 5. Additional configuration (optional)
 
-* За смяна на портовете или URL адреса, редактирайте `launchSettings.json` в папката `Properties`.
-* Ако използвате Docker, може да стартирате API-то контейнеризирано:
+* To change ports or URLs, edit `launchSettings.json` in the `Properties` folder.
 
-```bash
-docker build -t studyplatform-api .
-docker run -p 5000:80 -p 5001:443 studyplatform-api
-```
+## Microservices
 
----
+The microservices are responsible for processing uploaded files and generating resources using artificial intelligence.
+They are separate components that communicate with the main backend via HTTP requests or a message queue (e.g., RabbitMQ).
 
+### Main Responsibilities
 
-## 🤖 Микроуслуги
+* Extracting text and structured data from files (PDF, DOCX, PPTX, images, videos)
+* Generating flashcards, mind maps, and quizzes using AI models
+* Content analysis and categorization
+* Returning generated resources to the main API
 
-Микроуслугите отговарят за **обработката на качените файлове** и **генерирането на ресурси чрез изкуствен интелект**.  
-Те са отделни компоненти, които комуникират с основния бекенд чрез HTTP заявки или съобщителна опашка (например RabbitMQ).
+### Technologies
 
----
+* Python
+* AI / NLP libraries – OpenAI API, Transformers, spaCy, etc.
+* FastAPI
 
-### 🧩 Основни отговорности
+### Backend Integration
 
-- 📄 Извличане на текст и структурирани данни от файлове (PDF, DOCX, PPTX, изображения и видеа)  
-- 🧠 Генериране на флашкарти, мисловни карти и тестове с помощта на AI модели  
-- ⚙️ Анализ и категоризация на съдържанието  
-- 📤 Връщане на готовите ресурси към основното API  
-
----
-
-### 🛠️ Използвани технологии
-
-- **Python**  
-- **AI / NLP библиотеки** – OpenAI API, Transformers, spaCy и др.  
-- **FastAPI**
-
----
-
-### 🔗 Връзка с бекенда
-
-1. Потребителят качва файл чрез фронтенда.  
-2. Бекендът приема файла и го препраща към съответната микроуслуга.  
-3. Микроуслугата извлича съдържанието и генерира ресурси чрез AI.  
-4. Генерираните данни се връщат към бекенда, който ги съхранява и показва във фронтенда.  
-
-
+1. The user uploads a file through the frontend.
+2. The backend receives the file and forwards it to the appropriate microservice.
+3. The microservice extracts content and generates resources using AI.
+4. The generated data is returned to the backend, which stores and displays it in the frontend.
